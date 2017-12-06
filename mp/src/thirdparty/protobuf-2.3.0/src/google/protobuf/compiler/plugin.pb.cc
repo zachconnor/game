@@ -452,11 +452,11 @@ bool CodeGeneratorRequest::IsInitialized() const {
 void CodeGeneratorRequest::Swap(CodeGeneratorRequest* other) {
   if (other != this) {
     file_to_generate_.Swap(&other->file_to_generate_);
-    std::swap(parameter_, other->parameter_);
+    std::std::swap(parameter_, other->parameter_);
     proto_file_.Swap(&other->proto_file_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -792,12 +792,12 @@ bool CodeGeneratorResponse_File::IsInitialized() const {
 
 void CodeGeneratorResponse_File::Swap(CodeGeneratorResponse_File* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
-    std::swap(insertion_point_, other->insertion_point_);
-    std::swap(content_, other->content_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(name_, other->name_);
+    std::std::swap(insertion_point_, other->insertion_point_);
+    std::std::swap(content_, other->content_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -1058,11 +1058,11 @@ bool CodeGeneratorResponse::IsInitialized() const {
 
 void CodeGeneratorResponse::Swap(CodeGeneratorResponse* other) {
   if (other != this) {
-    std::swap(error_, other->error_);
+    std::std::swap(error_, other->error_);
     file_.Swap(&other->file_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 

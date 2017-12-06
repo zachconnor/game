@@ -144,9 +144,9 @@ void CBaseFlex::SetFlexWeight( LocalFlexController_t index, float value )
 
 		mstudioflexcontroller_t *pflexcontroller = pstudiohdr->pFlexcontroller( index );
 
-		if (pflexcontroller->max != pflexcontroller->min)
+        if (pflexcontroller->Max != pflexcontroller->Min)
 		{
-			value = (value - pflexcontroller->min) / (pflexcontroller->max - pflexcontroller->min);
+            value = (value - pflexcontroller->Min) / (pflexcontroller->Max - pflexcontroller->Min);
 			value = clamp( value, 0.0f, 1.0f );
 		}
 
@@ -164,9 +164,9 @@ float CBaseFlex::GetFlexWeight( LocalFlexController_t index )
 
 		mstudioflexcontroller_t *pflexcontroller = pstudiohdr->pFlexcontroller( index );
 
-		if (pflexcontroller->max != pflexcontroller->min)
+        if (pflexcontroller->Max != pflexcontroller->Min)
 		{
-			return m_flexWeight[index] * (pflexcontroller->max - pflexcontroller->min) + pflexcontroller->min;
+            return m_flexWeight[index] * (pflexcontroller->Max - pflexcontroller->Min) + pflexcontroller->Min;
 		}
 				
 		return m_flexWeight[index];
@@ -1029,36 +1029,36 @@ public:
 		// Swap the entire file
 		if ( IsX360() )
 		{
-			CByteswap swap;
-			swap.ActivateByteSwapping( true );
+            CByteswap swap;
+            swap.ActivateByteSwapping( true );
 			byte *pData = (byte*)buffer;
 			flexsettinghdr_t *pHdr = (flexsettinghdr_t*)pData;
-			swap.SwapFieldsToTargetEndian( pHdr );
+            swap.SwapFieldsToTargetEndian( pHdr );
 
 			// Flex Settings
 			flexsetting_t *pFlexSetting = (flexsetting_t*)((byte*)pHdr + pHdr->flexsettingindex);
 			for ( int i = 0; i < pHdr->numflexsettings; ++i, ++pFlexSetting )
 			{
-				swap.SwapFieldsToTargetEndian( pFlexSetting );
+                swap.SwapFieldsToTargetEndian( pFlexSetting );
 				
 				flexweight_t *pWeight = (flexweight_t*)(((byte*)pFlexSetting) + pFlexSetting->settingindex );
 				for ( int j = 0; j < pFlexSetting->numsettings; ++j, ++pWeight )
 				{
-					swap.SwapFieldsToTargetEndian( pWeight );
+                    swap.SwapFieldsToTargetEndian( pWeight );
 				}
 			}
 
 			// indexes
 			pData = (byte*)pHdr + pHdr->indexindex;
-			swap.SwapBufferToTargetEndian( (int*)pData, (int*)pData, pHdr->numindexes );
+            swap.SwapBufferToTargetEndian( (int*)pData, (int*)pData, pHdr->numindexes );
 
 			// keymappings
 			pData  = (byte*)pHdr + pHdr->keymappingindex;
-			swap.SwapBufferToTargetEndian( (int*)pData, (int*)pData, pHdr->numkeys );
+            swap.SwapBufferToTargetEndian( (int*)pData, (int*)pData, pHdr->numkeys );
 
 			// keyname indices
 			pData = (byte*)pHdr + pHdr->keynameindex;
-			swap.SwapBufferToTargetEndian( (int*)pData, (int*)pData, pHdr->numkeys );
+            swap.SwapBufferToTargetEndian( (int*)pData, (int*)pData, pHdr->numkeys );
 		}
 
 		// Fill in translation table

@@ -498,7 +498,7 @@ void CCollisionEvent::ObjectSound( int index, vcollisionevent_t *pEvent )
 		
 	if ( pGameData )
 	{
-		float volume = speed * (1.0f/(320.0f*320.0f));	// max volume at 320 in/s
+		float volume = speed * (1.0f/(320.0f*320.0f));	// Max volume at 320 in/s
 		
 		if ( volume > 1.0f )
 			volume = 1.0f;

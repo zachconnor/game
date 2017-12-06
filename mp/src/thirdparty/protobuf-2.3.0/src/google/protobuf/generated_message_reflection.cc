@@ -335,7 +335,7 @@ void GeneratedMessageReflection::Swap(
   int has_bits_size = (descriptor_->field_count() + 31) / 32;
 
   for (int i = 0; i < has_bits_size; i++) {
-    std::swap(has_bits1[i], has_bits2[i]);
+    std::std::swap(has_bits1[i], has_bits2[i]);
   }
 
   for (int i = 0; i < descriptor_->field_count(); i++) {
@@ -371,7 +371,7 @@ void GeneratedMessageReflection::Swap(
       switch (field->cpp_type()) {
 #define SWAP_VALUES(CPPTYPE, TYPE)                                           \
         case FieldDescriptor::CPPTYPE_##CPPTYPE:                             \
-          std::swap(*MutableRaw<TYPE>(message1, field),                      \
+          std::std::swap(*MutableRaw<TYPE>(message1, field),                      \
                     *MutableRaw<TYPE>(message2, field));                     \
           break;
 
@@ -390,7 +390,7 @@ void GeneratedMessageReflection::Swap(
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::STRING:
-              std::swap(*MutableRaw<string*>(message1, field),
+              std::std::swap(*MutableRaw<string*>(message1, field),
                         *MutableRaw<string*>(message2, field));
               break;
           }

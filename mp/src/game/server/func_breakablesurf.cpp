@@ -264,7 +264,7 @@ void CBreakableSurface::SurfaceTouch( CBaseEntity *pOther )
 		}
 	}
 
-	// Find nearest point on plane for max
+	// Find nearest point on plane for Max
 	Vector vecAbsMins, vecAbsMaxs;
 	pOther->CollisionProp()->WorldSpaceAABB( &vecAbsMins, &vecAbsMaxs );
 	Vector vToPlane		= (vecAbsMaxs - m_vCorner);

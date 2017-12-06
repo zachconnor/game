@@ -386,7 +386,7 @@ static int colorid=0;
 
 static void Label(struct QuantizedValue *q, int updatecolor)
 {
-	// fill in max/min values for tree, etc.
+	// fill in Max/Min values for tree, etc.
 	if (q)
 	{
 		Label(q->Children[0],updatecolor);
@@ -411,8 +411,8 @@ static void Label(struct QuantizedValue *q, int updatecolor)
 		else
 			for(int i=0;i<current_ndims;i++)
 			{
-				q->Mins[i]=min(q->Children[0]->Mins[i],q->Children[1]->Mins[i]);
-				q->Maxs[i]=max(q->Children[0]->Maxs[i],q->Children[1]->Maxs[i]);
+				q->Mins[i]=Min(q->Children[0]->Mins[i],q->Children[1]->Mins[i]);
+				q->Maxs[i]=Max(q->Children[0]->Maxs[i],q->Children[1]->Maxs[i]);
 			}
 	}
 }    
@@ -431,7 +431,7 @@ struct QuantizedValue *FindQNode(struct QuantizedValue const *q, int32 code)
 }
 
 
-void CheckInRange(struct QuantizedValue *q, uint8 *max, uint8 *min)
+void CheckInRange(struct QuantizedValue *q, uint8 *Max, uint8 *Min)
 {
 	if (q)
 	{
@@ -440,13 +440,13 @@ void CheckInRange(struct QuantizedValue *q, uint8 *max, uint8 *min)
 			// non-leaf node
 			CheckInRange(q->Children[0],q->Maxs, q->Mins);
 			CheckInRange(q->Children[1],q->Maxs, q->Mins);
-			CheckInRange(q->Children[0],max, min);
-			CheckInRange(q->Children[1],max, min);
+			CheckInRange(q->Children[0],Max, Min);
+			CheckInRange(q->Children[1],Max, Min);
 		}
 		for (int i=0;i<current_ndims;i++)
 		{
-			if (q->Maxs[i]>max[i]) printf("error1\n");
-			if (q->Mins[i]<min[i]) printf("error2\n");
+			if (q->Maxs[i]>Max[i]) printf("error1\n");
+			if (q->Mins[i]<Min[i]) printf("error2\n");
 		}
 	}
 }
@@ -657,7 +657,7 @@ void OptimizeQuantizer(struct QuantizedValue *q, int ndims)
 {
 	SetNDims(ndims);
 	RecalcMeans(q);		// reset q values
-	Label(q,0);			// update max/mins
+	Label(q,0);			// update Max/mins
 }
 
 

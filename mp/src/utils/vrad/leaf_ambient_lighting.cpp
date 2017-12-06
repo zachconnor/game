@@ -191,8 +191,8 @@ bool IsLeafAmbientSurfaceLight( dworldlight_t *wl )
 	if ( wl->style != 0 )
 		return false;
 
-	float intensity = max( wl->intensity[0], wl->intensity[1] );
-	intensity = max( intensity, wl->intensity[2] );
+	float intensity = Max( wl->intensity[0], wl->intensity[1] );
+	intensity = Max( intensity, wl->intensity[2] );
 	
 	return (intensity * g_flWorldLightMinEmitSurfaceDistanceRatio) < g_flWorldLightMinEmitSurface;
 }
@@ -345,7 +345,7 @@ void AddSampleToList( CUtlVector<ambientsample_t> &list, const Vector &samplePos
 				for (int s = 0; s < 3; s++ )
 				{
 					float dc = fabs(list[i].cube[k][s] - list[j].cube[k][s]);
-					maxDC = max(maxDC,dc);
+					maxDC = Max(maxDC,dc);
 				}
 				totalDC += maxDC;
 			}
@@ -381,7 +381,7 @@ void AddSampleToList( CUtlVector<ambientsample_t> &list, const Vector &samplePos
 	list.FastRemove( nearestNeighborIndex );
 }
 
-// max number of units in gamma space of per-side delta
+// Max number of units in gamma space of per-side delta
 int CubeDeltaGammaSpace( Vector *pCube0, Vector *pCube1 )
 {
 	int maxDelta = 0;
@@ -452,8 +452,8 @@ float AABBDistance( const Vector &mins0, const Vector &maxs0, const Vector &mins
 	Vector delta;
 	for ( int i = 0; i < 3; i++ )
 	{
-		float greatestMin = max(mins0[i], mins1[i]);
-		float leastMax = min(maxs0[i], maxs1[i]);
+		float greatestMin = Max(mins0[i], mins1[i]);
+		float leastMax = Min(maxs0[i], maxs1[i]);
 		delta[i] = (greatestMin < leastMax) ? 0 : (leastMax - greatestMin);
 	}
 	return delta.Length();
@@ -510,7 +510,7 @@ int NearestNeighborWithLight(int leafID)
 	return bestIndex;
 }
 
-// maps a float to a byte fraction between min & max
+// maps a float to a byte fraction between Min & Max
 static byte Fixed8Fraction( float t, float tMin, float tMax )
 {
 	if ( tMax <= tMin )
@@ -533,9 +533,9 @@ void ComputeAmbientForLeaf( int iThread, int leafID, CUtlVector<ambientsample_t>
 	int xSize = (dleafs[leafID].maxs[0] - dleafs[leafID].mins[0]) / 32;
 	int ySize = (dleafs[leafID].maxs[1] - dleafs[leafID].mins[1]) / 32;
 	int zSize = (dleafs[leafID].maxs[2] - dleafs[leafID].mins[2]) / 64;
-	xSize = max(xSize,1);
-	ySize = max(xSize,1);
-	zSize = max(xSize,1);
+	xSize = Max(xSize,1);
+	ySize = Max(xSize,1);
+	zSize = Max(xSize,1);
 	// generate update 128 candidate samples, always at least one sample
 	int volumeCount = xSize * ySize * zSize;
 	if ( g_bFastAmbient )

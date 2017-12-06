@@ -2116,7 +2116,7 @@ void CAI_NetworkBuilder::Rebuild( CAI_Network *pNetwork )
 	for (i = 0; i < nNodes; i++)
 	{
 		// --------------------------------------------------------------------
-		// If changed, mark all nodes that are within the max link distance to
+		// If changed, mark all nodes that are within the Max link distance to
 		// the changed node as having to be rebuild
 		// --------------------------------------------------------------------
 		if (ppNodes[i]->m_eNodeInfo & bits_NODE_WC_CHANGED)

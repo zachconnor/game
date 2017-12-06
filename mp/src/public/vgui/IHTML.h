@@ -79,7 +79,7 @@ namespace vgui
 		virtual void OnKeyUp(KeyCode code, bool bPopupMenu)=0;
 
 
-		// open a URL with the provided POST data (which can be much larger than the max URL of 512 chars)
+		// open a URL with the provided POST data (which can be much larger than the Max URL of 512 chars)
 		// NOTE - You CANNOT have get params (i.e a "?" ) in pchURL if pchPostData is set (due to an IE bug)
 		virtual void PostURL( const char *pchURL, const char *pchPostData ) = 0;
 

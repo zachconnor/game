@@ -446,7 +446,7 @@ bool CBaseMoveBehavior::StartMoving( int direction )
 
 		m_iDirection = direction;
 
-		// if we're going in reverse, swap the currentkey and targetkey (since we're going opposite dir)
+		// if we're going in reverse, std::swap the currentkey and targetkey (since we're going opposite dir)
 		if ( direction == 1 )
 		{
 			m_pTargetKeyFrame = m_pCurrentKeyFrame->NextKey( direction );

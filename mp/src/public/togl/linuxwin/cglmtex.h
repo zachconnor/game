@@ -95,7 +95,7 @@ typedef struct
 	D3DFORMAT	m_format;
 	void		*m_dest;			// dest address
 	int			m_chunkCount;		// square chunk count (single texels or compressed blocks)
-	int			m_byteCountLimit;	// caller expectation of max number of bytes to write out
+	int			m_byteCountLimit;	// caller expectation of Max number of bytes to write out
 	float		r,g,b,a;			// color desired
 	
 	// out
@@ -296,12 +296,12 @@ struct GLMTexSamplingParams
 	{
 		static const GLenum dxtogl_addressMode[] = { GL_REPEAT, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER, (GLenum)-1 };
 		static const GLenum dxtogl_magFilter[4] = { GL_NEAREST,	GL_NEAREST,	GL_LINEAR, GL_LINEAR };
-		static const GLenum dxtogl_minFilter[4][4] = // indexed by _D3DTEXTUREFILTERTYPE on both axes: [row is min filter][col is mip filter]. 
+		static const GLenum dxtogl_minFilter[4][4] = // indexed by _D3DTEXTUREFILTERTYPE on both axes: [row is Min filter][col is mip filter]. 
 		{
-			/* min = D3DTEXF_NONE */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},		// D3DTEXF_NONE we just treat like POINT
-			/* min = D3DTEXF_POINT */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},
-			/* min = D3DTEXF_LINEAR */		{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},
-			/* min = D3DTEXF_ANISOTROPIC */	{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},		// no diff from prior row, set maxAniso to effect the sampling
+			/* Min = D3DTEXF_NONE */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},		// D3DTEXF_NONE we just treat like POINT
+			/* Min = D3DTEXF_POINT */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},
+			/* Min = D3DTEXF_LINEAR */		{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},
+			/* Min = D3DTEXF_ANISOTROPIC */	{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},		// no diff from prior row, set maxAniso to effect the sampling
 		};
 
 		gGL->glSamplerParameteri( nSamplerObject, GL_TEXTURE_WRAP_S, dxtogl_addressMode[m_packed.m_addressU] );
@@ -337,12 +337,12 @@ struct GLMTexSamplingParams
 	{
 		static const GLenum dxtogl_addressMode[] = { GL_REPEAT, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER, (GLenum)-1 };
 		static const GLenum dxtogl_magFilter[4] = { GL_NEAREST,	GL_NEAREST,	GL_LINEAR, GL_LINEAR };
-		static const GLenum dxtogl_minFilter[4][4] = // indexed by _D3DTEXTUREFILTERTYPE on both axes: [row is min filter][col is mip filter]. 
+		static const GLenum dxtogl_minFilter[4][4] = // indexed by _D3DTEXTUREFILTERTYPE on both axes: [row is Min filter][col is mip filter]. 
 		{
-			/* min = D3DTEXF_NONE */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},		// D3DTEXF_NONE we just treat like POINT
-			/* min = D3DTEXF_POINT */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},
-			/* min = D3DTEXF_LINEAR */		{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},
-			/* min = D3DTEXF_ANISOTROPIC */	{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},		// no diff from prior row, set maxAniso to effect the sampling
+			/* Min = D3DTEXF_NONE */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},		// D3DTEXF_NONE we just treat like POINT
+			/* Min = D3DTEXF_POINT */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},
+			/* Min = D3DTEXF_LINEAR */		{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},
+			/* Min = D3DTEXF_ANISOTROPIC */	{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},		// no diff from prior row, set maxAniso to effect the sampling
 		};
 
 		if ( m_packed.m_addressU != curState.m_packed.m_addressU )
@@ -408,12 +408,12 @@ struct GLMTexSamplingParams
 	{
 		static const GLenum dxtogl_addressMode[] = { GL_REPEAT, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER, (GLenum)-1 };
 		static const GLenum dxtogl_magFilter[4] = { GL_NEAREST,	GL_NEAREST,	GL_LINEAR, GL_LINEAR };
-		static const GLenum dxtogl_minFilter[4][4] = // indexed by _D3DTEXTUREFILTERTYPE on both axes: [row is min filter][col is mip filter]. 
+		static const GLenum dxtogl_minFilter[4][4] = // indexed by _D3DTEXTUREFILTERTYPE on both axes: [row is Min filter][col is mip filter]. 
 		{
-			/* min = D3DTEXF_NONE */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},		// D3DTEXF_NONE we just treat like POINT
-			/* min = D3DTEXF_POINT */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},
-			/* min = D3DTEXF_LINEAR */		{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},
-			/* min = D3DTEXF_ANISOTROPIC */	{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},		// no diff from prior row, set maxAniso to effect the sampling
+			/* Min = D3DTEXF_NONE */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},		// D3DTEXF_NONE we just treat like POINT
+			/* Min = D3DTEXF_POINT */		{	GL_NEAREST,		GL_NEAREST_MIPMAP_NEAREST,	GL_NEAREST_MIPMAP_LINEAR,	(GLenum)-1	},
+			/* Min = D3DTEXF_LINEAR */		{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},
+			/* Min = D3DTEXF_ANISOTROPIC */	{	GL_LINEAR,		GL_LINEAR_MIPMAP_NEAREST,	GL_LINEAR_MIPMAP_LINEAR,	(GLenum)-1	},		// no diff from prior row, set maxAniso to effect the sampling
 		};
 
 		gGL->glTexParameteri( target, GL_TEXTURE_WRAP_S, dxtogl_addressMode[m_packed.m_addressU] );

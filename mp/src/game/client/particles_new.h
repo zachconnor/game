@@ -152,7 +152,7 @@ protected:
 	EHANDLE		m_hOwner;
 	EHANDLE     m_hControlPointOwners[MAX_PARTICLE_CONTROL_POINTS];
 
-	// holds the min/max bounds used to manage this thing in the client leaf system
+	// holds the Min/Max bounds used to manage this thing in the client leaf system
 	Vector		m_LastMin;
 	Vector		m_LastMax;
 

@@ -1278,7 +1278,7 @@ public:
 
 	//  Turning
 	virtual	float		CalcIdealYaw( const Vector &vecTarget );
-	virtual float		MaxYawSpeed( void );		// Get max yaw speed
+	virtual float		MaxYawSpeed( void );		// Get Max yaw speed
 	bool				FacingIdeal( void );
 	void				SetUpdatedYaw()	{ m_ScheduleState.bTaskUpdatedYaw = true; }
 
@@ -2430,8 +2430,8 @@ inline bool ValidateConditionLimits( const char *pszNewCondition )
 	int nGlobalConditions = CAI_BaseNPC::GetSchedulingSymbols()->NumConditions();
 	if ( nGlobalConditions >= MAX_CONDITIONS )
 	{ 
-		AssertMsg2( 0, "Exceeded max number of conditions (%d), ignoring condition %s\n", MAX_CONDITIONS, pszNewCondition ); 
-		DevWarning( "Exceeded max number of conditions (%d), ignoring condition %s\n", MAX_CONDITIONS, pszNewCondition ); 
+		AssertMsg2( 0, "Exceeded Max number of conditions (%d), ignoring condition %s\n", MAX_CONDITIONS, pszNewCondition ); 
+		DevWarning( "Exceeded Max number of conditions (%d), ignoring condition %s\n", MAX_CONDITIONS, pszNewCondition ); 
 		return false;
 	}
 	return true;

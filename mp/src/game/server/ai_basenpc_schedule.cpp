@@ -1914,7 +1914,7 @@ void CAI_BaseNPC::StartTask( const Task_t *pTask )
 				flMinRange = InnateRange1MinRange();
 			}
 
-			//Check against NPC's max range
+			//Check against NPC's Max range
 			if ( flMaxRange > m_flDistTooFar )
 			{
 				flMaxRange = m_flDistTooFar;
@@ -2082,7 +2082,7 @@ void CAI_BaseNPC::StartTask( const Task_t *pTask )
 						flMinRange = InnateRange1MinRange();
 					}
 
-					// Check against NPC's max range
+					// Check against NPC's Max range
 					if ( flMaxRange > m_flDistTooFar )
 					{
 						flMaxRange = m_flDistTooFar;
@@ -2238,7 +2238,7 @@ void CAI_BaseNPC::StartTask( const Task_t *pTask )
 			flMinRange = InnateRange1MinRange();
 		}
 
-		// Check against NPC's max range
+		// Check against NPC's Max range
 		if (flMaxRange > m_flDistTooFar)
 		{
 			flMaxRange = m_flDistTooFar;
@@ -3654,7 +3654,7 @@ void CAI_BaseNPC::RunTask( const Task_t *pTask )
 
 						hintCriteria.AddHintType( HINT_PLAYER_ALLY_MOVE_AWAY_DEST );
 						hintCriteria.SetFlag( bits_HINT_NODE_NEAREST );
-						hintCriteria.AddIncludePosition( GetAbsOrigin(), (20.0f * 12.0f) ); // 20 feet max
+						hintCriteria.AddIncludePosition( GetAbsOrigin(), (20.0f * 12.0f) ); // 20 feet Max
 						hintCriteria.AddExcludePosition( GetAbsOrigin(), 28.0f ); // don't plant on an hint that you start on
 
 						pHint = CAI_HintManager::FindHint( this, hintCriteria );

@@ -160,7 +160,7 @@ public:
 
 	// Trading Card badges data access
 	// if you only have one set of cards, the series will be 1
-	// the user has can have two different badges for a series; the regular (max level 5) and the foil (max level 1)
+	// the user has can have two different badges for a series; the regular (Max level 5) and the foil (Max level 1)
 	virtual int GetGameBadgeLevel( int nSeries, bool bFoil ) = 0;
 
 	// gets the Steam Level of the user, as shown on their profile

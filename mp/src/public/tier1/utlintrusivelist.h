@@ -619,7 +619,7 @@ namespace IntrusiveList
 				int rslt=(*comparefn)(i,i->m_pNext);
 				if (rslt==-1)
 				{
-					/// need to swap
+					/// need to std::swap
 					didswap=1;
 					T *newfirst=i->m_pNext;
 					if (prev)

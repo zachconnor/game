@@ -514,7 +514,7 @@ const Message* DynamicMessageFactory::GetPrototypeNoLock(
   for (int i = 0; i < type->field_count(); i++) {
     // Make sure field is aligned to avoid bus errors.
     int field_size = FieldSpaceUsed(type->field(i));
-    size = AlignTo(size, min(kSafeAlignment, field_size));
+    size = AlignTo(size, Min(kSafeAlignment, field_size));
     offsets[i] = size;
     size += field_size;
   }

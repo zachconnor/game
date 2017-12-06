@@ -132,7 +132,7 @@ void CMoveHelperClient::ProcessImpacts( void )
 	if ( !pPlayer )
 		return;
 
-	// Relink in order to build absorigin and absmin/max to reflect any changes
+	// Relink in order to build absorigin and absmin/Max to reflect any changes
 	//  from prediction.  Relink will early out on SOLID_NOT
 
 	// TODO: Touch triggers on the client

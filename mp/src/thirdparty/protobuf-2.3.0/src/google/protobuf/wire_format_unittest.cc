@@ -70,7 +70,7 @@ TEST(WireFormatTest, EnumsInSync) {
 }
 
 TEST(WireFormatTest, MaxFieldNumber) {
-  // Make sure the max field number constant is accurate.
+  // Make sure the Max field number constant is accurate.
   EXPECT_EQ((1 << (32 - WireFormatLite::kTagTypeBits)) - 1,
             FieldDescriptor::kMaxNumber);
 }

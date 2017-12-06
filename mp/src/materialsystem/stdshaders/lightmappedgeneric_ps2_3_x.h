@@ -547,8 +547,8 @@ HALF4 main( PS_INPUT i ) : COLOR
 
         float3 firstPlaneIntersect = (float3(1.0f, 1.0f, 1.0f) - positionLS) / rayLS;
         float3 secondPlaneIntersect = (-positionLS) / rayLS;
-        float3 furthestPlane = max(firstPlaneIntersect, secondPlaneIntersect);
-        float distance = min(furthestPlane.x, min(furthestPlane.y, furthestPlane.z));
+        float3 furthestPlane = Max(firstPlaneIntersect, secondPlaneIntersect);
+        float distance = Min(furthestPlane.x, Min(furthestPlane.y, furthestPlane.z));
 
         // Use distance in WS directly to recover intersection
         float3 intersectPositionWS = worldPos + reflectVect * distance;

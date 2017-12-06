@@ -48,8 +48,8 @@ Vector NavTraceMins( -0.45, -0.45, 0 );
 Vector NavTraceMaxs( 0.45, 0.45, HumanCrouchHeight );
 bool FindGroundForNode( Vector *pos, Vector *normal );	// find a ground Z for pos that is clear for NavTraceMins -> NavTraceMaxs
 
-const float MaxTraversableHeight = StepHeight;		// max internal obstacle height that can occur between nav nodes and safely disregarded
-const float MinObstacleAreaWidth = 10.0f;			// min width of a nav area we will generate on top of an obstacle
+const float MaxTraversableHeight = StepHeight;		// Max internal obstacle height that can occur between nav nodes and safely disregarded
+const float MinObstacleAreaWidth = 10.0f;			// Min width of a nav area we will generate on top of an obstacle
 
 //--------------------------------------------------------------------------------------------------------------
 /**
@@ -692,12 +692,12 @@ void AdjustObstacleDistances( float *pObstacleStartDist, float *pObstacleEndDist
 	if ( obstacleWidth < MinObstacleAreaWidth )
 	{		
 		float halfDelta = ( MinObstacleAreaWidth - obstacleWidth ) /2;
-		// move start so it's half of min width from center, but no less than zero
+		// move start so it's half of Min width from center, but no less than zero
 		*pObstacleStartDist = MAX( *pObstacleStartDist - halfDelta, 0 );
-		// move end so it's min width from start
+		// move end so it's Min width from start
 		*pObstacleEndDist = *pObstacleStartDist + MinObstacleAreaWidth;
 
-		// if this pushes the end past max allowed distance, pull start and end back so that end is within allowed distance
+		// if this pushes the end past Max allowed distance, pull start and end back so that end is within allowed distance
 		if ( *pObstacleEndDist > maxAllowedDist )
 		{
 			float delta = *pObstacleEndDist - maxAllowedDist;
@@ -859,7 +859,7 @@ void CNavMesh::RaiseAreasWithInternalObstacles()
 				corner[SOUTH_EAST].y = corner[NORTH_EAST].y + obstacleEndDist;
 				corner[NORTH_WEST].y += obstacleStartDist;
 				corner[NORTH_EAST].y += obstacleStartDist;
-				::V_swap( obstacleZ[0], obstacleZ[1] );			// swap left and right Z heights for obstacle so we can run common code below
+				::V_swap( obstacleZ[0], obstacleZ[1] );			// std::swap left and right Z heights for obstacle so we can run common code below
 				break;
 			case EAST:
 				corner[NORTH_EAST].x = corner[NORTH_WEST].x + obstacleEndDist;
@@ -871,7 +871,7 @@ void CNavMesh::RaiseAreasWithInternalObstacles()
 				corner[SOUTH_WEST].x = corner[SOUTH_EAST].x - obstacleEndDist;				
 				corner[NORTH_EAST].x -= obstacleStartDist;
 				corner[SOUTH_EAST].x -= obstacleStartDist;
-				::V_swap( obstacleZ[0], obstacleZ[1] );			// swap left and right Z heights for obstacle so we can run common code below
+				::V_swap( obstacleZ[0], obstacleZ[1] );			// std::swap left and right Z heights for obstacle so we can run common code below
 				break;
 			}
 
@@ -1081,14 +1081,14 @@ bool CNavMesh::CreateObstacleTopAreaIfNecessary( CNavArea *area, CNavArea *areaO
 				obstacleHeightEnd = obstacleHeightMax;
 			}
 
-			// for south and west, swap "start" and "end" values of edges so we can use common code below
+			// for south and west, std::swap "start" and "end" values of edges so we can use common code below
 			if ( dir == SOUTH || dir == WEST )
 			{
 				::V_swap( obstacleHeightStart, obstacleHeightEnd );
 				::V_swap( zStart, zEnd );
 			}					
 
-			// Enforce min area width for new area
+			// Enforce Min area width for new area
 			AdjustObstacleDistances( &obstacleDistMin, &obstacleDistMax, bMultiNode ? GenerationStepSize * 2 : GenerationStepSize );
 			Assert( obstacleDistMin < obstacleDistMax );
 			Assert( obstacleDistMax - obstacleDistMin >= MinObstacleAreaWidth );

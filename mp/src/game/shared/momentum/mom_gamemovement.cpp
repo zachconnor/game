@@ -64,7 +64,7 @@ void CMomentumGameMovement::DecayPunchAngle(void)
 
     len = VectorNormalize(vPunchAngle);
     len -= (10.0 + len * 0.5) * gpGlobals->frametime;
-    len = max(len, 0.0);
+    len = Max(len, float(0.0));
     VectorScale(vPunchAngle, len, vPunchAngle);
 
     m_pPlayer->m_Local.m_vecPunchAngle.Set(0, vPunchAngle.x);
@@ -318,10 +318,10 @@ void CMomentumGameMovement::Duck(void)
                 player->m_Local.m_bDucking = true;
             }
 
-            float duckmilliseconds = max(0.0f, 1000.0f - (float)player->m_Local.m_flDucktime);
+            float duckmilliseconds = Max(0.0f, 1000.0f - (float)player->m_Local.m_flDucktime);
             float duckseconds = duckmilliseconds / 1000.0f;
 
-            // time = max( 0.0, ( 1.0 - (float)player->m_Local.m_flDucktime / 1000.0 ) );
+            // time = Max( 0.0, ( 1.0 - (float)player->m_Local.m_flDucktime / 1000.0 ) );
 
             if (player->m_Local.m_bDucking)
             {
@@ -354,7 +354,7 @@ void CMomentumGameMovement::Duck(void)
                     player->m_Local.m_bDucking = true; // or unducking
                 }
 
-                float duckmilliseconds = max(0.0f, 1000.0f - (float)player->m_Local.m_flDucktime);
+                float duckmilliseconds = Max(0.0f, 1000.0f - (float)player->m_Local.m_flDucktime);
                 float duckseconds = duckmilliseconds / 1000.0f;
 
                 if (CanUnduck())
@@ -507,7 +507,7 @@ void CMomentumGameMovement::PlayerMove()
             }
             else
             {
-                offset.z = min(est, offset.z);
+                offset.z = Min(est, offset.z);
             }
             player->SetViewOffset(offset);
         }
@@ -985,7 +985,7 @@ void CMomentumGameMovement::AirMove(void)
     wishspeed = VectorNormalize(wishdir);
 
     //
-    // clamp to server defined max speed
+    // clamp to server defined Max speed
     //
     if (wishspeed != 0 && (wishspeed > mv->m_flMaxSpeed))
     {

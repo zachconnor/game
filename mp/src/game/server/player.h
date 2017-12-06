@@ -120,7 +120,7 @@ enum PlayerPhysFlag_e
 //-----------------------------------------------------
 //This is Half-Life player entity
 //-----------------------------------------------------
-#define CSUITPLAYLIST	4		// max of 4 suit sentences queued up at any time
+#define CSUITPLAYLIST	4		// Max of 4 suit sentences queued up at any time
 #define	SUIT_REPEAT_OK		0
 
 #define SUIT_NEXT_IN_30SEC	30

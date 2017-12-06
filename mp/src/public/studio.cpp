@@ -575,7 +575,7 @@ int	studiohdr_t::GetActivityListVersion( void )
 
 		Assert( pStudioHdr );
 
-		version = min( version, pStudioHdr->activitylistversion );
+		version = Min( version, pStudioHdr->activitylistversion );
 	}
 
 	return version;
@@ -839,7 +839,7 @@ const studiohdr_t *CStudioHdr::GroupStudioHdr( int i )
 	if ( !m_pStudioHdrCache.IsValidIndex( i ) )
 	{
 		const char *pszName = ( m_pStudioHdr ) ? m_pStudioHdr->pszName() : "<<null>>";
-		ExecuteNTimes( 5, Warning( "Invalid index passed to CStudioHdr(%s)::GroupStudioHdr(): %d, but max is %d\n", pszName, i, m_pStudioHdrCache.Count() ) );
+		ExecuteNTimes( 5, Warning( "Invalid index passed to CStudioHdr(%s)::GroupStudioHdr(): %d, but Max is %d\n", pszName, i, m_pStudioHdrCache.Count() ) );
 		DebuggerBreakIfDebugging();
 		return m_pStudioHdr; // return something known to probably exist, certainly things will be messed up, but hopefully not crash before the warning is noticed
 	}
@@ -1219,7 +1219,7 @@ int	CStudioHdr::GetActivityListVersion( void )
 	{
 		const studiohdr_t *pStudioHdr = GroupStudioHdr( i );
 		Assert( pStudioHdr );
-		version = min( version, pStudioHdr->activitylistversion );
+		version = Min( version, pStudioHdr->activitylistversion );
 	}
 
 	return version;
@@ -1262,7 +1262,7 @@ int	CStudioHdr::GetEventListVersion( void )
 	{
 		const studiohdr_t *pStudioHdr = GroupStudioHdr( i );
 		Assert( pStudioHdr );
-		version = min( version, pStudioHdr->eventsindexed );
+		version = Min( version, pStudioHdr->eventsindexed );
 	}
 
 	return version;
@@ -1427,8 +1427,8 @@ void CStudioHdr::RunFlexRules( const float *src, float *dest )
 				k--; 
 				break;
 			case STUDIO_NEG: stack[k-1] = -stack[k-1]; break;
-			case STUDIO_MAX: stack[k-2] = max( stack[k-2], stack[k-1] ); k--; break;
-			case STUDIO_MIN: stack[k-2] = min( stack[k-2], stack[k-1] ); k--; break;
+			case STUDIO_MAX: stack[k-2] = Max( stack[k-2], stack[k-1] ); k--; break;
+			case STUDIO_MIN: stack[k-2] = Min( stack[k-2], stack[k-1] ); k--; break;
 			case STUDIO_CONST: stack[k] = pops->d.value; k++; break;
 			case STUDIO_FETCH1: 
 				{ 
@@ -1514,17 +1514,17 @@ void CStudioHdr::RunFlexRules( const float *src, float *dest )
 			case STUDIO_DME_LOWER_EYELID:
 				{ 
 					const mstudioflexcontroller_t *const pCloseLidV = pFlexcontroller( (LocalFlexController_t)pops->d.index );
-					const float flCloseLidV = RemapValClamped( src[ pCloseLidV->localToGlobal ], pCloseLidV->min, pCloseLidV->max, 0.0f, 1.0f );
+					const float flCloseLidV = RemapValClamped( src[ pCloseLidV->localToGlobal ], pCloseLidV->Min, pCloseLidV->Max, 0.0f, 1.0f );
 
 					const mstudioflexcontroller_t *const pCloseLid = pFlexcontroller( static_cast< LocalFlexController_t >( (int)stack[ k - 1 ] ) );
-					const float flCloseLid = RemapValClamped( src[ pCloseLid->localToGlobal ], pCloseLid->min, pCloseLid->max, 0.0f, 1.0f );
+					const float flCloseLid = RemapValClamped( src[ pCloseLid->localToGlobal ], pCloseLid->Min, pCloseLid->Max, 0.0f, 1.0f );
 
 					int nBlinkIndex = static_cast< int >( stack[ k - 2 ] );
 					float flBlink = 0.0f;
 					if ( nBlinkIndex >= 0 )
 					{
 						const mstudioflexcontroller_t *const pBlink = pFlexcontroller( static_cast< LocalFlexController_t >( (int)stack[ k - 2 ] ) );
-						flBlink = RemapValClamped( src[ pBlink->localToGlobal ], pBlink->min, pBlink->max, 0.0f, 1.0f );
+						flBlink = RemapValClamped( src[ pBlink->localToGlobal ], pBlink->Min, pBlink->Max, 0.0f, 1.0f );
 					}
 
 					int nEyeUpDownIndex = static_cast< int >( stack[ k - 3 ] );
@@ -1532,7 +1532,7 @@ void CStudioHdr::RunFlexRules( const float *src, float *dest )
 					if ( nEyeUpDownIndex >= 0 )
 					{
 						const mstudioflexcontroller_t *const pEyeUpDown = pFlexcontroller( static_cast< LocalFlexController_t >( (int)stack[ k - 3 ] ) );
-						flEyeUpDown = RemapValClamped( src[ pEyeUpDown->localToGlobal ], pEyeUpDown->min, pEyeUpDown->max, -1.0f, 1.0f );
+						flEyeUpDown = RemapValClamped( src[ pEyeUpDown->localToGlobal ], pEyeUpDown->Min, pEyeUpDown->Max, -1.0f, 1.0f );
 					}
 
 					if ( flEyeUpDown > 0.0 )
@@ -1549,17 +1549,17 @@ void CStudioHdr::RunFlexRules( const float *src, float *dest )
 			case STUDIO_DME_UPPER_EYELID:
 				{ 
 					const mstudioflexcontroller_t *const pCloseLidV = pFlexcontroller( (LocalFlexController_t)pops->d.index );
-					const float flCloseLidV = RemapValClamped( src[ pCloseLidV->localToGlobal ], pCloseLidV->min, pCloseLidV->max, 0.0f, 1.0f );
+					const float flCloseLidV = RemapValClamped( src[ pCloseLidV->localToGlobal ], pCloseLidV->Min, pCloseLidV->Max, 0.0f, 1.0f );
 
 					const mstudioflexcontroller_t *const pCloseLid = pFlexcontroller( static_cast< LocalFlexController_t >( (int)stack[ k - 1 ] ) );
-					const float flCloseLid = RemapValClamped( src[ pCloseLid->localToGlobal ], pCloseLid->min, pCloseLid->max, 0.0f, 1.0f );
+					const float flCloseLid = RemapValClamped( src[ pCloseLid->localToGlobal ], pCloseLid->Min, pCloseLid->Max, 0.0f, 1.0f );
 
 					int nBlinkIndex = static_cast< int >( stack[ k - 2 ] );
 					float flBlink = 0.0f;
 					if ( nBlinkIndex >= 0 )
 					{
 						const mstudioflexcontroller_t *const pBlink = pFlexcontroller( static_cast< LocalFlexController_t >( (int)stack[ k - 2 ] ) );
-						flBlink = RemapValClamped( src[ pBlink->localToGlobal ], pBlink->min, pBlink->max, 0.0f, 1.0f );
+						flBlink = RemapValClamped( src[ pBlink->localToGlobal ], pBlink->Min, pBlink->Max, 0.0f, 1.0f );
 					}
 
 					int nEyeUpDownIndex = static_cast< int >( stack[ k - 3 ] );
@@ -1567,7 +1567,7 @@ void CStudioHdr::RunFlexRules( const float *src, float *dest )
 					if ( nEyeUpDownIndex >= 0 )
 					{
 						const mstudioflexcontroller_t *const pEyeUpDown = pFlexcontroller( static_cast< LocalFlexController_t >( (int)stack[ k - 3 ] ) );
-						flEyeUpDown = RemapValClamped( src[ pEyeUpDown->localToGlobal ], pEyeUpDown->min, pEyeUpDown->max, -1.0f, 1.0f );
+						flEyeUpDown = RemapValClamped( src[ pEyeUpDown->localToGlobal ], pEyeUpDown->Min, pEyeUpDown->Max, -1.0f, 1.0f );
 					}
 
 					if ( flEyeUpDown < 0.0f )
@@ -1698,7 +1698,7 @@ void CStudioHdr::CActivityToSequenceMapping::Initialize( CStudioHdr * __restrict
 		HashValueType &element = m_ActToSeqHash[handle];
 		element.startingIdx = sequenceCount;
 		sequenceCount += element.count;
-		topActivity = max(topActivity, element.activityIdx);
+		topActivity = Max(topActivity, element.activityIdx);
 	}
 	
 

@@ -119,7 +119,7 @@ public:
 	// Calls SetSize and copies each element.
 	void CopyArray( const T *pArray, int size );
 
-	// Fast swap
+	// Fast std::swap
 	void Swap( CUtlVector< T, A > &vec );
 	
 	// Add the specified array to the tail.

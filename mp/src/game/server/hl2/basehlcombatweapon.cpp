@@ -192,7 +192,7 @@ void CHLMachineGun::DoMachineGunKick( CBasePlayer *pPlayer, float dampEasy, floa
 		}
 	}
 
-	//Clip this to our desired min/max
+	//Clip this to our desired Min/Max
 	UTIL_ClipPunchAngleOffset( vecScratch, pPlayer->m_Local.m_vecPunchAngle, QAngle( 24.0f, 3.0f, 1.0f ) );
 
 	//Add it to the view punch

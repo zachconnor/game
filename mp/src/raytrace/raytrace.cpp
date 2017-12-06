@@ -242,8 +242,8 @@ int CacheOptimizedTriangle::ClassifyAgainstAxisSplit(int split_plane, float spli
 	float maxc=minc;
 	for(int v=1;v<3;v++)
 	{
-		minc=min(minc,Vertex(v)[split_plane]);
-		maxc=max(maxc,Vertex(v)[split_plane]);
+		minc=Min(minc,Vertex(v)[split_plane]);
+		maxc=Max(maxc,Vertex(v)[split_plane]);
 	}
 
 	if (minc>=split_value)
@@ -618,8 +618,8 @@ void RayTracingEnvironment::CalculateTriangleListBounds(int32 const *tris,int nt
 		for(int v=0; v<3; v++)
 			for(int c=0; c<3; c++)
 			{
-				minout[c]=min(minout[c],tri.Vertex(v)[c]);
-							  maxout[c]=max(maxout[c],tri.Vertex(v)[c]);
+				minout[c]=Min(minout[c],tri.Vertex(v)[c]);
+							  maxout[c]=Max(maxout[c],tri.Vertex(v)[c]);
 			}
 	}
 }
@@ -671,11 +671,11 @@ float RayTracingEnvironment::CalculateCostsOfSplit(
 	for(int t=0;t<ntris;t++)
 	{
 		CacheOptimizedTriangle &tri=OptimizedTriangleList[tri_list[t]];
-		// determine max and min coordinate values for later optimization
+		// determine Max and Min coordinate values for later optimization
 		for(int v=0;v<3;v++)
 		{
-			min_coord = min( min_coord, tri.Vertex(v)[split_plane] );
-			max_coord = max( max_coord, tri.Vertex(v)[split_plane] );
+			min_coord = Min( min_coord, tri.Vertex(v)[split_plane] );
+			max_coord = Max( max_coord, tri.Vertex(v)[split_plane] );
 		}
 		switch(tri.ClassifyAgainstAxisSplit(split_plane,split_value))
 		{

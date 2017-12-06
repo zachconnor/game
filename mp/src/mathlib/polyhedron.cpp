@@ -574,7 +574,7 @@ bool FindConvexShapeLooseAABB( const float *pInwardFacingPlanes, int iPlaneCount
 			// Chop the polygon against this plane
 			vertCount = ClipPolyToPlane( (Vector *)vertsIn, vertCount, (Vector *)vertsOut, *(Vector *)&pMovedPlanes[j*4], pMovedPlanes[(j*4) + 3], 0.0f );
 
-			//swap the input and output arrays
+			//std::swap the input and output arrays
 			vertsSwap = vertsIn; vertsIn = vertsOut; vertsOut = vertsSwap;
 
 			// Less than a poly left, something's wrong, don't bother with this polygon
@@ -623,7 +623,7 @@ bool FindConvexShapeLooseAABB( const float *pInwardFacingPlanes, int iPlaneCount
 		*pAABBMins = vAABBMins;
 		*pAABBMaxs = vAABBMaxs;
 	}
-	else if( pAABBMins ) //they only want the min
+	else if( pAABBMins ) //they only want the Min
 	{
 		for( int i = 0; i != iPolyCount; ++i )
 		{
@@ -640,7 +640,7 @@ bool FindConvexShapeLooseAABB( const float *pInwardFacingPlanes, int iPlaneCount
 		}
 		*pAABBMins = vAABBMins;
 	}
-	else //they only want the max
+	else //they only want the Max
 	{
 		for( int i = 0; i != iPolyCount; ++i )
 		{
@@ -2054,7 +2054,7 @@ void DumpAABBToGLView( const Vector &vCenter, const Vector &vExtents, const Vect
 	Vector vMins = vCenter - vExtents;
 	Vector vMaxs = vCenter + vExtents;
 
-	//x min side
+	//x Min side
 	fprintf( pFile, "4\n" );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMaxs.z, vColor.x, vColor.y, vColor.z );
@@ -2067,7 +2067,7 @@ void DumpAABBToGLView( const Vector &vCenter, const Vector &vExtents, const Vect
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMaxs.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 
-	//x max side
+	//x Max side
 	fprintf( pFile, "4\n" );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMaxs.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMaxs.x, vMins.y, vMaxs.z, vColor.x, vColor.y, vColor.z );
@@ -2081,7 +2081,7 @@ void DumpAABBToGLView( const Vector &vCenter, const Vector &vExtents, const Vect
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMaxs.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 
 
-	//y min side
+	//y Min side
 	fprintf( pFile, "4\n" );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMaxs.z, vColor.x, vColor.y, vColor.z );
@@ -2096,7 +2096,7 @@ void DumpAABBToGLView( const Vector &vCenter, const Vector &vExtents, const Vect
 
 
 
-	//y max side
+	//y Max side
 	fprintf( pFile, "4\n" );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMaxs.y, vMins.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMaxs.y, vMaxs.z, vColor.x, vColor.y, vColor.z );
@@ -2111,7 +2111,7 @@ void DumpAABBToGLView( const Vector &vCenter, const Vector &vExtents, const Vect
 
 
 
-	//z min side
+	//z Min side
 	fprintf( pFile, "4\n" );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMaxs.y, vMins.z, vColor.x, vColor.y, vColor.z );
@@ -2125,7 +2125,7 @@ void DumpAABBToGLView( const Vector &vCenter, const Vector &vExtents, const Vect
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMins.z, vColor.x, vColor.y, vColor.z );
 
 
-	//z max side
+	//z Max side
 	fprintf( pFile, "4\n" );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMins.y, vMaxs.z, vColor.x, vColor.y, vColor.z );
 	fprintf( pFile, "%6.3f %6.3f %6.3f %.2f %.2f %.2f\n", vMins.x, vMaxs.y, vMaxs.z, vColor.x, vColor.y, vColor.z );

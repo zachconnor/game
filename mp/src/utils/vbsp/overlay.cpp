@@ -273,7 +273,7 @@ void Overlay_EmitOverlayFace( mapoverlay_t *pMapOverlay )
 		Assert( nFaceCount < OVERLAY_BSP_FACE_COUNT );
 		if ( nFaceCount >= OVERLAY_BSP_FACE_COUNT )
 		{
-			Error( "Overlay touching too many faces (touching %d, max %d)\nOverlay %s at %.1f %.1f %.1f", nFaceCount, OVERLAY_BSP_FACE_COUNT, pMapOverlay->szMaterialName, pMapOverlay->vecOrigin.x, pMapOverlay->vecOrigin.y, pMapOverlay->vecOrigin.z );
+			Error( "Overlay touching too many faces (touching %d, Max %d)\nOverlay %s at %.1f %.1f %.1f", nFaceCount, OVERLAY_BSP_FACE_COUNT, pMapOverlay->szMaterialName, pMapOverlay->vecOrigin.x, pMapOverlay->vecOrigin.y, pMapOverlay->vecOrigin.z );
 			return;
 		}
 
@@ -361,7 +361,7 @@ void OverlayTransition_EmitOverlayFace( mapoverlay_t *pMapOverlay )
 		Assert( nFaceCount < WATEROVERLAY_BSP_FACE_COUNT );
 		if ( nFaceCount >= WATEROVERLAY_BSP_FACE_COUNT )
 		{
-			Error( "Water Overlay touching too many faces (touching %d, max %d)\nOverlay %s at %.1f %.1f %.1f", nFaceCount, OVERLAY_BSP_FACE_COUNT, pMapOverlay->szMaterialName, pMapOverlay->vecOrigin.x, pMapOverlay->vecOrigin.y, pMapOverlay->vecOrigin.z );
+			Error( "Water Overlay touching too many faces (touching %d, Max %d)\nOverlay %s at %.1f %.1f %.1f", nFaceCount, OVERLAY_BSP_FACE_COUNT, pMapOverlay->szMaterialName, pMapOverlay->vecOrigin.x, pMapOverlay->vecOrigin.y, pMapOverlay->vecOrigin.z );
 			return;
 		}
 

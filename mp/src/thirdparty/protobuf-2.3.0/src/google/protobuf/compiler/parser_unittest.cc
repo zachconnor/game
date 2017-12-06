@@ -478,7 +478,7 @@ TEST_F(ParseMessageTest, ExtensionRange) {
   ExpectParsesTo(
     "message TestMessage {\n"
     "  extensions 10 to 19;\n"
-    "  extensions 30 to max;\n"
+    "  extensions 30 to Max;\n"
     "}\n",
 
     "message_type {"
@@ -491,7 +491,7 @@ TEST_F(ParseMessageTest, ExtensionRange) {
 TEST_F(ParseMessageTest, CompoundExtensionRange) {
   ExpectParsesTo(
     "message TestMessage {\n"
-    "  extensions 2, 15, 9 to 11, 100 to max, 3;\n"
+    "  extensions 2, 15, 9 to 11, 100 to Max, 3;\n"
     "}\n",
 
     "message_type {"
@@ -1242,7 +1242,7 @@ TEST_F(ParseDecriptorDebugTest, TestAllDescriptorTypes) {
   SortMessages(&parsed);
 
   // I really wanted to use StringDiff here for the debug output on fail,
-  // but the strings are too long for it, and if I increase its max size,
+  // but the strings are too long for it, and if I increase its Max size,
   // we get a memory allocation failure :(
   EXPECT_EQ(expected.DebugString(), parsed.DebugString());
 }

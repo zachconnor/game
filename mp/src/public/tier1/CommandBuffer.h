@@ -77,7 +77,7 @@ public:
 	// to entirely contain in the buffer).
     CommandHandle_t GetNextCommandHandle();
 
-	// Specifies a max limit of the args buffer. For unittesting. Size == 0 means use default
+	// Specifies a Max limit of the args buffer. For unittesting. Size == 0 means use default
 	void LimitArgumentBufferSize( int nSize );
 
 	void SetWaitEnabled( bool bEnable )		{ m_bWaitEnabled = bEnable; }

@@ -147,7 +147,7 @@ float CBasePlayer::GetTimeBase( void ) const
 
 float CBasePlayer::GetPlayerMaxSpeed()
 {
-	// player max speed is the lower limit of m_flMaxSpeed and sv_maxspeed
+	// player Max speed is the lower limit of m_flMaxSpeed and sv_maxspeed
 	float fMaxSpeed = sv_maxspeed.GetFloat();
 	if ( MaxSpeed() > 0.0f && MaxSpeed() < fMaxSpeed )
 		fMaxSpeed = MaxSpeed();
@@ -1051,7 +1051,7 @@ void CBasePlayer::SelectItem( const char *pstr, int iSubType )
 ConVar sv_debug_player_use( "sv_debug_player_use", "0", FCVAR_REPLICATED, "Visualizes +use logic. Green cross=trace success, Red cross=trace too far, Green box=radius success" );
 float IntervalDistance( float x, float x0, float x1 )
 {
-	// swap so x0 < x1
+	// std::swap so x0 < x1
 	if ( x0 > x1 )
 	{
 		float tmp = x0;

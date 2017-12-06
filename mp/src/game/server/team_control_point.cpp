@@ -484,7 +484,7 @@ void CTeamControlPoint::CaptureStart( int iCapTeam, int iNumCappingPlayers, int 
 			iNumCappers = 8;
 		}
 
-		char cappers[9];	// pCappingPlayers should be max length 8
+		char cappers[9];	// pCappingPlayers should be Max length 8
 		int i;
 		for( i = 0 ; i < iNumCappers ; i++ )
 		{
@@ -723,7 +723,7 @@ void CTeamControlPoint::SendCapString( int iCapTeam, int iNumCappingPlayers, int
 			iNumCappers = 8;
 		}
 
-		char cappers[9];	// pCappingPlayers should be max length 8
+		char cappers[9];	// pCappingPlayers should be Max length 8
 		int i;
 		for( i = 0 ; i < iNumCappers ; i++ )
 		{

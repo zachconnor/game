@@ -152,7 +152,7 @@ public:
 	// relative to other cards w/ the same dx level?
 	virtual bool PreferReducedFillrate() const = 0;
 
-	// This is the max dx support level supported by the card
+	// This is the Max dx support level supported by the card
 	virtual int	 GetMaxDXSupportLevel() const = 0;
 
 	// Does the card specify fog color in linear space when sRGBWrites are enabled?

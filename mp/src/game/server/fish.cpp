@@ -274,7 +274,7 @@ float CFish::Avoid( void )
 	// 
 	// Stay within pool bounds.
 	// This may cause problems with pools with oddly concave portions
-	// right at the max range.
+	// right at the Max range.
 	//
 	Vector toCenter = m_pool->GetAbsOrigin() - GetAbsOrigin();
 	const float avoidZone = 20.0f;

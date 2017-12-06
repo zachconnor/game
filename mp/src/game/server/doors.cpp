@@ -280,7 +280,7 @@ void CBaseDoor::Spawn()
 	if ( !IsRotatingDoor() )
 	{
 		if ( ( m_eSpawnPosition == FUNC_DOOR_SPAWN_OPEN ) || HasSpawnFlags( SF_DOOR_START_OPEN_OBSOLETE ) )
-		{	// swap pos1 and pos2, put door at pos2
+		{	// std::swap pos1 and pos2, put door at pos2
 			UTIL_SetOrigin( this, m_vecPosition2);
 			m_toggle_state = TS_AT_TOP;
 		}
@@ -1380,7 +1380,7 @@ void CRotDoor::Spawn( void )
 	// been deprecated.
 	if ( HasSpawnFlags(SF_DOOR_START_OPEN_OBSOLETE) )
 	{	
-		// swap pos1 and pos2, put door at pos2, invert movement direction
+		// std::swap pos1 and pos2, put door at pos2, invert movement direction
 		QAngle vecNewAngles = m_vecAngle2;
 		m_vecAngle2 = m_vecAngle1;
 		m_vecAngle1 = vecNewAngles;

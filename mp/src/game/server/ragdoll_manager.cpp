@@ -164,8 +164,8 @@ int CRagdollManager::DrawDebugTextOverlays( void )
 	{
 		char tempstr[512];
 
-		// print max ragdoll count
-		Q_snprintf(tempstr,sizeof(tempstr),"max ragdoll count: %d", m_iCurrentMaxRagdollCount.Get());
+		// print Max ragdoll count
+		Q_snprintf(tempstr,sizeof(tempstr),"Max ragdoll count: %d", m_iCurrentMaxRagdollCount.Get());
 		EntityText(text_offset,tempstr,0);
 		text_offset++;
 	}

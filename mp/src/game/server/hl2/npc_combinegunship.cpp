@@ -2670,7 +2670,7 @@ void CNPC_CombineGunship::UpdateEnemyTarget( void )
 
 	if ( bMaxHits )
 	{
-		// We've hit our target. Stop chasing, and return to max speed.
+		// We've hit our target. Stop chasing, and return to Max speed.
 		chaseAngles[YAW] = lastChaseAngles[YAW];
 		lastSpeed = BASE_STITCH_VELOCITY;
 	}

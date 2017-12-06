@@ -1137,7 +1137,7 @@ void CTeamRoundTimer::SetTimeRemaining( int iTimerSeconds )
 	if ( IsDisabled() )
 		return;
 
-	// make sure we don't go over our max length
+	// make sure we don't go over our Max length
 	if ( m_nTimerMaxLength > 0 )
 	{
 		if ( iTimerSeconds > m_nTimerMaxLength )
@@ -1230,10 +1230,10 @@ void CTeamRoundTimer::AddTimerSeconds( int iSecondsToAdd, int iTeamResponsible /
 
 	if ( m_nTimerMaxLength > 0 )
 	{
-		// will adding this many seconds push us over our max length?
+		// will adding this many seconds push us over our Max length?
 		if ( GetTimeRemaining() + iSecondsToAdd > m_nTimerMaxLength )
 		{
-			// adjust to only add up to our max length
+			// adjust to only add up to our Max length
 			iSecondsToAdd = m_nTimerMaxLength - GetTimeRemaining();
 		}
 	}
@@ -1343,7 +1343,7 @@ void CTeamRoundTimer::InputSetMaxTime( inputdata_t &input )
 
 	if ( m_nTimerMaxLength > 0 )
 	{
-		// make sure our current time is not above the max length
+		// make sure our current time is not above the Max length
 		if ( GetTimeRemaining() > m_nTimerMaxLength )
 		{
 			SetTimeRemaining( m_nTimerMaxLength );

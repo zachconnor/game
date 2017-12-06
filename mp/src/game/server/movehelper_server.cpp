@@ -213,7 +213,7 @@ void CMoveHelperServer::ProcessImpacts( void )
 {
 	Assert( m_pHostPlayer );
 
-	// Relink in order to build absorigin and absmin/max to reflect any changes
+	// Relink in order to build absorigin and absmin/Max to reflect any changes
 	//  from prediction.  Relink will early out on SOLID_NOT
 	m_pHostPlayer->PhysicsTouchTriggers();
 

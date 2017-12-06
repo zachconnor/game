@@ -368,7 +368,7 @@ FORCEINLINE void CPixelWriter::ActivateByteSwapping( bool bSwap )
 		return;
 	}
 
-	// swap the shifts
+	// std::swap the shifts
 	m_RShift = 24-m_RShift;
 	m_GShift = 24-m_GShift;
 	m_BShift = 24-m_BShift;

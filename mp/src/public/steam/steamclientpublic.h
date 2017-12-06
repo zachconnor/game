@@ -302,7 +302,7 @@ enum ESteamUserStatType
 	k_ESteamUserStatTypeACHIEVEMENTS = 4,
 	k_ESteamUserStatTypeGROUPACHIEVEMENTS = 5,
 
-	// max, for sanity checks
+	// Max, for sanity checks
 	k_ESteamUserStatTypeMAX
 };
 

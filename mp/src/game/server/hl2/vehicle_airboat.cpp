@@ -231,8 +231,8 @@ private:
 	int				m_nSplashAttachment;
 
 	float			m_flPrevThrottle;			// Throttle during last think. Used for detecting state changes.
-	float			m_flSpinRate;				// Current rate of spin of propeller: 0 = min, 1.0 = max
-	float			m_flTargetSpinRate;			// Target rate of spin of propeller: 0 = min, 1.0 = max
+	float			m_flSpinRate;				// Current rate of spin of propeller: 0 = Min, 1.0 = Max
+	float			m_flTargetSpinRate;			// Target rate of spin of propeller: 0 = Min, 1.0 = Max
 	float			m_flPropTime;				// Time to turn on/off the prop.
 	float			m_flBlurTime;				// Time to turn on/off the blur.
 
@@ -246,7 +246,7 @@ private:
 	float			m_flEngineIdleTime;			// Time to start playing the engine's idle sound.
 	float			m_flEngineDuckTime;			// Time to reduce the volume of the engine's idle sound.
 
-	bool			m_bFadeOutFan;				// Fade out fan sound after cruising at max speed for a while.
+	bool			m_bFadeOutFan;				// Fade out fan sound after cruising at Max speed for a while.
 
 	int				m_nPrevWaterLevel;			// Used for detecting transitions into/out of water.
 	float			m_flWaterStoppedPitchTime;	// Time to pitch shift the water stopped sound.
@@ -1404,7 +1404,7 @@ void CPropAirboat::UpdateFanSound( CSoundEnvelopeController &controller, float s
 	// Manage the state of the fan sound.
 	if (speedRatio >= 0.8)
 	{
-		// Crossfade between a 'max speed' fan sound and the normal fan sound.
+		// Crossfade between a 'Max speed' fan sound and the normal fan sound.
 		controller.SoundChangeVolume( m_pFanSound, RemapValClamped( speedRatio, 0.8, 1.0, FAN_MAX_VOLUME, FAN_MIN_VOLUME ), FAN_CHANGE_VOLUME_TIME );
 		controller.SoundChangeVolume( m_pFanMaxSpeedSound, RemapValClamped( speedRatio, 0.8, 1.0, FAN_MIN_VOLUME, FAN_MAX_VOLUME ), FAN_CHANGE_VOLUME_TIME );
 

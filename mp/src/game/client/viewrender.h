@@ -394,7 +394,7 @@ public:
 
 	virtual void	QueueOverlayRenderView( const CViewSetup &view, int nClearFlags, int whatToDraw );
 
-	virtual void	GetScreenFadeDistances( float *min, float *max );
+	virtual void	GetScreenFadeDistances( float *Min, float *Max );
 
 	virtual C_BaseEntity *GetCurrentlyDrawingEntity();
 	virtual void		  SetCurrentlyDrawingEntity( C_BaseEntity *pEnt );

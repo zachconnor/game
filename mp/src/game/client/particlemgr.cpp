@@ -166,7 +166,7 @@ CParticleEffectBinding::~CParticleEffectBinding()
 	Term();
 }
 
-// The is the max size of the particles for use in bounding	computation
+// The is the Max size of the particles for use in bounding	computation
 void CParticleEffectBinding::SetParticleCullRadius( float flMaxParticleRadius )
 {
 	if ( m_flParticleCullRadius != flMaxParticleRadius )
@@ -569,7 +569,7 @@ bool CParticleEffectBinding::EnlargeBBoxToContain( const Vector &pt )
 
 	bool bHasChanged = false;
 
-	// check min bounds
+	// check Min bounds
 	if ( pt.x < m_Min.x ) 
 		{ m_Min.x = pt.x; bHasChanged = true; }
 
@@ -579,7 +579,7 @@ bool CParticleEffectBinding::EnlargeBBoxToContain( const Vector &pt )
 	if ( pt.z < m_Min.z ) 
 		{ m_Min.z = pt.z; bHasChanged = true; }
 
-	// check max bounds
+	// check Max bounds
 	if ( pt.x > m_Max.x ) 
 		{ m_Max.x = pt.x; bHasChanged = true; }
 
@@ -1168,7 +1168,7 @@ void CParticleMgr::LevelInit()
 
 Particle *CParticleMgr::AllocParticle( int size )
 {
-	// Enforce max particle limit.
+	// Enforce Max particle limit.
 	if ( m_nCurrentParticlesAllocated >= MAX_TOTAL_PARTICLES )
 		return NULL;
 		
@@ -2353,7 +2353,7 @@ void CParticleMgr::StatsAccumulateActiveParticleSystems()
 		pParticleInfo->pDef = NULL;		// These don't have this sort of def.
 	}
 
-	// Now accumulate/max then into the multi-frame stats.
+	// Now accumulate/Max then into the multi-frame stats.
 	int nCount = SingleFrameHistogram.GetNumStrings();
 	for ( int i = 0; i < nCount; ++i )
 	{

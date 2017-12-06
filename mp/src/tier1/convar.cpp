@@ -1024,7 +1024,7 @@ void ConVar::Revert( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 // Input  : minVal - 
-// Output : true if there is a min set
+// Output : true if there is a Min set
 //-----------------------------------------------------------------------------
 bool ConVar::GetMin( float& minVal ) const
 {
@@ -1250,11 +1250,11 @@ void ConVar_PrintDescription( const ConCommandBase *pVar )
 
 		if ( bMin )
 		{
-			ConMsg( " min. %f", fMin );
+			ConMsg( " Min. %f", fMin );
 		}
 		if ( bMax )
 		{
-			ConMsg( " max. %f", fMax );
+			ConMsg( " Max. %f", fMax );
 		}
 
 		ConMsg( "\n" );

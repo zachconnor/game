@@ -53,7 +53,7 @@ public:
 	virtual				~CMeasureSection( void );
 
 
-	// Update max value hit
+	// Update Max value hit
 	void				UpdateMax( void );
 	// Reset totals
 	void				Reset( void );

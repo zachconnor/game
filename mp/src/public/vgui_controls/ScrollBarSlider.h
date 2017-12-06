@@ -37,10 +37,10 @@ public:
 	// Check whether the scroll bar is vertical or not
 	virtual bool IsVertical();
 
-	// Set max and min range of lines to display
-    virtual void SetRange(int min, int max);	
+	// Set Max and Min range of lines to display
+    virtual void SetRange(int Min, int Max);	
 	
-	virtual void GetRange(int &min, int &max);
+	virtual void GetRange(int &Min, int &Max);
 
 	// Set number of rows that can be displayed in window
 	virtual void SetRangeWindow(int rangeWindow); 
@@ -52,7 +52,7 @@ public:
 	virtual void SetSize(int wide, int tall);
 
 	// Get current ScrollBarSlider bounds
-	virtual void GetNobPos(int &min, int &max);	
+	virtual void GetNobPos(int &Min, int &Max);	
 
 	virtual bool HasFullRange();
 	virtual void SetButtonOffset(int buttonOffset);

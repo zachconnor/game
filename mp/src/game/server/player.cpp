@@ -742,7 +742,7 @@ bool CBasePlayer::WantsLagCompensationOnEntity( const CBasePlayer *pPlayer, cons
 	const Vector &vMyOrigin = GetAbsOrigin();
 	const Vector &vHisOrigin = pPlayer->GetAbsOrigin();
 
-	// get max distance player could have moved within max lag compensation time, 
+	// get Max distance player could have moved within Max lag compensation time, 
 	// multiply by 1.5 to to avoid "dead zones"  (sqrt(2) would be the exact value)
 	float maxDistance = 1.5 * pPlayer->MaxSpeed() * sv_maxunlag.GetFloat();
 
@@ -3907,18 +3907,18 @@ void CBasePlayer::PreThink(void)
 	2) A new hit inflicting tbd restarts the tbd counter - each NPC has an 8bit counter,
 		per damage type. The counter is decremented every second, so the maximum time 
 		an effect will last is 255/60 = 4.25 minutes.  Of course, staying within the radius
-		of a damaging effect like fire, nervegas, radiation will continually reset the counter to max.
+		of a damaging effect like fire, nervegas, radiation will continually reset the counter to Max.
 
 	3) Every second that a tbd counter is running, the player takes damage.  The damage
 		is determined by the type of tdb.  
 			Paralyze		- 1/2 movement rate, 30 second duration.
-			Nervegas		- 5 points per second, 16 second duration = 80 points max dose.
-			Poison			- 2 points per second, 25 second duration = 50 points max dose.
-			Radiation		- 1 point per second, 50 second duration = 50 points max dose.
+			Nervegas		- 5 points per second, 16 second duration = 80 points Max dose.
+			Poison			- 2 points per second, 25 second duration = 50 points Max dose.
+			Radiation		- 1 point per second, 50 second duration = 50 points Max dose.
 			Drown			- 5 points per second, 2 second duration.
-			Acid/Chemical	- 5 points per second, 10 second duration = 50 points max.
+			Acid/Chemical	- 5 points per second, 10 second duration = 50 points Max.
 			Burn			- 10 points per second, 2 second duration.
-			Freeze			- 3 points per second, 10 second duration = 30 points max.
+			Freeze			- 3 points per second, 10 second duration = 30 points Max.
 
 	4) Certain actions or countermeasures counteract the damaging effects of tbds:
 
@@ -7417,7 +7417,7 @@ void CBasePlayer::EquipWearable( CEconWearable *pItem )
 	{
 		Assert( m_hMyWearables[i] != NULL );
 	}
-	// Networked Vector has a max size of MAX_WEARABLES_SENT_FROM_SERVER, should never have more then 7 wearables
+	// Networked Vector has a Max size of MAX_WEARABLES_SENT_FROM_SERVER, should never have more then 7 wearables
 	// in public
 	// Search for : RecvPropUtlVector( RECVINFO_UTLVECTOR( m_hMyWearables ), MAX_WEARABLES_SENT_FROM_SERVER,	RecvPropEHandle(NULL, 0, 0) ),
 	Assert( m_hMyWearables.Count() <= MAX_WEARABLES_SENT_FROM_SERVER );

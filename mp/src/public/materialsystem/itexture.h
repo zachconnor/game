@@ -113,7 +113,7 @@ public:
 	virtual bool CreateRenderTargetSurface( int width, int height, ImageFormat format, bool bSameAsTexture ) = 0;
 #endif
 
-	// swap everything except the name with another texture
+	// std::swap everything except the name with another texture
 	virtual void SwapContents( ITexture *pOther ) = 0;
 
 	// Retrieve the vtf flags mask

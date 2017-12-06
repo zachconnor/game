@@ -33,7 +33,7 @@
 //--------------------------------------------------------------------------------------------------------------
 /// The current version of the nav file format
 
-/// IMPORTANT: If this version changes, the swap function in makegamedata 
+/// IMPORTANT: If this version changes, the std::swap function in makegamedata 
 /// must be updated to match. If not, this will break the Xbox 360.
 // TODO: Was changed from 15, update when latest 360 code is integrated (MSB 5/5/09)
 const int NavCurrentVersion = 16;

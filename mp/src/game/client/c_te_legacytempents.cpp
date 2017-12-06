@@ -2102,7 +2102,7 @@ C_LocalTempEntity *CTempEnts::TempEntAllocHigh( const Vector& org, const model_t
 	{
 		// didn't find anything? The tent list is either full of high-priority tents
 		// or all tents in the list are still due to live for > 10 seconds. 
-		DevWarning( 1,"Couldn't alloc a high priority TENT (max %i)!\n", MAX_TEMP_ENTITIES );
+		DevWarning( 1,"Couldn't alloc a high priority TENT (Max %i)!\n", MAX_TEMP_ENTITIES );
 		return NULL;
 	}
 

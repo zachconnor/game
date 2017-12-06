@@ -139,7 +139,7 @@ int	GetVertexnum (Vector& in)
 	
 // emit a vertex
 	if (numvertexes == MAX_MAP_VERTS)
-		Error ("Too many unique verts, max = %d (map has too much brush geometry)\n", MAX_MAP_VERTS);
+		Error ("Too many unique verts, Max = %d (map has too much brush geometry)\n", MAX_MAP_VERTS);
 
 	dvertexes[numvertexes].point[0] = vert[0];
 	dvertexes[numvertexes].point[1] = vert[1];
@@ -194,7 +194,7 @@ int	GetVertexnum (Vector& v)
 
 	// new point
 	if (numvertexes == MAX_MAP_VERTS)
-		Error ("Too many unique verts, max = %d (map has too much brush geometry)\n", MAX_MAP_VERTS);
+		Error ("Too many unique verts, Max = %d (map has too much brush geometry)\n", MAX_MAP_VERTS);
 	VectorCopy (v, dv->point);
 	numvertexes++;
 	c_uniqueverts++;
@@ -276,7 +276,7 @@ void EmitFaceVertexes (face_t **pListHead, face_t *f)
 		if (noweld)
 		{	// make every point unique
 			if (numvertexes == MAX_MAP_VERTS)
-				Error ("Too many unique verts, max = %d (map has too much brush geometry)\n", MAX_MAP_VERTS);
+				Error ("Too many unique verts, Max = %d (map has too much brush geometry)\n", MAX_MAP_VERTS);
 			superverts[i] = numvertexes;
 			VectorCopy (w->p[i], dvertexes[numvertexes].point);
 			numvertexes++;
@@ -685,7 +685,7 @@ void FixFaceEdges (face_t **pList, face_t *f)
 		g_numprimindices += newPrim.indexCount;
 		if ( g_numprimitives > MAX_MAP_PRIMITIVES || g_numprimindices > MAX_MAP_PRIMINDICES )
 		{
-			Error("Too many t-junctions to fix up! (%d prims, max %d :: %d indices, max %d)\n", g_numprimitives, MAX_MAP_PRIMITIVES, g_numprimindices, MAX_MAP_PRIMINDICES );
+			Error("Too many t-junctions to fix up! (%d prims, Max %d :: %d indices, Max %d)\n", g_numprimitives, MAX_MAP_PRIMITIVES, g_numprimindices, MAX_MAP_PRIMINDICES );
 		}
 		for ( i = 0; i < outIndices.Count(); i++ )
 		{
@@ -867,7 +867,7 @@ void IntSort( CUtlVector<int> &theList )
 int AddEdge( int v1, int v2, face_t *f )
 {
 	if (numedges >= MAX_MAP_EDGES)
-		Error ("Too many edges in map, max == %d", MAX_MAP_EDGES);
+		Error ("Too many edges in map, Max == %d", MAX_MAP_EDGES);
 
 	g_VertEdgeList[v1].AddToTail( numedges );
 	g_VertEdgeList[v2].AddToTail( numedges );
@@ -1494,7 +1494,7 @@ int AddWindingToPrimverts( const winding_t *w, unsigned short *pIndices, int ver
 			g_numprimverts++;
 			if ( g_numprimverts > MAX_MAP_PRIMVERTS )
 			{
-				Error( "Exceeded max water verts.\nIncrease surface subdivision size or lower your subdivision size in vmt files! (%d>%d)\n", 
+				Error( "Exceeded Max water verts.\nIncrease surface subdivision size or lower your subdivision size in vmt files! (%d>%d)\n", 
 					( int )g_numprimverts, ( int )MAX_MAP_PRIMVERTS );
 			}
 		}
@@ -1531,18 +1531,18 @@ static void SubdivideFaceBySubdivSize( face_t *f, float subdivsize )
 	winding_t *w;
 	w = CopyWinding( f->w );
 
-	Vector min, max;
-	WindingBounds( w, min, max );
+	Vector Min, Max;
+	WindingBounds( w, Min, Max );
 
 #if 0
 	Msg( "START WINDING: \n" );
 	PrintWinding( w );
 #endif
 	int xStart, yStart, xEnd, yEnd, xSteps, ySteps;
-	xStart = ( int )subdivsize * ( int )( ( min[0] - subdivsize ) / subdivsize );
-	xEnd = ( int )subdivsize * ( int )( ( max[0] + subdivsize ) / subdivsize );
-	yStart = ( int )subdivsize * ( int )( ( min[1] - subdivsize ) / subdivsize );
-	yEnd = ( int )subdivsize * ( int )( ( max[1] + subdivsize ) / subdivsize );
+	xStart = ( int )subdivsize * ( int )( ( Min[0] - subdivsize ) / subdivsize );
+	xEnd = ( int )subdivsize * ( int )( ( Max[0] + subdivsize ) / subdivsize );
+	yStart = ( int )subdivsize * ( int )( ( Min[1] - subdivsize ) / subdivsize );
+	yEnd = ( int )subdivsize * ( int )( ( Max[1] + subdivsize ) / subdivsize );
 	xSteps = ( xEnd - xStart ) / subdivsize;
 	ySteps = ( yEnd - yStart ) / subdivsize;
 	int x, y;
@@ -1701,7 +1701,7 @@ static void SubdivideFaceBySubdivSize( face_t *f, float subdivsize )
 		g_numprimindices++;
 		if( g_numprimindices > MAX_MAP_PRIMINDICES )
 		{
-			Error( "Exceeded max water indicies.\nIncrease surface subdivision size! (%d>%d)\n", g_numprimindices, MAX_MAP_PRIMINDICES );
+			Error( "Exceeded Max water indicies.\nIncrease surface subdivision size! (%d>%d)\n", g_numprimindices, MAX_MAP_PRIMINDICES );
 		}
 	}
 	delete [] pStripIndices;
@@ -1713,14 +1713,14 @@ static void SubdivideFaceBySubdivSize( face_t *f, float subdivsize )
 		g_numprimindices++;
 		if( g_numprimindices > MAX_MAP_PRIMINDICES )
 		{
-			Error( "Exceeded max water indicies.\nIncrease surface subdivision size! (%d>%d)\n", g_numprimindices, MAX_MAP_PRIMINDICES );
+			Error( "Exceeded Max water indicies.\nIncrease surface subdivision size! (%d>%d)\n", g_numprimindices, MAX_MAP_PRIMINDICES );
 		}
 	}
 #endif
 	g_numprimitives++; // don't increment until we get here and are sure that we have a primitive.
 	if( g_numprimitives > MAX_MAP_PRIMITIVES )
 	{
-		Error( "Exceeded max water primitives.\nIncrease surface subdivision size! (%d>%d)\n", ( int )g_numprimitives, ( int )MAX_MAP_PRIMITIVES );
+		Error( "Exceeded Max water primitives.\nIncrease surface subdivision size! (%d>%d)\n", ( int )g_numprimitives, ( int )MAX_MAP_PRIMITIVES );
 	}
 }
 

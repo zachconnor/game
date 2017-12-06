@@ -316,7 +316,7 @@ void CReplayMessagePanel::PerformLayout()
 	}
 #endif
 
-	// Adjust overall panel size depending on min-mode
+	// Adjust overall panel size depending on Min-mode
 #if defined( TF_CLIENT_DLL )
 	extern ConVar cl_hud_minmode;
 	bool bMinMode = cl_hud_minmode.GetBool();
@@ -328,7 +328,7 @@ void CReplayMessagePanel::PerformLayout()
 	int nVerticalOffsetBetweenPanels = YRES(6);
 
 	// Only display replay icon and "replay" label if this is the top-most (vertically) panel
-	// and we're not in min-mode
+	// and we're not in Min-mode
 	Assert( InstanceCount() > 0 );
 	if ( !InstanceCount() || bMinMode || g_vecReplayMessagePanels[ 0 ].Get() != this )
 	{

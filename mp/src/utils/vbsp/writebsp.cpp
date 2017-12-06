@@ -92,7 +92,7 @@ void EmitMarkFace (dleaf_t *leaf_p, face_t *f)
 	if (i == numleaffaces)
 	{
 		if (numleaffaces >= MAX_MAP_LEAFFACES)
-			Error ("Too many detail brush faces, max = %d\n", MAX_MAP_LEAFFACES);
+			Error ("Too many detail brush faces, Max = %d\n", MAX_MAP_LEAFFACES);
 
 		dleaffaces[numleaffaces] =  facenum;
 		numleaffaces++;
@@ -119,7 +119,7 @@ void EmitLeaf (node_t *node)
 
 	// emit a leaf
 	if (numleafs >= MAX_MAP_LEAFS)
-		Error ("Too many BSP leaves, max = %d", MAX_MAP_LEAFS);
+		Error ("Too many BSP leaves, Max = %d", MAX_MAP_LEAFS);
 
 	node->diskId = numleafs;
 	leaf_p = &dleafs[numleafs];
@@ -158,7 +158,7 @@ void EmitLeaf (node_t *node)
 	for (b=node->brushlist ; b ; b=b->next)
 	{
 		if (numleafbrushes >= MAX_MAP_LEAFBRUSHES)
-			Error ("Too many brushes in one leaf, max = %d", MAX_MAP_LEAFBRUSHES);
+			Error ("Too many brushes in one leaf, Max = %d", MAX_MAP_LEAFBRUSHES);
 
 		brushnum = b->original - g_MainMap->mapbrushes;
 		for (i=leaf_p->firstleafbrush ; i<numleafbrushes ; i++)
@@ -234,7 +234,7 @@ int CreateOrigFace( face_t *f )
     // get the next original face
     //
     if( numorigfaces >= MAX_MAP_FACES )
-		Error( "Too many faces in map, max = %d", MAX_MAP_FACES );
+		Error( "Too many faces in map, Max = %d", MAX_MAP_FACES );
 	of = &dorigfaces[numorigfaces];
     numorigfaces++;
 
@@ -447,7 +447,7 @@ void EmitFace( face_t *f, qboolean onNode )
     // get the next available .bsp face slot
     //
 	if (numfaces >= MAX_MAP_FACES)
-		Error( "Too many faces in map, max = %d", MAX_MAP_FACES );
+		Error( "Too many faces in map, Max = %d", MAX_MAP_FACES );
 	df = &dfaces[numfaces];
 
 	// Save the correlation between dfaces and faces -- since dfaces doesnt have worldcraft face id
@@ -1016,7 +1016,7 @@ void SetLightStyles (void)
 		if (j == stylenum)
 		{
 			if (stylenum == MAX_SWITCHED_LIGHTS)
-				Error ("Too many switched lights (error at light %s), max = %d", t, MAX_SWITCHED_LIGHTS);
+				Error ("Too many switched lights (error at light %s), Max = %d", t, MAX_SWITCHED_LIGHTS);
 			strcpy (lighttargets[j], t);
 			stylenum++;
 		}
@@ -1308,7 +1308,7 @@ void BeginModel (void)
 	Vector		mins, maxs;
 
 	if (nummodels == MAX_MAP_MODELS)
-		Error ("Too many brush models in map, max = %d", MAX_MAP_MODELS);
+		Error ("Too many brush models in map, Max = %d", MAX_MAP_MODELS);
 	mod = &dmodels[nummodels];
 
 	mod->firstface = numfaces;

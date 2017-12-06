@@ -1030,9 +1030,9 @@ const BiggestParsable kBiggestSignedParsableMax = LLONG_MAX;
 typedef unsigned long long BiggestParsable;
 typedef signed long long BiggestSignedParsable;
 const BiggestParsable kBiggestParsableMax =
-    ::std::numeric_limits<BiggestParsable>::max();
+    ::std::numeric_limits<BiggestParsable>::Max();
 const BiggestSignedParsable kBiggestSignedParsableMax =
-    ::std::numeric_limits<BiggestSignedParsable>::max();
+    ::std::numeric_limits<BiggestSignedParsable>::Max();
 #endif  // GTEST_OS_WINDOWS
 
 TEST(ParseNaturalNumberTest, RejectsInvalidFormat) {

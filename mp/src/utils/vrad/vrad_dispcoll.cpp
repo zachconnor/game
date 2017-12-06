@@ -108,8 +108,8 @@ void CVRADDispColl::CalcSampleRadius2AndBox( dface_t *pFace )
 	}
 	m_flSampleRadius2 = flSampleRadius * flSampleRadius;
 
-	// Calculate the patch radius - the max sample edge length * the number of luxels per edge "chop."
-	float flSampleSize = max( m_flSampleWidth, m_flSampleHeight );
+	// Calculate the patch radius - the Max sample edge length * the number of luxels per edge "chop."
+	float flSampleSize = Max( m_flSampleWidth, m_flSampleHeight );
 	float flPatchSampleRadius = flSampleSize * dispchop * 2.2f;
 	if ( flPatchSampleRadius > g_MaxDispPatchRadius )
 	{
@@ -120,7 +120,7 @@ void CVRADDispColl::CalcSampleRadius2AndBox( dface_t *pFace )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Get the min/max of the displacement surface.
+// Purpose: Get the Min/Max of the displacement surface.
 //-----------------------------------------------------------------------------
 void CVRADDispColl::GetSurfaceMinMax( Vector &boxMin, Vector &boxMax )
 {
@@ -440,7 +440,7 @@ void CVRADDispColl::CreateChildPatchesFromRoot( int iParentPatch, int *pChildPat
 	vecEdges[3] = pParentPatch->winding->p[3] - pParentPatch->winding->p[0];
 
 	// Should the patch be subdivided - check the area.
-	float flMaxLength  = max( m_flSampleWidth, m_flSampleHeight );
+	float flMaxLength  = Max( m_flSampleWidth, m_flSampleHeight );
 	float flMinEdgeLength = flMaxLength * dispchop;
 
 	// Find the longest edge.
@@ -551,7 +551,7 @@ void CVRADDispColl::CreateChildPatches( int iParentPatch, int nLevel )
 		return;
 
 	// Should the patch be subdivided - check the area.
-	float flMaxLength  = max( m_flSampleWidth, m_flSampleHeight );
+	float flMaxLength  = Max( m_flSampleWidth, m_flSampleHeight );
 	float flMinEdgeLength = flMaxLength * dispchop;
 
 	// Split along the longest edge.
@@ -659,7 +659,7 @@ void CVRADDispColl::CreateChildPatchesSub( int iParentPatch )
 		return;
 
 	// Should the patch be subdivided - check the area.
-	float flMaxLength  = max( m_flSampleWidth, m_flSampleHeight );
+	float flMaxLength  = Max( m_flSampleWidth, m_flSampleHeight );
 	float flMinEdgeLength = flMaxLength * dispchop;
 
 	// Split along the longest edge.
@@ -870,8 +870,8 @@ bool CVRADDispColl::InitParentPatch( int iPatch, Vector *pPoints, float &flArea 
 	{
 		for ( int iAxis = 0; iAxis < 3; ++iAxis )
 		{
-			vecMin[iAxis] = min( vecMin[iAxis], pPoints[iPoint][iAxis] );
-			vecMax[iAxis] = max( vecMax[iAxis], pPoints[iPoint][iAxis] );
+			vecMin[iAxis] = Min( vecMin[iAxis], pPoints[iPoint][iAxis] );
+			vecMax[iAxis] = Max( vecMax[iAxis], pPoints[iPoint][iAxis] );
 		}
 	}
 
@@ -1019,8 +1019,8 @@ bool CVRADDispColl::InitPatch( int iPatch, int iParentPatch, int iChild, Vector 
 	{
 		for ( int iAxis = 0; iAxis < 3; ++iAxis )
 		{
-			vecMin[iAxis] = min( vecMin[iAxis], pPoints[iPoint][iAxis] );
-			vecMax[iAxis] = max( vecMax[iAxis], pPoints[iPoint][iAxis] );
+			vecMin[iAxis] = Min( vecMin[iAxis], pPoints[iPoint][iAxis] );
+			vecMax[iAxis] = Max( vecMax[iAxis], pPoints[iPoint][iAxis] );
 		}
 	}
 

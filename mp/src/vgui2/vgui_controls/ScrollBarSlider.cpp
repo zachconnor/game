@@ -410,20 +410,20 @@ void ScrollBarSlider::PaintBackground()
 //-----------------------------------------------------------------------------
 // Purpose: Set the range of the ScrollBarSlider
 //-----------------------------------------------------------------------------
-void ScrollBarSlider::SetRange(int min,int max)
+void ScrollBarSlider::SetRange(int Min,int Max)
 {
-	if(max<min)
+	if(Max<Min)
 	{
-		max=min;
+		Max=Min;
 	}
 
-	if(min>max)
+	if(Min>Max)
 	{
-		min=max;
+		Min=Max;
 	}
 
-	_range[0]=min;
-	_range[1]=max;
+	_range[0]=Min;
+	_range[1]=Max;
 
 	// update the value (forces it within the range)
 	SetValue( _value );
@@ -433,10 +433,10 @@ void ScrollBarSlider::SetRange(int min,int max)
 //-----------------------------------------------------------------------------
 // Purpose: Get the range values of the ScrollBarSlider
 //-----------------------------------------------------------------------------
-void ScrollBarSlider::GetRange(int& min,int& max)
+void ScrollBarSlider::GetRange(int& Min,int& Max)
 {
-	min=_range[0];
-	max=_range[1];
+	Min=_range[0];
+	Max=_range[1];
 }
 
 //-----------------------------------------------------------------------------
@@ -575,10 +575,10 @@ void ScrollBarSlider::OnMouseReleased(MouseCode code)
 //-----------------------------------------------------------------------------
 // Purpose: Get the position of the ends of the ScrollBarSlider.
 //-----------------------------------------------------------------------------
-void ScrollBarSlider::GetNobPos(int& min, int& max)
+void ScrollBarSlider::GetNobPos(int& Min, int& Max)
 {
-	min=_nobPos[0];
-	max=_nobPos[1];
+	Min=_nobPos[0];
+	Max=_nobPos[1];
 }
 
 //-----------------------------------------------------------------------------

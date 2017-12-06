@@ -28,7 +28,7 @@
 #define DUST_SPEED			5		// speed at which dust starts
 #define REAR_AXLE			1		// indexes of axlex
 #define	FRONT_AXLE			0
-#define MAX_GUAGE_SPEED		100.0	// 100 mph is max speed shown on guage
+#define MAX_GUAGE_SPEED		100.0	// 100 mph is Max speed shown on guage
 
 #define BRAKE_MAX_VALUE				1.0f
 #define BRAKE_BACK_FORWARD_SCALAR	2.0f
@@ -390,7 +390,7 @@ bool CFourWheelVehiclePhysics::Initialize( const char *pVehicleScript, unsigned 
 		return false;
 	}
 
-	// NOTE: this needs to be greater than your max framerate (so zero is still instant)
+	// NOTE: this needs to be greater than your Max framerate (so zero is still instant)
 	m_throttleRate = 10000.0;
 	if ( vehicle.engine.throttleTime > 0 )
 	{
@@ -725,7 +725,7 @@ bool CFourWheelVehiclePhysics::Think()
 	if( IsBoosting() && !m_bLastBoost )
 	{
 		m_bLastBoost = true;
-		m_turboTimer = gpGlobals->curtime + 2.75f;		// min duration for turbo sound
+		m_turboTimer = gpGlobals->curtime + 2.75f;		// Min duration for turbo sound
 	}
 	else if( !IsBoosting() && m_bLastBoost )
 	{
@@ -975,7 +975,7 @@ void CFourWheelVehiclePhysics::SteeringTurn( float carSpeed, const vehicleparams
 	const vehicle_operatingparams_t &carState = m_pVehicle->GetOperatingParams();
 	bool bIsBoosting = carState.isTorqueBoosting;
 
-	// if you're recovering from a boost and still going faster than max, use the boost steering values
+	// if you're recovering from a boost and still going faster than Max, use the boost steering values
 	bool bIsBoostRecover = (carState.boostTimeLeft == 100 || carState.boostTimeLeft == 0) ? false : true;
 	float boostMinSpeed = vehicleData.engine.maxSpeed * vehicleData.engine.autobrakeSpeedGain;
 	if ( !bIsBoosting && bIsBoostRecover && carSpeedIns > boostMinSpeed )

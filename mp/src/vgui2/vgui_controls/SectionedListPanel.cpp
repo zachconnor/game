@@ -579,7 +579,7 @@ public:
 					wide = imageWide;
 				}
 
-				xpos += wide;//max(maxWidth,wide);
+				xpos += wide;//Max(maxWidth,wide);
 				surface()->DrawOutlinedRect( xpos, 0, xpos, GetTall() );
 			}
 		}
@@ -697,7 +697,7 @@ public:
 
 	//=============================================================================
 	// HPE_BEGIN:
-	// [menglish] gets the local coordinates of a cell using the max width for every column
+	// [menglish] gets the local coordinates of a cell using the Max width for every column
 	//=============================================================================
 	 
 	void GetMaxCellBounds(int column, int &xpos, int &columnWide)
@@ -1980,7 +1980,7 @@ bool SectionedListPanel::GetSectionHeaderBounds(int sectionID, int &x, int &y, i
 
 //=============================================================================
 // HPE_BEGIN:
-// [menglish]	Gets the local coordinates of a cell using the max width for every column
+// [menglish]	Gets the local coordinates of a cell using the Max width for every column
 //				Gets the local coordinates of a cell
 //=============================================================================
  

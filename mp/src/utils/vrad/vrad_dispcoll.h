@@ -70,7 +70,7 @@ protected:
 
 	int						m_iParent;								// Parent index
 	float					m_flSampleRadius2;						// Sampling radius
-	float					m_flPatchSampleRadius2;					// Patch sampling radius (max bound)
+	float					m_flPatchSampleRadius2;					// Patch sampling radius (Max bound)
 	float					m_flSampleWidth;
 	float					m_flSampleHeight;
 	CUtlVector<Vector2D>	m_aLuxelCoords;							// Lightmap coordinates.

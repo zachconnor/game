@@ -1492,7 +1492,7 @@ bool CHalfLife2::ShouldCollide( int collisionGroup0, int collisionGroup1 )
 	// The smaller number is always first
 	if ( collisionGroup0 > collisionGroup1 )
 	{
-		// swap so that lowest is always first
+		// std::swap so that lowest is always first
 		int tmp = collisionGroup0;
 		collisionGroup0 = collisionGroup1;
 		collisionGroup1 = tmp;

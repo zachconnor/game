@@ -303,8 +303,8 @@ float _SSE_InvRSquared(const float* v)
 		shufps		xmm2, xmm2, 1		// x2 = vy * vy, X, X, X
 		addss		xmm1, xmm2			// x1 = (vx * vx) + (vy * vy), X, X, X
 		addss		xmm1, xmm3			// x1 = (vx * vx) + (vy * vy) + (vz * vz), X, X, X
-		maxss		xmm1, xmm5			// x1 = max( 1.0, x1 )
-		rcpss		xmm0, xmm1			// x0 = 1 / max( 1.0, x1 )
+		maxss		xmm1, xmm5			// x1 = Max( 1.0, x1 )
+		rcpss		xmm0, xmm1			// x0 = 1 / Max( 1.0, x1 )
 		movss		inv_r2, xmm0		// inv_r2 = x0
 	}
 #elif POSIX
@@ -498,7 +498,7 @@ void _SSE_SinCos(float x, float* s, float* c)
 	mm4 = mm2;
 	mm5 = mm3;
 	
-	/* get the swap sign flag for the sine */
+	/* get the std::swap sign flag for the sine */
 	mm0 = _mm_and_si64(mm2, *(v2si*)_pi32_4);
 	mm1 = _mm_and_si64(mm3, *(v2si*)_pi32_4);
 	mm0 = _mm_slli_pi32(mm0, 29);
@@ -667,7 +667,7 @@ float _SSE_cos( float x )
 	mm2 = _mm_sub_pi32(mm2, *(v2si*)_pi32_2);
 	mm3 = _mm_sub_pi32(mm3, *(v2si*)_pi32_2);
 	
-	/* get the swap sign flag in mm0:mm1 and the 
+	/* get the std::swap sign flag in mm0:mm1 and the 
 	 polynom selection mask in mm2:mm3 */
 	
 	mm0 = _mm_andnot_si64(mm2, *(v2si*)_pi32_4);

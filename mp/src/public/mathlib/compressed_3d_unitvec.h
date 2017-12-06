@@ -263,7 +263,7 @@ public:
          if ( maxError < ang ) maxError = ang;
       }}
 
-      cerr << "max angle error: " << maxError
+      cerr << "Max angle error: " << maxError
            << ", average error: " << avgError / numVecs
            << ", num tested vecs: " << numVecs << endl;
    }

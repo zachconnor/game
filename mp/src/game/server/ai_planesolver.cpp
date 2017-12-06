@@ -582,7 +582,7 @@ void CAI_PlaneSolver::AdjustSolutionForFliers( const AILocalMoveGoal_t &goal, fl
 	AssertFloatEquals( pSolution->LengthSqr(), 1.0f, 1e-3 );
 
 	// Move up 0 when we have to move forward as much as we have to move down z (45 degree angle)
-	// Move up max when we have to move forward 5x as much as we have to move down z,
+	// Move up Max when we have to move forward 5x as much as we have to move down z,
 	// or if we have to move up z.
 	float flUpAmount = 0.0f;
 	if ( vecDir.z >= -flRadius * MIN_ZDIR_TO_RADIUS)

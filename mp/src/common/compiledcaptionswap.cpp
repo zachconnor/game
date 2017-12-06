@@ -35,15 +35,15 @@ END_BYTESWAP_DATADESC()
 //-----------------------------------------------------------------------------
 bool SwapClosecaptionFile( void *pData )
 {
-	CByteswap swap;
-	swap.ActivateByteSwapping( true );
+    CByteswap swap;
+    swap.ActivateByteSwapping( true );
 
 	CompiledCaptionHeader_t *pHdr = (CompiledCaptionHeader_t*)pData;
 
 	if ( IsX360() )
 	{
-		// pre-swap file header
-		swap.SwapFieldsToTargetEndian( pHdr );
+		// pre-std::swap file header
+        swap.SwapFieldsToTargetEndian( pHdr );
 	}
 
 	if ( pHdr->magic != COMPILED_CAPTION_FILEID || pHdr->version != COMPILED_CAPTION_VERSION )
@@ -54,16 +54,16 @@ bool SwapClosecaptionFile( void *pData )
 
 	// lookup headers
 	pData = (byte*)pData + sizeof(CompiledCaptionHeader_t);
-	swap.SwapFieldsToTargetEndian( (CaptionLookup_t*)pData, pHdr->directorysize );
+    swap.SwapFieldsToTargetEndian( (CaptionLookup_t*)pData, pHdr->directorysize );
 
 	// unicode data
 	pData = (byte*)pHdr + pHdr->dataoffset;
-	swap.SwapBufferToTargetEndian( (wchar_t*)pData, (wchar_t*)pData, pHdr->numblocks * pHdr->blocksize / sizeof(wchar_t) );
+    swap.SwapBufferToTargetEndian( (wchar_t*)pData, (wchar_t*)pData, pHdr->numblocks * pHdr->blocksize / sizeof(wchar_t) );
 
 	if ( IsPC() )
 	{
-		// post-swap file header
-		swap.SwapFieldsToTargetEndian( pHdr );
+		// post-std::swap file header
+        swap.SwapFieldsToTargetEndian( pHdr );
 	}
 
 	return true;

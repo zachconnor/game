@@ -918,7 +918,7 @@ void PropBreakableCreateAll( int modelindex, IPhysicsObject *pPhysics, const bre
 			nFrameNumber = gpGlobals->framecount; 
 		} 
       
-		// Check for max breakable count for the frame. 
+		// Check for Max breakable count for the frame. 
 		if ( nPropBreakablesPerFrameCount >= nPropCount ) 
 			return; 
 	} 
@@ -1310,7 +1310,7 @@ CBaseEntity *CreateGibsFromList( CUtlVector<breakmodel_t> &list, int modelindex,
 			nFrameNumber = gpGlobals->framecount; 
 		} 
       
-		// Check for max breakable count for the frame. 
+		// Check for Max breakable count for the frame. 
 		if ( nPropBreakablesPerFrameCount >= nPropCount ) 
 			return NULL; 
 	} 

@@ -429,8 +429,8 @@ kv->SetInt("secure", 0);
 
 kv->SetString("IPAddr", pServerItem->m_NetAdr.GetConnectionAddressString());
 
-int nAdjustedForBotsPlayers = max(0, pServerItem->m_nPlayers - pServerItem->m_nBotPlayers);
-int nAdjustedForBotsMaxPlayers = max(0, pServerItem->m_nMaxPlayers - pServerItem->m_nBotPlayers);
+int nAdjustedForBotsPlayers = Max(0, pServerItem->m_nPlayers - pServerItem->m_nBotPlayers);
+int nAdjustedForBotsMaxPlayers = Max(0, pServerItem->m_nMaxPlayers - pServerItem->m_nBotPlayers);
 
 char buf[32];
 Q_snprintf(buf, sizeof(buf), "%d / %d", nAdjustedForBotsPlayers, nAdjustedForBotsMaxPlayers);

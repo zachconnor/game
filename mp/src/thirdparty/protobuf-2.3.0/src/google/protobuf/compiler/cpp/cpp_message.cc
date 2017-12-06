@@ -768,7 +768,7 @@ GenerateOffsets(io::Printer* printer) {
   printer->Print(
     "static const int $classname$_offsets_[$field_count$] = {\n",
     "classname", classname_,
-    "field_count", SimpleItoa(max(1, descriptor_->field_count())));
+    "field_count", SimpleItoa(Max(1, descriptor_->field_count())));
   printer->Indent();
 
   for (int i = 0; i < descriptor_->field_count(); i++) {
@@ -1045,14 +1045,14 @@ GenerateSwap(io::Printer* printer) {
     }
 
     for (int i = 0; i < (descriptor_->field_count() + 31) / 32; ++i) {
-      printer->Print("std::swap(_has_bits_[$i$], other->_has_bits_[$i$]);\n",
+      printer->Print("std::std::swap(_has_bits_[$i$], other->_has_bits_[$i$]);\n",
                      "i", SimpleItoa(i));
     }
 
     if (HasUnknownFields(descriptor_->file())) {
       printer->Print("_unknown_fields_.Swap(&other->_unknown_fields_);\n");
     }
-    printer->Print("std::swap(_cached_size_, other->_cached_size_);\n");
+    printer->Print("std::std::swap(_cached_size_, other->_cached_size_);\n");
     if (descriptor_->extension_range_count() > 0) {
       printer->Print("_extensions_.Swap(&other->_extensions_);\n");
     }

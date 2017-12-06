@@ -412,7 +412,7 @@ private:
 protected:
 	CNetworkVar( float, m_fadeMinDist );	// Point at which fading is absolute
 	CNetworkVar( float, m_fadeMaxDist );	// Point at which fading is inactive
-	CNetworkVar( float, m_flFadeScale );	// Scale applied to min / max
+	CNetworkVar( float, m_flFadeScale );	// Scale applied to Min / Max
 
 public:
 	COutputEvent m_OnIgnite;

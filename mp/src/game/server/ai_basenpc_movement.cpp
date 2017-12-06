@@ -464,7 +464,7 @@ bool CAI_BaseNPC::AutoMovement( float flInterval, CBaseEntity *pTarget, AIMoveTr
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: return max 1/10 second rate of turning
+// Purpose: return Max 1/10 second rate of turning
 // Input  :
 // Output :
 //-----------------------------------------------------------------------------

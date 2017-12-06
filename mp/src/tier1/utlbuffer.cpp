@@ -638,7 +638,7 @@ void CUtlBuffer::GetStringInternal( char *pString, size_t maxLenInChars )
 		return;
 	}
 
-	const size_t nCharsToRead = min( (size_t)nLen, maxLenInChars ) - 1;
+	const size_t nCharsToRead = Min( (size_t)nLen, maxLenInChars ) - 1;
 
 	Get( pString, nCharsToRead );
 	pString[nCharsToRead] = 0;
@@ -1698,7 +1698,7 @@ bool CUtlBuffer::ConvertCRLF( CUtlBuffer &outBuf )
 }
 
 //-----------------------------------------------------------------------------
-// Fast swap
+// Fast std::swap
 //-----------------------------------------------------------------------------
 void CUtlBuffer::Swap( CUtlBuffer &buf )
 {
@@ -1711,7 +1711,7 @@ void CUtlBuffer::Swap( CUtlBuffer &buf )
 
 
 //-----------------------------------------------------------------------------
-// Fast swap w/ a CUtlMemory.
+// Fast std::swap w/ a CUtlMemory.
 //-----------------------------------------------------------------------------
 void CUtlBuffer::Swap( CUtlMemory<uint8> &mem )
 {

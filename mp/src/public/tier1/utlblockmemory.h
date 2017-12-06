@@ -86,7 +86,7 @@ public:
 	int NumAllocated() const;
 	int Count() const { return NumAllocated(); }
 
-	// Grows memory by max(num,growsize) rounded up to the next power of 2, and returns the allocation index/ptr
+    // Grows memory by Max(num,growsize) rounded up to the next power of 2, and returns the allocation index/ptr
 	void Grow( int num = 1 );
 
 	// Makes sure we've got at least this much memory
@@ -130,15 +130,15 @@ CUtlBlockMemory<T,I>::~CUtlBlockMemory()
 
 
 //-----------------------------------------------------------------------------
-// Fast swap
+// Fast std::swap
 //-----------------------------------------------------------------------------
 template< class T, class I >
 void CUtlBlockMemory<T,I>::Swap( CUtlBlockMemory< T, I > &mem )
 {
-	swap( m_pMemory, mem.m_pMemory );
-	swap( m_nBlocks, mem.m_nBlocks );
-	swap( m_nIndexMask, mem.m_nIndexMask );
-	swap( m_nIndexShift, mem.m_nIndexShift );
+    std::swap( m_pMemory, mem.m_pMemory );
+    std::swap( m_nBlocks, mem.m_nBlocks );
+    std::swap( m_nIndexMask, mem.m_nIndexMask );
+    std::swap( m_nIndexShift, mem.m_nIndexShift );
 }
 
 

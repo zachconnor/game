@@ -264,7 +264,7 @@ void CPropJetski::OnTurn( CUserCmd *ucmd )
 	float flAbsSteering = fabsf( flSteering );
 	float flInvAbsSteering = 1.0f - flAbsSteering;
 
-	// Get the speed and ratio to max speed.
+	// Get the speed and ratio to Max speed.
 	float flSpeed = m_VehiclePhysics.GetSpeed();
 	float flMaxSpeed = m_VehiclePhysics.GetMaxSpeed();
 	float flRatio = flSpeed / flMaxSpeed;
@@ -335,7 +335,7 @@ bool CPropJetski::UpdateLean( CUserCmd *ucmd )
 //-----------------------------------------------------------------------------
 float CPropJetski::CalculateFriction( CUserCmd *ucmd )
 {
-	// Get the speed and ratio to max speed.
+	// Get the speed and ratio to Max speed.
 	float flSpeed = m_VehiclePhysics.GetSpeed();
 	float flMaxSpeed = m_VehiclePhysics.GetMaxSpeed();
 	float flRatio = flSpeed / flMaxSpeed;
@@ -358,7 +358,7 @@ float CPropJetski::CalculateFriction( CUserCmd *ucmd )
 //-----------------------------------------------------------------------------
 float CPropJetski::CalculateDrag( CUserCmd *ucmd )
 {
-	// Get the speed and ratio to max speed.
+	// Get the speed and ratio to Max speed.
 	float flSpeed = m_VehiclePhysics.GetSpeed();
 	float flMaxSpeed = m_VehiclePhysics.GetMaxSpeed();
 	float flRatio = flSpeed / flMaxSpeed;

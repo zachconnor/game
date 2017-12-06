@@ -436,23 +436,23 @@ FORCEINLINE fltx4 ArcTan2SIMD( const fltx4 &a, const fltx4 &b )
 	return result;
 }
 
-FORCEINLINE fltx4 MaxSIMD( const fltx4 & a, const fltx4 & b )				// max(a,b)
+FORCEINLINE fltx4 MaxSIMD( const fltx4 & a, const fltx4 & b )				// Max(a,b)
 {
 	fltx4 retVal;
-	SubFloat( retVal, 0 ) = max( SubFloat( a, 0 ), SubFloat( b, 0 ) );
-	SubFloat( retVal, 1 ) = max( SubFloat( a, 1 ), SubFloat( b, 1 ) );
-	SubFloat( retVal, 2 ) = max( SubFloat( a, 2 ), SubFloat( b, 2 ) );
-	SubFloat( retVal, 3 ) = max( SubFloat( a, 3 ), SubFloat( b, 3 ) );
+	SubFloat( retVal, 0 ) = Max( SubFloat( a, 0 ), SubFloat( b, 0 ) );
+	SubFloat( retVal, 1 ) = Max( SubFloat( a, 1 ), SubFloat( b, 1 ) );
+	SubFloat( retVal, 2 ) = Max( SubFloat( a, 2 ), SubFloat( b, 2 ) );
+	SubFloat( retVal, 3 ) = Max( SubFloat( a, 3 ), SubFloat( b, 3 ) );
 	return retVal;
 }
 
-FORCEINLINE fltx4 MinSIMD( const fltx4 & a, const fltx4 & b )				// min(a,b)
+FORCEINLINE fltx4 MinSIMD( const fltx4 & a, const fltx4 & b )				// Min(a,b)
 {
 	fltx4 retVal;
-	SubFloat( retVal, 0 ) = min( SubFloat( a, 0 ), SubFloat( b, 0 ) );
-	SubFloat( retVal, 1 ) = min( SubFloat( a, 1 ), SubFloat( b, 1 ) );
-	SubFloat( retVal, 2 ) = min( SubFloat( a, 2 ), SubFloat( b, 2 ) );
-	SubFloat( retVal, 3 ) = min( SubFloat( a, 3 ), SubFloat( b, 3 ) );
+	SubFloat( retVal, 0 ) = Min( SubFloat( a, 0 ), SubFloat( b, 0 ) );
+	SubFloat( retVal, 1 ) = Min( SubFloat( a, 1 ), SubFloat( b, 1 ) );
+	SubFloat( retVal, 2 ) = Min( SubFloat( a, 2 ), SubFloat( b, 2 ) );
+	SubFloat( retVal, 3 ) = Min( SubFloat( a, 3 ), SubFloat( b, 3 ) );
 	return retVal;
 }
 
@@ -781,9 +781,9 @@ FORCEINLINE fltx4 Dot4SIMD( const fltx4 &a, const fltx4 &b )
 }
 
 // Clamps the components of a vector to a specified minimum and maximum range.
-FORCEINLINE fltx4 ClampVectorSIMD( FLTX4 in, FLTX4 min, FLTX4 max)
+FORCEINLINE fltx4 ClampVectorSIMD( FLTX4 in, FLTX4 Min, FLTX4 Max)
 {
-	return MaxSIMD( min, MinSIMD( max, in ) );
+	return MaxSIMD( Min, MinSIMD( Max, in ) );
 }
 
 // Squelch the w component of a vector to +0.0.
@@ -858,7 +858,7 @@ FORCEINLINE void TransposeSIMD( fltx4 & x, fltx4 & y, fltx4 & z, fltx4 & w )
 // and replicate it to the whole return value.
 FORCEINLINE fltx4 FindLowestSIMD3( const fltx4 & a )
 {
-	float lowest = min( min( SubFloat(a, 0), SubFloat(a, 1) ), SubFloat(a, 2));
+	float lowest = Min( Min( SubFloat(a, 0), SubFloat(a, 1) ), SubFloat(a, 2));
 	return ReplicateX4(lowest);
 }
 
@@ -866,7 +866,7 @@ FORCEINLINE fltx4 FindLowestSIMD3( const fltx4 & a )
 // and replicate it to the whole return value.
 FORCEINLINE fltx4 FindHighestSIMD3( const fltx4 & a )
 {
-	float highest = max( max( SubFloat(a, 0), SubFloat(a, 1) ), SubFloat(a, 2));
+	float highest = Max( Max( SubFloat(a, 0), SubFloat(a, 1) ), SubFloat(a, 2));
 	return ReplicateX4(highest);
 }
 
@@ -1067,12 +1067,12 @@ FORCEINLINE fltx4 ArcTan2SIMD( const fltx4 &a, const fltx4 &b )
 
 // DivSIMD defined further down, since it uses ReciprocalSIMD
 
-FORCEINLINE fltx4 MaxSIMD( const fltx4 & a, const fltx4 & b )				// max(a,b)
+FORCEINLINE fltx4 MaxSIMD( const fltx4 & a, const fltx4 & b )				// Max(a,b)
 {
 	return __vmaxfp( a, b );
 }
 
-FORCEINLINE fltx4 MinSIMD( const fltx4 & a, const fltx4 & b )				// min(a,b)
+FORCEINLINE fltx4 MinSIMD( const fltx4 & a, const fltx4 & b )				// Min(a,b)
 {
 	return __vminfp( a, b );
 }
@@ -1345,9 +1345,9 @@ FORCEINLINE fltx4 ExpSIMD( const fltx4 &toPower )
 }
 
 // Clamps the components of a vector to a specified minimum and maximum range.
-FORCEINLINE fltx4 ClampVectorSIMD( FLTX4 in, FLTX4 min, FLTX4 max)
+FORCEINLINE fltx4 ClampVectorSIMD( FLTX4 in, FLTX4 Min, FLTX4 Max)
 {
-	return XMVectorClamp(in, min, max);
+	return XMVectorClamp(in, Min, Max);
 }
 
 FORCEINLINE fltx4 LoadUnalignedSIMD( const void *pSIMD )
@@ -1520,11 +1520,11 @@ FORCEINLINE fltx4 FindLowestSIMD3( const fltx4 & a )
 	compareOne = __vrlimi( compareOne, a, 8 | 4 , 1 );
 	// compareOne is [y,z,G,G]
 	fltx4 retval = MinSIMD( a, compareOne );
-	// retVal is [min(x,y), min(y,z), G, G]
+	// retVal is [Min(x,y), Min(y,z), G, G]
 	compareOne = __vrlimi( compareOne, a, 8 , 2);
 	// compareOne is [z, G, G, G]
 	retval = MinSIMD( retval, compareOne );
-	// retVal = [ min(min(x,y),z), G, G, G ]
+	// retVal = [ Min(Min(x,y),z), G, G, G ]
 	
 	// splat the x component out to the whole vector and return
 	return SplatXSIMD( retval );
@@ -1544,11 +1544,11 @@ FORCEINLINE fltx4 FindHighestSIMD3( const fltx4 & a )
 	compareOne = __vrlimi( compareOne, a, 8 | 4 , 1 );
 	// compareOne is [y,z,G,G]
 	fltx4 retval = MaxSIMD( a, compareOne );
-	// retVal is [max(x,y), max(y,z), G, G]
+	// retVal is [Max(x,y), Max(y,z), G, G]
 	compareOne = __vrlimi( compareOne, a, 8 , 2);
 	// compareOne is [z, G, G, G]
 	retval = MaxSIMD( retval, compareOne );
-	// retVal = [ max(max(x,y),z), G, G, G ]
+	// retVal = [ Max(Max(x,y),z), G, G, G ]
 
 	// splat the x component out to the whole vector and return
 	return SplatXSIMD( retval );
@@ -2120,12 +2120,12 @@ FORCEINLINE fltx4 CmpInBoundsSIMD( const fltx4 & a, const fltx4 & b )		// (a <= 
 	return AndSIMD( CmpLeSIMD(a,b), CmpGeSIMD(a, NegSIMD(b)) );
 }
 
-FORCEINLINE fltx4 MinSIMD( const fltx4 & a, const fltx4 & b )				// min(a,b)
+FORCEINLINE fltx4 MinSIMD( const fltx4 & a, const fltx4 & b )				// Min(a,b)
 {
 	return _mm_min_ps( a, b );
 }
 
-FORCEINLINE fltx4 MaxSIMD( const fltx4 & a, const fltx4 & b )				// max(a,b)
+FORCEINLINE fltx4 MaxSIMD( const fltx4 & a, const fltx4 & b )				// Max(a,b)
 {
 	return _mm_max_ps( a, b );
 }
@@ -2254,9 +2254,9 @@ FORCEINLINE fltx4 ExpSIMD( const fltx4 &toPower )
 }
 
 // Clamps the components of a vector to a specified minimum and maximum range.
-FORCEINLINE fltx4 ClampVectorSIMD( FLTX4 in, FLTX4 min, FLTX4 max)
+FORCEINLINE fltx4 ClampVectorSIMD( FLTX4 in, FLTX4 Min, FLTX4 Max)
 {
-	return MaxSIMD( min, MinSIMD( max, in ) );
+	return MaxSIMD( Min, MinSIMD( Max, in ) );
 }
 
 FORCEINLINE void TransposeSIMD( fltx4 & x, fltx4 & y, fltx4 & z, fltx4 & w)
@@ -2271,11 +2271,11 @@ FORCEINLINE fltx4 FindLowestSIMD3( const fltx4 &a )
 	fltx4 compareOne = RotateLeft( a );
 	// compareOne is [y,z,G,x]
 	fltx4 retval = MinSIMD( a, compareOne );
-	// retVal is [min(x,y), ... ]
+	// retVal is [Min(x,y), ... ]
 	compareOne = RotateLeft2( a );
 	// compareOne is [z, G, x, y]
 	retval = MinSIMD( retval, compareOne );
-	// retVal = [ min(min(x,y),z)..]
+	// retVal = [ Min(Min(x,y),z)..]
 	// splat the x component out to the whole vector and return
 	return SplatXSIMD( retval );
 	
@@ -2288,11 +2288,11 @@ FORCEINLINE fltx4 FindHighestSIMD3( const fltx4 &a )
 	fltx4 compareOne = RotateLeft( a );
 	// compareOne is [y,z,G,x]
 	fltx4 retval = MaxSIMD( a, compareOne );
-	// retVal is [max(x,y), ... ]
+	// retVal is [Max(x,y), ... ]
 	compareOne = RotateLeft2( a );
 	// compareOne is [z, G, x, y]
 	retval = MaxSIMD( retval, compareOne );
-	// retVal = [ max(max(x,y),z)..]
+	// retVal = [ Max(Max(x,y),z)..]
 	// splat the x component out to the whole vector and return
 	return SplatXSIMD( retval );
 	

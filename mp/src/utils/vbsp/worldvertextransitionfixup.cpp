@@ -51,7 +51,7 @@ static void GeneratePatchedMaterialName( const char *pMaterialName, char *pBuffe
 	Assert( nLen < TEXTURE_NAME_LENGTH - 1 );
 	if ( nLen >= TEXTURE_NAME_LENGTH - 1 )
 	{
-		Error( "Generated worldvertextransition patch name : %s too long! (max = %d)\n", pBuffer, TEXTURE_NAME_LENGTH );
+		Error( "Generated worldvertextransition patch name : %s too long! (Max = %d)\n", pBuffer, TEXTURE_NAME_LENGTH );
 	}
 
 	BackSlashToForwardSlash( pBuffer );

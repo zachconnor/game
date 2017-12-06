@@ -32,8 +32,8 @@ struct QuantizedValue {
 	double *ErrorMeasure;									// variance measure for each dimension
 	double TotalError;										// sum of errors
 	uint8 *Mean;											// average value of each dimension
-	uint8 *Mins;											// min box for children and this
-	uint8 *Maxs;											// max box for children and this
+	uint8 *Mins;											// Min box for children and this
+	uint8 *Maxs;											// Max box for children and this
 	int NQuant;												// the number of samples which were
 															// quantzied to this node since the
 															// last time OptimizeQuantizer()
@@ -86,7 +86,7 @@ inline struct Sample *AllocSamples(int ns, int nd)
 }
 
 
-// MinimumError: what is the min error which will occur if quantizing
+// MinimumError: what is the Min error which will occur if quantizing
 // a sample to the given qnode? This is just the error if the qnode
 // is a leaf.
 double MinimumError(struct QuantizedValue const *q, uint8 const *sample,

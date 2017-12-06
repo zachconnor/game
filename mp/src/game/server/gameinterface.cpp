@@ -398,7 +398,7 @@ void DrawMeasuredSections(void)
 	p = CMeasureSection::GetList();
 	while ( p )
 	{
-		// Update max 
+		// Update Max 
 		p->UpdateMax();
 
 		// Reset regular accum.

@@ -22,7 +22,7 @@ BEGIN_VS_SHADER_FLAGS( ShadowModel_DX8, "Help for ShadowModel", SHADER_NOT_EDITA
 		SHADER_PARAM( BASETEXTURESCALE, SHADER_PARAM_TYPE_VEC2, "[1 1]", "$baseTexture texcoord scale" )
 		SHADER_PARAM( FALLOFFOFFSET, SHADER_PARAM_TYPE_FLOAT, "0", "Distance at which shadow starts to fade" )
 		SHADER_PARAM( FALLOFFDISTANCE, SHADER_PARAM_TYPE_FLOAT, "100", "Max shadow distance" )
-		SHADER_PARAM( FALLOFFAMOUNT, SHADER_PARAM_TYPE_FLOAT, "0.9", "Amount to brighten the shadow at max dist" )
+		SHADER_PARAM( FALLOFFAMOUNT, SHADER_PARAM_TYPE_FLOAT, "0.9", "Amount to brighten the shadow at Max dist" )
 	END_SHADER_PARAMS
 
 	SHADER_INIT_PARAMS()

@@ -841,7 +841,7 @@ void DrawSkin_DX9_Internal( CBaseVSShader *pShader, IMaterialVar** params, IShad
 		if ( bHasRimLight && (info.m_nRimLightPower != -1) && params[info.m_nRimLightPower]->IsDefined() )
 		{
 			vSpecularTint[3] = params[info.m_nRimLightPower]->GetFloatValue();
-			vSpecularTint[3] = max(vSpecularTint[3], 1.0f);	// Make sure this is at least 1
+			vSpecularTint[3] = Max(vSpecularTint[3], 1.0f);	// Make sure this is at least 1
 		}
 
 		// Get the rim boost (goes in w of flashlight position)
@@ -900,7 +900,7 @@ void DrawSkin_DX9_Internal( CBaseVSShader *pShader, IMaterialVar** params, IShad
 		if ( (info.m_nPhongFresnelRanges != -1) && params[info.m_nPhongFresnelRanges]->IsDefined() )
 		{
 			params[info.m_nPhongFresnelRanges]->GetVecValue( vFresnelRanges_SpecBoost, 3 );	// Grab optional Fresnel range parameters
-			// Change fresnel range encoding from (min, mid, max) to ((mid-min)*2, mid, (max-mid)*2)
+			// Change fresnel range encoding from (Min, mid, Max) to ((mid-Min)*2, mid, (Max-mid)*2)
 			vFresnelRanges_SpecBoost[0] = (vFresnelRanges_SpecBoost[1] - vFresnelRanges_SpecBoost[0]) * 2;
 			vFresnelRanges_SpecBoost[2] = (vFresnelRanges_SpecBoost[2] - vFresnelRanges_SpecBoost[1]) * 2;
 		}

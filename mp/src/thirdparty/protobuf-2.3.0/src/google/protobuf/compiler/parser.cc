@@ -765,7 +765,7 @@ bool Parser::ParseExtensions(DescriptorProto* message) {
     DO(ConsumeInteger(&start, "Expected field number range."));
 
     if (TryConsume("to")) {
-      if (TryConsume("max")) {
+      if (TryConsume("Max")) {
         end = FieldDescriptor::kMaxNumber;
       } else {
         DO(ConsumeInteger(&end, "Expected integer."));

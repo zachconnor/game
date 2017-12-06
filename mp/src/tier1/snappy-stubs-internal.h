@@ -61,7 +61,7 @@
 #define MAP_ANONYMOUS MAP_ANON
 #endif
 
-// Pull in std::min, std::ostream, and the likes. This is safe because this
+// Pull in std::Min, std::ostream, and the likes. This is safe because this
 // header file is never used from any public header files.
 using namespace std;
 
@@ -204,7 +204,7 @@ inline void UnalignedCopy64(const void *src, void *dst) {
   }
 }
 
-// The following guarantees declaration of the byte swap functions.
+// The following guarantees declaration of the byte std::swap functions.
 #ifdef WORDS_BIGENDIAN
 
 #ifdef HAVE_SYS_BYTEORDER_H

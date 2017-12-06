@@ -901,7 +901,7 @@ size_t Compress(Source* reader, Sink* writer) {
     size_t fragment_size;
     const char* fragment = reader->Peek(&fragment_size);
     assert(fragment_size != 0);  // premature end of input
-    const size_t num_to_read = min(N, kBlockSize);
+    const size_t num_to_read = Min(N, kBlockSize);
     size_t bytes_read = fragment_size;
 
     size_t pending_advance = 0;
@@ -913,7 +913,7 @@ size_t Compress(Source* reader, Sink* writer) {
       // Read into scratch buffer
       if (scratch == NULL) {
         // If this is the last iteration, we want to allocate N bytes
-        // of space, otherwise the max possible kBlockSize space.
+        // of space, otherwise the Max possible kBlockSize space.
         // num_to_read contains exactly the correct value
         scratch = new char[num_to_read];
       }
@@ -1304,7 +1304,7 @@ void RawCompress(const char* input,
 }
 
 size_t Compress(const char* input, size_t input_length, string* compressed) {
-  // Pre-grow the buffer to the max length of the compressed output
+  // Pre-grow the buffer to the Max length of the compressed output
   compressed->resize(MaxCompressedLength(input_length));
 
   size_t compressed_length;

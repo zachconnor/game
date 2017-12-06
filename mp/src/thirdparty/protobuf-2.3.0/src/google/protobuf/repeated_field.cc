@@ -44,7 +44,7 @@ void RepeatedPtrFieldBase::Reserve(int new_size) {
   if (total_size_ >= new_size) return;
 
   void** old_elements = elements_;
-  total_size_ = max(total_size_ * 2, new_size);
+  total_size_ = Max(total_size_ * 2, new_size);
   elements_ = new void*[total_size_];
   memcpy(elements_, old_elements, allocated_size_ * sizeof(elements_[0]));
   if (old_elements != initial_space_) {

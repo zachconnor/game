@@ -3477,7 +3477,7 @@ void CNavArea::UpdateOnOpenList( void )
 	// since value can only decrease, bubble this area up from current spot
 	while( m_prevOpen && this->GetTotalCost() < m_prevOpen->GetTotalCost() )
 	{
-		// swap position with predecessor
+		// std::swap position with predecessor
 		CNavArea *other = m_prevOpen;
 		CNavArea *before = other->m_prevOpen;
 		CNavArea *after  = this->m_nextOpen;

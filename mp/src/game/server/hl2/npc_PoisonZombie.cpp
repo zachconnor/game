@@ -32,14 +32,14 @@
 //
 // Controls how soon he throws the first headcrab after seeing his enemy (also when the first headcrab leaps off)
 //
-#define ZOMBIE_THROW_FIRST_MIN_DELAY	1	// min seconds before first crab throw
-#define ZOMBIE_THROW_FIRST_MAX_DELAY	2	// max seconds before first crab throw
+#define ZOMBIE_THROW_FIRST_MIN_DELAY	1	// Min seconds before first crab throw
+#define ZOMBIE_THROW_FIRST_MAX_DELAY	2	// Max seconds before first crab throw
 
 //
 // Controls how often he throws headcrabs (also how often headcrabs leap off)
 //
-#define ZOMBIE_THROW_MIN_DELAY	4			// min seconds between crab throws
-#define ZOMBIE_THROW_MAX_DELAY	10			// max seconds between crab throws
+#define ZOMBIE_THROW_MIN_DELAY	4			// Min seconds between crab throws
+#define ZOMBIE_THROW_MAX_DELAY	10			// Max seconds between crab throws
 
 //
 // Ranges for throwing headcrabs.
@@ -453,7 +453,7 @@ void CNPC_PoisonZombie::Event_Killed( const CTakeDamageInfo &info )
 int CNPC_PoisonZombie::OnTakeDamage_Alive( const CTakeDamageInfo &inputInfo )
 {
 	//
-	// Calculate what percentage of the creature's max health
+	// Calculate what percentage of the creature's Max health
 	// this amount of damage represents (clips at 1.0).
 	//
 	float flDamagePercent = MIN( 1, inputInfo.GetDamage() / m_iMaxHealth );

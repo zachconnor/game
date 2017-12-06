@@ -151,7 +151,7 @@ static impactdamagetable_t gCappedPlayerImpactDamageTable =
 	0.0f,		// large mass in kg (no large mass effects)
 	1.0f,		// large mass scale
 	2.0f,		// large mass falling scale
-	320.0f,		// min velocity for player speed to cause damage
+	320.0f,		// Min velocity for player speed to cause damage
 
 };
 
@@ -2882,7 +2882,7 @@ void CHL2_Player::PlayerUse ( void )
 
 			if ( ( pWeapon != NULL ) && ( Weapon_CanSwitchTo( pWeapon ) ) )
 			{
-				//Try to take ammo or swap the weapon
+				//Try to take ammo or std::swap the weapon
 				if ( Weapon_OwnsThisType( pWeapon->GetClassname(), pWeapon->GetSubType() ) )
 				{
 					Weapon_EquipAmmoOnly( pWeapon );

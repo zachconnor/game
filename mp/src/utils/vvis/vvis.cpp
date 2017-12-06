@@ -82,7 +82,7 @@ winding_t *NewWinding (int points)
 	int			size;
 	
 	if (points > MAX_POINTS_ON_WINDING)
-		Error ("NewWinding: %i points, max %d", points, MAX_POINTS_ON_WINDING);
+		Error ("NewWinding: %i points, Max %d", points, MAX_POINTS_ON_WINDING);
 	
 	size = (int)(&((winding_t *)0)->points[points]);
 	w = (winding_t*)malloc (size);
@@ -465,7 +465,7 @@ void LoadPortals (char *name)
 
 	if (g_numportals * 2 >= MAX_PORTALS)
 	{
-		Error("The map overflows the max portal count (%d of max %d)!\n", g_numportals, MAX_PORTALS / 2 );
+		Error("The map overflows the Max portal count (%d of Max %d)!\n", g_numportals, MAX_PORTALS / 2 );
 	}
 
 	// these counts should take advantage of 64 bit systems automatically
@@ -881,7 +881,7 @@ float DetermineVisRadius( )
 {
 	float flRadius = -1;
 
-	// Check the max vis range to determine the vis radius
+	// Check the Max vis range to determine the vis radius
 	for (int i = 0; i < num_entities; ++i)
 	{
 		char* pEntity = ValueForKey(&entities[i], "classname");

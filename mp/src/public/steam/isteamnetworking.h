@@ -131,7 +131,7 @@ public:
 	//    automatically establishes NAT-traversing or Relay server connections
 
 	// Sends a P2P packet to the specified user
-	// UDP-like, unreliable and a max packet size of 1200 bytes
+	// UDP-like, unreliable and a Max packet size of 1200 bytes
 	// the first packet send may be delayed as the NAT-traversal code runs
 	// if we can't get through to the user, an error will be posted via the callback P2PSessionConnectFail_t
 	// see EP2PSend enum above for the descriptions of the different ways of sending packets
@@ -256,7 +256,7 @@ public:
 	// returns true to describe how the socket ended up connecting
 	virtual ESNetSocketConnectionType GetSocketConnectionType( SNetSocket_t hSocket ) = 0;
 
-	// max packet size, in bytes
+	// Max packet size, in bytes
 	virtual int GetMaxPacketSize( SNetSocket_t hSocket ) = 0;
 };
 #define STEAMNETWORKING_INTERFACE_VERSION "SteamNetworking005"

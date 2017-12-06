@@ -1283,7 +1283,7 @@ int CFuncTrackTrain::DrawDebugTextOverlays( void )
 		EntityText( nOffset, tempstr, 0 );
 		nOffset++;
 
-		Q_snprintf( tempstr,sizeof(tempstr), "max speed: %g", (double)m_maxSpeed );
+		Q_snprintf( tempstr,sizeof(tempstr), "Max speed: %g", (double)m_maxSpeed );
 		EntityText( nOffset, tempstr, 0 );
 		nOffset++;
 	}
@@ -1465,7 +1465,7 @@ void CFuncTrackTrain::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TY
 
 //-----------------------------------------------------------------------------
 // Purpose: Input handler that sets the speed of the train.
-// Input  : Float speed from 0 to max speed, in units per second.
+// Input  : Float speed from 0 to Max speed, in units per second.
 //-----------------------------------------------------------------------------
 void CFuncTrackTrain::InputSetSpeedReal( inputdata_t &inputdata )
 {
@@ -1743,7 +1743,7 @@ void CFuncTrackTrain::Blocked( CBaseEntity *pOther )
 
 extern void FixupAngles( QAngle &v );
 
-#define TRAIN_MAXSPEED		1000	// approx max speed for sound pitch calculation
+#define TRAIN_MAXSPEED		1000	// approx Max speed for sound pitch calculation
 
 
 //-----------------------------------------------------------------------------
@@ -2409,7 +2409,7 @@ void CFuncTrackTrain::FirePassInputs( CPathTrack *pStart, CPathTrack *pEnd, bool
 {
 	CPathTrack *pCurrent = pStart;
 
-	// swap if going backward
+	// std::swap if going backward
 	if ( !forward )
 	{
 		pCurrent = pEnd;

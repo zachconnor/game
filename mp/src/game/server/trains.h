@@ -185,12 +185,12 @@ private:
 	string_t	m_iszSoundStart;			// Sound to play when starting to move.
 	string_t	m_iszSoundStop;				// Sound to play when stopping.
 
-	float		m_flMoveSoundMinTime;		// The most often to play the move 'ping' sound (used at max speed)
+	float		m_flMoveSoundMinTime;		// The most often to play the move 'ping' sound (used at Max speed)
 	float		m_flMoveSoundMaxTime;		// The least often to play the move 'ping' sound (used approaching zero speed)
 	float		m_flNextMoveSoundTime;
 
 	int			m_nMoveSoundMinPitch;		// The sound pitch to approach as we come to a stop
-	int			m_nMoveSoundMaxPitch;		// The sound pitch to approach as we approach our max speed (actually, it's hardcoded to 1000 in/sec)
+	int			m_nMoveSoundMaxPitch;		// The sound pitch to approach as we approach our Max speed (actually, it's hardcoded to 1000 in/sec)
 
 	TrainOrientationType_t m_eOrientationType;
 	TrainVelocityType_t m_eVelocityType;

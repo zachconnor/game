@@ -83,7 +83,7 @@ typedef int JobStatus_t;
 enum JobFlags_t
 {
 	JF_IO				= ( 1 << 0 ),	// The job primarily blocks on IO or hardware
-	JF_BOOST_THREAD		= ( 1 << 1 ),	// Up the thread priority to max allowed while processing task
+	JF_BOOST_THREAD		= ( 1 << 1 ),	// Up the thread priority to Max allowed while processing task
 	JF_SERIAL			= ( 1 << 2 ),	// Job cannot be executed out of order relative to other "strict" jobs
 	JF_QUEUE			= ( 1 << 3 ),	// Queue it, even if not an IO job
 };

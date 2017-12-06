@@ -253,21 +253,21 @@ BaseWindingForPlane
 winding_t *BaseWindingForPlane (const Vector &normal, vec_t dist)
 {
 	int		i, x;
-	vec_t	max, v;
+	vec_t	Max, v;
 	Vector	org, vright, vup;
 	winding_t	*w;
 	
 // find the major axis
 
-	max = -1;
+	Max = -1;
 	x = -1;
 	for (i=0 ; i<3; i++)
 	{
 		v = fabs(normal[i]);
-		if (v > max)
+		if (v > Max)
 		{
 			x = i;
-			max = v;
+			Max = v;
 		}
 	}
 	if (x==-1)

@@ -689,7 +689,7 @@ void CBaseThumbnailCollection::UpdateViewingPage( void )
 		int iRow = floor( i / (float)m_nReplayThumbnailsPerRow );
 		int iColumn = i % m_nReplayThumbnailsPerRow;
 
-		// Hit the max number of rows we show?
+		// Hit the Max number of rows we show?
 		if ( iRow >= m_nMaxRows )
 			break;
 
@@ -709,7 +709,7 @@ void CBaseThumbnailCollection::UpdateViewingPage( void )
 		// Need another thumbnail in this row?
 		if ( iColumn >= m_vecRows[iRow]->GetNumReplayItems() )
 		{
-			// Hit the max number of thumbnails in this row?
+			// Hit the Max number of thumbnails in this row?
 			if ( iColumn >= m_nReplayThumbnailsPerRow )
 				break;
 

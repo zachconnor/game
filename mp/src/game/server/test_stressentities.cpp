@@ -82,7 +82,7 @@ void Test_SpawnRandomEntities( const CCommand &args )
 {
 	if ( args.ArgC() < 3 )
 	{
-		Error( "Test_SpawnRandomEntities <min # entities> <max # entities> missing arguments." );
+		Error( "Test_SpawnRandomEntities <Min # entities> <Max # entities> missing arguments." );
 	}
 
 	if ( g_StressEntities.Count() == 0 )

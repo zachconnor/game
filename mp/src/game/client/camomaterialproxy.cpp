@@ -299,20 +299,20 @@ void CCamoMaterialProxy::GetColors( Vector &diffuseColor, Vector &baseColor, int
 #endif
 	
 #if 0
-	float max;
-	max = diffuseColor[0];
-	if( diffuseColor[1] > max )
+	float Max;
+	Max = diffuseColor[0];
+	if( diffuseColor[1] > Max )
 	{
-		max = diffuseColor[1];
+		Max = diffuseColor[1];
 	}
-	if( diffuseColor[2] > max )
+	if( diffuseColor[2] > Max )
 	{
-		max = diffuseColor[2];
+		Max = diffuseColor[2];
 	}
-	if( max > 1.0f )
+	if( Max > 1.0f )
 	{
-		max = 1.0f / max;
-		diffuseColor = diffuseColor * max;
+		Max = 1.0f / Max;
+		diffuseColor = diffuseColor * Max;
 	}
 #else
 	if( diffuseColor[0] > 1.0f )

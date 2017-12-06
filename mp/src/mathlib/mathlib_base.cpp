@@ -1775,7 +1775,7 @@ void QuaternionScale( const Quaternion &p, float t, Quaternion &q )
 	// FIXME: nick, this isn't overly sensitive to accuracy, and it may be faster to 
 	// use the cos part (w) of the quaternion (sin(omega)*N,cos(omega)) to figure the new scale.
 	float sinom = sqrt( DotProduct( &p.x, &p.x ) );
-	sinom = min( sinom, 1.f );
+	sinom = Min( sinom, 1.f );
 
 	float sinsom = sin( asin( sinom ) * t );
 
@@ -3592,20 +3592,20 @@ void ComputeTrianglePlane( const Vector& v1, const Vector& v2, const Vector& v3,
 int PolyFromPlane( Vector *outVerts, const Vector& normal, float dist, float fHalfScale )
 {
 	int		i, x;
-	vec_t	max, v;
+	vec_t	Max, v;
 	Vector	org, vright, vup;
 
 	// find the major axis
 
-	max = -16384; //MAX_COORD_INTEGER
+	Max = -16384; //MAX_COORD_INTEGER
 	x = -1;
 	for (i=0 ; i<3; i++)
 	{
 		v = fabs(normal[i]);
-		if (v > max)
+		if (v > Max)
 		{
 			x = i;
-			max = v;
+			Max = v;
 		}
 	}
 
@@ -4049,10 +4049,10 @@ void CalcTriangleTangentSpace( const Vector &p0, const Vector &p1, const Vector 
 //-----------------------------------------------------------------------------
 void RGBtoHSV( const Vector &rgb, Vector &hsv )
 {
-	float flMax = max( rgb.x, rgb.y );
-	flMax = max( flMax, rgb.z );
-	float flMin = min( rgb.x, rgb.y );
-	flMin = min( flMin, rgb.z );
+	float flMax = Max( rgb.x, rgb.y );
+	flMax = Max( flMax, rgb.z );
+	float flMin = Min( rgb.x, rgb.y );
+	flMin = Min( flMin, rgb.z );
 
 	// hsv.z is the value
 	hsv.z = flMax;

@@ -125,7 +125,7 @@ bool RagdollManager_SaveImportant( CAI_BaseNPC *pNPC );
 #define	NPC_GRENADE_FEAR_DIST		200
 #define	MAX_GLASS_PENETRATION_DEPTH	16.0f
 
-#define FINDNAMEDENTITY_MAX_ENTITIES	32		// max number of entities to be considered for random entity selection in FindNamedEntity
+#define FINDNAMEDENTITY_MAX_ENTITIES	32		// Max number of entities to be considered for random entity selection in FindNamedEntity
 
 extern bool			g_fDrawLines;
 extern short		g_sModelIndexLaser;		// holds the index for the laser beam
@@ -146,7 +146,7 @@ ConVar	ai_default_efficient( "ai_default_efficient", ( IsX360() ) ? "1" : "0" );
 ConVar	ai_efficiency_override( "ai_efficiency_override", "0" );
 ConVar	ai_debug_efficiency( "ai_debug_efficiency", "0" );
 ConVar	ai_debug_dyninteractions( "ai_debug_dyninteractions", "0", FCVAR_NONE, "Debug the NPC dynamic interaction system." );
-ConVar	ai_frametime_limit( "ai_frametime_limit", "50", FCVAR_NONE, "frametime limit for min efficiency AIE_NORMAL (in sec's)." );
+ConVar	ai_frametime_limit( "ai_frametime_limit", "50", FCVAR_NONE, "frametime limit for Min efficiency AIE_NORMAL (in sec's)." );
 
 ConVar	ai_use_think_optimizations( "ai_use_think_optimizations", "1" );
 
@@ -5448,7 +5448,7 @@ float CAI_BaseNPC::EnemyDistance( CBaseEntity *pEnemy )
 	float enemyHeight = pEnemy->CollisionProp()->OBBSize().z;
 	float myHeight = CollisionProp()->OBBSize().z;
 	
-	// max distance our centers can be apart with the boxes still overlapping
+	// Max distance our centers can be apart with the boxes still overlapping
 	float flMaxZDist = ( enemyHeight + myHeight ) * 0.5f;
 
 	// see if the enemy is closer to my head, feet or in between
@@ -9355,35 +9355,35 @@ void CAI_BaseNPC::ReportOverThinkLimit( float time )
 		CollisionProp()->NormalizedToWorldSpace( Vector( 0.5f, 0.5f, 1.0f ), &tmp );
 		tmp.z += 16;
 
-		float max = -1;
+		float Max = -1;
 		const char *pszMax = "unknown";
 
-		if ( g_AIConditionsTimer.GetDuration().GetMillisecondsF() > max )
+		if ( g_AIConditionsTimer.GetDuration().GetMillisecondsF() > Max )
 		{
-			max = g_AIConditionsTimer.GetDuration().GetMillisecondsF();
+			Max = g_AIConditionsTimer.GetDuration().GetMillisecondsF();
 			pszMax = "Conditions";
 		}
-		if ( g_AIPrescheduleThinkTimer.GetDuration().GetMillisecondsF() > max )
+		if ( g_AIPrescheduleThinkTimer.GetDuration().GetMillisecondsF() > Max )
 		{
-			max = g_AIPrescheduleThinkTimer.GetDuration().GetMillisecondsF();
+			Max = g_AIPrescheduleThinkTimer.GetDuration().GetMillisecondsF();
 			pszMax = "Pre-think";
 		}
-		if ( g_AIMaintainScheduleTimer.GetDuration().GetMillisecondsF() > max )
+		if ( g_AIMaintainScheduleTimer.GetDuration().GetMillisecondsF() > Max )
 		{
-			max = g_AIMaintainScheduleTimer.GetDuration().GetMillisecondsF();
+			Max = g_AIMaintainScheduleTimer.GetDuration().GetMillisecondsF();
 			pszMax = "Schedule";
 		}
-		if ( g_AIPostRunTimer.GetDuration().GetMillisecondsF() > max )
+		if ( g_AIPostRunTimer.GetDuration().GetMillisecondsF() > Max )
 		{
-			max = g_AIPostRunTimer.GetDuration().GetMillisecondsF();
+			Max = g_AIPostRunTimer.GetDuration().GetMillisecondsF();
 			pszMax = "Post-run";
 		}
-		if ( g_AIMoveTimer.GetDuration().GetMillisecondsF() > max )
+		if ( g_AIMoveTimer.GetDuration().GetMillisecondsF() > Max )
 		{
-			max = g_AIMoveTimer.GetDuration().GetMillisecondsF();
+			Max = g_AIMoveTimer.GetDuration().GetMillisecondsF();
 			pszMax = "Move";
 		}
-		NDebugOverlay::Text( tmp, (char*)(const char *)CFmtStr( "Slow %.1f, %s %.1f ", time, pszMax, max ), false, 1 );
+		NDebugOverlay::Text( tmp, (char*)(const char *)CFmtStr( "Slow %.1f, %s %.1f ", time, pszMax, Max ), false, 1 );
 	}
 
 	if ( ai_report_task_timings_on_limit.GetBool() )

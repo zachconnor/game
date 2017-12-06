@@ -2207,7 +2207,7 @@ void CNPC_CombineDropship::PrescheduleThink( void )
 				{
 					SetLandingState( LANDING_LIFTOFF );
 					SetActivity( (Activity)ACT_DROPSHIP_LIFTOFF );
-					m_engineThrust = 1.0f;			// ensure max volume once we're airborne
+					m_engineThrust = 1.0f;			// ensure Max volume once we're airborne
 					if ( m_bIsFiring )
 					{
 						StopCannon();				// kill cannon sounds if they are on
@@ -2290,7 +2290,7 @@ void CNPC_CombineDropship::PrescheduleThink( void )
 						float flSpeed = GetAbsVelocity().Length();
 						Vector vecVelocity = vecToTarget;
 						VectorNormalize( vecVelocity );
-						SetAbsVelocity( vecVelocity * min(flSpeed,flDistance) );
+						SetAbsVelocity( vecVelocity * Min(flSpeed,flDistance) );
 					}
 					else
 					*/

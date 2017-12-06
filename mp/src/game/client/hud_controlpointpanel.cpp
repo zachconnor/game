@@ -589,7 +589,7 @@ void CHudCapturePanel::OnThink()
 		// Just show the number of players in the zone.
 		if ( mp_capstyle.GetInt() == 1 )
 		{
-			// Clip to max number of players we can show
+			// Clip to Max number of players we can show
 			if ( nNumTeammates > 5 )
 			{
 				nNumTeammates = 5;

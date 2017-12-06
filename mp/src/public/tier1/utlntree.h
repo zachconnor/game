@@ -130,7 +130,7 @@ protected:
 	I	m_Root;
 	I	m_FirstFree;
 	I	m_ElementCount;		// The number actually in the tree
-	I	m_MaxElementIndex;	// The max index we've ever assigned
+	I	m_MaxElementIndex;	// The Max index we've ever assigned
 	
 	// For debugging purposes; 
 	// it's in release builds so this can be used in libraries correctly

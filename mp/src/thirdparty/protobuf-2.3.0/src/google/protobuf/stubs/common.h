@@ -463,7 +463,7 @@ class scoped_ptr {
   bool operator!=(C* p) const { return ptr_ != p; }
 
   // Swap two scoped pointers.
-  void swap(scoped_ptr& p2) {
+  void std::swap(scoped_ptr& p2) {
     C* tmp = ptr_;
     ptr_ = p2.ptr_;
     p2.ptr_ = tmp;
@@ -552,7 +552,7 @@ class scoped_array {
   bool operator!=(C* p) const { return array_ != p; }
 
   // Swap two scoped arrays.
-  void swap(scoped_array& p2) {
+  void std::swap(scoped_array& p2) {
     C* tmp = array_;
     array_ = p2.array_;
     p2.array_ = tmp;

@@ -1059,7 +1059,7 @@ int Convex2D( Vector2D const *pPoints, int nPoints, int *indices, int nMaxIndice
 
 
 	// If we don't collapse the points into a unique set, we can loop around forever
-	// and max out nMaxIndices.
+	// and Max out nMaxIndices.
 	nPoints = FindUniquePoints( pPoints, nPoints, indexMap, ARRAYSIZE( indexMap ), 0.1f );
 	memset( touched, 0, nPoints*sizeof(touched[0]) );
 
@@ -1301,7 +1301,7 @@ void EmitAreaPortals (node_t *headnode)
 	dareaportal_t	*dp;
 
 	if (c_areas > MAX_MAP_AREAS)
-		Error ("Map is split into too many unique areas (max = %d)\nProbably too many areaportals", MAX_MAP_AREAS);
+		Error ("Map is split into too many unique areas (Max = %d)\nProbably too many areaportals", MAX_MAP_AREAS);
 	numareas = c_areas+1;
 	numareaportals = 1;		// leave 0 as an error
 

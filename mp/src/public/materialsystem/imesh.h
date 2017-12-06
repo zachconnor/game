@@ -948,7 +948,7 @@ inline void CVertexBuilder::AttachEndModify()
 
 
 //-----------------------------------------------------------------------------
-// Computes the first min non-null address
+// Computes the first Min non-null address
 //-----------------------------------------------------------------------------
 inline unsigned char* FindMinAddress( void *pAddress1, void *pAddress2, int nAddress2Size )
 {
@@ -980,7 +980,7 @@ inline void CVertexBuilder::Reset()
 #endif
 
 #ifdef DEBUG_WRITE_COMBINE
-	// Logic for m_pLastWrittenAddress is tricky. It really wants the min of the
+	// Logic for m_pLastWrittenAddress is tricky. It really wants the Min of the
 	// non-null address pointers.
 	m_nLastWrittenField = MB_FIELD_NONE;
 	m_pLastWrittenAddress = NULL;

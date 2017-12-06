@@ -476,7 +476,7 @@ void C_ReplayCamera::CalcRoamingView(Vector& eyeOrigin, QAngle& eyeAngles, float
 		wishspeed = VectorNormalize(wishdir);
 
 		//
-		// Clamp to server defined max speed
+		// Clamp to server defined Max speed
 		//
 		if (wishspeed > maxspeed )
 		{

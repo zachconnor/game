@@ -438,7 +438,7 @@ class IVideoMaterial : public IBaseInterface
 		// Material / Texture Info functions
 		virtual IMaterial		   *GetMaterial() = 0;									// Gets the IMaterial associated with an video material
 
-		virtual void				GetVideoTexCoordRange( float *pMaxU, float *pMaxV ) = 0;		// Returns the max texture coordinate of the video portion of the material surface ( 0.0, 0.0 to U, V )
+		virtual void				GetVideoTexCoordRange( float *pMaxU, float *pMaxV ) = 0;		// Returns the Max texture coordinate of the video portion of the material surface ( 0.0, 0.0 to U, V )
 		virtual void				GetVideoImageSize( int *pWidth, int *pHeight ) = 0;				// Returns the frame size of the Video Image Frame in pixels ( the stored in a subrect of the material itself)
 		
 };

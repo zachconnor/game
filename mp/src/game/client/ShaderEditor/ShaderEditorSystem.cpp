@@ -279,7 +279,7 @@ void ShaderEditorHandler::RegisterCallbacks() const
     if (!IsReady())
         return;
 
-    // 4 components max
+    // 4 components Max
     shaderEdit->RegisterClientCallback("sun data", ClCallback_SunData, 4);
     shaderEdit->RegisterClientCallback("sun dir", ClCallback_SunDirection, 3);
     shaderEdit->RegisterClientCallback("local player velocity", ClCallback_PlayerVelocity, 4);

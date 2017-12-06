@@ -72,7 +72,7 @@ Studio models are position independent, so the cache manager can move them.
 #ifndef _XBOX
 #define MAXSTUDIOTRIANGLES	65536	// TODO: tune this
 #define MAXSTUDIOVERTS		65536	// TODO: tune this
-#define	MAXSTUDIOFLEXVERTS	10000	// max number of verts that can be flexed per mesh.  TODO: tune this
+#define	MAXSTUDIOFLEXVERTS	10000	// Max number of verts that can be flexed per mesh.  TODO: tune this
 #else
 #define MAXSTUDIOTRIANGLES	25000
 #define MAXSTUDIOVERTS		10000
@@ -900,8 +900,8 @@ struct mstudioflexcontroller_t
 	int					sznameindex;
 	inline char * const pszName( void ) const { return ((char *)this) + sznameindex; }
 	mutable int			localToGlobal;	// remapped at load time to master list
-	float				min;
-	float				max;
+	float				Min;
+	float				Max;
 };
 
 
@@ -1560,7 +1560,7 @@ struct studioloddata_t
 
 	// For decals on hardware morphing, we must actually do hardware skinning
 	// For this to work, we have to hope that the total # of bones used by
-	// hw flexed verts is < than the max possible for the dx level we're running under
+	// hw flexed verts is < than the Max possible for the dx level we're running under
 	int					*m_pHWMorphDecalBoneRemap;
 	int					m_nDecalBoneCount;
 };
@@ -1771,7 +1771,7 @@ struct thinModelVertices_t
 	{
 		Assert( ( m_numBoneInfluences  >= 1 ) && ( m_numBoneInfluences  <= 3 ) );
 		Assert( ( boneWeights.numbones >= 1 ) && ( boneWeights.numbones <= m_numBoneInfluences ) );
-		int    numStoredWeights = max( 0, ( m_numBoneInfluences - 1 ) );
+		int    numStoredWeights = Max( 0, ( m_numBoneInfluences - 1 ) );
 		float *pBaseWeight	= m_boneWeights + vertIndex*numStoredWeights;
 		char  *pBaseIndex	= m_boneIndices + vertIndex*m_numBoneInfluences;
 		for ( int i = 0; i < m_numBoneInfluences; i++ )
@@ -1841,7 +1841,7 @@ private:
 		Assert( pBoneWeights );
 		Assert( ( m_numBoneInfluences <= 1 ) || ( m_boneWeights != NULL ) );
 		Assert( ( m_numBoneInfluences <= 0 ) || ( m_boneIndices != NULL ) );
-		int    numStoredWeights = max( 0, ( m_numBoneInfluences - 1 ) );
+		int    numStoredWeights = Max( 0, ( m_numBoneInfluences - 1 ) );
 		float *pBaseWeight	= m_boneWeights + vertIndex*numStoredWeights;
 		char  *pBaseIndex	= m_boneIndices + vertIndex*m_numBoneInfluences;
 		float  sum			= 0.0f;

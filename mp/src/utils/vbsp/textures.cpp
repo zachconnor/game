@@ -63,7 +63,7 @@ int	FindMiptex (const char *name)
 		}
 	}
 	if (nummiptex == MAX_MAP_TEXTURES)
-		Error ("Too many unique textures, max %d", MAX_MAP_TEXTURES);
+		Error ("Too many unique textures, Max %d", MAX_MAP_TEXTURES);
 	strcpy (textureref[i].name, name);
 
 	textureref[i].lightmapWorldUnitsPerLuxel = 0.0f;
@@ -419,7 +419,7 @@ int FindAliasedTexData( const char *pName_, dtexdata_t *sourceTexture )
 	output = numtexdata;
 	if ( numtexdata >= MAX_MAP_TEXDATA )
 	{
-		Error( "Too many unique texture mappings, max = %d\n", MAX_MAP_TEXDATA );
+		Error( "Too many unique texture mappings, Max = %d\n", MAX_MAP_TEXDATA );
 	}
 	pTexData = GetTexData( output );
 	numtexdata++;
@@ -481,7 +481,7 @@ int FindOrCreateTexData( const char *pName_ )
 	nOutput = numtexdata;
 	if ( numtexdata >= MAX_MAP_TEXDATA )
 	{
-		Error( "Too many unique texture mappings, max = %d\n", MAX_MAP_TEXDATA );
+		Error( "Too many unique texture mappings, Max = %d\n", MAX_MAP_TEXDATA );
 	}
 	dtexdata_t *pTexData = GetTexData( nOutput );
 	numtexdata++;

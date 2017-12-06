@@ -10,7 +10,7 @@
 #pragma once
 #endif
 
-const int k_cubAppProofOfPurchaseKeyMax = 64;			// max bytes of a legacy cd key we support
+const int k_cubAppProofOfPurchaseKeyMax = 64;			// Max bytes of a legacy cd key we support
 
 
 //-----------------------------------------------------------------------------

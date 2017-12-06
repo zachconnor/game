@@ -313,7 +313,7 @@ void CPhysicsSpring::Activate( void )
 			return;
 		}
 
-		// if m_end is not closer to pEnd than m_start, swap
+		// if m_end is not closer to pEnd than m_start, std::swap
 		if ( !PointIsNearer( pEnd, m_end, m_start ) )
 		{
 			Vector tmpVec = m_start;

@@ -96,7 +96,7 @@ typedef enum
 #define MAKE_CONVAR(name, defaultval, flags, desc, minVal, maxVal)                                                            \
     ConVar name(#name, defaultval, flags, desc, true, minVal, true, maxVal)
 
-//Creates a CONVAR with 0 as the minimum value, and 1 as the max value. Useful for toggle variables.
+//Creates a CONVAR with 0 as the minimum value, and 1 as the Max value. Useful for toggle variables.
 #define MAKE_TOGGLE_CONVAR(name, defaultval, flags, desc) MAKE_CONVAR(name, defaultval, flags, desc, 0, 1)
 
 #define MAKE_TOGGLE_CONVAR_C(name, defaultval, flags, desc, callback) MAKE_CONVAR_C(name, defaultval, flags, desc, 0, 1, callback)

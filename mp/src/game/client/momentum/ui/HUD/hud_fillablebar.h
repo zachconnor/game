@@ -69,13 +69,13 @@ public:
     void PaintString(const wchar_t *text, int textlen, vgui::HFont& font, int x, int y);
 
     // Direct setvalue. Use override for interpolation
-    // @pPercent: max->100 , min->0
+    // @pPercent: Max->100 , Min->0
     void SetValue(float pPercent)
     {
         m_flValue = clamp(pPercent, 0, 100);
     }
     // Sets the new % value of the filled box. If pInterpTime > 0, a interpolation is made.
-    // @pPercent: max->100 , min->0
+    // @pPercent: Max->100 , Min->0
     void SetValue(float pPercent, float pInterpTime)
     {
         m_flDesiredValue = clamp(pPercent, 0, 100);

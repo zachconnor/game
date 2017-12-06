@@ -689,7 +689,7 @@ bool CBreakable::UpdateHealth( int iNewHealth, CBaseEntity *pActivator )
 			m_iMaxHealth = 1;
 		}
 
-		// Output the new health as a percentage of max health [0..1]
+		// Output the new health as a percentage of Max health [0..1]
 		float flRatio = clamp( (float)m_iHealth / (float)m_iMaxHealth, 0.f, 1.f );
 		m_OnHealthChanged.Set( flRatio, pActivator, this );
 
@@ -819,7 +819,7 @@ int CBreakable::OnTakeDamage( const CTakeDamageInfo &info )
 {
 	CTakeDamageInfo subInfo = info;
 
-	// If attacker can't do at least the min required damage to us, don't take any damage from them
+	// If attacker can't do at least the Min required damage to us, don't take any damage from them
 	if ( m_takedamage == DAMAGE_NO || info.GetDamage() < m_iMinHealthDmg )
 		return 0;
 

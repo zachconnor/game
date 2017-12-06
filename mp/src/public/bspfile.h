@@ -36,7 +36,7 @@
 #define MAX_DISP_LIGHTMAP_DIM_INCLUDING_BORDER	128
 
 
-// This is the actual max.. (change if you change the brush lightmap dim or disp lightmap dim
+// This is the actual Max.. (change if you change the brush lightmap dim or disp lightmap dim
 #define MAX_LIGHTMAP_DIM_WITHOUT_BORDER		MAX_DISP_LIGHTMAP_DIM_WITHOUT_BORDER
 #define MAX_LIGHTMAP_DIM_INCLUDING_BORDER	MAX_DISP_LIGHTMAP_DIM_INCLUDING_BORDER
 

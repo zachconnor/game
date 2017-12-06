@@ -46,7 +46,7 @@ C_PhysPropClientside *C_PhysPropClientside::CreateNew( bool bForce )
 {
 	if ( (s_PhysPropList.Count() >= cl_phys_props_max.GetInt()) && !bForce )
 	{
-		DevMsg("Warning! Client physic props overflow *max %i).\n", cl_phys_props_max.GetInt() );
+		DevMsg("Warning! Client physic props overflow *Max %i).\n", cl_phys_props_max.GetInt() );
 		return NULL;
 	}
 

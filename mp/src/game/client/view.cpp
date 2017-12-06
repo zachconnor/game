@@ -119,7 +119,7 @@ ConVar mat_viewportupscale( "mat_viewportupscale", "1", FCVAR_ARCHIVE, "Scale th
 ConVar cl_leveloverview( "cl_leveloverview", "0", FCVAR_CHEAT );
 
 static ConVar r_mapextents( "r_mapextents", "16384", FCVAR_CHEAT, 
-						   "Set the max dimension for the map.  This determines the far clipping plane" );
+						   "Set the Max dimension for the map.  This determines the far clipping plane" );
 
 // UNDONE: Delete this or move to the material system?
 ConVar	gl_clear( "gl_clear", "0");

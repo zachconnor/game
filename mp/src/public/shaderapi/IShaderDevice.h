@@ -62,7 +62,7 @@ struct ShaderDeviceInfo_t
 	int m_nAASamples;					// Number of AA samples to use
 	int m_nAAQuality;					// AA quality level
 	int m_nDXLevel;						// 0 means use recommended DX level for this adapter
-	int m_nWindowedSizeLimitWidth;		// Used if m_bLimitWindowedSize is set, defines max bounds for the back buffer
+	int m_nWindowedSizeLimitWidth;		// Used if m_bLimitWindowedSize is set, defines Max bounds for the back buffer
 	int m_nWindowedSizeLimitHeight;
 
 	bool m_bWindowed : 1;

@@ -459,7 +459,7 @@ public:
 		"secure"
 			- Server passes the filter if the server is VAC-enabled.
 		"notfull"
-			- Server passes the filter if the player count is less than the reported max player count.
+			- Server passes the filter if the player count is less than the reported Max player count.
 		"hasplayers"
 			- Server passes the filter if the player count is greater than zero.
 		"noplayers"

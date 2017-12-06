@@ -424,7 +424,7 @@ public:
 		m_pTextEntryMovieTitle = dynamic_cast< TextEntry * >( FindChildByName( "MovieTitleTextEntry" ) );
 		m_pTextEntryMovieDesc = dynamic_cast< TextEntry * >( FindChildByName( "MovieDescTextEntry" ) );
 
-		// use insert, so that max characters is obeyed
+		// use insert, so that Max characters is obeyed
 		m_pTextEntryMovieTitle->InsertString( m_pMovie->GetItemTitle() );
 		// @todo add steam profile to description
 		m_pTextEntryMovieDesc->SetText( "" );

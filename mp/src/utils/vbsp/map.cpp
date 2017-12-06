@@ -516,7 +516,7 @@ void CMapFile::AddBrushBevels (mapbrush_t *b)
 				c_boxbevels++;
 			}
 
-			// if the plane is not in it canonical order, swap it
+			// if the plane is not in it canonical order, std::swap it
 			if (i != order)
 			{
 				sidetemp = b->original_sides[order];
@@ -1527,27 +1527,27 @@ ChunkFileResult_t CMapFile::LoadEntityCallback(CChunkFile *pFile, int nParam)
 		const char *pMaxDXLevelStr = ValueForKey( mapent, "maxdxlevel" );
 		if( *pMinDXLevelStr != '\0' || *pMaxDXLevelStr != '\0' )
 		{
-			int min = 0;
-			int max = 0;
+			int Min = 0;
+			int Max = 0;
 			if( *pMinDXLevelStr )
 			{
-				min = atoi( pMinDXLevelStr );
+				Min = atoi( pMinDXLevelStr );
 			}
 			if( *pMaxDXLevelStr )
 			{
-				max = atoi( pMaxDXLevelStr );
+				Max = atoi( pMaxDXLevelStr );
 			}
 
-			// Set min and max to default values.
-			if( min == 0 )
+			// Set Min and Max to default values.
+			if( Min == 0 )
 			{
-				min = g_nDXLevel;
+				Min = g_nDXLevel;
 			}
-			if( max == 0 )
+			if( Max == 0 )
 			{
-				max = g_nDXLevel;
+				Max = g_nDXLevel;
 			}
-			if( ( g_nDXLevel != 0 ) && ( g_nDXLevel < min || g_nDXLevel > max ) )
+			if( ( g_nDXLevel != 0 ) && ( g_nDXLevel < Min || g_nDXLevel > Max ) )
 			{
 				mapent->numbrushes = 0;
 				mapent->epairs = NULL;
@@ -3349,7 +3349,7 @@ mapdispinfo_t *ParseDispInfoChunk( void )
             g_MapError.ReportError( "ParseDispInfoChunk: Illegal Chunk! - ]" );
     }
 
-    // max displacement value
+    // Max displacement value
    	if( g_nMapFileVersion < 350 )
 	{
 		GetToken( false );

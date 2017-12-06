@@ -66,7 +66,7 @@ impactdamagetable_t gZombiePassengerImpactDamageTable =
 		VPHYSICS_LARGE_OBJECT_MASS,		// large mass in kg 
 		4,			// large mass scale (anything over 500kg does 4X as much energy to read from damage table)
 		5,			// large mass falling scale (emphasize falling/crushing damage over sideways impacts since the stress will kill you anyway)
-		0.0f,		// min vel
+		0.0f,		// Min vel
 };
 
 //-----------------------------------------------------------------------------

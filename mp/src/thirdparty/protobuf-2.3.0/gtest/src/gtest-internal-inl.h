@@ -399,10 +399,10 @@ class Vector {
   // j is invalid.
   void Swap(int i, int j) {
     GTEST_CHECK_(0 <= i && i < size_)
-        << "Invalid first swap element " << i << ": must be in range [0, "
+        << "Invalid first std::swap element " << i << ": must be in range [0, "
         << (size_ - 1) << "].";
     GTEST_CHECK_(0 <= j && j < size_)
-        << "Invalid second swap element " << j << ": must be in range [0, "
+        << "Invalid second std::swap element " << j << ": must be in range [0, "
         << (size_ - 1) << "].";
 
     E* const temp = elements_[i];

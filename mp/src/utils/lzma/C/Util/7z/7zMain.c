@@ -245,14 +245,14 @@ static void UIntToStr_2(char *s, unsigned value)
 
 static void ConvertFileTimeToString(const CNtfsFileTime *nt, char *s)
 {
-  unsigned year, mon, hour, min, sec;
+  unsigned year, mon, hour, Min, sec;
   Byte ms[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
   unsigned t;
   UInt32 v;
   UInt64 v64 = nt->Low | ((UInt64)nt->High << 32);
   v64 /= 10000000;
   sec = (unsigned)(v64 % 60); v64 /= 60;
-  min = (unsigned)(v64 % 60); v64 /= 60;
+  Min = (unsigned)(v64 % 60); v64 /= 60;
   hour = (unsigned)(v64 % 24); v64 /= 24;
 
   v = (UInt32)v64;
@@ -277,7 +277,7 @@ static void ConvertFileTimeToString(const CNtfsFileTime *nt, char *s)
   UIntToStr_2(s, mon + 1); s[2] = '-'; s += 3;
   UIntToStr_2(s, (unsigned)v + 1); s[2] = ' '; s += 3;
   UIntToStr_2(s, hour); s[2] = ':'; s += 3;
-  UIntToStr_2(s, min); s[2] = ':'; s += 3;
+  UIntToStr_2(s, Min); s[2] = ':'; s += 3;
   UIntToStr_2(s, sec); s[2] = 0;
 }
 

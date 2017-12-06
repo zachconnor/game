@@ -769,7 +769,7 @@ void Menu::PerformLayout()
 		AddScrollBar();
 
 		// This fills in m_VisibleSortedItems as needed
-		MakeItemsVisibleInScrollRange( m_iNumVisibleLines, min( fullHeightWouldRequire, workTall ) );
+		MakeItemsVisibleInScrollRange( m_iNumVisibleLines, Min( fullHeightWouldRequire, workTall ) );
 	}
 	else
 	{
@@ -1172,7 +1172,7 @@ void Menu::Paint()
 
 
 //-----------------------------------------------------------------------------
-// Purpose:	sets the max number of items visible (scrollbar appears with more)
+// Purpose:	sets the Max number of items visible (scrollbar appears with more)
 // Input  : numItems - 
 //-----------------------------------------------------------------------------
 void Menu::SetNumberOfVisibleItems( int numItems )
@@ -1890,7 +1890,7 @@ void Menu::ApplySchemeSettings(IScheme *pScheme)
 			int wide, tall;
 			m_MenuItems[i]->GetCheckImageSize( wide, tall );
 
-			m_iCheckImageWidth = max ( m_iCheckImageWidth, wide );
+			m_iCheckImageWidth = Max ( m_iCheckImageWidth, wide );
 		}
 	}
 	_recalculateWidth = true;

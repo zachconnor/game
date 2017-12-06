@@ -25,7 +25,7 @@ typedef unsigned int UtlHandle_t;
 
 //-----------------------------------------------------------------------------
 // Purpose: This is a table used to allocate handles
-// HandleBits specifies the max # of simultaneously allocated handles.
+// HandleBits specifies the Max # of simultaneously allocated handles.
 // An extra bit is used for the validity state
 // The rest of the 32 bits are used for a serial number
 //-----------------------------------------------------------------------------
@@ -202,7 +202,7 @@ bool CUtlHandleTable<T, HandleBits>::IsHandleValid( UtlHandle_t handle ) const
 
 	
 //-----------------------------------------------------------------------------
-// Current max handle
+// Current Max handle
 //-----------------------------------------------------------------------------
 template< class T, int HandleBits >
 unsigned int CUtlHandleTable<T, HandleBits>::GetValidHandleCount() const

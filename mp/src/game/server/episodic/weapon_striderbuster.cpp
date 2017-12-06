@@ -40,7 +40,7 @@ ConVar striderbuster_allow_all_damage( "striderbuster_allow_all_damage", "0", FC
 ConVar striderbuster_magnetic_force_strider("striderbuster_magnetic_force_strider", "750000.0f", FCVAR_NONE,"Intensity of magnade's attraction to a strider.");
 ConVar striderbuster_magnetic_force_hunter("striderbuster_magnetic_force_hunter","1750000.0f",FCVAR_NONE,"Intensity of magnade's attraction to a hunter.");
 ConVar striderbuster_falloff_power("striderbuster_falloff_power","4",FCVAR_NONE,"Order of the distance falloff. 1 = linear 2 = quadratic");
-ConVar striderbuster_leg_stick_dist( "striderbuster_leg_stick_dist", "80.0", FCVAR_NONE, "If the buster hits a strider's leg, the max distance from the head at which it sticks anyway." );
+ConVar striderbuster_leg_stick_dist( "striderbuster_leg_stick_dist", "80.0", FCVAR_NONE, "If the buster hits a strider's leg, the Max distance from the head at which it sticks anyway." );
 ConVar striderbuster_debugseek( "striderbuster_debugseek", "0" );
 
 ConVar sk_striderbuster_magnet_multiplier( "sk_striderbuster_magnet_multiplier", "2.25" );

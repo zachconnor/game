@@ -48,7 +48,7 @@ enum
 	COND_HYDRA_SNAGGED = LAST_SHARED_CONDITION,
 	COND_HYDRA_STUCK,
 	COND_HYDRA_OVERSHOOT,
-	COND_HYDRA_OVERSTRETCH, // longer than max distance
+	COND_HYDRA_OVERSTRETCH, // longer than Max distance
 	COND_HYDRA_STRIKE,		// head hit something
 	COND_HYDRA_NOSTUCK		// no segments are stuck
 };

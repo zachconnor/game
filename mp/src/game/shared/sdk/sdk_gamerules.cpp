@@ -291,8 +291,8 @@ bool CSDKGameRules::ShouldCollide( int collisionGroup0, int collisionGroup1 )
 {
 	if ( collisionGroup0 > collisionGroup1 )
 	{
-		// swap so that lowest is always first
-		swap(collisionGroup0,collisionGroup1);
+		// std::swap so that lowest is always first
+		std::swap(collisionGroup0,collisionGroup1);
 	}
 	
 	//Don't stand on COLLISION_GROUP_WEAPON
@@ -332,8 +332,8 @@ CAmmoDef* GetAmmoDef()
 		bInitted = true;
 		
 		// def.AddAmmoType( BULLET_PLAYER_50AE,		DMG_BULLET, TRACER_LINE, 0, 0, "ammo_50AE_max",		2400, 0, 10, 14 );
-		def.AddAmmoType( AMMO_GRENADE, DMG_BLAST, TRACER_LINE, 0, 0,	1/*max carry*/, 1, 0 );
-		def.AddAmmoType( AMMO_BULLETS, DMG_BULLET, TRACER_LINE, 0, 0,	1/*max carry*/, 1, 0 );
+		def.AddAmmoType( AMMO_GRENADE, DMG_BLAST, TRACER_LINE, 0, 0,	1/*Max carry*/, 1, 0 );
+		def.AddAmmoType( AMMO_BULLETS, DMG_BULLET, TRACER_LINE, 0, 0,	1/*Max carry*/, 1, 0 );
 	}
 
 	return &def;

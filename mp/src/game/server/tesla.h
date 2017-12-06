@@ -50,8 +50,8 @@ public:
 	float m_flRadius;		// Radius it looks for surfaces to arc to.
 	
 	float m_flThickness[2];		// Beam thickness.
-	float m_flTimeVisible[2];	// How long each beam stays around (min/max).
-	float m_flArcInterval[2];	// Time between args (min/max).
+	float m_flTimeVisible[2];	// How long each beam stays around (Min/Max).
+	float m_flArcInterval[2];	// Time between args (Min/Max).
 
 	bool m_bOn;
 

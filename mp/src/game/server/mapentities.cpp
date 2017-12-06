@@ -387,7 +387,7 @@ void MapEntity_ParseAllEntities(const char *pMapData, IMapEntityFilter *pFilter,
 		{
 			VPROF( "MapEntity_ParseAllEntities_SpawnTransients");
 
-			// We overflow the max edicts on large maps that have lots of entities.
+			// We overflow the Max edicts on large maps that have lots of entities.
 			// Nodes & Lights remove themselves immediately on Spawn(), so dispatch their
 			// spawn now, to free up the slot inside this loop.
 			// NOTE: This solution prevents nodes & lights from being used inside point_templates.
@@ -406,7 +406,7 @@ void MapEntity_ParseAllEntities(const char *pMapData, IMapEntityFilter *pFilter,
 		{
 			VPROF( "MapEntity_ParseAllEntities_SpawnTransients");
 
-			// We overflow the max edicts on large maps that have lots of entities.
+			// We overflow the Max edicts on large maps that have lots of entities.
 			// Nodes & Lights remove themselves immediately on Spawn(), so dispatch their
 			// spawn now, to free up the slot inside this loop.
 			// NOTE: This solution prevents nodes & lights from being used inside point_templates.

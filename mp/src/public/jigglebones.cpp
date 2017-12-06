@@ -400,7 +400,7 @@ void CJiggleBones::BuildJiggleTransformations( int boneIndex, float currenttime,
 
 		if ( jiggleInfo->flags & JIGGLE_HAS_ANGLE_CONSTRAINT )
 		{
-			// enforce max angular error
+			// enforce Max angular error
 			Vector error = goalTip - data->tipPos;
 			float dot = DotProduct( forward, goalForward );
 			float angleBetween = acos( dot );

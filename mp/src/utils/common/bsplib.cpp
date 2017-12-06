@@ -1078,7 +1078,7 @@ void CGameLump::SwapGameLump( GameLumpId_t id, int version, byte *dest, byte *sr
 		src += sizeof(int);
 		dest += sizeof(int);
 
-		// The one-at-a-time swap is to compensate for these structures 
+		// The one-at-a-time std::swap is to compensate for these structures 
 		// possibly being misaligned, which crashes the Xbox 360.
 		if ( version == 4 )
 		{
@@ -1506,7 +1506,7 @@ void DecompressVis (byte *in, byte *decompressed)
 }
 
 //-----------------------------------------------------------------------------
-//	Lump-specific swap functions
+//	Lump-specific std::swap functions
 //-----------------------------------------------------------------------------
 struct swapcollideheader_t
 {
@@ -1564,7 +1564,7 @@ static void SwapPhyscollideLump( byte *pDestBase, byte *pSrcBase, unsigned int &
 
 	if ( !physcollision )
 	{
-		Warning("!!! WARNING: Can't swap the physcollide lump!\n" );
+		Warning("!!! WARNING: Can't std::swap the physcollide lump!\n" );
 		return;
 	}
 
@@ -1574,7 +1574,7 @@ static void SwapPhyscollideLump( byte *pDestBase, byte *pSrcBase, unsigned int &
 	byte *pSrc = pSrcBase;
 
 	// first the src chunks have to be aligned properly
-	// swap increases size, allocate enough expansion room
+	// std::swap increases size, allocate enough expansion room
 	byte *pSrcAlignedBase = (byte*)malloc( 2*count );
 	byte *basePtr = pSrcAlignedBase;
 	byte *pSrcAligned = pSrcAlignedBase;
@@ -2558,7 +2558,7 @@ static void SwapInPlace( T *pData, int count )
 	if ( !pData )
 		return;
 
-	// use the datadesc to swap the fields in place
+	// use the datadesc to std::swap the fields in place
 	g_Swap.SwapFieldsToTargetEndian<T>( (T*)pData, pData, count );
 }
 
@@ -2568,7 +2568,7 @@ static void SwapInPlace( int fieldType, T *pData, int count )
 	if ( !pData )
 		return;
 
-	// swap the data in place
+	// std::swap the data in place
 	g_Swap.SwapBufferToTargetEndian<T>( (T*)pData, (T*)pData, count );
 }
 
@@ -3847,7 +3847,7 @@ bool SwapVHV( void *pDestBase, void *pSrcBase )
 	pSrc += sizeof(HardwareVerts::FileHeader_t);
 	pDest += sizeof(HardwareVerts::FileHeader_t);
 
-	// This swap is pretty format specific
+	// This std::swap is pretty format specific
 	Assert( pHdr->m_nVersion == VHV_VERSION );
 	if ( pHdr->m_nVersion != VHV_VERSION )
 		return false;
@@ -3863,7 +3863,7 @@ bool SwapVHV( void *pDestBase, void *pSrcBase )
 		pDest = (byte*)pDestBase + pMesh->m_nOffset;
 
 		// Swap as a buffer of integers 
-		// (source is bgra for an Intel swap to argb. PowerPC won't swap, so we need argb source. 
+		// (source is bgra for an Intel std::swap to argb. PowerPC won't std::swap, so we need argb source. 
 		g_Swap.SwapBufferToTargetEndian<int>( (int*)pDest, (int*)pSrc, pMesh->m_nVertexes );
 	}
 	return true;
@@ -3981,12 +3981,12 @@ void ConvertPakFileContents( const char *pInFilename )
 				tempBuffer.Put( sourceBuf.Base(), sourceBuf.TellMaxPut() );
 			}
 
-			// swap the VHV
+			// std::swap the VHV
 			targetBuf.EnsureCapacity( tempBuffer.TellPut() );
 			bOK = SwapVHV( targetBuf.Base(), tempBuffer.Base() );
 			if ( !bOK )
 			{
-				Warning( "Failed to swap '%s' in '%s'.\n", relativeName, pInFilename );
+				Warning( "Failed to std::swap '%s' in '%s'.\n", relativeName, pInFilename );
 				continue;
 			}
 			targetBuf.SeekPut( CUtlBuffer::SEEK_HEAD, tempBuffer.TellPut() );
@@ -4079,10 +4079,10 @@ int SwapLumpToDisk( int fieldType, int lumpnum )
 
 	DevMsg( "Swapping %s\n", GetLumpName( lumpnum ) );
 
-	// lump swap may expand, allocate enough expansion room
+	// lump std::swap may expand, allocate enough expansion room
 	void *pBuffer = malloc( 2*g_pBSPHeader->lumps[lumpnum].filelen );
 
-	// CopyLumpInternal will handle the swap on load case
+	// CopyLumpInternal will handle the std::swap on load case
 	unsigned int fieldSize = ( fieldType == FIELD_VECTOR ) ? sizeof(Vector) : sizeof(T);
 	unsigned int count = CopyLumpInternal<T>( fieldType, lumpnum, (T*)pBuffer, g_pBSPHeader->lumps[lumpnum].version );
 	g_pBSPHeader->lumps[lumpnum].filelen = count * fieldSize;
@@ -4128,10 +4128,10 @@ int SwapLumpToDisk( int lumpnum )
 
 	DevMsg( "Swapping %s\n", GetLumpName( lumpnum ) );
 
-	// lump swap may expand, allocate enough room
+	// lump std::swap may expand, allocate enough room
 	void *pBuffer = malloc( 2*g_pBSPHeader->lumps[lumpnum].filelen );
 
-	// CopyLumpInternal will handle the swap on load case
+	// CopyLumpInternal will handle the std::swap on load case
 	int count = CopyLumpInternal<T>( lumpnum, (T*)pBuffer, g_pBSPHeader->lumps[lumpnum].version );
 	g_pBSPHeader->lumps[lumpnum].filelen = count * sizeof(T);
 
@@ -4152,7 +4152,7 @@ void SwapLeafAmbientLightingLumpToDisk()
 {
 	if ( HasLump( LUMP_LEAF_AMBIENT_INDEX ) || HasLump( LUMP_LEAF_AMBIENT_INDEX_HDR ) )
 	{
-		// current version, swap in place
+		// current version, std::swap in place
 		if ( HasLump( LUMP_LEAF_AMBIENT_INDEX_HDR ) )
 		{
 			// write HDR
@@ -4591,7 +4591,7 @@ bool RepackBSP( CUtlBuffer &inputBuffer, CUtlBuffer &outputBuffer, CompressFunc_
 	CByteswap	byteSwap;
 	if ( IsX360() )
 	{
-		// bsp is 360, swap the header back
+		// bsp is 360, std::swap the header back
 		byteSwap.ActivateByteSwapping( true );
 		byteSwap.SwapFieldsToTargetEndian( pInBSPHeader );
 	}
@@ -4748,7 +4748,7 @@ bool RepackBSP( CUtlBuffer &inputBuffer, CUtlBuffer &outputBuffer, CompressFunc_
 
 //-----------------------------------------------------------------------------
 //  For all lumps in a bsp: Loads the lump from file A, swaps it, writes it to file B.
-//  This limits the memory used for the swap process which helps the Xbox 360.
+//  This limits the memory used for the std::swap process which helps the Xbox 360.
 //
 //	NOTE: These lumps will be written to the file in exactly the order they appear here,
 //	so they can be shifted around if desired for file access optimization.
@@ -4759,14 +4759,14 @@ bool SwapBSPFile( const char *pInFilename, const char *pOutFilename, bool bSwapO
 
 	if ( !g_pFileSystem->FileExists( pInFilename ) )
 	{
-		Warning( "Error! Couldn't open input file %s - BSP swap failed!\n", pInFilename ); 
+		Warning( "Error! Couldn't open input file %s - BSP std::swap failed!\n", pInFilename ); 
 		return false;
 	}
 
 	g_hBSPFile = SafeOpenWrite( pOutFilename );
 	if ( !g_hBSPFile )
 	{
-		Warning( "Error! Couldn't open output file %s - BSP swap failed!\n", pOutFilename ); 
+		Warning( "Error! Couldn't open output file %s - BSP std::swap failed!\n", pOutFilename ); 
 		return false;
 	}
 
@@ -4914,8 +4914,8 @@ bool SwapBSPFile( const char *pInFilename, const char *pOutFilename, bool bSwapO
 	{
 		if ( HasLump( i ) && !g_Lumps.bLumpParsed[i] )
 		{
-			// a new lump got added that needs to have a swap function
-			Warning( "BSP: '%s', %s has no swap or copy function. Discarding!\n", pInFilename, GetLumpName(i) );
+			// a new lump got added that needs to have a std::swap function
+			Warning( "BSP: '%s', %s has no std::swap or copy function. Discarding!\n", pInFilename, GetLumpName(i) );
 
 			// the data didn't get copied, so don't reference garbage
 			g_pBSPHeader->lumps[i].filelen = 0;
@@ -4958,7 +4958,7 @@ bool SwapBSPFile( const char *pInFilename, const char *pOutFilename, bool bSwapO
 		g_hBSPFile = SafeOpenWrite( pOutFilename );
 		if ( !g_hBSPFile )
 		{
-			Warning( "Error! Couldn't open output file %s - BSP swap failed!\n", pOutFilename ); 
+			Warning( "Error! Couldn't open output file %s - BSP std::swap failed!\n", pOutFilename ); 
 			return false;
 		}
 		SafeWrite( g_hBSPFile, outputBuffer.Base(), outputBuffer.TellPut() );

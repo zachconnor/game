@@ -124,7 +124,7 @@ public:
 	int NumAllocated() const;
 	int Count() const { return NumAllocated(); }
 
-	// Grows memory by max(num,growsize), and returns the allocation index/ptr
+	// Grows memory by Max(num,growsize), and returns the allocation index/ptr
 	void Grow( int num = 1 );
 
 	// Makes sure we've got at least this much memory
@@ -134,7 +134,7 @@ public:
 	void Purge();
 
 protected:
-	// Fast swap - WARNING: Swap invalidates all ptr-based indices!!!
+	// Fast std::swap - WARNING: Swap invalidates all ptr-based indices!!!
 	void Swap( CUtlFixedMemory< T > &mem );
 
 	bool IsInBlock( intp i, BlockHeader_t *pBlockHeader ) const
@@ -177,7 +177,7 @@ CUtlFixedMemory<T>::~CUtlFixedMemory()
 
 
 //-----------------------------------------------------------------------------
-// Fast swap - WARNING: Swap invalidates all ptr-based indices!!!
+// Fast std::swap - WARNING: Swap invalidates all ptr-based indices!!!
 //-----------------------------------------------------------------------------
 template< class T >
 void CUtlFixedMemory<T>::Swap( CUtlFixedMemory< T > &mem )

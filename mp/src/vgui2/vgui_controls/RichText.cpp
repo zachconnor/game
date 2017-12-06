@@ -20,9 +20,11 @@ enum
 
 using namespace vgui;
 
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
+/*
+#ifndef Max
+#define Max(a,b)            (((a) > (b)) ? (a) : (b))
 #endif
+*/
 
 namespace vgui
 {
@@ -2103,9 +2105,9 @@ void RichText::GotoTextEnd()
 	_invalidateVerticalScrollbarSlider = true;
 
 	// force the scrollbar to the bottom
-	int min, max;
-	_vertScrollBar->GetRange(min, max);
-	_vertScrollBar->SetValue(max);
+    int Min, Max;
+    _vertScrollBar->GetRange(Min, Max);
+    _vertScrollBar->SetValue(Max);
 
 	Repaint();
 }
@@ -2685,12 +2687,12 @@ int RichText::ParseTextStringForUrls( const char *text, int startPos, char *pchU
 			// get the url
 			i += Q_strlen( "<a href=" );
 			const char *pchURLEnd = Q_strstr( text + i, ">" );
-			Q_strncpy( pchURL, text + i, min( pchURLEnd - text - i + 1, cchURL ) ); 
+            Q_strncpy( pchURL, text + i, Min( pchURLEnd - text - i + 1, cchURL ) );
 			i += ( pchURLEnd - text - i + 1 );
             
 			// get the url text
 			pchURLEnd = Q_strstr( text, "</a>" );
-			Q_strncpy( pchURLText, text + i, min( pchURLEnd - text - i + 1, cchURLText ) ); 
+            Q_strncpy( pchURLText, text + i, Min( pchURLEnd - text - i + 1, cchURLText ) );
 			i += ( pchURLEnd - text - i );
 			i += Q_strlen( "</a>" );
 

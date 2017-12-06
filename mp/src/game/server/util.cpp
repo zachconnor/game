@@ -3172,7 +3172,7 @@ void CC_VoxelTreeBox( const CCommand &args )
 	partition->RenderObjectsInBox( vecMin, vecMax, flTime );
 }
 
-static ConCommand voxeltree_box( "voxeltree_box", CC_VoxelTreeBox, "View entities in the voxel-tree inside box <Vector(min), Vector(max)>.", FCVAR_CHEAT );
+static ConCommand voxeltree_box( "voxeltree_box", CC_VoxelTreeBox, "View entities in the voxel-tree inside box <Vector(Min), Vector(Max)>.", FCVAR_CHEAT );
 
 void CC_VoxelTreeSphere( const CCommand &args )
 {

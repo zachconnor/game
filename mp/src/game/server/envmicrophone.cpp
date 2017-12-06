@@ -269,7 +269,7 @@ bool CEnvMicrophone::CanHearSound(CSound *pSound, float &flVolume)
 		return true;
 	}
 
-	// Over our max range?
+	// Over our Max range?
 	if ( m_flMaxRange && flDistance > m_flMaxRange )
 	{
 		return false;
@@ -329,7 +329,7 @@ bool CEnvMicrophone::CanHearSound( int entindex, soundlevel_t soundlevel, float 
 		flDistance = pEntity->WorldSpaceCenter().DistTo( m_hMeasureTarget->GetAbsOrigin() );
 	}
 
-	// Over our max range?
+	// Over our Max range?
 	if ( m_flMaxRange && flDistance > m_flMaxRange )
 	{
 #ifdef DEBUG_MICROPHONE

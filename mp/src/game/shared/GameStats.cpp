@@ -1143,7 +1143,7 @@ bool CBaseGameStats_Driver::AddBaseDataForSend( KeyValues *pKV, StatSendType_t s
 			pKVPerf->SetFloat( "MaxFPS", flMaxFrameRate );
 			pKVPerf->SetFloat( "StdDevFPS", flStandardDeviationFrameRate );
 
-			// Determine the min/avg/max Server Ping and store the results 
+			// Determine the Min/avg/Max Server Ping and store the results 
 			float flAverageServerPing = AverageStat( &StatsBufferRecord_t::m_flServerPing );
 			pKVPerf->SetFloat( "AvgServerPing", flAverageServerPing );
 

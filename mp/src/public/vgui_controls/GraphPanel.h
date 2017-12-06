@@ -31,7 +31,7 @@ public:
 	// sets the window of samples to display
 	void SetDisplayDomainSize(float size);
 	// sets the range of samples the graph should keep
-	// should be set to the max you would set the display domain size
+	// should be set to the Max you would set the display domain size
 	void SetMaxDomainSize(float size);
 	// sets the minimum domain that will be displayed; used to collapse samples
 	void SetMinDomainSize(float size);

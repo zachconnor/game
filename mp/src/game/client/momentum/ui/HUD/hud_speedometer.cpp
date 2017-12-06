@@ -44,7 +44,7 @@ static MAKE_TOGGLE_CONVAR(mom_speedometer, "1", FLAG_HUD_CVAR | FCVAR_CLIENTCMD_
 
 static MAKE_CONVAR(mom_speedometer_colorize, "1", FLAG_HUD_CVAR | FCVAR_CLIENTCMD_CAN_EXECUTE,
                           "Toggles speedometer colorization. 0 = OFF, 1 = ON (Based on acceleration)," 
-                          " 2 = ON (Staged by relative velocity to max.)\n", 0, 2);
+                          " 2 = ON (Staged by relative velocity to Max.)\n", 0, 2);
 
 static MAKE_TOGGLE_CONVAR(mom_speedometer_showlastjumpvel, "1", FLAG_HUD_CVAR | FCVAR_CLIENTCMD_CAN_EXECUTE,
                           "Toggles showing player velocity at last jump (XY only). 0 = OFF, 1 = ON\n");

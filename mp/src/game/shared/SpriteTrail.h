@@ -81,7 +81,7 @@ private:
 #if defined( CLIENT_DLL )
 	enum
 	{
-		// NOTE: # of points max must be a power of two!
+		// NOTE: # of points Max must be a power of two!
 		MAX_SPRITE_TRAIL_POINTS	= 256,
 		MAX_SPRITE_TRAIL_MASK = MAX_SPRITE_TRAIL_POINTS - 1,
 	};

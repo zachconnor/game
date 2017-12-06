@@ -1355,7 +1355,7 @@ void CCoreDispInfo::CalcErrorTermAtNode( int nodeIndex, int level )
         errorTerm = ( float )VectorLength( segment );
 
 	//
-	// add the max child's error term
+	// add the Max child's error term
 	//
 	errorTerm += GetMaxErrorFromChildren( nodeIndex, level );
 

@@ -1311,7 +1311,7 @@ void CAI_BlendedMotor::BuildVelocityScript( const AILocalMoveGoal_t &move )
 
 		if (dv > 0.0)
 		{
-			// find time, distance to accel to next max vel
+			// find time, distance to accel to next Max vel
 			float t1 = dv / idealAccel;
 			float d1 = m_scriptMove[i].flMaxVelocity * t1 + 0.5 * (idealAccel) * t1 * t1;
 
@@ -1337,7 +1337,7 @@ void CAI_BlendedMotor::BuildVelocityScript( const AILocalMoveGoal_t &move )
 
 		if (dv < 0.0)
 		{
-			// find time, distance to decal to next max vel
+			// find time, distance to decal to next Max vel
 			float t1 = -dv / idealAccel;
 			float d1 = m_scriptMove[i].flMaxVelocity * t1 + 0.5 * (idealAccel) * t1 * t1;
 
@@ -1462,7 +1462,7 @@ void CAI_BlendedMotor::BuildVelocityScript( const AILocalMoveGoal_t &move )
 		}
 	}
 
-	// clamp min velocities
+	// clamp Min velocities
 	for (i = 0; i < m_scriptMove.Count(); i++)
 	{
 		m_scriptMove[i].flMaxVelocity = MAX( m_scriptMove[i].flMaxVelocity, MIN_VELOCITY );

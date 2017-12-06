@@ -7584,8 +7584,8 @@ void Panel::OnDraggablePanelPaint()
 	input()->GetCursorPos( x, y );
 	int w, h;
 
-	w = min( sw, 80 );
-	h = min( sh, 80 );
+	w = Min( sw, 80 );
+	h = Min( sh, 80 );
 	x -= ( w >> 1 );
 	y -= ( h >> 1 );
 

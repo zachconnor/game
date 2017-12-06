@@ -51,10 +51,10 @@ BEGIN_SHADER( Cable_DX6,
 		{
 			BindTexture( SHADER_SAMPLER0, BASETEXTURE, FRAME );
 			SetFixedFunctionTextureTransform( MATERIAL_TEXTURE0, BASETEXTURETRANSFORM );
-			Vector min, max;
-			params[MINLIGHT]->GetVecValue( &min.x, 3 );
-			params[MAXLIGHT]->GetVecValue( &max.x, 3 );
-			Vector avg = ( min + max ) * 0.5f;
+			Vector Min, Max;
+			params[MINLIGHT]->GetVecValue( &Min.x, 3 );
+			params[MAXLIGHT]->GetVecValue( &Max.x, 3 );
+			Vector avg = ( Min + Max ) * 0.5f;
 			pShaderAPI->Color3fv( &avg.x );	
 		}
 		Draw( );

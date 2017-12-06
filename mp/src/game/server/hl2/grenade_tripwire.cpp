@@ -186,7 +186,7 @@ void CTripwireGrenade::RopeBreakThink( void  )
 		}
 	}
 
-	// Check if rope had gotten beyond it's max length
+	// Check if rope had gotten beyond it's Max length
 	float flRopeLength = (GetAbsOrigin()-m_pHook->GetAbsOrigin()).Length();
 	if (flRopeLength > TGRENADE_MAX_ROPE_LEN)
 	{

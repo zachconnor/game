@@ -60,7 +60,7 @@
 
 EHANDLE g_hTeamTrainWatcherMaster = NULL;
 */
-#define MAX_ALARM_TIME_NO_RECEDE 18 // max amount of time to play the alarm if the train isn't going to recede
+#define MAX_ALARM_TIME_NO_RECEDE 18 // Max amount of time to play the alarm if the train isn't going to recede
 
 BEGIN_DATADESC( CTeamTrainWatcher )
 
@@ -113,7 +113,7 @@ BEGIN_DATADESC( CTeamTrainWatcher )
 
 	// can be up to 8 links
 
-	// min speed for train hud speed levels
+	// Min speed for train hud speed levels
 	DEFINE_KEYFIELD( m_flSpeedLevels[0], FIELD_FLOAT, "hud_min_speed_level_1" ),
 	DEFINE_KEYFIELD( m_flSpeedLevels[1], FIELD_FLOAT, "hud_min_speed_level_2" ),
 	DEFINE_KEYFIELD( m_flSpeedLevels[2], FIELD_FLOAT, "hud_min_speed_level_3" ),

@@ -18,7 +18,7 @@
 #define DEMO_PROTOCOL		3
 
 #if !defined( MAX_OSPATH )
-#define	MAX_OSPATH		260			// max length of a filesystem pathname
+#define	MAX_OSPATH		260			// Max length of a filesystem pathname
 #endif
 
 // Demo messages
@@ -60,14 +60,14 @@ struct demoheader_t
 	int		signonlength;					// length of sigondata in bytes
 };
 
-inline void ByteSwap_demoheader_t( demoheader_t &swap )
+inline void ByteSwap_demoheader_t( demoheader_t &std::swap )
 {
-	swap.demoprotocol = LittleDWord( swap.demoprotocol );
-	swap.networkprotocol = LittleDWord( swap.networkprotocol );
-	LittleFloat( &swap.playback_time, &swap.playback_time );
-	swap.playback_ticks = LittleDWord( swap.playback_ticks );
-	swap.playback_frames = LittleDWord( swap.playback_frames );
-	swap.signonlength = LittleDWord( swap.signonlength );
+	std::swap.demoprotocol = LittleDWord( std::swap.demoprotocol );
+	std::swap.networkprotocol = LittleDWord( std::swap.networkprotocol );
+	LittleFloat( &std::swap.playback_time, &std::swap.playback_time );
+	std::swap.playback_ticks = LittleDWord( std::swap.playback_ticks );
+	std::swap.playback_frames = LittleDWord( std::swap.playback_frames );
+	std::swap.signonlength = LittleDWord( std::swap.signonlength );
 }
 
 #define FDEMO_NORMAL		0

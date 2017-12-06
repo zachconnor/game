@@ -67,7 +67,7 @@ void CFuncLadder::Spawn()
 	Vector playerMins = VEC_HULL_MIN;
 	Vector playerMaxs = VEC_HULL_MAX;
 
-	// This will swap them if they are inverted
+	// This will std::swap them if they are inverted
 	SetEndPoints( m_vecPlayerMountPositionTop, m_vecPlayerMountPositionBottom );
 
 #if !defined( CLIENT_DLL )

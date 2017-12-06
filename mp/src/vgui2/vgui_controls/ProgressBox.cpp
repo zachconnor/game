@@ -25,9 +25,11 @@
 
 using namespace vgui;
 
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
+/*
+#ifndef Max
+#define Max(a,b)            (((a) > (b)) ? (a) : (b))
 #endif
+*/
 
 //-----------------------------------------------------------------------------
 // Purpose: Constructor

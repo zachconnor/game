@@ -364,8 +364,8 @@ static void DrawScreenSpaceRectangleWithSlop(
 	)
 {
 	// add slop
-	int slopwidth = width + FILTER_KERNEL_SLOP; //min(dest_rt->GetActualWidth()-destx,width+FILTER_KERNEL_SLOP);
-	int slopheight = height + FILTER_KERNEL_SLOP; //min(dest_rt->GetActualHeight()-desty,height+FILTER_KERNEL_SLOP);
+	int slopwidth = width + FILTER_KERNEL_SLOP; //Min(dest_rt->GetActualWidth()-destx,width+FILTER_KERNEL_SLOP);
+	int slopheight = height + FILTER_KERNEL_SLOP; //Min(dest_rt->GetActualHeight()-desty,height+FILTER_KERNEL_SLOP);
 
 	// adjust coordinates for slop
 	src_texture_x1 = FLerp( src_texture_x0, src_texture_x1, destx, destx + width - 1, destx + slopwidth - 1 );
@@ -422,7 +422,7 @@ void CHistogram_entry_t::IssueQuery( int frm_num )
 	int xl, yl, dest_width, dest_height;
 	pRenderContext->GetViewport( xl, yl, dest_width, dest_height );
 
-	// Find min and max gamma-space text range
+	// Find Min and Max gamma-space text range
 	float flTestRangeMin = m_min_lum;
 	float flTestRangeMax = ( m_max_lum == 1.0f ) ? 10000.0f : m_max_lum; // Count all pixels >1.0 as 1.0
 
@@ -585,7 +585,7 @@ void CLuminanceHistogramSystem::Update( void )
 					{
 						CurHistogram[i].m_npixels_in_range = np;
 						// 						    if (mat_debug_autoexposure.GetInt())
-						// 								Warning("min=%f max=%f np = %d\n",CurHistogram[i].m_min_lum,CurHistogram[i].m_max_lum,np);
+						// 								Warning("Min=%f Max=%f np = %d\n",CurHistogram[i].m_min_lum,CurHistogram[i].m_max_lum,np);
 						CurHistogram[i].m_state = HESTATE_QUERY_DONE;
 					}
 				}
@@ -778,7 +778,7 @@ static float GetCurrentBloomScale( void )
 
 static void GetExposureRange( float *flAutoExposureMin, float *flAutoExposureMax )
 {
-	// Get min
+	// Get Min
 	if ( ( g_bUseCustomAutoExposureMin ) && ( g_flCustomAutoExposureMin > 0.0f ) )
 	{
 		*flAutoExposureMin = g_flCustomAutoExposureMin;
@@ -788,7 +788,7 @@ static void GetExposureRange( float *flAutoExposureMin, float *flAutoExposureMax
 		*flAutoExposureMin = mat_autoexposure_min.GetFloat();
 	}
 
-	// Get max
+	// Get Max
 	if ( ( g_bUseCustomAutoExposureMax ) && ( g_flCustomAutoExposureMax > 0.0f ) )
 	{
 		*flAutoExposureMax = g_flCustomAutoExposureMax;
@@ -805,7 +805,7 @@ static void GetExposureRange( float *flAutoExposureMin, float *flAutoExposureMax
 		*flAutoExposureMin = 0.0f;
 	}
 
-	// Make sure min <= max
+	// Make sure Min <= Max
 	if ( *flAutoExposureMin > *flAutoExposureMax )
 	{
 		*flAutoExposureMax = *flAutoExposureMin;
@@ -892,7 +892,7 @@ void CLuminanceHistogramSystem::UpdateLuminanceRanges( void )
 			e.m_max_lum = 100000.0;
 		}
 
-		//Warning( "Bucket %d: min/max %f / %f ", bucket, e.m_min_lum, e.m_max_lum );
+		//Warning( "Bucket %d: Min/Max %f / %f ", bucket, e.m_min_lum, e.m_max_lum );
 	}
 }
 
@@ -1019,7 +1019,7 @@ void CLuminanceHistogramSystem::DisplayHistogram( void )
 			np += e.m_npixels_in_range;
 		int width = MAX( 1, 500 * ( e.m_max_lum - e.m_min_lum ) );
 
-		//Warning( "Bucket %d: min/max %f / %f.  m_npixels_in_range=%d   m_npixels=%d\n", l, e.m_min_lum, e.m_max_lum, e.m_npixels_in_range, e.m_npixels );
+		//Warning( "Bucket %d: Min/Max %f / %f.  m_npixels_in_range=%d   m_npixels=%d\n", l, e.m_min_lum, e.m_max_lum, e.m_npixels_in_range, e.m_npixels );
 
 		if ( np )
 		{
@@ -2234,7 +2234,7 @@ void DoEnginePostProcessing( int x, int y, int w, int h, bool bFlashlightIsOn, b
 	}
 
 #if defined( _X360 )
-	pRenderContext->PushVertexShaderGPRAllocation( 16 ); //max out pixel shader threads
+	pRenderContext->PushVertexShaderGPRAllocation( 16 ); //Max out pixel shader threads
 #endif
 
 	if ( r_queued_post_processing.GetInt() )
@@ -2253,7 +2253,7 @@ void DoEnginePostProcessing( int x, int y, int w, int h, bool bFlashlightIsOn, b
 
 	g_bFlashlightIsOn = bFlashlightIsOn;
 
-	// Use the appropriate autoexposure min / max settings.
+	// Use the appropriate autoexposure Min / Max settings.
 	// Mapmaker's overrides the convar settings.
 	float flAutoExposureMin;
 	float flAutoExposureMax;

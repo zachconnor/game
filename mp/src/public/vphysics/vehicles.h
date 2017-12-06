@@ -172,8 +172,8 @@ struct vehicle_steeringparams_t
 	float		steeringRateFast;		// this is the speed the wheels are steered when the vehicle is "fast"
 	float		steeringRestRateSlow;	// this is the speed at which the wheels move toward their resting state (straight ahead) at slow speed
 	float		steeringRestRateFast;	// this is the speed at which the wheels move toward their resting state (straight ahead) at fast speed
-	float		speedSlow;				// this is the max speed of "slow"
-	float		speedFast;				// this is the min speed of "fast"
+	float		speedSlow;				// this is the Max speed of "slow"
+	float		speedFast;				// this is the Min speed of "fast"
 	float		turnThrottleReduceSlow;		// this is the amount of throttle reduction to apply at the maximum steering angle
 	float		turnThrottleReduceFast;		// this is the amount of throttle reduction to apply at the maximum steering angle
 	float		brakeSteeringRateFactor;	// this scales the steering rate when the brake/handbrake is down
@@ -199,12 +199,12 @@ struct vehicle_engineparams_t
 	float		throttleTime;			// time to reach full throttle in seconds
 
 	// transmission
-	int			gearCount;				// gear count - max 10
+	int			gearCount;				// gear count - Max 10
 	float		gearRatio[VEHICLE_MAX_GEAR_COUNT];	// ratio for each gear
 
 	// automatic transmission (simple auto-shifter - switches at fixed RPM limits)
-	float		shiftUpRPM;				// max RPMs to switch to a higher gear
-	float		shiftDownRPM;			// min RPMs to switch to a lower gear
+	float		shiftUpRPM;				// Max RPMs to switch to a higher gear
+	float		shiftDownRPM;			// Min RPMs to switch to a lower gear
 	float		boostForce;
 	float		boostDuration;
 	float		boostDelay;

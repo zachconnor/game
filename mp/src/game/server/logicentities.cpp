@@ -654,7 +654,7 @@ void CMathRemap::Spawn(void)
 	}
 
 	//
-	// Make sure min and max are set properly relative to one another.
+	// Make sure Min and Max are set properly relative to one another.
 	//
 	if (m_flInMin > m_flInMax)
 	{
@@ -776,7 +776,7 @@ void CMathColorBlend::Spawn(void)
 	}
 
 	//
-	// Make sure min and max are set properly relative to one another.
+	// Make sure Min and Max are set properly relative to one another.
 	//
 	if (m_flInMin > m_flInMax)
 	{
@@ -1298,7 +1298,7 @@ class CMathCounter : public CLogicalEntity
 {
 	DECLARE_CLASS( CMathCounter, CLogicalEntity );
 private:
-	float m_flMin;		// Minimum clamp value. If min and max are BOTH zero, no clamping is done.
+	float m_flMin;		// Minimum clamp value. If Min and Max are BOTH zero, no clamping is done.
 	float m_flMax;		// Maximum clamp value.
 	bool m_bHitMin;		// Set when we reach or go below our minimum value, cleared if we go above it again.
 	bool m_bHitMax;		// Set when we reach or exceed our maximum value, cleared if we fall below it again.
@@ -1343,8 +1343,8 @@ BEGIN_DATADESC( CMathCounter )
 	DEFINE_FIELD(m_bHitMin, FIELD_BOOLEAN),
 
 	// Keys
-	DEFINE_KEYFIELD(m_flMin, FIELD_FLOAT, "min"),
-	DEFINE_KEYFIELD(m_flMax, FIELD_FLOAT, "max"),
+	DEFINE_KEYFIELD(m_flMin, FIELD_FLOAT, "Min"),
+	DEFINE_KEYFIELD(m_flMax, FIELD_FLOAT, "Max"),
 
 	DEFINE_KEYFIELD(m_bDisabled, FIELD_BOOLEAN, "StartDisabled" ),
 
@@ -1396,7 +1396,7 @@ bool CMathCounter::KeyValue(const char *szKeyName, const char *szValue)
 void CMathCounter::Spawn( void )
 {
 	//
-	// Make sure max and min are ordered properly or clamp won't work.
+	// Make sure Max and Min are ordered properly or clamp won't work.
 	//
 	if (m_flMin > m_flMax)
 	{
@@ -1428,11 +1428,11 @@ int CMathCounter::DrawDebugTextOverlays( void )
 	{
 		char tempstr[512];
 
-		Q_snprintf(tempstr,sizeof(tempstr),"    min value: %f", m_flMin);
+		Q_snprintf(tempstr,sizeof(tempstr),"    Min value: %f", m_flMin);
 		EntityText(text_offset,tempstr,0);
 		text_offset++;
 
-		Q_snprintf(tempstr,sizeof(tempstr),"    max value: %f", m_flMax);
+		Q_snprintf(tempstr,sizeof(tempstr),"    Max value: %f", m_flMax);
 		EntityText(text_offset,tempstr,0);
 		text_offset++;
 
@@ -1456,7 +1456,7 @@ int CMathCounter::DrawDebugTextOverlays( void )
 }
 
 //-----------------------------------------------------------------------------
-// Change min/max
+// Change Min/Max
 //-----------------------------------------------------------------------------
 void CMathCounter::InputSetHitMax( inputdata_t &inputdata )
 {

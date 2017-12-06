@@ -25,7 +25,7 @@ struct LodScriptData_t;
 
 #define STUDIO_QUADRATIC_MOTION 0x00002000
 
-#define MAXSTUDIOANIMFRAMES		2000	// max frames per animation
+#define MAXSTUDIOANIMFRAMES		2000	// Max frames per animation
 #define MAXSTUDIOSEQUENCES		1524	// total sequences
 #define MAXSTUDIOSRCBONES		512		// bones allowed at source movement
 #define MAXSTUDIOBONEWEIGHTS	3
@@ -251,7 +251,7 @@ EXTERN	Vector2D g_texcoord[MAXSTUDIOVERTS];
 
 EXTERN	int g_numfaces;
 EXTERN	s_tmpface_t g_face[MAXSTUDIOTRIANGLES];
-EXTERN	s_face_t g_src_uface[MAXSTUDIOTRIANGLES];	// max res unified faces
+EXTERN	s_face_t g_src_uface[MAXSTUDIOTRIANGLES];	// Max res unified faces
 
 struct v_unify_t
 {

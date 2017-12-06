@@ -827,7 +827,7 @@ int CZombie::OnTakeDamage_Alive( const CTakeDamageInfo &inputInfo )
 		if( !m_fIsTorso && inputInfo.GetDamage() > (m_iMaxHealth/3) )
 		{
 			// Always flinch if damaged a lot by buckshot, even if not shot in the head.
-			// The reason for making sure we did at least 1/3rd of the zombie's max health
+			// The reason for making sure we did at least 1/3rd of the zombie's Max health
 			// is so the zombie doesn't flinch every time the odd shotgun pellet hits them,
 			// and so the maximum number of times you'll see a zombie flinch like this is 2.(sjb)
 			AddGesture( ACT_GESTURE_FLINCH_HEAD );

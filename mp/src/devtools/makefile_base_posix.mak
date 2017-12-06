@@ -61,9 +61,10 @@ CFLAGS = $(BASE_CFLAGS) $(ENV_CFLAGS)
 ifeq ($(CLANG_BUILD),1)
 	CXXFLAGS = $(BASE_CFLAGS) -std=gnu++0x -Wno-c++11-narrowing -Wno-dangling-else $(ENV_CXXFLAGS)
 else
-	CXXFLAGS = $(BASE_CFLAGS) -std=gnu++0x -fpermissive $(ENV_CXXFLAGS)
+	CXXFLAGS = $(BASE_CFLAGS) -fpermissive $(ENV_CXXFLAGS)
 endif
 DEFINES += -DVPROF_LEVEL=1 -DGNUC -DNO_HOOK_MALLOC -DNO_MALLOC_OVERRIDE
+CXXFLAGS += -m32 -w --static
 
 ## TODO: This cases build errors in cstrike/bin right now. Need to debug.
 # This causes all filesystem interfaces to default to their 64bit versions on
@@ -79,33 +80,8 @@ COPY_DLL_TO_SRV = 0
 # We should always specify -Wl,--build-id, as documented at:
 # http://linux.die.net/man/1/ld and http://fedoraproject.org/wiki/Releases/FeatureBuildId.http://fedoraproject.org/wiki/Releases/FeatureBuildId
 LDFLAGS += -Wl,--build-id
-
-#
-# If we should be running in a chroot, check to see if we are. If not, then prefix everything with the 
-# required chroot
-#
-ifdef MAKE_CHROOT
-	export STEAM_RUNTIME_PATH := /usr
-	ifneq ("$(SCHROOT_CHROOT_NAME)", "$(CHROOT_NAME)")
-        $(info '$(SCHROOT_CHROOT_NAME)' is not '$(CHROOT_NAME)')
-        $(error This makefile should be run from within a chroot. 'schroot --chroot $(CHROOT_NAME) -- $(MAKE) $(MAKEFLAGS)')  
-	endif
-	GCC_VER = -4.8
-	P4BIN = $(SRCROOT)/devtools/bin/linux/p4
-	CRYPTOPPDIR=ubuntu12_32_gcc48
-else ifeq ($(USE_VALVE_BINDIR),1)
-	# Using /valve/bin directory.
-	export STEAM_RUNTIME_PATH ?= /valve
-	GCC_VER = -4.6
-	P4BIN = p4
-	CRYPTOPPDIR=linux32
-else
-	# Not using chroot, use old steam-runtime. (gcc 4.6.3)
-	export STEAM_RUNTIME_PATH ?= /valve/steam-runtime
-	GCC_VER =
-	P4BIN = p4
-	CRYPTOPPDIR=ubuntu12_32
-endif
+CRYPTOPPDIR=ubuntu12_32
+export STEAM_RUNTIME_PATH := /usr
 
 ifeq ($(TARGET_PLATFORM),linux64)
 	MARCH_TARGET = core2
@@ -170,6 +146,11 @@ else ifeq ($(GCC_VER),-4.8)
 	# WARN_FLAGS += -Wno-unused-function
 endif
 
+WARN_FLAGS += -Wno-unused-local-typedefs
+WARN_FLAGS += -Wno-unused-result
+WARN_FLAGS += -Wno-narrowing
+
+
 WARN_FLAGS += -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-value -Wno-missing-field-initializers
 WARN_FLAGS += -Wno-sign-compare -Wno-reorder -Wno-invalid-offsetof -Wno-float-equal -Werror=return-type
 WARN_FLAGS += -fdiagnostics-show-option -Wformat -Wformat-security
@@ -206,7 +187,7 @@ endif
 
 LINK_MAP_FLAGS = -Wl,-Map,$(@:.so=).map
 
-SHLIBLDFLAGS = -shared $(LDFLAGS) -Wl,--no-undefined
+SHLIBLDFLAGS = -L/usr/lib32 -shared $(LDFLAGS) -Wl,--no-undefined
 
 _WRAP := -Xlinker --wrap=
 PATHWRAP = $(_WRAP)fopen $(_WRAP)freopen $(_WRAP)open    $(_WRAP)creat    $(_WRAP)access  $(_WRAP)__xstat \

@@ -123,9 +123,9 @@ void ScalableImagePanel::PaintBackground()
 		}
 		else
 		{
-			//uvh - row 1, is tall - ( 2 * src_corner_height ) ( min 0 )
-			uvh = max( 1.0 - 2 * m_flCornerHeightPercent, 0.0f );
-			drawH = max( 0, ( tall - 2 * m_iCornerHeight ) );
+			//uvh - row 1, is tall - ( 2 * src_corner_height ) ( Min 0 )
+            uvh = Max( float(1.0 - 2 * m_flCornerHeightPercent), 0.0f );
+			drawH = Max( 0, ( tall - 2 * m_iCornerHeight ) );
 		}
 
 		for ( col=0;col<3;col++ )
@@ -138,9 +138,9 @@ void ScalableImagePanel::PaintBackground()
 			}
 			else
 			{
-				//uvw - col 1, is wide - ( 2 * src_corner_width ) ( min 0 )
-				uvw = max( 1.0 - 2 * m_flCornerWidthPercent, 0.0f );
-				drawW = max( 0, ( wide - 2 * m_iCornerWidth ) );
+				//uvw - col 1, is wide - ( 2 * src_corner_width ) ( Min 0 )
+                uvw = Max( float(1.0 - 2 * m_flCornerWidthPercent), 0.0f );
+				drawW = Max( 0, ( wide - 2 * m_iCornerWidth ) );
 			}
 
 			Vector2D uv11( uvx, uvy );

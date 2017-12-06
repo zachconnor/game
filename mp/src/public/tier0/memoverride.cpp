@@ -1305,9 +1305,9 @@ SIZE_T WINAPI XMemSize( PVOID pAddress, DWORD dwAllocAttributes )
 }
 #endif // _X360
 
-#define MAX_LANG_LEN        64  /* max language name length */
-#define MAX_CTRY_LEN        64  /* max country name length */
-#define MAX_MODIFIER_LEN    0   /* max modifier name length - n/a */
+#define MAX_LANG_LEN        64  /* Max language name length */
+#define MAX_CTRY_LEN        64  /* Max country name length */
+#define MAX_MODIFIER_LEN    0   /* Max modifier name length - n/a */
 #define MAX_LC_LEN          (MAX_LANG_LEN+MAX_CTRY_LEN+MAX_MODIFIER_LEN+3)
 
 #if _MSC_VER >= 1700 // VS 11

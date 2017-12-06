@@ -23,7 +23,7 @@ class CFuncCombineBallSpawner;
 class CSpriteTrail;
 
 //-----------------------------------------------------------------------------
-// Looks for enemies, bounces a max # of times before it breaks
+// Looks for enemies, bounces a Max # of times before it breaks
 //-----------------------------------------------------------------------------
 class CPropCombineBall : public CBaseAnimating, public CDefaultPlayerPickupVPhysics
 {

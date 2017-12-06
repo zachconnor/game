@@ -438,8 +438,8 @@ typedef struct tree_desc {
     ct_data *static_tree;   // corresponding static tree or NULL
     const int *extra_bits;  // extra bits for each code or NULL
     int     extra_base;     // base index for extra_bits
-    int     elems;          // max number of elements in the tree
-    int     max_length;     // max bit length for the codes
+    int     elems;          // Max number of elements in the tree
+    int     max_length;     // Max bit length for the codes
     int     max_code;       // largest code with non zero frequency
 } tree_desc;
 
@@ -1071,8 +1071,8 @@ void scan_tree (TState &state,ct_data *tree, int max_code)
     int curlen;                /* length of current code */
     int nextlen = tree[0].dl.len; /* length of next code */
     int count = 0;             /* repeat count of the current code */
-    int max_count = 7;         /* max repeat count */
-    int min_count = 4;         /* min repeat count */
+    int max_count = 7;         /* Max repeat count */
+    int min_count = 4;         /* Min repeat count */
 
     if (nextlen == 0) max_count = 138, min_count = 3;
     tree[max_code+1].dl.len = (ush)-1; /* guard */
@@ -1113,8 +1113,8 @@ void send_tree (TState &state, ct_data *tree, int max_code)
     int curlen;                /* length of current code */
     int nextlen = tree[0].dl.len; /* length of next code */
     int count = 0;             /* repeat count of the current code */
-    int max_count = 7;         /* max repeat count */
-    int min_count = 4;         /* min repeat count */
+    int max_count = 7;         /* Max repeat count */
+    int min_count = 4;         /* Min repeat count */
 
     /* tree[max_code+1].dl.len = -1; */  /* guard already set */
     if (nextlen == 0) max_count = 138, min_count = 3;
@@ -1641,7 +1641,7 @@ void lm_init (TState &state, int pack_level, ush *flags)
 // if desired. Which I do so desire!
 int longest_match(TState &state,IPos cur_match)
 {
-    unsigned chain_length = state.ds.max_chain_length;   /* max hash chain length */
+    unsigned chain_length = state.ds.max_chain_length;   /* Max hash chain length */
     uch far *scan = state.ds.window + state.ds.strstart; /* current string */
     uch far *match;                    /* matched string */
     int len;                           /* length of current match */

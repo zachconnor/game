@@ -306,7 +306,7 @@ public:
 	Vector			m_attachedPositionObjectSpace;
 
 private:
-	// Compute the max speed for an attached object
+	// Compute the Max speed for an attached object
 	void ComputeMaxSpeed( CBaseEntity *pEntity, IPhysicsObject *pPhysics );
 
 	game_shadowcontrol_params_t	m_shadow;
@@ -1703,7 +1703,7 @@ void CWeaponPhysCannon::PuntVPhysics( CBaseEntity *pEntity, const Vector &vecFor
 			{
 				maxMass *= 2.5;	// 625 for vehicles
 			}
-			float mass = MIN(totalMass, maxMass); // max 250kg of additional force
+			float mass = MIN(totalMass, maxMass); // Max 250kg of additional force
 
 			// Put some spin on the object
 			for ( i = 0; i < listCount; i++ )
@@ -2020,7 +2020,7 @@ bool CWeaponPhysCannon::AttachObject( CBaseEntity *pObject, const Vector &vPosit
 	m_bActive = true;
 	if( pOwner )
 	{
-		// NOTE: This can change the mass; so it must be done before max speed setting
+		// NOTE: This can change the mass; so it must be done before Max speed setting
 		Physgun_OnPhysGunPickup( pObject, pOwner, PICKED_UP_BY_CANNON );
 	}
 

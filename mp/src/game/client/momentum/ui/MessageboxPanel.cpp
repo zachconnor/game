@@ -55,12 +55,12 @@ void MessageBoxVarRef::PerformLayout()
 
     int btnWide, btnTall;
     m_pOkButton->GetContentSize(btnWide, btnTall);
-    btnWide = max(oldWide, btnWide + 10);
-    btnTall = max(oldTall, btnTall + 10);
+    btnWide = Max(oldWide, btnWide + 10);
+    btnTall = Max(oldTall, btnTall + 10);
     m_pOkButton->SetSize(btnWide, btnTall);
 
-    boxWidth = max(boxWidth, m_pMessageLabel->GetWide() + 100);
-    boxWidth = max(boxWidth, btnWide * 2 + 30);
+    boxWidth = Max(boxWidth, m_pMessageLabel->GetWide() + 100);
+    boxWidth = Max(boxWidth, btnWide * 2 + 30);
     SetSize(boxWidth, boxTall);
 
     m_pMessageLabel->SetPos((wide / 2) - (m_pMessageLabel->GetWide() / 2) + x, y + 5);

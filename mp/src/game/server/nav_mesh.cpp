@@ -3310,5 +3310,5 @@ void CNavMesh::EndVisibilityComputations( void )
 		avgVisLength /= TheNavAreas.Count();
 	}
 
-	Msg( "NavMesh Visibility List Lengths:  min = %d, avg = %d, max = %d\n", minVisLength, avgVisLength, maxVisLength );
+	Msg( "NavMesh Visibility List Lengths:  Min = %d, avg = %d, Max = %d\n", minVisLength, avgVisLength, maxVisLength );
 }

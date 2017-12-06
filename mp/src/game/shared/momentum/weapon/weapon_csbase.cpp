@@ -351,7 +351,7 @@ void CWeaponCSBase::ItemPostFrame()
     if ((m_bInReload) && (pPlayer->m_flNextAttack <= gpGlobals->curtime))
     {
         // complete the reload. 
-        int j = min(GetMaxClip1() - m_iClip1, pPlayer->GetAmmoCount(m_iPrimaryAmmoType));
+        int j = Min(GetMaxClip1() - m_iClip1, pPlayer->GetAmmoCount(m_iPrimaryAmmoType));
 
         // Add them to the clip
         m_iClip1 += j;
@@ -796,7 +796,7 @@ void CWeaponCSBase::DrawCrosshair()
 
     if (pPlayer->m_SrvData.m_iShotsFired > m_iAmmoLastCheck)
     {
-        m_flCrosshairDistance = min(15, m_flCrosshairDistance + iDeltaDistance);
+        m_flCrosshairDistance = Min(float(15), m_flCrosshairDistance + iDeltaDistance);
     }
     else if (m_flCrosshairDistance > iDistance)
     {
@@ -840,9 +840,9 @@ void CWeaponCSBase::DrawCrosshair()
 
     int iBarSize = XRES(5) + (iCrosshairDistance - iDistance) / 2;
 
-    iBarSize = max(1, (int) ((float) iBarSize * scale));
+    iBarSize = Max(1, (int) ((float) iBarSize * scale));
 
-    int iBarThickness = max(1, (int) floor(scale + 0.5f));
+    int iBarThickness = Max(1, (int) floor(scale + 0.5f));
 
     int	r, g, b;
 
@@ -1231,7 +1231,7 @@ float CWeaponCSBase::CalcViewmodelBob(void)
 
     //Find the speed of the player
     float speed = player->GetLocalVelocity().Length2D();
-    float flmaxSpeedDelta = max(0, (gpGlobals->curtime - lastbobtime) * 320.0f);
+    float flmaxSpeedDelta = Max(float(0), (gpGlobals->curtime - lastbobtime) * 320.0f);
 
     // don't allow too big speed changes
     speed = clamp(speed, lastspeed - flmaxSpeedDelta, lastspeed + flmaxSpeedDelta);

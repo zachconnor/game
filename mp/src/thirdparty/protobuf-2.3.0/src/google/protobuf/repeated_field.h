@@ -139,7 +139,7 @@ class RepeatedField {
 
   // Move the contents of |from| into |to|, possibly clobbering |from| in the
   // process.  For primitive types this is just a memcpy(), but it could be
-  // specialized for non-primitive types to, say, swap each element instead.
+  // specialized for non-primitive types to, say, std::swap each element instead.
   void MoveArray(Element to[], Element from[], int size);
 
   // Copy the elements of |from| into |to|.
@@ -542,7 +542,7 @@ void RepeatedField<Element>::Swap(RepeatedField* other) {
 
 template <typename Element>
 void RepeatedField<Element>::SwapElements(int index1, int index2) {
-  std::swap(elements_[index1], elements_[index2]);
+  std::std::swap(elements_[index1], elements_[index2]);
 }
 
 template <typename Element>
@@ -709,7 +709,7 @@ RepeatedPtrFieldBase::data() const {
 }
 
 inline void RepeatedPtrFieldBase::SwapElements(int index1, int index2) {
-  std::swap(elements_[index1], elements_[index2]);
+  std::std::swap(elements_[index1], elements_[index2]);
 }
 
 template <typename TypeHandler>

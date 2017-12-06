@@ -828,7 +828,7 @@ void CAI_MoveProbe::JumpMoveLimit( const Vector &vecStart, const Vector &vecEnd,
 		return;
 	}
 
-	// FIXME: add max jump velocity callback?  Look at the velocity in the jump animation?  use ideal running speed?
+	// FIXME: add Max jump velocity callback?  Look at the velocity in the jump animation?  use ideal running speed?
 	float maxHorzVel = GetOuter()->GetMaxJumpSpeed();
 
 	Vector gravity = Vector(0, 0, GetCurrentGravity() * GetOuter()->GetJumpGravity() );

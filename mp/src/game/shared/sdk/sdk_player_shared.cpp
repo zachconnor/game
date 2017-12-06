@@ -65,7 +65,7 @@ void CSDKPlayer::FireBullet(
 
 	float flMaxRange = 8000;
 
-	Vector vecEnd = vecSrc + vecDir * flMaxRange; // max bullet range is 10000 units
+	Vector vecEnd = vecSrc + vecDir * flMaxRange; // Max bullet range is 10000 units
 
 	trace_t tr; // main enter bullet trace
 

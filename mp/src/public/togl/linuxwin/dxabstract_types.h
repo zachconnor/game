@@ -826,7 +826,7 @@ typedef enum _D3DRENDERSTATETYPE
     D3DRS_VERTEXBLEND               = 151,
     D3DRS_CLIPPLANEENABLE           = 152,
     D3DRS_POINTSIZE                 = 154,   /* float point size */
-    D3DRS_POINTSIZE_MIN             = 155,   /* float point size min threshold */
+    D3DRS_POINTSIZE_MIN             = 155,   /* float point size Min threshold */
     D3DRS_POINTSPRITEENABLE         = 156,   /* BOOL point texture coord control */
     D3DRS_POINTSCALEENABLE          = 157,   /* BOOL point size scale enable */
     D3DRS_POINTSCALE_A              = 158,   /* float point attenuation A value */
@@ -836,7 +836,7 @@ typedef enum _D3DRENDERSTATETYPE
     D3DRS_MULTISAMPLEMASK           = 162,  // DWORD - per-sample enable/disable
     D3DRS_PATCHEDGESTYLE            = 163,  // Sets whether patch edges will use float style tessellation
     D3DRS_DEBUGMONITORTOKEN         = 165,  // DEBUG ONLY - token to debug monitor
-    D3DRS_POINTSIZE_MAX             = 166,   /* float point size max threshold */
+    D3DRS_POINTSIZE_MAX             = 166,   /* float point size Max threshold */
     D3DRS_INDEXEDVERTEXBLENDENABLE  = 167,
     D3DRS_COLORWRITEENABLE          = 168,  // per-channel write enable
     D3DRS_TWEENFACTOR               = 170,   // float tween factor
@@ -1269,7 +1269,7 @@ typedef struct _D3DVIEWPORT9
     DWORD       Y;            /* Viewport Top left */
     DWORD       Width;
     DWORD       Height;       /* Viewport Dimensions */
-    float       MinZ;         /* Min/max of clip Volume */
+    float       MinZ;         /* Min/Max of clip Volume */
     float       MaxZ;
 } D3DVIEWPORT9;
 
@@ -1318,7 +1318,7 @@ typedef struct _D3DCAPS9
     DWORD   MaxVertexBlendMatrices;
     DWORD   MaxVertexBlendMatrixIndex;
 
-    DWORD   MaxPrimitiveCount;          // max number of primitives per DrawPrimitive call
+    DWORD   MaxPrimitiveCount;          // Max number of primitives per DrawPrimitive call
     DWORD   MaxStreams;
 
     DWORD   VertexShaderVersion;

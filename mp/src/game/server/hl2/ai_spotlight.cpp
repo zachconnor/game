@@ -357,7 +357,7 @@ void CAI_Spotlight::UpdateSpotlightEndpoint( void )
 	// Avoid sudden change in where beam fades out when cross disconinuities
 	m_flSpotlightCurLength = Lerp( 0.20f, m_flSpotlightCurLength, flBeamLength );
 
-	// Fade out spotlight end if past max length.  
+	// Fade out spotlight end if past Max length.  
 	if (m_flSpotlightCurLength > 2*m_flSpotlightMaxLength)
 	{
 		m_hSpotlightTarget->SetRenderColorA( 0 );

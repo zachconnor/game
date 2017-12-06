@@ -1476,7 +1476,7 @@ int CNPC_BaseScanner::DrawDebugTextOverlays(void)
 		GetVelocity( &vel, NULL );
 
 		char tempstr[512];
-		Q_snprintf( tempstr, sizeof(tempstr), "speed (max): %.2f (%.2f)", vel.Length(), m_flSpeed );
+		Q_snprintf( tempstr, sizeof(tempstr), "speed (Max): %.2f (%.2f)", vel.Length(), m_flSpeed );
 		EntityText( nOffset, tempstr, 0 );
 		nOffset++;
 	}

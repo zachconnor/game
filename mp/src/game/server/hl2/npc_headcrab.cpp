@@ -3100,7 +3100,7 @@ void CBlackHeadcrab::Precache( void )
 
 
 //-----------------------------------------------------------------------------
-// Purpose: Returns the max yaw speed for the current activity.
+// Purpose: Returns the Max yaw speed for the current activity.
 //-----------------------------------------------------------------------------
 float CBlackHeadcrab::MaxYawSpeed( void )
 {

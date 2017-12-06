@@ -249,7 +249,7 @@ protected:
 	/* 116*/	CNavArea *m_parent;											// the area just prior to this on in the search path
 	/* 120*/	NavTraverseType m_parentHow;								// how we get from parent to us
 
-	/* 124*/	float m_pathLengthSoFar;									// length of path so far, needed for limiting pathfind max path length
+	/* 124*/	float m_pathLengthSoFar;									// length of path so far, needed for limiting pathfind Max path length
 
 	/* *************** 360 cache line *************** */
 
@@ -701,7 +701,7 @@ private:
 	SpotEncounterVector m_spotEncounters;						// list of possible ways to move thru this area, and the spots to look at as we do
 	void AddSpotEncounters( const CNavArea *from, NavDirType fromDir, const CNavArea *to, NavDirType toDir );	// add spot encounter data when moving from area to area
 
-	float m_earliestOccupyTime[ MAX_NAV_TEAMS ];				// min time to reach this spot from spawn
+	float m_earliestOccupyTime[ MAX_NAV_TEAMS ];				// Min time to reach this spot from spawn
 
 #ifdef DEBUG_AREA_PLAYERCOUNTS
 	CUtlVector< int > m_playerEntIndices[ MAX_NAV_TEAMS ];

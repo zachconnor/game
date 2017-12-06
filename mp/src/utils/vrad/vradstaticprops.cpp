@@ -155,20 +155,20 @@ void Rasterizer::Build()
 	const float baseY = mUvStepY / 2.0f;
 
 
-	float fMinX = min(min(mT0.x, mT1.x), mT2.x);
-	float fMinY = min(min(mT0.y, mT1.y), mT2.y);
-	float fMaxX = max(max(mT0.x, mT1.x), mT2.x);
-	float fMaxY = max(max(mT0.y, mT1.y), mT2.y);
+	float fMinX = Min(Min(mT0.x, mT1.x), mT2.x);
+	float fMinY = Min(Min(mT0.y, mT1.y), mT2.y);
+	float fMaxX = Max(Max(mT0.x, mT1.x), mT2.x);
+	float fMaxY = Max(Max(mT0.y, mT1.y), mT2.y);
 
 	// Degenerate. Consider warning about these, but otherwise no problem.
 	if (fMinX == fMaxX || fMinY == fMaxY)
 		return;
 
 	// Clamp to 0..1
-	fMinX = max(0, fMinX);
-	fMinY = max(0, fMinY);
-	fMaxX = min(1.0f, fMaxX);
-	fMaxY = min(1.0f, fMaxY);
+	fMinX = Max(0, fMinX);
+	fMinY = Max(0, fMinY);
+	fMaxX = Min(1.0f, fMaxX);
+	fMaxY = Min(1.0f, fMaxY);
 
 	// We puff the interesting area up by 1 so we can hit an inflated region for the necessary bilerp data.
 	// If we wanted to support better texturing (almost definitely unnecessary), we'd change this to a larger size.
@@ -180,10 +180,10 @@ void Rasterizer::Build()
 	int iMaxY = GetRow(fMaxY) + 1 + kFilterSampleRadius;
 
 	// Clamp to valid texture (integer) locations
-	iMinX = max(0, iMinX);
-	iMinY = max(0, iMinY);
-	iMaxX = min(iMaxX, mResX - 1);
-	iMaxY = min(iMaxY, mResY - 1);
+	iMinX = Max(0, iMinX);
+	iMinY = Max(0, iMinY);
+	iMaxX = Min(iMaxX, mResX - 1);
+	iMaxY = Min(iMaxY, mResY - 1);
 
 	// Set the size to be as expected. 
 	// TODO: Pass this in from outside to minimize allocations
@@ -779,15 +779,15 @@ public:
 	// HACKHACK: Compute the average coverage for this triangle by sampling the AABB of its texture space
 	float ComputeCoverageForTriangle( int shadowTextureIndex, const Vector2D &t0, const Vector2D &t1, const Vector2D &t2 )
 	{
-		float umin = min(t0.x, t1.x);
-		umin = min(umin, t2.x);
-		float umax = max(t0.x, t1.x);
-		umax = max(umax, t2.x);
+		float umin = Min(t0.x, t1.x);
+		umin = Min(umin, t2.x);
+		float umax = Max(t0.x, t1.x);
+		umax = Max(umax, t2.x);
 
-		float vmin = min(t0.y, t1.y);
-		vmin = min(vmin, t2.y);
-		float vmax = max(t0.y, t1.y);
-		vmax = max(vmax, t2.y);
+		float vmin = Min(t0.y, t1.y);
+		vmin = Min(vmin, t2.y);
+		float vmax = Max(t0.y, t1.y);
+		vmax = Max(vmax, t2.y);
 
 		// UNDONE: Do something about tiling
 		umin = clamp(umin, 0, 1);
@@ -2455,8 +2455,8 @@ static int GetTexelCount(unsigned int _resX, unsigned int _resY, bool _mipmaps)
 	while (_resX > 1 || _resY > 1) 
 	{
 		retVal += _resX * _resY;
-		_resX = max(1, _resX >> 1);
-		_resY = max(1, _resY >> 1);
+		_resX = Max(1, _resX >> 1);
+		_resY = Max(1, _resY >> 1);
 	}
 
 	// Add in the 1x1 mipmap level, which wasn't hit above. This could be done in the initializer of 
@@ -2582,8 +2582,8 @@ static void FilterCoarserMipmaps(unsigned int _resX, unsigned int _resY, CUtlVec
 
 	int srcResX = _resX;
 	int srcResY = _resY;
-	int dstResX = max(1, (srcResX >> 1));
-	int dstResY = max(1, (srcResY >> 1));
+	int dstResX = Max(1, (srcResX >> 1));
+	int dstResY = Max(1, (srcResY >> 1));
 	int dstOffset = GetTexelCount(srcResX, srcResY, false);
 
 	// Build mipmaps here, after being converted to linear space. 
@@ -2618,8 +2618,8 @@ static void FilterCoarserMipmaps(unsigned int _resX, unsigned int _resY, CUtlVec
 
 		srcResX = dstResX;
 		srcResY = dstResY;
-		dstResX = max(1, (srcResX >> 1));
-		dstResY = max(1, (srcResY >> 1));
+		dstResX = Max(1, (srcResX >> 1));
+		dstResY = Max(1, (srcResY >> 1));
 		dstOffset += GetTexelCount(srcResX, srcResY, false);
 	}
 }
@@ -2650,8 +2650,8 @@ static void ConvertToDestinationFormat(unsigned int _resX, unsigned int _resY, I
 			srcOffset += GetTexelCount(srcResX, srcResY, false);
 			dstOffset += ImageLoader::GetMemRequired(srcResX, srcResY, 1, _destFmt, false);
 
-			srcResX = max(1, (srcResX >> 1));
-			srcResY = max(1, (srcResY >> 1));
+			srcResX = Max(1, (srcResX >> 1));
+			srcResY = Max(1, (srcResY >> 1));
 		}
 
 		// Do the 1x1 level also.

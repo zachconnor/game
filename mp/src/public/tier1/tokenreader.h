@@ -18,8 +18,8 @@
 #pragma warning(disable:4701 4702 4530)
 #endif
 
-#undef min
-#undef max
+#undef Min
+#undef Max
 #include <fstream>
 #include "valve_minmax_on.h"
 

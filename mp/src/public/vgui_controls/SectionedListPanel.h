@@ -163,7 +163,7 @@ public:
 	// [menglish] Get the bounds of an item or column.
 	//=============================================================================
 	 
-	// gets the local coordinates of a cell using the max width for every column
+	// gets the local coordinates of a cell using the Max width for every column
 	virtual bool GetMaxCellBounds(int itemID, int column, int &x, int &y, int &wide, int &tall);
 
 	// gets the local coordinates of an item

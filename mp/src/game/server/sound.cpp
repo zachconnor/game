@@ -290,7 +290,7 @@ void CAmbientGeneric::Spawn( void )
 
 
 //-----------------------------------------------------------------------------
-// Computes the max audible radius for a given sound level
+// Computes the Max audible radius for a given sound level
 //-----------------------------------------------------------------------------
 #define MIN_AUDIBLE_VOLUME 1.01e-3
 
@@ -315,7 +315,7 @@ void CAmbientGeneric::ComputeMaxAudibleDistance( )
 	float flMaxRadius = m_radius * 2;
 	while ( true )
 	{
-		// First, find a min + max range surrounding the desired distance gain
+		// First, find a Min + Max range surrounding the desired distance gain
 		float flGain = enginesound->GetDistGainFromSoundLevel( m_iSoundLevel, flMaxRadius );
 		if ( flGain <= MIN_AUDIBLE_VOLUME )
 			break;
@@ -937,7 +937,7 @@ void CAmbientGeneric::ToggleSound()
 		if (m_dpv.cspinup)
 		{
 			// Don't actually shut off. Each toggle causes
-			// incremental spinup to max pitch
+			// incremental spinup to Max pitch
 
 			if (m_dpv.cspincount <= m_dpv.cspinup)
 			{	

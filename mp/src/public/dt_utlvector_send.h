@@ -38,7 +38,7 @@
 //
 //	SendPropUtlVector( 
 //		SENDINFO_UTLVECTOR( m_FloatArray ),
-//		16,	// max elements
+//		16,	// Max elements
 //		SendPropFloat( NULL, 0, 0, 0, SPROP_NOSCALE )
 //		)
 //

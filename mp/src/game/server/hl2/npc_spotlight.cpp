@@ -1336,7 +1336,7 @@ void CNPC_Spotlight::SpotlightUpdate(void)
 	float flBeamLength	= VectorNormalize( m_pSpotlightTarget->m_vSpotlightDir );
 	m_flSpotlightCurLength = (0.60*m_flSpotlightCurLength) + (0.4*flBeamLength);
 
-	// Fade out spotlight end if past max length.  
+	// Fade out spotlight end if past Max length.  
 	if (m_flSpotlightCurLength > 2*m_flSpotlightMaxLength)
 	{
 		m_pSpotlightTarget->SetRenderColorA( 0 );
@@ -1397,7 +1397,7 @@ void CNPC_Spotlight::Spawn(void)
 
 	if (m_flSpotlightGoalWidth > MAX_BEAM_WIDTH)
 	{
-		DevMsg("CNPC_Spotlight::Spawn: Invalid spotlight width %.1f (max %.1f)\n", m_flSpotlightGoalWidth, MAX_BEAM_WIDTH );
+		DevMsg("CNPC_Spotlight::Spawn: Invalid spotlight width %.1f (Max %.1f)\n", m_flSpotlightGoalWidth, MAX_BEAM_WIDTH );
 		m_flSpotlightGoalWidth = MAX_BEAM_WIDTH; 
 	}
 

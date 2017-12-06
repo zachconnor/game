@@ -186,7 +186,7 @@ void C_HudMapInfo::Paint()
         {
             //Note: The player will never be inside a "checkpoint" zone
             // Stage # Start
-            wchar_t stageCurrent[128]; // 00'\0' and max stages is 64
+            wchar_t stageCurrent[128]; // 00'\0' and Max stages is 64
 
             V_snwprintf(stageCurrent, ARRAYSIZE(stageCurrent), L"%d", m_iZoneCurrent);
             // Fills the "Stage %s1 Start" string

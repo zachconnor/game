@@ -241,7 +241,7 @@ void ReadLightFile (char *filename)
 			char szTexlight[256];
 			Vector value;
 			if ( num_texlights == MAX_TEXLIGHTS )
-				Error ("Too many texlights, max = %d", MAX_TEXLIGHTS);
+				Error ("Too many texlights, Max = %d", MAX_TEXLIGHTS);
 
 			int argCnt = sscanf (scan, "%s ",szTexlight );
 
@@ -284,7 +284,7 @@ void ReadLightFile (char *filename)
 			texlights[j].filename = filename;
 			file_texlights ++;
 			
-			num_texlights = max( num_texlights, j + 1 );
+			num_texlights = Max( num_texlights, j + 1 );
 		}
 	}
 	qprintf ( "[%i texlights parsed from '%s']\n\n", file_texlights, filename);
@@ -819,7 +819,7 @@ int CreateChildPatch( int nParentIndex, winding_t *pWinding, float flArea, const
 			if ( (child->face_maxs[i] == child->maxs[i] || child->face_mins[i] == child->mins[i] )
 			  && total[i] > minchop )
 			{
-				child->chop = max( minchop, child->chop / 2 );
+				child->chop = Max( minchop, child->chop / 2 );
 				break;
 			}
 		}
@@ -879,7 +879,7 @@ void SubdividePatch( int ndxPatch )
 			if (patch->chop > minchop)
 			{
 				bSubdivide = true;
-				patch->chop = max( minchop, patch->chop / 2 );
+				patch->chop = Max( minchop, patch->chop / 2 );
 			}
 		}
 	}
@@ -1930,7 +1930,7 @@ void MakeAllScales (void)
 	// release visibility matrix
 	FreeVisMatrix ();
 
-	Msg("transfers %d, max %d\n", total_transfer, max_transfer );
+	Msg("transfers %d, Max %d\n", total_transfer, max_transfer );
 
 	qprintf ("transfer lists: %5.1f megs\n"
 		, (float)total_transfer * sizeof(transfer_t) / (1024*1024));
@@ -2640,7 +2640,7 @@ int ParseCommandLine( int argc, char **argv, bool *onlydetail )
 					Warning("Error: expected positive value after '-chop'\n" );
 					return -1;
 				}
-				minchop = min( minchop, maxchop );
+				minchop = Min( minchop, maxchop );
 			}
 			else
 			{
@@ -2799,7 +2799,7 @@ void PrintUsage( int argc, char **argv )
 		"Common options:\n"
 		"\n"
 		"  -v (or -verbose): Turn on verbose output (also shows more command\n"
-		"  -bounce #       : Set max number of bounces (default: 100).\n"
+		"  -bounce #       : Set Max number of bounces (default: 100).\n"
 		"  -fast           : Quick and dirty lighting.\n"
 		"  -fastambient    : Per-leaf ambient sampling is lower quality to save compute time.\n"
 		"  -final          : High quality processing. equivalent to -extrasky 16.\n"
@@ -2836,7 +2836,7 @@ void PrintUsage( int argc, char **argv )
 		"                    ignored.\n"
 		"  -loghash        : Log the sample hash table to samplehash.txt.\n"
 		"  -onlydetail     : Only light detail props and per-leaf lighting.\n"
-		"  -maxdispsamplesize #: Set max displacement sample size (default: 512).\n"
+		"  -maxdispsamplesize #: Set Max displacement sample size (default: 512).\n"
 		"  -softsun <n>    : Treat the sun as an area light source of size <n> degrees."
 		"                    Produces soft shadows.\n"
 		"                    Recommended values are between 0 and 5. Default is 0.\n"

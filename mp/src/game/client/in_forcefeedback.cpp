@@ -383,7 +383,7 @@ static void DescribeFFDevice( const DIDEVCAPS& caps )
 	DevMsg( "  %u POVs\n", caps.dwPOVs );
 
 	DevMsg( "  %.1f msec FF sample period\n", (float)caps.dwFFSamplePeriod/1000.0f );
-	DevMsg( "  %.1f msec FF min time resolution period\n", (float)caps.dwFFMinTimeResolution/1000.0f );
+	DevMsg( "  %.1f msec FF Min time resolution period\n", (float)caps.dwFFMinTimeResolution/1000.0f );
 }
 
 struct LoadEffectContext_t

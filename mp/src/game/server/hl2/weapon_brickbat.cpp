@@ -188,7 +188,7 @@ void CWeaponBrickbat::BrickbatTouch( CBaseEntity *pOther )
 
 		if ( ( oldWeapon != NULL ) && ( oldWeapon != this ) )
 		{
-			// Only pick up if not at max ammo amount
+			// Only pick up if not at Max ammo amount
 			if (oldWeapon->m_nAmmoCount[m_iCurrentAmmoType] < BrickBatAmmoArray[m_iCurrentAmmoType].m_nMaxCarry)
 			{
 				oldWeapon->m_nAmmoCount[m_iCurrentAmmoType]++;
@@ -198,7 +198,7 @@ void CWeaponBrickbat::BrickbatTouch( CBaseEntity *pOther )
 		}
 		else
 		{
-			// Only pick up if not at max ammo amount
+			// Only pick up if not at Max ammo amount
 			if (m_nAmmoCount[m_iCurrentAmmoType] < BrickBatAmmoArray[m_iCurrentAmmoType].m_nMaxCarry)
 			{
 				m_nAmmoCount[m_iCurrentAmmoType]++;

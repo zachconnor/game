@@ -116,7 +116,7 @@ enum KeyBindingContextHandle_t
 class IForceVirtualInheritancePanel
 {
 	// We need Panel to use virtual inheritance so that
-	// pointers to its members are max size.
+	// pointers to its members are Max size.
 	// This is due to a limitation in C++ with ahead
 	// declarations of points to members as used in MessageMap.
 };

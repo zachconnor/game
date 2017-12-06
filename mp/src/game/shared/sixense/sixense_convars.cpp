@@ -92,7 +92,7 @@ ConVar sixense_portal_tweaking_moved_time( "sixense_portal_tweaking_moved_time",
 // scaling convars
 //
 
-ConVar sixense_scaling_hold_radius_mode( "sixense_scaling_hold_radius_mode", "4", FCVAR_REPLICATED | FCVAR_CHEAT, "0 = bounding radius, 1 = use MAX( min, bounding radius )" );
+ConVar sixense_scaling_hold_radius_mode( "sixense_scaling_hold_radius_mode", "4", FCVAR_REPLICATED | FCVAR_CHEAT, "0 = bounding radius, 1 = use MAX( Min, bounding radius )" );
 ConVar sixense_scaling_hold_radius( "sixense_scaling_hold_radius", "32.0", FCVAR_REPLICATED | FCVAR_CHEAT );
 ConVar sixense_scaling_hold_radius_blend_time( "sixense_scaling_hold_radius_blend_time", "1.0", FCVAR_REPLICATED | FCVAR_CHEAT );
 ConVar sixense_scaling_error_blend_time( "sixense_scaling_error_blend_time", "1.0", FCVAR_REPLICATED | FCVAR_CHEAT );
@@ -105,8 +105,8 @@ ConVar sixense_scaling_max( "sixense_scaling_max", "9.0", FCVAR_REPLICATED | FCV
 ConVar sixense_scaling_volume( "sixense_scaling_volume", "0.25", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling sound volume." );
 ConVar sixense_scaling_volume_clamped( "sixense_scaling_volume_clamped", "0.35", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling clamped sound volume." );
 ConVar sixense_scaling_volume_initial( "sixense_scaling_volume_initial", "1.0", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling initiated sound volume." );
-ConVar sixense_scaling_pitch_clamped_min( "sixense_scaling_pitch_clamped_min", "140", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling clamped min sound pitch." );
-ConVar sixense_scaling_pitch_clamped_max( "sixense_scaling_pitch_clamped_max", "255", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling clamped max sound pitch." );
+ConVar sixense_scaling_pitch_clamped_min( "sixense_scaling_pitch_clamped_min", "140", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling clamped Min sound pitch." );
+ConVar sixense_scaling_pitch_clamped_max( "sixense_scaling_pitch_clamped_max", "255", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling clamped Max sound pitch." );
 ConVar sixense_scaling_pitch_initial( "sixense_scaling_pitch_initial", "85", FCVAR_REPLICATED | FCVAR_CHEAT, "Scaling initiated sound pitch." );
 ConVar sixense_scaling_turret_controller_distance( "sixense_scaling_turret_controller_distance", "20.0", FCVAR_REPLICATED | FCVAR_CHEAT, "Distance in mm controller must be moved to scale turret." );
 ConVar sixense_scaling_turret_min( "sixense_scaling_turret_min", "0.5", FCVAR_REPLICATED | FCVAR_CHEAT, "Min turret scale." );

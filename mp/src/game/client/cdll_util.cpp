@@ -1082,7 +1082,7 @@ static unsigned char ComputeDistanceFade( C_BaseEntity *pEntity, float flMinDist
 		::V_swap( flMinDist, flMaxDist );
 	}
 
-	// If a negative value is provided for the min fade distance, then base it off the max.
+	// If a negative value is provided for the Min fade distance, then base it off the Max.
 	if( flMinDist < 0 )
 	{
 		flMinDist = flMaxDist - 400;

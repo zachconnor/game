@@ -160,8 +160,8 @@ struct GLMRendererInfoFields
 	
 	// booleans	
 	bool	m_hasGammaWrites;			// aka glGetBooleanv(GL_FRAMEBUFFER_SRGB_CAPABLE_EXT) / glEnable(GL_FRAMEBUFFER_SRGB_EXT)
-	bool	m_hasMixedAttachmentSizes;	// aka ARB_fbo in 10.6.3 - test for min OS vers, then exported ext string
-	bool	m_hasBGRA;					// aka GL_BGRA vertex attribs in 10.6.3 -  - test for min OS vers, then exported ext string
+	bool	m_hasMixedAttachmentSizes;	// aka ARB_fbo in 10.6.3 - test for Min OS vers, then exported ext string
+	bool	m_hasBGRA;					// aka GL_BGRA vertex attribs in 10.6.3 -  - test for Min OS vers, then exported ext string
 	bool	m_hasNewFullscreenMode;		// aka 10.6.x "big window" fullscreen mode
 	bool	m_hasNativeClipVertexMode;	// aka GLSL gl_ClipVertex does not fall back to SW- OS version and folklore-based
 	bool	m_hasOcclusionQuery;		// occlusion query: do you speak it ?!

@@ -1165,7 +1165,7 @@ void CMultiPlayerAnimState::UpdateInterpolators()
 {
 	VPROF( "CBasePlayerAnimState::UpdateInterpolators" );
 
-	// First, figure out their current max speed based on their current activity.
+	// First, figure out their current Max speed based on their current activity.
 	float flCurMaxSpeed = GetCurrentMaxGroundSpeed();
 
 #ifdef CLIENT_DLL
@@ -2012,7 +2012,7 @@ void CMultiPlayerAnimState::DebugShowAnimState( int iStartLine )
 	}
 #endif
 
-	Anim_StatePrintf( iLine++, "vel: %.2f, time: %.2f, max: %.2f", 
+	Anim_StatePrintf( iLine++, "vel: %.2f, time: %.2f, Max: %.2f", 
 		vOuterVel.Length2D(), gpGlobals->curtime, GetInterpolatedGroundSpeed() );
 		
 //	AnimStatePrintf( iLine++, "ent yaw: %.2f, body_yaw: %.2f, body_pitch: %.2f, move_x: %.2f, move_y: %.2f", 

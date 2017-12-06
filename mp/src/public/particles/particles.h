@@ -2073,7 +2073,7 @@ private:
 	float m_flMinimumSimTime; // minimum time to sim before drawing first frame - prevents all
 							  // capped particles from drawing at 0 time.
 
-	int m_nMinimumFrames;					  // number of frames to apply max/min simulation times
+	int m_nMinimumFrames;					  // number of frames to apply Max/Min simulation times
 
 
 	// Is the particle system rendered on the viewmodel?

@@ -160,7 +160,7 @@ void CBaseCombatCharacter::RemoveAllAmmo( )
 //-----------------------------------------------------------------------------
 void CBaseCombatCharacter::SetAmmoCount( int iCount, int iAmmoIndex )
 {
-	// NOTE: No sound, no max check! Seems pretty bogus to me!
+	// NOTE: No sound, no Max check! Seems pretty bogus to me!
 	m_iAmmo.Set( iAmmoIndex, iCount );
 }
 
@@ -287,7 +287,7 @@ void CCombatCharVisCache::FrameUpdatePreEntityThink()
 
 	// Lazy retirement of vis cache
 	// NOTE: 256 was chosen heuristically based on a playthrough where 200
-	// was the max # in the viscache where nothing could be retired.
+	// was the Max # in the viscache where nothing could be retired.
 	if ( m_VisCache.Count() < 256 )
 		return;
 

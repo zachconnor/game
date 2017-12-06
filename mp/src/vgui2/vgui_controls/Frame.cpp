@@ -92,7 +92,7 @@ namespace
 			if (_dragMultX == -1)
 			{
 				// only move if we are not at the minimum
-				// if we are at min we have to force the proper offset (dx)
+				// if we are at Min we have to force the proper offset (dx)
 				if (newWide < minWide)
 				{
 					dx=_dragOrgSize[0]-minWide;
@@ -138,7 +138,7 @@ namespace
 			// set new position
 			_frame->SetPos(newX, newY);
 			// set the new size			
-			// if window is below min size it will automatically pop to min size
+			// if window is below Min size it will automatically pop to Min size
 			_frame->SetSize(newWide, newTall);
 			_frame->InvalidateLayout();
 			_frame->Repaint();
@@ -2323,8 +2323,8 @@ void Frame::OnScreenSizeChanged(int iOldWide, int iOldTall)
 	}
 
 	// make sure the top-left is visible
-	x = max( 0, x );
-	y = max( 0, y );
+	x = Max( 0, x );
+	y = Max( 0, y );
 
 	// apply
 	SetPos(x, y);

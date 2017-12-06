@@ -615,7 +615,7 @@ impactdamagetable_t gAntlionGuardImpactDamageTable =
 	45,		// large mass in kg 
 	2,		// large mass scale (anything over 500kg does 4X as much energy to read from damage table)
 	1,		// large mass falling scale
-	0,		// my min velocity
+	0,		// my Min velocity
 };
 
 //-----------------------------------------------------------------------------
@@ -909,7 +909,7 @@ bool CNPC_AntlionGuard::CanSummon( bool bIgnoreTime )
 	if ( !bIgnoreTime && m_flNextSummonTime > gpGlobals->curtime )
 		return false;
 
-	// Hit the max number of them allowed? Only summon when we're 2 down.
+	// Hit the Max number of them allowed? Only summon when we're 2 down.
 	if ( m_iNumLiveAntlions >= MAX(1, ANTLIONGUARD_SUMMON_COUNT-1) )
 		return false;
 
@@ -3149,7 +3149,7 @@ void CNPC_AntlionGuard::SummonAntlions( void )
 		{ -200, 0 },
 	};
 
-	// Only spawn up to our max count
+	// Only spawn up to our Max count
 	int iSpawnPoint = 0;
 	for ( int i = 0; (m_iNumLiveAntlions < ANTLIONGUARD_SUMMON_COUNT) && (iSpawnPoint < ARRAYSIZE(sAntlionSpawnPositions)); i++ )
 	{

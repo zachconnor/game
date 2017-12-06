@@ -160,12 +160,12 @@ public:
 	CNetworkVar( int, m_iMinGust );			// the slowest that a gust can be
 	CNetworkVar( int, m_iMaxGust );			// the fastest that a gust can be
 
-	CNetworkVar( float, m_flMinGustDelay );	// min time between gusts
-	CNetworkVar( float, m_flMaxGustDelay );	// max time between gusts
+	CNetworkVar( float, m_flMinGustDelay );	// Min time between gusts
+	CNetworkVar( float, m_flMaxGustDelay );	// Max time between gusts
 
-	CNetworkVar( float, m_flGustDuration );	// max time between gusts
+	CNetworkVar( float, m_flGustDuration );	// Max time between gusts
 
-	CNetworkVar( int, m_iGustDirChange );	// max number of degrees wind dir changes on gusts.
+	CNetworkVar( int, m_iGustDirChange );	// Max number of degrees wind dir changes on gusts.
 	int m_iszGustSound;		// name of the wind sound to play for gusts.
 	int m_iWindDir;			// wind direction (yaw)
 	float m_flWindSpeed;	// the wind speed

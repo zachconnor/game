@@ -980,7 +980,7 @@ int CCollisionEvent::ShouldSolvePenetration( IPhysicsObject *pObj0, IPhysicsObje
 	// solve it yourself here and return 0, or have the default implementation do it
 	if ( pEntity0 > pEntity1 )
 	{
-		// swap sort
+		// std::swap sort
 		CBaseEntity *pTmp = pEntity0;
 		pEntity0 = pEntity1;
 		pEntity1 = pTmp;
@@ -2584,7 +2584,7 @@ void PhysCollisionSound( CBaseEntity *pEntity, IPhysicsObject *pPhysObject, int 
 	if ( deltaTime < 0.05f || speed < 70.0f )
 		return;
 
-	float volume = speed * speed * (1.0f/(320.0f*320.0f));	// max volume at 320 in/s
+	float volume = speed * speed * (1.0f/(320.0f*320.0f));	// Max volume at 320 in/s
 	if ( volume > 1.0f )
 		volume = 1.0f;
 

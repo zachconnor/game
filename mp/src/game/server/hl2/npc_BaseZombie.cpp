@@ -728,7 +728,7 @@ bool CNPC_BaseZombie::ShouldBecomeTorso( const CTakeDamageInfo &info, float flDa
 
 	// Break in half IF:
 	// 
-	// Take half or more of max health in DMG_BLAST
+	// Take half or more of Max health in DMG_BLAST
 	if( (info.GetDamageType() & DMG_BLAST) && flDamageThreshold >= 0.5 )
 	{
 		return true;
@@ -842,7 +842,7 @@ int CNPC_BaseZombie::OnTakeDamage_Alive( const CTakeDamageInfo &inputInfo )
 
 	int tookDamage = BaseClass::OnTakeDamage_Alive( info );
 
-	// flDamageThreshold is what percentage of the creature's max health
+	// flDamageThreshold is what percentage of the creature's Max health
 	// this amount of damage represents. (clips at 1.0)
 	float flDamageThreshold = MIN( 1, info.GetDamage() / m_iMaxHealth );
 	

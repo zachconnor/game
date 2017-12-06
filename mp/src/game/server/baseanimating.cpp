@@ -1010,7 +1010,7 @@ float CBaseAnimating::GetIdealSpeed( ) const
 
 float CBaseAnimating::GetIdealAccel( ) const
 {
-	// return ideal max velocity change over 1 second.
+	// return ideal Max velocity change over 1 second.
 	// tuned for run-walk range of humans
 	return GetIdealSpeed() + 50;
 }
@@ -1557,7 +1557,7 @@ void CBaseAnimating::UpdateStepOrigin()
 				// debounce floor location
 				m_flEstIkFloor = m_flEstIkFloor * 0.2 + m_flIKGroundMinHeight * 0.8;
 
-				// don't let heigth difference between min and max exceed step height
+				// don't let heigth difference between Min and Max exceed step height
 				float bias = clamp( (m_flIKGroundMaxHeight - m_flIKGroundMinHeight) - height, 0.f, height );
 				// save off reasonable offset
 				m_flEstIkOffset = clamp( m_flEstIkFloor - GetAbsOrigin().z, -height + bias, 0.0f );
@@ -2193,7 +2193,7 @@ void CBaseAnimating::SetSequenceBox( void )
 	if ( ExtractBbox( GetSequence(), mins, maxs ) )
 	{
 		// expand box for rotation
-		// find min / max for rotations
+		// find Min / Max for rotations
 		float yaw = GetLocalAngles().y * (M_PI / 180.0);
 		
 		Vector xvector, yvector;

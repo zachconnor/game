@@ -45,7 +45,7 @@ extern IFileSystem *filesystem;
 
 using namespace vgui;
 
-#define RANKSTRING "00000"               // A max of 99999 ranks (too generous)
+#define RANKSTRING "00000"               // A Max of 99999 ranks (too generous)
 #define DATESTRING "00/00/0000 00:00:00" // Entire date string
 #define TIMESTRING "00:00:00.000"        // Entire time string
 

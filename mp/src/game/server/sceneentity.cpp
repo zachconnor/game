@@ -60,7 +60,7 @@ static ConVar scene_maxcaptionradius( "scene_maxcaptionradius", "1200", 0, "Only
 // Think every 50 msec (FIXME: Try 10hz?)
 #define SCENE_THINK_INTERVAL 0.001 // FIXME: make scene's think in concert with their npc's	
 
-#define FINDNAMEDENTITY_MAX_ENTITIES	32		// max number of entities to be considered for random entity selection in FindNamedEntity
+#define FINDNAMEDENTITY_MAX_ENTITIES	32		// Max number of entities to be considered for random entity selection in FindNamedEntity
 
 // List of the last 5 lines of speech from NPCs for bug reports
 static recentNPCSpeech_t speechListSounds[ SPEECH_LIST_MAX_SOUNDS ] = { { 0, "", "" }, { 0, "", "" }, { 0, "", "" }, { 0, "", "" }, { 0, "", "" } };
@@ -620,7 +620,7 @@ IMPLEMENT_SERVERCLASS_ST_NOBASE( CSceneEntity, DT_SceneEntity )
 	SendPropFloat(SENDINFO(m_flForceClientTime)),
 	SendPropUtlVector(
 		SENDINFO_UTLVECTOR( m_hActorList ),
-		MAX_ACTORS_IN_SCENE, // max elements
+		MAX_ACTORS_IN_SCENE, // Max elements
 		SendPropEHandle( NULL, 0 ) ),
 END_SEND_TABLE()
 

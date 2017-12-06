@@ -681,7 +681,7 @@ void CC_DrawCross( const CCommand &args )
 	vPosition.y = atof(args[2]);
 	vPosition.z = atof(args[3]);
 
-	// Offset since min and max z in not about center
+	// Offset since Min and Max z in not about center
 	Vector mins = Vector(-5,-5,-5);
 	Vector maxs = Vector(5,5,5);
 
@@ -813,7 +813,7 @@ CON_COMMAND_F( buddha, "Toggle.  Player takes damage but won't die. (Shows red c
 }
 
 
-#define TALK_INTERVAL 0.66 // min time between say commands from a client
+#define TALK_INTERVAL 0.66 // Min time between say commands from a client
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 CON_COMMAND( say, "Display player message" )

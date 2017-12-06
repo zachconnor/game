@@ -664,7 +664,7 @@ face_t *ComputeVisibleBrushSides( bspbrush_t *list )
 					{
 						// it cut into more than one visible fragment
 						// Don't fragment details
-						// UNDONE: Build 2d convex hull of this list and swap face winding 
+						// UNDONE: Build 2d convex hull of this list and std::swap face winding 
 						// with that polygon?  That would fix the remaining issues.
 						FreeFaceList( pClip );
 						pClip = NULL;

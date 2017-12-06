@@ -658,7 +658,7 @@ void CAI_Motor::MoveFacing( const AILocalMoveGoal_t &move )
 		// ideal facing direction
 		float idealYaw = UTIL_AngleMod( UTIL_VecToYaw( dir ) );
 		
-		// FIXME: facing has important max velocity issues
+		// FIXME: facing has important Max velocity issues
 		SetIdealYawAndUpdate( idealYaw );	
 
 		// find movement direction to compensate for not being turned far enough

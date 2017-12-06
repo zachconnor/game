@@ -849,7 +849,7 @@ void CFuncTank::Spawn( void )
 		CreateVPhysics();
 	}
 
-	// Setup squared min/max range.
+	// Setup squared Min/Max range.
 	m_flMinRange2 = m_minRange * m_minRange;
 	m_flMaxRange2 = m_maxRange * m_maxRange;
 	m_flIgnoreGraceUpto *= m_flIgnoreGraceUpto;

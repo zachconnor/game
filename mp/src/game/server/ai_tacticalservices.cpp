@@ -258,7 +258,7 @@ bool CAI_TacticalServices::FindLateralCover( const Vector &vNearPos, const Vecto
 
 //-------------------------------------
 // Purpose: Find a nearby node that further away from the enemy than the
-//			min range of my current weapon if there is one or just futher
+//			Min range of my current weapon if there is one or just futher
 //			away than my current location if I don't have a weapon.  
 //			Used to back away for attacks
 //-------------------------------------

@@ -519,7 +519,7 @@ static void GeneratePatchedName( const char *pMaterialName, const PatchInfo_t &i
 		Assert( nLen < TEXTURE_NAME_LENGTH - 1 );
 		if ( nLen >= TEXTURE_NAME_LENGTH - 1 )
 		{
-			Error( "Generated env_cubemap patch name : %s too long! (max = %d)\n", pBuffer, TEXTURE_NAME_LENGTH );
+			Error( "Generated env_cubemap patch name : %s too long! (Max = %d)\n", pBuffer, TEXTURE_NAME_LENGTH );
 		}
 	}
 

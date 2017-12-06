@@ -219,7 +219,7 @@ void CEmptyServerPlugin::LevelInit( char const *pMapName )
 
 //---------------------------------------------------------------------------------
 // Purpose: called on level start, when the server is ready to accept client connections
-//		edictCount is the number of entities in the level, clientMax is the max client count
+//		edictCount is the number of entities in the level, clientMax is the Max client count
 //---------------------------------------------------------------------------------
 void CEmptyServerPlugin::ServerActivate( edict_t *pEdictList, int edictCount, int clientMax )
 {

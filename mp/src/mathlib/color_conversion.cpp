@@ -486,18 +486,18 @@ void VectorToColorRGBExp32( const Vector& vin, ColorRGBExp32 &c )
 	Assert( s_bMathlibInitialized );
 	Assert( v.x >= 0.0f && v.y >= 0.0f && v.z >= 0.0f );
 	int i;		
-	float max = v[0];				
+	float Max = v[0];				
 	for( i = 1; i < 3; i++ )
 	{
 		// Get the maximum value.
-		if( v[i] > max )
+		if( v[i] > Max )
 		{
-			max = v[i];
+			Max = v[i];
 		}
 	}
 				
 	// figure out the exponent for this luxel.
-	int exponent = VectorToColorRGBExp32_CalcExponent( max );
+	int exponent = VectorToColorRGBExp32_CalcExponent( Max );
 				
 	// make the exponent fits into a signed byte.
 	if( exponent < -128 )
@@ -569,7 +569,7 @@ void VectorToColorRGBExp32( const Vector& vin, ColorRGBExp32 &c )
 	Assert( vin.x >= 0.0f && vin.y >= 0.0f && vin.z >= 0.0f );
 
 	// work out which of the channels is the largest ( we will use that to map the exponent )
-	// this is a sluggish branch-based decision tree -- most architectures will offer a [max]
+	// this is a sluggish branch-based decision tree -- most architectures will offer a [Max]
 	// assembly opcode to do this faster.
 	const float *pMax;
 	if (vin.x > vin.y)

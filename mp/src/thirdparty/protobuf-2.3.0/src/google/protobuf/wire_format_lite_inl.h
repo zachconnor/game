@@ -268,7 +268,7 @@ inline bool WireFormatLite::ReadRepeatedFixedSizePrimitive(
     // The number of bytes each type occupies on the wire.
     const int per_value_size = tag_size + sizeof(value);
 
-    int elements_available = min(values->Capacity() - values->size(),
+    int elements_available = Min(values->Capacity() - values->size(),
                                  size / per_value_size);
     int num_read = 0;
     while (num_read < elements_available &&

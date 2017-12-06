@@ -163,7 +163,7 @@ void CPointSpotlight::Spawn(void)
 	
 	if (m_flSpotlightGoalWidth > MAX_BEAM_WIDTH )
 	{
-		DevMsg("%s (%s) has an invalid spotlight width %.1f (max %.1f).\n", GetClassname(), GetDebugName(), m_flSpotlightGoalWidth, MAX_BEAM_WIDTH );
+		DevMsg("%s (%s) has an invalid spotlight width %.1f (Max %.1f).\n", GetClassname(), GetDebugName(), m_flSpotlightGoalWidth, MAX_BEAM_WIDTH );
 		m_flSpotlightGoalWidth = MAX_BEAM_WIDTH; 
 	}
 
@@ -189,7 +189,7 @@ void CPointSpotlight::Spawn(void)
 //-----------------------------------------------------------------------------
 void CPointSpotlight::ComputeRenderInfo()
 {
-	// Fade out spotlight end if past max length.  
+	// Fade out spotlight end if past Max length.  
 	if ( m_flSpotlightCurLength > 2*m_flSpotlightMaxLength )
 	{
 		m_hSpotlightTarget->SetRenderColorA( 0 );

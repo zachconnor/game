@@ -1397,7 +1397,7 @@ const uInt border[] = { // Order of the bit length code lengths
 //12. Note: length code 284 can represent 227-258, but length code 285
 //    really is 258.  The last length deserves its own, short code
 //    since it gets used a lot in very redundant files.  The length
-//    258 is special since 258 - 3 (the min match length) is 255.
+//    258 is special since 258 - 3 (the Min match length) is 255.
 //13. The literal/length and distance code bit lengths are read as a
 //    single stream of lengths.  It is possible (and advantageous) for
 //    a repeat code (16, 17, or 18) to go across the boundary between
@@ -2141,7 +2141,7 @@ z_streamp z)
   // do until not enough input or output space for fast loop 
   do {                          // assume called with m >= 258 && n >= 10 
     // get literal/length code 
-    GRABBITS(20)                // max bits for literal/length code 
+    GRABBITS(20)                // Max bits for literal/length code 
     if ((e = (t = tl + ((uInt)b & ml))->exop) == 0)
     {
       DUMPBITS(t->bits)
@@ -2163,7 +2163,7 @@ z_streamp z)
         Tracevv((stderr, "inflate:         * length %u\n", c));
 
         // decode distance base of block to copy 
-        GRABBITS(15);           // max bits for distance code 
+        GRABBITS(15);           // Max bits for distance code 
         e = (t = td + ((uInt)b & md))->exop;
         for (;;) {
           DUMPBITS(t->bits)

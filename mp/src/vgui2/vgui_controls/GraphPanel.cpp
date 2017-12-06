@@ -43,7 +43,7 @@ void GraphPanel::SetDisplayDomainSize(float size)
 {
 	m_flDomainSize = size;
 
-	// set the max domain size if it hasn't been set yet
+	// set the Max domain size if it hasn't been set yet
 	if (!m_bMaxDomainSizeSet)
 	{
 		SetMaxDomainSize(size);
@@ -125,7 +125,7 @@ void GraphPanel::AddItem(float sampleEnd, float sampleValue)
 	}
 
 /*
-	// see the max number of samples necessary to display this information reasonably precisely
+	// see the Max number of samples necessary to display this information reasonably precisely
 	static const int MAX_LIKELY_GRAPH_WIDTH = 800;
 	int maxSamplesNeeded = 2 * MAX_LIKELY_GRAPH_WIDTH / (m_iGraphBarWidth + m_iGraphBarGapWidth);
 	if (m_Samples.Count() > 2)
@@ -269,7 +269,7 @@ void GraphPanel::Paint()
 		}
 
 		// draw the item
-		// show the max value in the sample, not the average
+		// show the Max value in the sample, not the average
 		int size = (int)(maxValue * barSizeMultiplier);
 //		int size = (int)((value * barSizeMultiplier) / samplesTouched);
 		surface()->DrawFilledRect(x, GetTall() - size, x + m_iGraphBarWidth, GetTall());

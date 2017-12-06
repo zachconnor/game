@@ -69,16 +69,16 @@ HALF3 CalcReflectionVectorUnnormalized( HALF3 normal, HALF3 eyeVector )
 
 float3 HuePreservingColorClamp( float3 c )
 {
-	// Get the max of all of the color components and a specified maximum amount
-	float maximum = max( max( c.x, c.y ), max( c.z, 1.0f ) );
+	// Get the Max of all of the color components and a specified maximum amount
+	float maximum = Max( Max( c.x, c.y ), Max( c.z, 1.0f ) );
 
 	return (c / maximum);
 }
 
 HALF3 HuePreservingColorClamp( HALF3 c, HALF maxVal )
 {
-	// Get the max of all of the color components and a specified maximum amount
-	float maximum = max( max( c.x, c.y ), max( c.z, maxVal ) );
+	// Get the Max of all of the color components and a specified maximum amount
+	float maximum = Max( Max( c.x, c.y ), Max( c.z, maxVal ) );
 	return (c * ( maxVal / maximum ) );
 }
 
@@ -151,16 +151,16 @@ float3 DecompressHDR( float4 input )
 
 float4 CompressHDR( float3 input )
 {
-	// FIXME: want to use min so that we clamp to white, but what happens if we 
+	// FIXME: want to use Min so that we clamp to white, but what happens if we 
 	// have an albedo component that's less than 1/MAX_HDR_OVERBRIGHT?
-	//	float fMax = max( max( color.r, color.g ), color.b );
+	//	float fMax = Max( Max( color.r, color.g ), color.b );
 	float4 output;
-	float fMax = min( min( input.r, input.g ), input.b );
+	float fMax = Min( Min( input.r, input.g ), input.b );
 	if( fMax > 1.0f )
 	{
 		float oofMax = 1.0f / fMax;
 		output.rgb = oofMax * input.rgb;
-		output.a = min( fMax / MAX_HDR_OVERBRIGHT, 1.0f );
+		output.a = Min( fMax / MAX_HDR_OVERBRIGHT, 1.0f );
 	}
 	else
 	{

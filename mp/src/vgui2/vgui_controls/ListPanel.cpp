@@ -42,17 +42,18 @@ enum
 	WINDOW_BORDER_WIDTH=2 // the width of the window's border
 };
 
-
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
+/*
+#ifndef Max
+#define Max(a,b)            (((a) > (b)) ? (a) : (b))
 #endif
 
-#ifndef min
-#define min(a,b)    (((a) < (b)) ? (a) : (b))
+#ifndef Min
+#define Min(a,b)    (((a) < (b)) ? (a) : (b))
 #endif
+*/
 
 #ifndef clamp
-#define clamp( val, min, max ) ( ((val) > (max)) ? (max) : ( ((val) < (min)) ? (min) : (val) ) )
+#define clamp( val, Min, Max ) ( ((val) > (Max)) ? (Max) : ( ((val) < (Min)) ? (Min) : (val) ) )
 #endif
 
 //-----------------------------------------------------------------------------
@@ -542,9 +543,9 @@ void ListPanel::SetColumnHeaderHeight( int height )
 //			this->FindChildByName(columnHeaderName) can be used to retrieve a pointer to a header panel by name
 //
 // if minWidth and maxWidth are BOTH NOTRESIZABLE or RESIZABLE
-// the min and max size will be calculated automatically for you with that attribute
+// the Min and Max size will be calculated automatically for you with that attribute
 // columns are resizable by default
-// if min and max size are specified column is resizable
+// if Min and Max size are specified column is resizable
 //
 // A small note on passing numbers for minWidth and maxWidth, 
 // If the initial window size is larger than the sum of the original widths of the columns,
@@ -566,7 +567,7 @@ void ListPanel::AddColumnHeader(int index, const char *columnName, const char *c
 {
 	if (columnFlags & COLUMN_FIXEDSIZE && !(columnFlags & COLUMN_RESIZEWITHWINDOW))
 	{
-		// for fixed size columns, set the min & max widths to be the same as the initial width
+        // for fixed size columns, set the Min & Max widths to be the same as the initial width
 		AddColumnHeader( index, columnName, columnText, width, width, width, columnFlags);
 	}
 	else
@@ -1092,7 +1093,7 @@ void ListPanel::IndexItem(int itemID)
 	FastSortListPanelItem *newitem = (FastSortListPanelItem*) m_DataItems[itemID];
 
 	// remove the item from the indexes and re-add
-	int maxCount = min(m_ColumnsHistory.Count(), newitem->m_SortedTreeIndexes.Count());
+    int maxCount = Min(m_ColumnsHistory.Count(), newitem->m_SortedTreeIndexes.Count());
 	for (int i = 0; i < maxCount; i++)
 	{
 		IndexRBTree_t &rbtree = m_ColumnsData[m_ColumnsHistory[i]].m_SortedTree;
@@ -1504,7 +1505,7 @@ Panel *ListPanel::GetCellRenderer(int itemID, int col)
 		// set cell size
 		Panel *header = column.m_pHeader;
 	    int wide = header->GetWide();
-		m_pTextImage->SetSize( min( cw, wide - 5 ), tall);
+        m_pTextImage->SetSize( Min( cw, wide - 5 ), tall);
 
 		m_pLabel->SetTextImageIndex( 0 );
 		m_pLabel->SetImageAtIndex(0, m_pTextImage, 3);
@@ -1742,7 +1743,7 @@ void ListPanel::PerformLayout()
 			header->SetWide( column.m_iMinWidth );
 	}
 
-	// This was a while(1) loop and we hit an infinite loop case, so now we max out the # of times it can loop.
+    // This was a while(1) loop and we hit an infinite loop case, so now we Max out the # of times it can loop.
 	for ( int iLoopSanityCheck=0; iLoopSanityCheck < 1000; iLoopSanityCheck++ )
 	{
 		// try and place headers as is - before we have to force items to be minimum width
@@ -1789,7 +1790,7 @@ void ListPanel::PerformLayout()
 				}
 			}
 
-			// enforce column mins and max's - unless we're FORCING it to shrink
+            // enforce column mins and Max's - unless we're FORCING it to shrink
 			if ( hWide < column.m_iMinWidth && !bForceShrink ) 
 			{
 				hWide = column.m_iMinWidth; // adjust width of column
@@ -2005,7 +2006,7 @@ void ListPanel::Paint()
 
 				render->SetPos( xpos, (drawcount * m_iRowHeight) + m_iTableStartY);
 
-				int right = min( xpos + wide, maxw );
+                int right = Min( xpos + wide, maxw );
 				int usew = right - xpos;
 				render->SetSize( usew, m_iRowHeight - 1 );
 
@@ -3149,7 +3150,7 @@ void ListPanel::ApplyUserConfigSettings(KeyValues *userConfig)
 	//    - Window width is 500, load sizes setup relative to a 1000-width window
 	//	  - Set window size to 1000
 	//    - In PerformLayout, it thinks the window has grown by 500 (since m_lastBarWidth is 500 and new window width is 1000)
-	//      so it pushes out any COLUMN_RESIZEWITHWINDOW columns to their max extent and shrinks everything else to its min extent.
+    //      so it pushes out any COLUMN_RESIZEWITHWINDOW columns to their Max extent and shrinks everything else to its Min extent.
 	m_lastBarWidth = userConfig->GetInt( "lastBarWidth", 0 );
 	
 	// read which columns are hidden

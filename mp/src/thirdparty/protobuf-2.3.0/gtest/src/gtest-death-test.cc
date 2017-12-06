@@ -1053,7 +1053,7 @@ static void SplitString(const ::std::string& str, char delimiter,
       pos = colon + 1;
     }
   }
-  dest->swap(parsed);
+  dest->std::swap(parsed);
 }
 
 #if GTEST_OS_WINDOWS

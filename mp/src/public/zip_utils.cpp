@@ -623,7 +623,7 @@ void CZipFile::ParseFromBuffer( void *buffer, int bufferlength )
 	// Initialize a buffer
 	CUtlBuffer buf( 0, bufferlength +1  );					// +1 for null termination
 
-	// need to swap bytes, so set the buffer opposite the machine's endian
+	// need to std::swap bytes, so set the buffer opposite the machine's endian
 	buf.ActivateByteSwapping( m_Swap.IsSwappingBytes() );
 
 	buf.Put( buffer, bufferlength );
@@ -657,7 +657,7 @@ void CZipFile::ParseFromBuffer( void *buffer, int bufferlength )
 			if ( rec.commentLength )
 			{
 				char commentString[128];
-				int commentLength = min( rec.commentLength, sizeof( commentString ) );
+				int commentLength = Min( rec.commentLength, sizeof( commentString ) );
 				buf.Get( commentString, commentLength );
 				if ( commentLength == sizeof( commentString ) )
 					--commentLength;
@@ -814,7 +814,7 @@ HANDLE CZipFile::ParseFromDisk( const char *pFilename )
 			if ( rec.commentLength )
 			{
 				char commentString[128];
-				int commentLength = min( rec.commentLength, sizeof( commentString ) );
+				int commentLength = Min( rec.commentLength, sizeof( commentString ) );
 				CWin32File::FileRead( hFile, commentString, commentLength );
 				if ( commentLength == sizeof( commentString ) )
 					--commentLength;

@@ -874,7 +874,7 @@ bool CHL2MPRules::ShouldCollide( int collisionGroup0, int collisionGroup1 )
 {
 	if ( collisionGroup0 > collisionGroup1 )
 	{
-		// swap so that lowest is always first
+		// std::swap so that lowest is always first
 		V_swap(collisionGroup0,collisionGroup1);
 	}
 

@@ -1821,7 +1821,7 @@ int CNPC_Alyx::TranslateSchedule( int scheduleType )
 					// Does my enemy have enough health to warrant crouching?
 					if ( pEnemy->GetHealth() > ALYX_MIN_ENEMY_HEALTH_TO_CROUCH )
 					{
-						// And are they far enough away? Expand the min dist so we don't crouch & stand immediately.
+						// And are they far enough away? Expand the Min dist so we don't crouch & stand immediately.
 						if ( EnemyDistance( pEnemy ) > (ALYX_MIN_ENEMY_DIST_TO_CROUCH * 1.5) && (pEnemy->GetFlags() & FL_ONGROUND) )
 						{
 							//Warning("CROUCH: Desiring due to enemy far away.\n" );

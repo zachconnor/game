@@ -100,7 +100,7 @@ class GameData
 
 		CUtlVector<GDclass *> m_Classes;
 
-		int m_nMinMapCoord;		// Min & max map bounds as defined by the FGD.
+		int m_nMinMapCoord;		// Min & Max map bounds as defined by the FGD.
 		int m_nMaxMapCoord;
 
 		// Instance Remapping

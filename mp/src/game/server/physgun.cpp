@@ -421,7 +421,7 @@ IMotionEvent::simresult_e CGravControllerPoint::Simulate( IPhysicsMotionControll
 	}
 	else
 	{
-		// clamp future velocity to max speed
+		// clamp future velocity to Max speed
 		Vector nextVel = delta + vel;
 		float nextSpeed = nextVel.Length();
 		if ( nextSpeed > m_maxVel )

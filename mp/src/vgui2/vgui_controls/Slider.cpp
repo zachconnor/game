@@ -626,10 +626,10 @@ void Slider::PaintBackground()
 //-----------------------------------------------------------------------------
 // Purpose: Set the range of the slider.
 //-----------------------------------------------------------------------------
-void Slider::SetRange(int min,int max)
+void Slider::SetRange(int Min,int Max)
 {
-	_range[0]=min;
-	_range[1]=max;
+	_range[0]=Min;
+	_range[1]=Max;
 
 	ClampRange();
 }
@@ -664,12 +664,12 @@ void Slider::ClampRange()
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Get the max and min values of the slider
+// Purpose: Get the Max and Min values of the slider
 //-----------------------------------------------------------------------------
-void Slider::GetRange(int& min,int& max)
+void Slider::GetRange(int& Min,int& Max)
 {
-	min=_range[0];
-	max=_range[1];
+	Min=_range[0];
+	Max=_range[1];
 }
 
 //-----------------------------------------------------------------------------
@@ -766,12 +766,12 @@ void Slider::OnMousePressed(MouseCode code)
 	else
 	{
 		// we clicked elsewhere on the slider; move the nob to that position
-		int min, max;
-		GetRange(min, max);
+		int Min, Max;
+		GetRange(Min, Max);
 		if ( m_bUseSubRange )
 		{
-			min = _subrange[ 0 ];
-			max = _subrange[ 1 ];
+			Min = _subrange[ 0 ];
+			Max = _subrange[ 1 ];
 		}
 
 //		int wide = GetWide();
@@ -779,10 +779,10 @@ void Slider::OnMousePressed(MouseCode code)
 		GetTrackRect( _x, _y, wide, tall );
 		if ( wide > 0 )
 		{
-			float frange = ( float )( max - min );
+			float frange = ( float )( Max - Min );
 			float clickFrac = clamp( ( float )( x - _x ) / (float)( wide - 1 ), 0.0f, 1.0f );
 
-			float value = (float)min + clickFrac * frange;
+			float value = (float)Min + clickFrac * frange;
 
 			startdragging = IsDragOnRepositionNob();
 
@@ -868,9 +868,9 @@ void Slider::OnKeyCodeTyped(KeyCode code)
     		}
         case KEY_PAGEDOWN:
             {
-                int min, max;
-                GetRange(min, max);
-                float range = (float) max-min;
+                int Min, Max;
+                GetRange(Min, Max);
+                float range = (float) Max-Min;
                 float pertick = range/m_nNumTicks;
                 int val = GetValue();
                 SetValue(val - (int) pertick);
@@ -878,9 +878,9 @@ void Slider::OnKeyCodeTyped(KeyCode code)
             }
         case KEY_PAGEUP:
             {
-                int min, max;
-                GetRange(min, max);
-                float range = (float) max-min;
+                int Min, Max;
+                GetRange(Min, Max);
+                float range = (float) Max-Min;
                 float pertick = range/m_nNumTicks;
                 int val = GetValue();
                 SetValue(val + (int) pertick);
@@ -888,16 +888,16 @@ void Slider::OnKeyCodeTyped(KeyCode code)
             }
         case KEY_HOME:
             {
-                int min, max;
-                GetRange(min, max);
-                SetValue(min);
+                int Min, Max;
+                GetRange(Min, Max);
+                SetValue(Min);
     			break;
             }
         case KEY_END:
             {
-                int min, max;
-                GetRange(min, max);
-                SetValue(max);
+                int Min, Max;
+                GetRange(Min, Max);
+                SetValue(Max);
     			break;
             }
     	default:
@@ -926,10 +926,10 @@ void Slider::OnMouseReleased(MouseCode code)
 //-----------------------------------------------------------------------------
 // Purpose: Get the nob's position (the ends of each side of the nob)
 //-----------------------------------------------------------------------------
-void Slider::GetNobPos(int& min, int& max)
+void Slider::GetNobPos(int& Min, int& Max)
 {
-	min=_nobPos[0];
-	max=_nobPos[1];
+	Min=_nobPos[0];
+	Max=_nobPos[1];
 }
 
 //-----------------------------------------------------------------------------

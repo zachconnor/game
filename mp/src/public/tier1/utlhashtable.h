@@ -686,7 +686,7 @@ void CUtlHashtable<KeyT, ValueT, KeyHashT, KeyIsEqualT, AltKeyT>::DbgCheckIntegr
 	// and also the validity of the user's Hash and Equal function objects.
 	// NOTE: will fail if function objects require any sort of state!
 	CUtlHashtable clone;
-	unsigned int bytes = sizeof(entry_t)*max(16,m_table.Count());
+	unsigned int bytes = sizeof(entry_t)*Max(16,m_table.Count());
 	byte* tempbuf = (byte*) malloc(bytes);
 	clone.SetExternalBuffer( tempbuf, bytes, false, false );
 	clone = *this;
@@ -812,7 +812,7 @@ public:
 	void Swap( CUtlStableHashtable &other )
 	{
 		m_table.Swap(other.m_table);
-		// XXX swapping CUtlLinkedList by block memory swap, ugh
+		// XXX swapping CUtlLinkedList by block memory std::swap, ugh
 		char buf[ sizeof(m_data) ];
 		memcpy( buf, &m_data, sizeof(m_data) );
 		memcpy( &m_data, &other.m_data, sizeof(m_data) );

@@ -219,7 +219,7 @@ int CStripper::CreateStrip(int tri, int vert, int maxlen, int *pswaps,
         }
         else if(flookahead)
         {
-            // try a swap and see who our new neighbor would be
+            // try a std::swap and see who our new neighbor would be
             int edgeswap = (fstartcw ? vert + 1 : vert + 2) % 3;
             int nexttriswap = m_ptriinfo[tri].neighbortri[edgeswap];
             int nextvertswap = m_ptriinfo[tri].neighboredge[edgeswap];
@@ -228,7 +228,7 @@ int CStripper::CreateStrip(int tri, int vert, int maxlen, int *pswaps,
             {
                 assert(nexttri != -1);
 
-                // if the swap neighbor has a lower count, change directions
+                // if the std::swap neighbor has a lower count, change directions
                 if(GetNeighborCount(nexttriswap) < GetNeighborCount(nexttri))
                 {
                     fswap = true;
@@ -249,7 +249,7 @@ int CStripper::CreateStrip(int tri, int vert, int maxlen, int *pswaps,
                     }
                     else if(nexttriswap != -1 && !m_pused[nexttriswap])
                     {
-                        // check neighbor counts on both directions and swap if it's better
+                        // check neighbor counts on both directions and std::swap if it's better
                         if(GetNeighborCount(nexttriswap) < GetNeighborCount(nexttri1))
                             fswap = true;
                     }
@@ -260,7 +260,7 @@ int CStripper::CreateStrip(int tri, int vert, int maxlen, int *pswaps,
         if(fswap)
         {
             // we've been told to change directions so make sure we actually can
-            // and then add the swap vertex
+            // and then add the std::swap vertex
             int edgeswap = (fstartcw ? vert + 1 : vert + 2) % 3;
             nexttri = m_ptriinfo[tri].neighbortri[edgeswap];
             nextvert = m_ptriinfo[tri].neighboredge[edgeswap];
@@ -287,7 +287,7 @@ int CStripper::CreateStrip(int tri, int vert, int maxlen, int *pswaps,
     for(int j = 2; j < stripcount; j++)
         m_pused[pstriptris[j]] = 0;
 
-    // return swap count and striplen
+    // return std::swap count and striplen
     *pswaps = swaps;
     return stripcount;
 }
@@ -365,7 +365,7 @@ STRIPLIST::iterator FindBestCachedStrip(STRIPLIST *pstriplist,
     // make sure we keep the list in order and always pull off
     // the first dude.
     if(istriplistbest != pstriplist->begin())
-        swap(*istriplistbest, *pstriplist->begin());
+        std::swap(*istriplistbest, *pstriplist->begin());
 
     return pstriplist->begin();
 }
@@ -384,7 +384,7 @@ int CStripper::CreateManyStrips(STRIPLIST *pstriplist, WORD **ppstripindices)
 	STRIPLIST::iterator istriplist;
     for( istriplist = pstriplist->begin(); istriplist != pstriplist->end(); ++istriplist)
     {
-        // add striplength plus potential degenerate to swap ccw --> cw
+        // add striplength plus potential degenerate to std::swap ccw --> cw
         indexcount += StripLen(**istriplist) + 1;
     }
 
@@ -607,7 +607,7 @@ void CStripper::BuildStrips(STRIPLIST *pstriplist, int maxlen, bool flookahead)
         // store the STRIPVERTS
         pstriplist->push_back(pstripvertices);
 
-        // if strip was odd - swap orientation
+        // if strip was odd - std::swap orientation
         if((len & 0x1))
             fstartcw = !fstartcw;
     }

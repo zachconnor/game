@@ -1043,8 +1043,8 @@ void CBaseVSShader::VertexShaderUnlitGenericPass( int baseTextureVar, int frameV
 		SetModulationVertexShaderDynamicState();
 	
 		float flConsts[12]={ 0, 0, 0, 1, 				// color
-			0, 0, 0, 0,					// max
-			0, 0, 0, .5,				// min
+			0, 0, 0, 0,					// Max
+			0, 0, 0, .5,				// Min
 		};
 
 		// set up outline pixel shader constants

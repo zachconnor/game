@@ -234,7 +234,7 @@ float Fresnel( const float3 vNormal, const float3 vEyeDir, float3 vRanges )
 	//else
 	//	result = lerp( vRanges.x, vRanges.y, 2*f );			// Blend between low and mid values
 
-	// note: vRanges is now encoded as ((mid-min)*2, mid, (max-mid)*2) to optimize math
+	// note: vRanges is now encoded as ((mid-Min)*2, mid, (Max-mid)*2) to optimize math
 	float f = saturate( 1 - dot( vNormal, vEyeDir ) );
 	f = f*f - 0.5;
 	return vRanges.y + (f >= 0.0 ? vRanges.z : vRanges.x) * f;

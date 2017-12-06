@@ -22,6 +22,7 @@ using namespace vgui;
 static MAKE_TOGGLE_CONVAR(mom_comparisons, "1", FLAG_HUD_CVAR, "Shows the run comparison panel. 0 = OFF, 1 = ON");
 
 // Max stages
+
 static MAKE_CONVAR(mom_comparisons_max_zones, "4", FLAG_HUD_CVAR,
                    "Max number of zones to show on the comparison panel.", 1, 10);
 
@@ -45,7 +46,7 @@ static MAKE_TOGGLE_CONVAR(mom_comparisons_vel_show, "1", FLAG_HUD_CVAR,
 static MAKE_TOGGLE_CONVAR(mom_comparisons_vel_show_avg, "1", FLAG_HUD_CVAR,
                           "Toggle showing average velocity. 0 = OFF, 1 = ON"); // avg vel
 static MAKE_TOGGLE_CONVAR(mom_comparisons_vel_show_max, "1", FLAG_HUD_CVAR,
-                          "Toggle showing max stage velocity. 0 = OFF, 1 = ON"); // max vel
+                          "Toggle showing Max stage velocity. 0 = OFF, 1 = ON"); // Max vel
 static MAKE_TOGGLE_CONVAR(mom_comparisons_vel_show_enter, "1", FLAG_HUD_CVAR,
                           "Toggle showing stage enter velocity. 0 = OFF, 1 = ON"); // enter vel
 static MAKE_TOGGLE_CONVAR(mom_comparisons_vel_show_exit, "1", FLAG_HUD_CVAR,
@@ -601,7 +602,7 @@ void C_RunComparisons::DrawComparisonString(ComparisonString_t string, int stage
     surface()->DrawPrintText(actualValueUnicode, wcslen(actualValueUnicode));
 
     // Draw the comparison value
-    // But first see if this changes our max width for the panel
+    // But first see if this changes our Max width for the panel
     SetMaxWide(newXPosComparison                                        // X pos for the comparison
                + UTIL_ComputeStringWidth(m_hTextFont, compareValueANSI) // Width of the compare string
                + 2);                                                    // Padding
@@ -657,7 +658,7 @@ void C_RunComparisons::Paint()
                compareLocalized, //"Compare against: "
                GetRunComparisons()->runName);
 
-    // Check to see if this updates max width
+    // Check to see if this updates Max width
     SetMaxWide(UTIL_ComputeStringWidth(m_hTextFont, fullCompareString));
 
     wchar_t compareUnicode[BUFSIZELOCL];
@@ -795,7 +796,7 @@ void C_RunComparisons::Paint()
                     comparisonColor = Color(comparisonColor.r(), comparisonColor.g(), comparisonColor.b(), bogus_alpha);
                 }
 
-                // See if this updates our max width.
+                // See if this updates our Max width.
                 SetMaxWide(newXPos + UTIL_ComputeStringWidth(m_hTextFont, timeComparisonString) + 2);
 
                 ANSI_TO_UNICODE(timeComparisonString, timeComparisonStringUnicode);

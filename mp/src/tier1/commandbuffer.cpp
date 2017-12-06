@@ -55,7 +55,7 @@ void CCommandBuffer::SetWaitDelayTime( int nTickDelay )
 
 	
 //-----------------------------------------------------------------------------
-// Specifies a max limit of the args buffer. For unittesting. Size == 0 means use default
+// Specifies a Max limit of the args buffer. For unittesting. Size == 0 means use default
 //-----------------------------------------------------------------------------
 void CCommandBuffer::LimitArgumentBufferSize( int nSize )
 {

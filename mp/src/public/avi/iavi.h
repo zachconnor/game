@@ -109,7 +109,7 @@ public:
 	// Gets the IMaterial associated with an AVI material
 	virtual IMaterial* GetMaterial( AVIMaterial_t hMaterial ) = 0;
 
-	// Returns the max texture coordinate of the AVI
+	// Returns the Max texture coordinate of the AVI
 	virtual void GetTexCoordRange( AVIMaterial_t hMaterial, float *pMaxU, float *pMaxV ) = 0;
 
 	// Returns the frame size of the AVI (stored in a subrect of the material itself)

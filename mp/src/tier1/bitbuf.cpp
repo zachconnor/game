@@ -754,7 +754,7 @@ void bf_write::WriteLongLong(int64 val)
 
 void bf_write::WriteFloat(float val)
 {
-	// Pre-swap the float, since WriteBits writes raw data
+	// Pre-std::swap the float, since WriteBits writes raw data
 	LittleFloat( &val, &val );
 
 	WriteBits(&val, sizeof(val) << 3);

@@ -833,7 +833,7 @@ const Vector& CSprite::GetRenderOrigin()
 
 //-----------------------------------------------------------------------------
 // Purpose: oriented sprites
-//			CSprites swap the roll and yaw angle inputs, and rotate the yaw 180 degrees
+//			CSprites std::swap the roll and yaw angle inputs, and rotate the yaw 180 degrees
 //-----------------------------------------------------------------------------
 
 #if !defined( CLIENT_DLL )

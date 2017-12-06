@@ -102,7 +102,7 @@ GenerateMergingCode(io::Printer* printer) const {
 
 void EnumFieldGenerator::
 GenerateSwappingCode(io::Printer* printer) const {
-  printer->Print(variables_, "std::swap($name$_, other->$name$_);\n");
+  printer->Print(variables_, "std::std::swap($name$_, other->$name$_);\n");
 }
 
 void EnumFieldGenerator::

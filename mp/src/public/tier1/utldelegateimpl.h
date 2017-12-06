@@ -902,7 +902,7 @@ public:
 // wrapper classes. So that they will work with as many compilers as possible, 
 // the classes are of the form
 //   FastDelegate3<int, char *, double>
-// They can cope with any combination of parameters. The max number of parameters
+// They can cope with any combination of parameters. The Max number of parameters
 // allowed is 8, but it is trivial to increase this limit.
 // Note that we need to treat const member functions seperately.
 // All this class does is to enforce type safety, and invoke the delegate with

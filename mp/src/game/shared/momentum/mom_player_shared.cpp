@@ -117,7 +117,7 @@ void CMomentumPlayer::FireBullet(
     Vector vecSrc,	// shooting postion
     const QAngle &shootAngles,  //shooting angle
     float vecSpread, // spread vector
-    float flDistance, // max distance 
+    float flDistance, // Max distance 
     int iPenetration, // how many obstacles can be penetrated
     int iBulletType, // ammo type
     int iDamage, // base damage

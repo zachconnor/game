@@ -90,7 +90,7 @@ static ConVar m_forward( "m_forward","1", FCVAR_ARCHIVE, "Mouse forward factor."
 
 static ConVar m_customaccel( "m_customaccel", "0", FCVAR_ARCHIVE, "Custom mouse acceleration:"
 	"\n0: custom accelaration disabled"
-	"\n1: mouse_acceleration = min(m_customaccel_max, pow(raw_mouse_delta, m_customaccel_exponent) * m_customaccel_scale + sensitivity)"
+	"\n1: mouse_acceleration = Min(m_customaccel_max, pow(raw_mouse_delta, m_customaccel_exponent) * m_customaccel_scale + sensitivity)"
 	"\n2: Same as 1, with but x and y sensitivity are scaled by m_pitch and m_yaw respectively."
 	"\n3: mouse_acceleration = pow(raw_mouse_delta, m_customaccel_exponent - 1) * sensitivity"
 	);

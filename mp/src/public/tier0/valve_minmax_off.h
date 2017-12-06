@@ -1,7 +1,7 @@
 //========= Copyright Valve Corporation, All rights reserved. ============//
-#ifdef min
-	#undef min
+#ifdef Min
+	#undef Min
 #endif
-#ifdef max
-	#undef max
+#ifdef Max
+	#undef Max
 #endif

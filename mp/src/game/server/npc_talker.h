@@ -16,8 +16,8 @@
 #endif
 
 #ifndef _XBOX
-#undef min
-#undef max
+#undef Min
+#undef Max
 #pragma warning(push)
 #include <set>
 #pragma warning(pop)

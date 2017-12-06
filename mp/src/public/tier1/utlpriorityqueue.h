@@ -98,7 +98,7 @@ void CUtlPriorityQueue<T>::RemoveAtHead()
 			// Item has been filtered down to its proper place, terminate.
 			if ( m_LessFunc( m_heap[index], m_heap[child] ) )
 			{
-				// mark the potential swap and check the other child
+				// mark the potential std::swap and check the other child
 				larger = child;
 			}
 		}
@@ -106,7 +106,7 @@ void CUtlPriorityQueue<T>::RemoveAtHead()
 		child++;
 		if ( child < count )
 		{
-			// If this child is larger, swap it instead
+			// If this child is larger, std::swap it instead
 			if ( m_LessFunc( m_heap[larger], m_heap[child] ) )
 				larger = child;
 		}
@@ -114,7 +114,7 @@ void CUtlPriorityQueue<T>::RemoveAtHead()
 		if ( larger == index )
 			break;
 
-		// swap with the larger child
+		// std::swap with the larger child
 		Swap( index, larger );
 		index = larger;
 	}
@@ -141,7 +141,7 @@ void CUtlPriorityQueue<T>::RemoveAt( int index )
 			// Item has been filtered down to its proper place, terminate.
 			if ( m_LessFunc( m_heap[index], m_heap[child] ) )
 			{
-				// mark the potential swap and check the other child
+				// mark the potential std::swap and check the other child
 				larger = child;
 			}
 		}
@@ -149,7 +149,7 @@ void CUtlPriorityQueue<T>::RemoveAt( int index )
 		child++;
 		if ( child < count )
 		{
-			// If this child is larger, swap it instead
+			// If this child is larger, std::swap it instead
 			if ( m_LessFunc( m_heap[larger], m_heap[child] ) )
 				larger = child;
 		}
@@ -157,7 +157,7 @@ void CUtlPriorityQueue<T>::RemoveAt( int index )
 		if ( larger == index )
 			break;
 
-		// swap with the larger child
+		// std::swap with the larger child
 		Swap( index, larger );
 		index = larger;
 	}
@@ -175,7 +175,7 @@ void CUtlPriorityQueue<T>::Insert( T const &element )
 		if ( m_LessFunc( m_heap[index], m_heap[parent] ) )
 			break;
 
-		// swap with parent and repeat
+		// std::swap with parent and repeat
 		Swap( parent, index );
 		index = parent;
 	}

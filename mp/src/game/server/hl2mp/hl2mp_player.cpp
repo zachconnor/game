@@ -630,7 +630,7 @@ bool CHL2MP_Player::WantsLagCompensationOnEntity( const CBasePlayer *pPlayer, co
 	const Vector &vMyOrigin = GetAbsOrigin();
 	const Vector &vHisOrigin = pPlayer->GetAbsOrigin();
 
-	// get max distance player could have moved within max lag compensation time, 
+	// get Max distance player could have moved within Max lag compensation time, 
 	// multiply by 1.5 to to avoid "dead zones"  (sqrt(2) would be the exact value)
 	float maxDistance = 1.5 * pPlayer->MaxSpeed() * sv_maxunlag.GetFloat();
 

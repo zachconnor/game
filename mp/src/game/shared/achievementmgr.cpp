@@ -2020,7 +2020,7 @@ CON_COMMAND_F( achievement_test_friend_count, "Counts the # of teammates on loca
 		return;
 	if ( 2 != args.ArgC() )
 	{
-		Msg( "Usage: achievement_test_friend_count <min # of teammates>\n" );
+		Msg( "Usage: achievement_test_friend_count <Min # of teammates>\n" );
 		return;
 	}
 	int iMinFriends = atoi( args[1] );

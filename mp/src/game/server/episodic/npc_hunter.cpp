@@ -1120,7 +1120,7 @@ impactdamagetable_t s_HunterImpactDamageTable =
 	VPHYSICS_LARGE_OBJECT_MASS,		// large mass in kg 
 	4,			// large mass scale (anything over 500kg does 4X as much energy to read from damage table)
 	5,			// large mass falling scale (emphasize falling/crushing damage over sideways impacts since the stress will kill you anyway)
-	0.0f,		// min vel
+	0.0f,		// Min vel
 };
 
 
@@ -1493,7 +1493,7 @@ private:
 	CAI_HunterEscortBehavior m_EscortBehavior;
 
 	int m_nFlechettesQueued;
-	int m_nClampedShots;				// The number of consecutive shots fired at an out-of-max yaw target.
+	int m_nClampedShots;				// The number of consecutive shots fired at an out-of-Max yaw target.
 
 	float m_flNextRangeAttack2Time;		// Time when we can fire another volley of flechettes.
 	float m_flNextFlechetteTime;		// Time to fire the next flechette in this volley.

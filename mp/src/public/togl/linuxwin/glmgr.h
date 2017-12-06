@@ -2409,7 +2409,7 @@ public:
 class CStackCrawlParams
 {
 	public:
-	uint					m_frameLimit;							// input: max frames to retrieve
+	uint					m_frameLimit;							// input: Max frames to retrieve
 	uint					m_frameCount;							// output: frames found
 	void					*m_crawl[kMaxCrawlFrames];				// call site addresses
 	char					*m_crawlNames[kMaxCrawlFrames];			// pointers into text following, one per decoded name

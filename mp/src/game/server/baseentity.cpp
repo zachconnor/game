@@ -2703,7 +2703,7 @@ void CBaseEntity::VPhysicsSwapObject( IPhysicsObject *pSwap )
 
 	if ( !m_pPhysicsObject )
 	{
-		Warning( "Bad vphysics swap for %s\n", STRING(m_iClassname) );
+		Warning( "Bad vphysics std::swap for %s\n", STRING(m_iClassname) );
 	}
 	m_pPhysicsObject = pSwap;
 }
@@ -6631,7 +6631,7 @@ void CBaseEntity::InputAddOutput( inputdata_t &inputdata )
 	}
 	else
 	{
-		Warning("AddOutput input fired with bad string. Format: <output name> <targetname>,<inputname>,<parameter>,<delay>,<max times to fire (-1 == infinite)>\n");
+		Warning("AddOutput input fired with bad string. Format: <output name> <targetname>,<inputname>,<parameter>,<delay>,<Max times to fire (-1 == infinite)>\n");
 	}
 }
 

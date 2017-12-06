@@ -496,7 +496,7 @@ bool AnimationController::ParseScriptFile(char *pMem, int length)
 				// duration
 				pMem = ParseFile(pMem, token, NULL);
 				cmdAnimate.duration = (float)atof(token);
-				// check max duration
+				// check Max duration
 				if (cmdAnimate.startTime + cmdAnimate.duration > seq.duration)
 				{
 					seq.duration = cmdAnimate.startTime + cmdAnimate.duration;

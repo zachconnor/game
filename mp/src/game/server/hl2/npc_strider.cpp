@@ -1203,7 +1203,7 @@ void CNPC_Strider::GatherHeightConditions( const Vector &vTestPos, CBaseEntity *
 
 		if ( !strider_always_use_procedural_height.GetBool() )
 		{
-			// If going from max to min, or min to max, use animations 60% of the time
+			// If going from Max to Min, or Min to Max, use animations 60% of the time
 			if ( fabsf(GetMaxHeight() - GetHeight()) < 0.1 && fabsf(GetMinHeight() - newHeight) < 0.1 )
 			{
 				if ( random->RandomInt(1, 10 ) <= 6 )
@@ -1221,7 +1221,7 @@ void CNPC_Strider::GatherHeightConditions( const Vector &vTestPos, CBaseEntity *
 				}
 			}
 
-			// Otherwise, if going from near max or near min to the other, use animations based on time
+			// Otherwise, if going from near Max or near Min to the other, use animations based on time
 			if ( bDoProceduralHeightChange && m_PostureAnimationTimer.Expired() )
 			{
 				if ( GetHeight() - GetMinHeight() > GetHeightRange() * .85 && newHeight - GetMinHeight() < GetHeightRange() * .15 )
@@ -2479,7 +2479,7 @@ float CNPC_Strider::StriderEnemyDistance( CBaseEntity *pEnemy )
 	CollisionProp()->WorldSpaceSurroundingBounds( &striderSurroundMins, &striderSurroundMaxs );
 	float myHeight = striderSurroundMaxs.z - striderSurroundMins.z;
 	
-	// max distance our centers can be apart with the boxes still overlapping
+	// Max distance our centers can be apart with the boxes still overlapping
 	float flMaxZDist = ( enemyHeight + myHeight ) * 0.5f;
 
 	// see if the enemy is closer to my head, feet or in between
@@ -2894,7 +2894,7 @@ bool CNPC_Strider::GetWeaponLosZ( const Vector &vOrigin, float minZ, float maxZ,
 	}
 	
 
-	// Try at max height
+	// Try at Max height
 	vTestPos.z = maxZ;
 	if ( WeaponLOSCondition( vTestPos, vTargetPos, false ) )
 	{
@@ -2904,7 +2904,7 @@ bool CNPC_Strider::GetWeaponLosZ( const Vector &vOrigin, float minZ, float maxZ,
 		return true;
 	}
 
-	// Try min height
+	// Try Min height
 	vTestPos.z = minZ;
 	if ( WeaponLOSCondition( vTestPos, vTargetPos, false ) )
 	{
@@ -2914,7 +2914,7 @@ bool CNPC_Strider::GetWeaponLosZ( const Vector &vOrigin, float minZ, float maxZ,
 		return true;
 	}
 	
-	// Test up from min
+	// Test up from Min
 	vTestPos = vOrigin + vIncrement;
 	while ( vTestPos.z <= maxZ && !WeaponLOSCondition( vTestPos, vTargetPos, false ) )
 	{

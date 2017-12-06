@@ -530,7 +530,7 @@ void CAI_TrackPather::UpdateCurrentTarget()
 	// Trip our "path_track reached" output
 	if ( m_pCurrentPathTarget != m_pLastPathTarget )
 	{
-		// Get the path's specified max speed
+		// Get the path's specified Max speed
 		m_flPathMaxSpeed = m_pCurrentPathTarget->m_flSpeed;
 
 		variant_t emptyVariant;
@@ -1036,7 +1036,7 @@ void CAI_TrackPather::UpdateCurrentTargetLeading()
 	// Trip our "path_track reached" output
 	if ( m_pCurrentPathTarget != m_pLastPathTarget )
 	{
-		// Get the path's specified max speed
+		// Get the path's specified Max speed
 		m_flPathMaxSpeed = m_pCurrentPathTarget->m_flSpeed;
 
 		variant_t emptyVariant;
@@ -1282,7 +1282,7 @@ float CAI_TrackPather::TargetSpeedAcrossPath() const
 
 
 //------------------------------------------------------------------------------
-// Returns the max distance we can be from the path
+// Returns the Max distance we can be from the path
 //------------------------------------------------------------------------------
 float CAI_TrackPather::MaxDistanceFromCurrentPath() const
 {

@@ -26,7 +26,7 @@ class CSprite;
 
 #define TURRET_RANGE	(100 * 12)
 #define TURRET_SPREAD	VECTOR_CONE_5DEGREES
-#define TURRET_TURNRATE	360		// max angles per second
+#define TURRET_TURNRATE	360		// Max angles per second
 #define TURRET_MAXWAIT	15		// seconds turret will stay active w/o a target
 #define TURRET_MAXSPIN	5		// seconds turret barrel will spin w/o a target
 #define TURRET_MACHINE_VOLUME	0.5

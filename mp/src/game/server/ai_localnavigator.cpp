@@ -96,7 +96,7 @@ bool CAI_LocalNavigator::MoveCalcDirect( AILocalMoveGoal_t *pMoveGoal, bool bOnl
 
 		if ( pMoveGoal->flags & ( AILMG_TARGET_IS_TRANSITION | AILMG_TARGET_IS_GOAL ) )
 		{
-			// clamp checkDist to be no farther than max distance to goal
+			// clamp checkDist to be no farther than Max distance to goal
 			checkDist = MIN( checkDist, pMoveGoal->maxDist );
 		}
 

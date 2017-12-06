@@ -90,7 +90,7 @@ void CHudSuitPower::OnThink( void )
 
 	if ( flCurrentPower >= 100.0f && m_flSuitPower < 100.0f )
 	{
-		// we've reached max power
+		// we've reached Max power
 		g_pClientMode->GetViewportAnimationController()->StartAnimationSequence("SuitAuxPowerMax");
 	}
 	else if ( flCurrentPower < 100.0f && (m_flSuitPower >= 100.0f || m_flSuitPower == SUITPOWER_INIT) )

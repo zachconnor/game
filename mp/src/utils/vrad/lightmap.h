@@ -40,7 +40,7 @@ extern int *vertexface[MAX_MAP_VERTS];
 struct faceneighbor_t
 {
 	int		numneighbors;			// neighboring faces that share vertices
-	int		*neighbor;				// neighboring face list (max of 64)
+	int		*neighbor;				// neighboring face list (Max of 64)
 
 	Vector	*normal;				// adjusted normal per vertex
 	Vector	facenormal;				// face normal

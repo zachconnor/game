@@ -814,10 +814,10 @@ void CNPC_Advisor::RunTask( const Task_t *pTask )
 			{
 				m_levitateCallback.m_vecGoalPos1 = m_hLevitateGoal1->GetAbsOrigin();
 				m_levitateCallback.m_vecGoalPos2 = m_hLevitateGoal2->GetAbsOrigin();
-				// swap them if necessary (1 must be the bottom)
+				// std::swap them if necessary (1 must be the bottom)
 				if (m_levitateCallback.m_vecGoalPos1.z > m_levitateCallback.m_vecGoalPos2.z)
 				{
-					swap(m_levitateCallback.m_vecGoalPos1,m_levitateCallback.m_vecGoalPos2);
+					std::swap(m_levitateCallback.m_vecGoalPos1,m_levitateCallback.m_vecGoalPos2);
 				}
 
 				m_levitateCallback.m_flFloat = 0.06f; // this is an absolute accumulation upon gravity
@@ -1461,7 +1461,7 @@ void CNPC_Advisor::PullObjectToStaging( CBaseEntity *pEnt, const Vector &staging
 
 int	CNPC_Advisor::OnTakeDamage( const CTakeDamageInfo &info )
 {
-	// Clip our max 
+	// Clip our Max 
 	CTakeDamageInfo newInfo = info;
 	if ( newInfo.GetDamage() > 20.0f )
 	{
@@ -1968,7 +1968,7 @@ static impactdamagetable_t gAdvisorImpactDamageTable =
 	45,		// large mass in kg 
 	2,		// large mass scale (anything over 500kg does 4X as much energy to read from damage table)
 	1,		// large mass falling scale
-	0,		// my min velocity
+	0,		// my Min velocity
 };
 
 //-----------------------------------------------------------------------------

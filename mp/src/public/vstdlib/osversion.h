@@ -18,7 +18,7 @@
 #include "vstdlib/vstdlib.h"
 
 // OS types we know about
-// Must be in ascending capability order, we use this for min OS requirements
+// Must be in ascending capability order, we use this for Min OS requirements
 enum EOSType
 {
 	k_eOSUnknown = -1,

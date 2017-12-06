@@ -123,7 +123,7 @@ protected:
 	// What's the current path direction?
 	void CurrentPathDirection( Vector *pVecPathDir );
 
-	// Returns the max distance we can be from the path
+	// Returns the Max distance we can be from the path
 	float MaxDistanceFromCurrentPath() const;
 
 	// true to use farthest, false for nearest

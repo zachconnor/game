@@ -598,7 +598,7 @@ bool CFilterEnemy::PassesMobbedFilter( CBaseEntity *pCaller, CBaseEntity *pEnemy
 		{
 			nNumMatchingSquadmates++;
 
-			// If we're at or passed the max we stop
+			// If we're at or passed the Max we stop
 			if ( nNumMatchingSquadmates >= m_nMaxSquadmatesPerEnemy )
 			{
 				// We wanted to find more than allowed and we did

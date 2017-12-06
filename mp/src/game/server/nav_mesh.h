@@ -435,7 +435,7 @@ public:
 	void CommandNavMakeSniperSpots( void );								// cuts up the marked area into individual areas suitable for sniper spots
 	void CommandNavBuildLadder( void );									// builds a nav ladder on the climbable surface under the cursor
 	void CommandNavRemoveJumpAreas( void );								// removes jump areas, replacing them with connections
-	void CommandNavSubdivide( const CCommand &args );					// subdivide each nav area in X and Y to create 4 new areas - limit min size
+	void CommandNavSubdivide( const CCommand &args );					// subdivide each nav area in X and Y to create 4 new areas - limit Min size
 	void CommandNavSaveSelected( const CCommand &args );				// Save selected set to disk
 	void CommandNavMergeMesh( const CCommand &args );					// Merge a saved selected set into the current mesh
 	void CommandNavMarkWalkable( void );

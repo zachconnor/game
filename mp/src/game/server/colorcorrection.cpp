@@ -207,10 +207,10 @@ void CColorCorrection::FadeInThink( void )
 {
 	// Check for conditions where we shouldnt fade in
 	if (		m_flFadeInDuration <= 0 ||  // not set to fade in
-		 m_flCurWeight >= m_flMaxWeight ||  // already past max weight
+		 m_flCurWeight >= m_flMaxWeight ||  // already past Max weight
 							!m_bEnabled ||  // fade in/out mutex
-				  m_flMaxWeight == 0.0f ||  // min==max
-  m_flStartFadeInWeight >= m_flMaxWeight )  // already at max weight
+				  m_flMaxWeight == 0.0f ||  // Min==Max
+  m_flStartFadeInWeight >= m_flMaxWeight )  // already at Max weight
 	{
 		SetNextThink ( TICK_NEVER_THINK, s_pFadeInContextThink );
 		return;
@@ -244,8 +244,8 @@ void CColorCorrection::FadeOutThink( void )
 	if ( m_flFadeOutDuration <= 0 || // not set to fade out
 			m_flCurWeight <= 0.0f || // already faded out
 					   m_bEnabled || // fade in/out mutex
-		   m_flMaxWeight == 0.0f  || // min==max
-	 m_flStartFadeOutWeight <= 0.0f )// already at min weight
+		   m_flMaxWeight == 0.0f  || // Min==Max
+	 m_flStartFadeOutWeight <= 0.0f )// already at Min weight
 	{
 		SetNextThink ( TICK_NEVER_THINK, s_pFadeOutContextThink );
 		return;

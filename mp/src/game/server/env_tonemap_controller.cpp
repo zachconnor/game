@@ -165,7 +165,7 @@ void CEnvTonemapController::InputSetBloomScaleRange( inputdata_t &inputdata )
 	int nargs=sscanf("%f %f",inputdata.value.String(), bloom_max, bloom_min );
 	if (nargs != 2)
 	{
-		Warning("%s (%s) received SetBloomScaleRange input without 2 arguments. Syntax: <max bloom> <min bloom>\n", GetClassname(), GetDebugName() );
+		Warning("%s (%s) received SetBloomScaleRange input without 2 arguments. Syntax: <Max bloom> <Min bloom>\n", GetClassname(), GetDebugName() );
 		return;
 	}
 	m_flCustomBloomScale=bloom_max;
@@ -204,7 +204,7 @@ void CEnvTonemapController::UpdateTonemapScaleBlend( void )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Set the auto exposure min to the specified value
+// Purpose: Set the auto exposure Min to the specified value
 //-----------------------------------------------------------------------------
 void CEnvTonemapController::InputSetAutoExposureMin( inputdata_t &inputdata )
 {
@@ -213,7 +213,7 @@ void CEnvTonemapController::InputSetAutoExposureMin( inputdata_t &inputdata )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Set the auto exposure max to the specified value
+// Purpose: Set the auto exposure Max to the specified value
 //-----------------------------------------------------------------------------
 void CEnvTonemapController::InputSetAutoExposureMax( inputdata_t &inputdata )
 {

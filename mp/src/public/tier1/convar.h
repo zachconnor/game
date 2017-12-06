@@ -364,7 +364,7 @@ public:
 	// Reset to default value
 	void						Revert( void );
 
-	// True if it has a min/max setting
+	// True if it has a Min/Max setting
 	bool						GetMin( float& minVal ) const;
 	bool						GetMax( float& maxVal ) const;
 	const char					*GetDefault( void ) const;

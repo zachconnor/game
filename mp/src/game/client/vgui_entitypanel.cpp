@@ -102,7 +102,7 @@ void CEntityPanel::ComputeAndSetSize( void )
 		float flZoom = commander->GetCommanderOverlayPanel()->GetZoom();
 
 		// Scale our size
-		m_flScale = 0.75 + (0.25 * (1.0 - flZoom)); // 1/2 size at max zoomed out, full size by half zoomed in
+		m_flScale = 0.75 + (0.25 * (1.0 - flZoom)); // 1/2 size at Max zoomed out, full size by half zoomed in
 	}
 	else
 #endif 

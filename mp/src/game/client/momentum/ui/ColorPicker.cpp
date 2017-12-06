@@ -69,8 +69,8 @@ void HSV2RGB(const Vector &hsv, Vector4D &normalizedRGBA) { HSV2RGB(hsv.x, hsv.y
 void HSV2RGB(const Vector &hsv, Vector &normalizedRGBA) { HSV2RGB(hsv.x, hsv.y, hsv.z, normalizedRGBA); }
 void RGB2HSV(const Vector4D &normalizedRGB, float &H, float &s, float &v)
 {
-    float fmax = max(normalizedRGB.x, max(normalizedRGB.y, normalizedRGB.z));
-    float fmin = min(normalizedRGB.x, min(normalizedRGB.y, normalizedRGB.z));
+    float fmax = Max(normalizedRGB.x, Max(normalizedRGB.y, normalizedRGB.z));
+    float fmin = Min(normalizedRGB.x, Min(normalizedRGB.y, normalizedRGB.z));
 
     v = fmax;
 

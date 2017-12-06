@@ -670,7 +670,7 @@ void CNewRecharge::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE 
 	// If we're over our limit, debounce our keys
 	if ( pPlayer->ArmorValue() >= nMaxArmor)
 	{
-		// Citadel charger must also be at max health
+		// Citadel charger must also be at Max health
 		if ( !HasSpawnFlags(SF_CITADEL_RECHARGER) || ( HasSpawnFlags( SF_CITADEL_RECHARGER ) && pActivator->GetHealth() >= pActivator->GetMaxHealth() ) )
 		{
 			// Make the user re-use me to get started drawing health.

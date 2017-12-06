@@ -171,11 +171,11 @@ FORCEINLINE int IntersectRayWithFourBoxes( const FourVectors &rayStart, const Fo
 	// Find the entry parametric intersection distance in each dimesion, for each box
 	FourVectors entryT = minimum(hitMins,hitMaxs);
 
-	// now find the max overall entry distance across all dimensions for each box
+	// now find the Max overall entry distance across all dimensions for each box
 	fltx4 minTemp = MaxSIMD(entryT.x, entryT.y);
 	fltx4 boxEntryT = MaxSIMD(minTemp, entryT.z);
 
-	// now find the min overall exit distance across all dimensions for each box
+	// now find the Min overall exit distance across all dimensions for each box
 	fltx4 maxTemp = MinSIMD(exitT.x, exitT.y);
 	fltx4 boxExitT = MinSIMD(maxTemp, exitT.z);
 
@@ -193,7 +193,7 @@ FORCEINLINE int IntersectRayWithFourBoxes( const FourVectors &rayStart, const Fo
 // NOTE: This can be used as a 1 vs 4 test by replicating a single box into the one side
 FORCEINLINE int IntersectFourBoxPairs( const FourVectors &mins0, const FourVectors &maxs0, const FourVectors &mins1, const FourVectors &maxs1 )
 {
-	// find the max mins and min maxs in each dimension
+	// find the Max mins and Min maxs in each dimension
 	FourVectors intersectMins = maximum(mins0,mins1);
 	FourVectors intersectMaxs = minimum(maxs0,maxs1);
 
@@ -394,7 +394,7 @@ void CDispCollTree::AABBTree_CopyDispData( CCoreDispInfo *pDisp )
 		// Add the displacement surface flag.
 		m_aTris[iTri].m_uiFlags |= DISPSURF_FLAG_SURFACE;
 
-		// Calculate the plane normal and the min max.
+		// Calculate the plane normal and the Min Max.
 		m_aTris[iTri].CalcPlane( m_aVerts );
 		m_aTris[iTri].FindMinMax( m_aVerts );
 	}

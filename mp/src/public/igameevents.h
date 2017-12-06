@@ -40,7 +40,7 @@ event is defined like this:
 
 	"game_start"				// a new game starts
 	{
-		"roundslimit"	"long"		// max round
+		"roundslimit"	"long"		// Max round
 		"timelimit"		"long"		// time limit
 		"fraglimit"		"long"		// frag limit
 		"objective"		"string"	// round objective
@@ -54,10 +54,10 @@ data field should not be broadcasted to clients, use the type "local".
 */
 
 
-#define MAX_EVENT_NAME_LENGTH	32		// max game event name length
-#define MAX_EVENT_BITS			9		// max bits needed for an event index
-#define MAX_EVENT_NUMBER		(1<<MAX_EVENT_BITS)		// max number of events allowed
-#define MAX_EVENT_BYTES			1024	// max size in bytes for a serialized event
+#define MAX_EVENT_NAME_LENGTH	32		// Max game event name length
+#define MAX_EVENT_BITS			9		// Max bits needed for an event index
+#define MAX_EVENT_NUMBER		(1<<MAX_EVENT_BITS)		// Max number of events allowed
+#define MAX_EVENT_BYTES			1024	// Max size in bytes for a serialized event
 
 class KeyValues;
 class CGameEvent;

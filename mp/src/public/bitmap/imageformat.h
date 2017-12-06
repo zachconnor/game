@@ -350,7 +350,7 @@ namespace ImageLoader
 							 unsigned char *dst, enum ImageFormat dstImageFormat, 
 							 int width, int height, int srcStride = 0, int dstStride = 0 );
 
-	// must be used in conjunction with ConvertImageFormat() to pre-swap and post-swap
+	// must be used in conjunction with ConvertImageFormat() to pre-std::swap and post-std::swap
 	void PreConvertSwapImageData( unsigned char *pImageData, int nImageSize, ImageFormat imageFormat, int width = 0, int stride = 0 );
 	void PostConvertSwapImageData( unsigned char *pImageData, int nImageSize, ImageFormat imageFormat, int width = 0, int stride = 0 );
 	void ByteSwapImageData( unsigned char *pImageData, int nImageSize, ImageFormat imageFormat, int width = 0, int stride = 0 );

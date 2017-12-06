@@ -40,8 +40,8 @@
 #define UTIL_SNAPPY_SNAPPY_H__
 
 // fletcherd@valvesoftware.com: Added this kludge.  We really need to stop #defining this in our code.
-#undef min
-#undef max
+#undef Min
+#undef Max
 
 #include <stddef.h>
 #ifdef _WIN32

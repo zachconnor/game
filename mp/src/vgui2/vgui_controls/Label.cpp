@@ -27,9 +27,11 @@
 
 using namespace vgui;
 
-#ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
+/*
+#ifndef Max
+#define Max(a,b)            (((a) > (b)) ? (a) : (b))
 #endif
+*/
 
 DECLARE_BUILD_FACTORY_DEFAULT_TEXT( Label, Label );
 
@@ -142,7 +144,7 @@ void Label::GetContentSize(int &wide, int &tall)
 	for (int i=0; i < _imageDar.Size(); i++)
 		wide += _imageDar[i].offset;
 
-	tall = max((ty1 - ty0) + _textInset[1], iTall);
+    tall = Max((ty1 - ty0) + _textInset[1], iTall);
 }
 
 //-----------------------------------------------------------------------------
@@ -416,8 +418,8 @@ void Label::ComputeAlignment(int &tx0, int &ty0, int &tx1, int &ty1)
 		if (iWide > wide) // if the image is larger than the label just do a west alignment
 			actualXAlignment = Label::a_west;
 		
-		// get the max height
-		maxY = max(maxY, iTall);
+        // get the Max height
+        maxY = Max(maxY, iTall);
 		maxX += iWide;
 
 		// add the offset to x

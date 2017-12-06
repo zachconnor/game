@@ -731,7 +731,7 @@ int lookup_texture( char *texturename, int maxlen )
 	}
 
 	if (i >= MAXSTUDIOSKINS)
-		MdlError("Too many materials used, max %d\n", ( int )MAXSTUDIOSKINS );
+		MdlError("Too many materials used, Max %d\n", ( int )MAXSTUDIOSKINS );
 
 //	vprint( 0,  "texture %d = %s\n", i, texturename );
 	V_strcpy_safe( g_texture[i].name, texturename );
@@ -2748,7 +2748,7 @@ s_source_t *MotionMap( s_source_t *pSource, s_source_t *pTarget, s_template_t *p
 					thisJointInRelativeSrcMat[3][2] *= thisSolve->relativeLockScale;
 				}
 				
-				// swap momentarily to get new destination
+				// std::swap momentarily to get new destination
 				// NOTE: the relative lock must have already been solved
 				sourceAnimation[t] = pSource->rawanim[t];
 				pSource->rawanim[t] = combinedAnimation[t];
@@ -2758,7 +2758,7 @@ s_source_t *MotionMap( s_source_t *pSource, s_source_t *pTarget, s_template_t *p
 				CatBonePath(relativeJointPathInRoot, pSource->rawanim[t], relativeJointInRootMatTgt, 1);
 				M_ConcatTransforms(thisJointInRelativeSrcMat, relativeJointInRootMatTgt, thisJointInRootMat);
 
-				// swap back just for cleanliness
+				// std::swap back just for cleanliness
 				// a little overkill as it's just swapped
 				// just leaving it here for clarity
 				combinedAnimation[t] = pSource->rawanim[t];
@@ -2767,7 +2767,7 @@ s_source_t *MotionMap( s_source_t *pSource, s_source_t *pTarget, s_template_t *p
 			}
 			
 			//----------------------------------------------------------------
-			// swap animation
+			// std::swap animation
 			//----------------------------------------------------------------
 			sourceAnimation[t] = pSource->rawanim[t];
 			pSource->rawanim[t] = combinedAnimation[t];
@@ -2904,12 +2904,12 @@ s_source_t *MotionMap( s_source_t *pSource, s_source_t *pTarget, s_template_t *p
 			pSource->rawanim[t][thisJointIndex].rot = resultBone.rot;
 
 
-			// swap animation back for next solve
+			// std::swap animation back for next solve
 			combinedAnimation[t] = pSource->rawanim[t];
 			pSource->rawanim[t] = sourceAnimation[t];
 
 		}
-		// swap animation
+		// std::swap animation
 		sourceAnimation[t] = pSource->rawanim[t];
 		pSource->rawanim[t] = combinedAnimation[t];
 
@@ -3015,7 +3015,7 @@ s_source_t *MotionMap( s_source_t *pSource, s_source_t *pTarget, s_template_t *p
 			}
 		}
 
-		// swap animation back for next solve
+		// std::swap animation back for next solve
 		combinedAnimation[t] = pSource->rawanim[t];
 		pSource->rawanim[t] = sourceAnimation[t];
 	}

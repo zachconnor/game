@@ -17,8 +17,8 @@
 #define MAX_NUM_ARGVS	50
 
 // SYSTEM INFO
-#define	MAX_QPATH		96			// max length of a game pathname
-#define	MAX_OSPATH		260			// max length of a filesystem pathname
+#define	MAX_QPATH		96			// Max length of a game pathname
+#define	MAX_OSPATH		260			// Max length of a filesystem pathname
 
 #define	ON_EPSILON		0.1			// point on plane side epsilon
 

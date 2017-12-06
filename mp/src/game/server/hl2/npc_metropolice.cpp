@@ -1774,7 +1774,7 @@ void CNPC_MetroPolice::AimBurstAtEnemy( float flReactionTime )
 	// Always stitch horizontally...
 	vecDelta.z = 0.0f;
 
-	// The max stitch distance here is used to guarantee the cop doesn't try to lead
+	// The Max stitch distance here is used to guarantee the cop doesn't try to lead
 	// the airboat so much that he ends up shooting behind himself
 	float flMaxStitchDistance = VectorNormalize( vecDelta );
 	flMaxStitchDistance -= 50.0f;
@@ -4797,7 +4797,7 @@ void CNPC_MetroPolice::RunTask( const Task_t *pTask )
 							flMinRange = MIN( GetActiveWeapon()->m_fMinRange1, GetActiveWeapon()->m_fMinRange2 );
 						}
 
-						// Check against NPC's max range
+						// Check against NPC's Max range
 						if (flMaxRange > m_flDistTooFar)
 						{
 							flMaxRange = m_flDistTooFar;
@@ -5158,7 +5158,7 @@ void CNPC_MetroPolice::PrecriminalUse( CBaseEntity *pActivator, CBaseEntity *pCa
 	// Treat it like the player's bothered the cop
 	IncrementPlayerCriminalStatus();
 
-	// If we've hit max warnings, and we're allowed to chase, go for it
+	// If we've hit Max warnings, and we're allowed to chase, go for it
 	if ( m_nNumWarnings == METROPOLICE_MAX_WARNINGS )
 	{
 		AdministerJustice();

@@ -24,7 +24,7 @@ struct physics_performanceparams_t
 	float	maxAngularVelocity;						// limit world space angular velocity to this (degrees / s)
 	float	lookAheadTimeObjectsVsWorld;			// predict collisions this far (seconds) into the future
 	float	lookAheadTimeObjectsVsObject;			// predict collisions this far (seconds) into the future
-	float	minFrictionMass;						// min mass for friction solves (constrains dynamic range of mass to improve stability)
+	float	minFrictionMass;						// Min mass for friction solves (constrains dynamic range of mass to improve stability)
 	float	maxFrictionMass;						// mas mass for friction solves
 
 	void Defaults()

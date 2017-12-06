@@ -141,7 +141,7 @@ public:
 	//	"msg" - (string) a longer message shown in the GameUI
 	//  "color" - (color) the color to display the message in the hud (white by default)
 	//	"level" - (int) the priority of this message (closer to 0 is higher), only 1 message can be outstanding at a time
-	//	"time" - (int) the time in seconds this message should stay active in the GameUI (min 10 sec, max 200 sec)
+	//	"time" - (int) the time in seconds this message should stay active in the GameUI (Min 10 sec, Max 200 sec)
 	//
 	// For DIALOG_MENU add sub keys for each option with these fields:
 	//  "command" - (string) client command to run if selected

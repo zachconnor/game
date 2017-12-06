@@ -1275,18 +1275,18 @@ void CViewRender::DrawUnderwaterOverlay( void )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Returns the min/max fade distances
+// Purpose: Returns the Min/Max fade distances
 //-----------------------------------------------------------------------------
-void CViewRender::GetScreenFadeDistances( float *min, float *max )
+void CViewRender::GetScreenFadeDistances( float *Min, float *Max )
 {
-	if ( min )
+	if ( Min )
 	{
-		*min = r_screenfademinsize.GetFloat();
+		*Min = r_screenfademinsize.GetFloat();
 	}
 
-	if ( max )
+	if ( Max )
 	{
-		*max = r_screenfademaxsize.GetFloat();
+		*Max = r_screenfademaxsize.GetFloat();
 	}
 }
 
@@ -2772,7 +2772,7 @@ void CViewRender::ViewDrawScene_PortalStencil( const CViewSetup &viewIn, ViewCus
 	pReplacementWaterRefractionTexture.Init( portalrendertargets->GetWaterRefractionTextureForStencilDepth( iRecursionLevel ) );
 
 
-	//swap texture contents for the primary render targets with those we set aside for this recursion level
+	//std::swap texture contents for the primary render targets with those we set aside for this recursion level
 	if( pReplacementWaterReflectionTexture != NULL )
 		pPrimaryWaterReflectionTexture->SwapContents( pReplacementWaterReflectionTexture );
 
@@ -2871,7 +2871,7 @@ void CViewRender::ViewDrawScene_PortalStencil( const CViewSetup &viewIn, ViewCus
 	g_CurrentViewID = iCurrentViewID; //just in case the cast to view_id_t screwed up the id #
 
 
-	//swap back the water render targets
+	//std::swap back the water render targets
 	if( pReplacementWaterReflectionTexture != NULL )
 		pPrimaryWaterReflectionTexture->SwapContents( pReplacementWaterReflectionTexture );
 
@@ -5024,7 +5024,7 @@ void CShadowDepthView::Draw()
 	pRenderContext->ClearColor3ub(0xFF, 0xFF, 0xFF);
 
 #if defined( _X360 )
-	pRenderContext->PushVertexShaderGPRAllocation( 112 ); //almost all work is done in vertex shaders for depth rendering, max out their threads
+	pRenderContext->PushVertexShaderGPRAllocation( 112 ); //almost all work is done in vertex shaders for depth rendering, Max out their threads
 #endif
 
 	pRenderContext.SafeRelease();
@@ -5124,7 +5124,7 @@ void CFreezeFrameView::Draw( void )
 	CMatRenderContextPtr pRenderContext( materials );
 
 #if defined( _X360 )
-	pRenderContext->PushVertexShaderGPRAllocation( 16 ); //max out pixel shader threads
+	pRenderContext->PushVertexShaderGPRAllocation( 16 ); //Max out pixel shader threads
 #endif
 
 	// we might only need half of the texture if we're rendering in stereo
@@ -5521,7 +5521,7 @@ void CBaseWorldView::SSAO_DepthPass()
 
 #if defined( _X360 )
 	Assert(0); // rebalance this if we ever use this on 360
-	pRenderContext->PushVertexShaderGPRAllocation( 112 ); //almost all work is done in vertex shaders for depth rendering, max out their threads
+	pRenderContext->PushVertexShaderGPRAllocation( 112 ); //almost all work is done in vertex shaders for depth rendering, Max out their threads
 #endif
 
 	pRenderContext.SafeRelease();

@@ -90,8 +90,8 @@ int CNormalList::FindOrAddNormal( Vector const &vNormal )
 	for( int iDim=0; iDim < 3; iDim++ )
 	{
 		gi[iDim] = (int)( ((vNormal[iDim] + 1.0f) * 0.5f) * NUM_SUBDIVS - 0.000001f );
-		gi[iDim] = min( gi[iDim], NUM_SUBDIVS );
-		gi[iDim] = max( gi[iDim], 0 );
+		gi[iDim] = Min( gi[iDim], NUM_SUBDIVS );
+		gi[iDim] = Max( gi[iDim], 0 );
 	}
 
 	// Look for a matching vector in there.
@@ -1327,8 +1327,8 @@ bool CanLeafTraceToSky( int iLeaf )
 	for ( int j = 0; j < NUMVERTEXNORMALS; j+=4 )
 	{
 		// search back to see if we can hit a sky brush
-		delta.LoadAndSwizzle( g_anorms[j], g_anorms[min( j+1, NUMVERTEXNORMALS-1 )],
-			g_anorms[min( j+2, NUMVERTEXNORMALS-1 )], g_anorms[min( j+3, NUMVERTEXNORMALS-1 )] );
+		delta.LoadAndSwizzle( g_anorms[j], g_anorms[Min( j+1, NUMVERTEXNORMALS-1 )],
+			g_anorms[Min( j+2, NUMVERTEXNORMALS-1 )], g_anorms[Min( j+3, NUMVERTEXNORMALS-1 )] );
 		delta *= -MAX_TRACE_LENGTH;
 		delta += center4;
 
@@ -2817,18 +2817,18 @@ static void ComputeLightmapGradients( SSE_SampleInfo_t& info, bool const* pHasPr
 
 			if (sample.t > 0)
 			{
-				if (sample.s > 0)   gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j-1-w] ) );
-				gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j-w] ) );
-				if (sample.s < w-1) gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j+1-w] ) );
+				if (sample.s > 0)   gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j-1-w] ) );
+				gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j-w] ) );
+				if (sample.s < w-1) gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j+1-w] ) );
 			}
 			if (sample.t < h-1)
 			{
-				if (sample.s > 0)   gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j-1+w] ) );
-				gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j+w] ) );
-				if (sample.s < w-1) gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j+1+w] ) );
+				if (sample.s > 0)   gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j-1+w] ) );
+				gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j+w] ) );
+				if (sample.s < w-1) gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j+1+w] ) );
 			}
-			if (sample.s > 0)   gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j-1] ) );
-			if (sample.s < w-1) gradient[i] = max( gradient[i], fabs( pIntensity[j] - pIntensity[j+1] ) );
+			if (sample.s > 0)   gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j-1] ) );
+			if (sample.s < w-1) gradient[i] = Max( gradient[i], fabs( pIntensity[j] - pIntensity[j+1] ) );
 		}
 	}
 }
@@ -2898,7 +2898,7 @@ static void BuildSupersampleFaceLights( lightinfo_t& l, SSE_SampleInfo_t& info, 
 	// in that area. Because the supersampling operation will cause lighting changes,
 	// we've found that it's good to re-check the gradients again and see if any other
 	// areas should be supersampled as a result of the previous pass. Keep going
-	// until all the gradients are reasonable or until we hit a max number of passes
+	// until all the gradients are reasonable or until we hit a Max number of passes
 	bool do_anotherpass = true;
 	int pass = 1;
 	while (do_anotherpass && pass <= extrapasses)
@@ -3119,7 +3119,7 @@ void BuildFacelights (int iThread, int facenum)
 		int nSample = 4 * grp;
 
 		sample_t *sample = sampleInfo.m_pFaceLight->sample + nSample;
-		int numSamples = min ( 4, sampleInfo.m_pFaceLight->numsamples - nSample );
+		int numSamples = Min ( 4, sampleInfo.m_pFaceLight->numsamples - nSample );
 
 		FourVectors positions;
 		FourVectors normals;
@@ -3442,14 +3442,14 @@ static void ColorClampBumped( Vector& color1, Vector& color2, Vector& color3 )
 	int i;
 	for( i = 0; i < 3; i++ )
 	{
-		float max = VectorMaximum( *colors[order[i]] );
-		if( max <= 1.0f )
+		float Max = VectorMaximum( *colors[order[i]] );
+		if( Max <= 1.0f )
 		{
 			continue;
 		}
 		// This channel is too bright. . take half of the amount that we are over and 
 		// add it to the other two channel.
-		float factorToRedist = ( max - 1.0f ) / max;
+		float factorToRedist = ( Max - 1.0f ) / Max;
 		Vector colorToRedist = factorToRedist * *colors[order[i]];
 		*colors[order[i]] -= colorToRedist;
 		colorToRedist *= 0.5f;

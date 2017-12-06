@@ -73,7 +73,7 @@ END_SEND_TABLE()
 BEGIN_SEND_TABLE_NOBASE( CBaseAnimatingOverlay, DT_OverlayVars )
 	SendPropUtlVector( 
 		SENDINFO_UTLVECTOR( m_AnimOverlay ),
-		CBaseAnimatingOverlay::MAX_OVERLAYS, // max elements
+		CBaseAnimatingOverlay::MAX_OVERLAYS, // Max elements
 		SendPropDataTable( NULL, 0, &REFERENCE_SEND_TABLE( DT_Animationlayer ) )  )
 END_SEND_TABLE()
 

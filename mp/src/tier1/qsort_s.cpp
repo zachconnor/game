@@ -26,7 +26,7 @@
 #include <stddef.h>                     /* for size_t definition  */
 
 /*
-**  swap nbytes between a and b
+**  std::swap nbytes between a and b
 */
 
 static void swap_bytes(char *a, char *b, size_t nbytes)
@@ -60,7 +60,7 @@ extern "C" void qsort_s(void *basep, size_t nelems, size_t size,
    limit = base + nelems * size;/* pointer past end of array      */
    for ( ;; ) {                 /* repeat until break...          */
       if ( limit - base > thresh ) {  /* if more than T elements  */
-                                      /*   swap base with middle  */
+                                      /*   std::swap base with middle  */
          SWAP((((limit-base)/size)/2)*size+base, base);
          i = base + size;             /* i scans left to right    */
          j = limit - size;            /* j scans right to left    */
@@ -79,7 +79,7 @@ extern "C" void qsort_s(void *basep, size_t nelems, size_t size,
             while ( COMP(ctx, j, base) > 0 );
             if ( i > j )              /* if pointers crossed      */
                break;                 /*     break loop           */
-            SWAP(i, j);       /* else swap elements, keep scanning*/
+            SWAP(i, j);       /* else std::swap elements, keep scanning*/
          }
          SWAP(base, j);         /* move pivot into correct place  */
          if ( j - base > limit - i ) {  /* if left subfile larger */

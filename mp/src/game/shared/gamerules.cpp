@@ -163,7 +163,7 @@ bool CGameRules::CanHaveAmmo( CBaseCombatCharacter *pPlayer, int iAmmoIndex )
 {
 	if ( iAmmoIndex > -1 )
 	{
-		// Get the max carrying capacity for this ammo
+		// Get the Max carrying capacity for this ammo
 		int iMaxCarry = GetAmmoDef()->MaxCarry( iAmmoIndex );
 
 		// Does the player have room for more of this type of ammo?
@@ -666,7 +666,7 @@ bool CGameRules::ShouldCollide( int collisionGroup0, int collisionGroup1 )
 {
 	if ( collisionGroup0 > collisionGroup1 )
 	{
-		// swap so that lowest is always first
+		// std::swap so that lowest is always first
 		::V_swap(collisionGroup0,collisionGroup1);
 	}
 

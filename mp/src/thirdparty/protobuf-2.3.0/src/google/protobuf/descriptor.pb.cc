@@ -836,9 +836,9 @@ bool FileDescriptorSet::IsInitialized() const {
 void FileDescriptorSet::Swap(FileDescriptorSet* other) {
   if (other != this) {
     file_.Swap(&other->file_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -1378,17 +1378,17 @@ bool FileDescriptorProto::IsInitialized() const {
 
 void FileDescriptorProto::Swap(FileDescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
-    std::swap(package_, other->package_);
+    std::std::swap(name_, other->name_);
+    std::std::swap(package_, other->package_);
     dependency_.Swap(&other->dependency_);
     message_type_.Swap(&other->message_type_);
     enum_type_.Swap(&other->enum_type_);
     service_.Swap(&other->service_);
     extension_.Swap(&other->extension_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -1631,11 +1631,11 @@ bool DescriptorProto_ExtensionRange::IsInitialized() const {
 
 void DescriptorProto_ExtensionRange::Swap(DescriptorProto_ExtensionRange* other) {
   if (other != this) {
-    std::swap(start_, other->start_);
-    std::swap(end_, other->end_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(start_, other->start_);
+    std::std::swap(end_, other->end_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -2111,16 +2111,16 @@ bool DescriptorProto::IsInitialized() const {
 
 void DescriptorProto::Swap(DescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::std::swap(name_, other->name_);
     field_.Swap(&other->field_);
     extension_.Swap(&other->extension_);
     nested_type_.Swap(&other->nested_type_);
     enum_type_.Swap(&other->enum_type_);
     extension_range_.Swap(&other->extension_range_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -2765,17 +2765,17 @@ bool FieldDescriptorProto::IsInitialized() const {
 
 void FieldDescriptorProto::Swap(FieldDescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
-    std::swap(number_, other->number_);
-    std::swap(label_, other->label_);
-    std::swap(type_, other->type_);
-    std::swap(type_name_, other->type_name_);
-    std::swap(extendee_, other->extendee_);
-    std::swap(default_value_, other->default_value_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(name_, other->name_);
+    std::std::swap(number_, other->number_);
+    std::std::swap(label_, other->label_);
+    std::std::swap(type_, other->type_);
+    std::std::swap(type_name_, other->type_name_);
+    std::std::swap(extendee_, other->extendee_);
+    std::std::swap(default_value_, other->default_value_);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -3086,12 +3086,12 @@ bool EnumDescriptorProto::IsInitialized() const {
 
 void EnumDescriptorProto::Swap(EnumDescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::std::swap(name_, other->name_);
     value_.Swap(&other->value_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -3399,12 +3399,12 @@ bool EnumValueDescriptorProto::IsInitialized() const {
 
 void EnumValueDescriptorProto::Swap(EnumValueDescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
-    std::swap(number_, other->number_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(name_, other->name_);
+    std::std::swap(number_, other->number_);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -3715,12 +3715,12 @@ bool ServiceDescriptorProto::IsInitialized() const {
 
 void ServiceDescriptorProto::Swap(ServiceDescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::std::swap(name_, other->name_);
     method_.Swap(&other->method_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -4103,13 +4103,13 @@ bool MethodDescriptorProto::IsInitialized() const {
 
 void MethodDescriptorProto::Swap(MethodDescriptorProto* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
-    std::swap(input_type_, other->input_type_);
-    std::swap(output_type_, other->output_type_);
-    std::swap(options_, other->options_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(name_, other->name_);
+    std::std::swap(input_type_, other->input_type_);
+    std::std::swap(output_type_, other->output_type_);
+    std::std::swap(options_, other->options_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -4664,17 +4664,17 @@ bool FileOptions::IsInitialized() const {
 
 void FileOptions::Swap(FileOptions* other) {
   if (other != this) {
-    std::swap(java_package_, other->java_package_);
-    std::swap(java_outer_classname_, other->java_outer_classname_);
-    std::swap(java_multiple_files_, other->java_multiple_files_);
-    std::swap(optimize_for_, other->optimize_for_);
-    std::swap(cc_generic_services_, other->cc_generic_services_);
-    std::swap(java_generic_services_, other->java_generic_services_);
-    std::swap(py_generic_services_, other->py_generic_services_);
+    std::std::swap(java_package_, other->java_package_);
+    std::std::swap(java_outer_classname_, other->java_outer_classname_);
+    std::std::swap(java_multiple_files_, other->java_multiple_files_);
+    std::std::swap(optimize_for_, other->optimize_for_);
+    std::std::swap(cc_generic_services_, other->cc_generic_services_);
+    std::std::swap(java_generic_services_, other->java_generic_services_);
+    std::std::swap(py_generic_services_, other->py_generic_services_);
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -4974,12 +4974,12 @@ bool MessageOptions::IsInitialized() const {
 
 void MessageOptions::Swap(MessageOptions* other) {
   if (other != this) {
-    std::swap(message_set_wire_format_, other->message_set_wire_format_);
-    std::swap(no_standard_descriptor_accessor_, other->no_standard_descriptor_accessor_);
+    std::std::swap(message_set_wire_format_, other->message_set_wire_format_);
+    std::std::swap(no_standard_descriptor_accessor_, other->no_standard_descriptor_accessor_);
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -5404,14 +5404,14 @@ bool FieldOptions::IsInitialized() const {
 
 void FieldOptions::Swap(FieldOptions* other) {
   if (other != this) {
-    std::swap(ctype_, other->ctype_);
-    std::swap(packed_, other->packed_);
-    std::swap(deprecated_, other->deprecated_);
-    std::swap(experimental_map_key_, other->experimental_map_key_);
+    std::std::swap(ctype_, other->ctype_);
+    std::std::swap(packed_, other->packed_);
+    std::std::swap(deprecated_, other->deprecated_);
+    std::std::swap(experimental_map_key_, other->experimental_map_key_);
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -5633,9 +5633,9 @@ bool EnumOptions::IsInitialized() const {
 void EnumOptions::Swap(EnumOptions* other) {
   if (other != this) {
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -5857,9 +5857,9 @@ bool EnumValueOptions::IsInitialized() const {
 void EnumValueOptions::Swap(EnumValueOptions* other) {
   if (other != this) {
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -6081,9 +6081,9 @@ bool ServiceOptions::IsInitialized() const {
 void ServiceOptions::Swap(ServiceOptions* other) {
   if (other != this) {
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -6305,9 +6305,9 @@ bool MethodOptions::IsInitialized() const {
 void MethodOptions::Swap(MethodOptions* other) {
   if (other != this) {
     uninterpreted_option_.Swap(&other->uninterpreted_option_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
     _extensions_.Swap(&other->_extensions_);
   }
 }
@@ -6568,11 +6568,11 @@ bool UninterpretedOption_NamePart::IsInitialized() const {
 
 void UninterpretedOption_NamePart::Swap(UninterpretedOption_NamePart* other) {
   if (other != this) {
-    std::swap(name_part_, other->name_part_);
-    std::swap(is_extension_, other->is_extension_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(name_part_, other->name_part_);
+    std::std::swap(is_extension_, other->is_extension_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
@@ -7001,14 +7001,14 @@ bool UninterpretedOption::IsInitialized() const {
 void UninterpretedOption::Swap(UninterpretedOption* other) {
   if (other != this) {
     name_.Swap(&other->name_);
-    std::swap(identifier_value_, other->identifier_value_);
-    std::swap(positive_int_value_, other->positive_int_value_);
-    std::swap(negative_int_value_, other->negative_int_value_);
-    std::swap(double_value_, other->double_value_);
-    std::swap(string_value_, other->string_value_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::std::swap(identifier_value_, other->identifier_value_);
+    std::std::swap(positive_int_value_, other->positive_int_value_);
+    std::std::swap(negative_int_value_, other->negative_int_value_);
+    std::std::swap(double_value_, other->double_value_);
+    std::std::swap(string_value_, other->string_value_);
+    std::std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
+    std::std::swap(_cached_size_, other->_cached_size_);
   }
 }
 

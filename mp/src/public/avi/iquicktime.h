@@ -145,7 +145,7 @@ public:
 	// Gets the IMaterial associated with an BINK material
 	virtual IMaterial* GetMaterial( QUICKTIMEMaterial_t hMaterial ) = 0;
 
-	// Returns the max texture coordinate of the BINK
+	// Returns the Max texture coordinate of the BINK
 	virtual void GetTexCoordRange( QUICKTIMEMaterial_t hMaterial, float *pMaxU, float *pMaxV ) = 0;
 
 	// Returns the frame size of the QUICKTIME Image Frame (stored in a subrect of the material itself)

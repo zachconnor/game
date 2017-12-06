@@ -565,7 +565,7 @@ void CNetGraphPanel::DrawTimes( vrect_t vrect, cmdinfo_t *cmdinfo, int x, int w,
 
 //-----------------------------------------------------------------------------
 // Purpose: Compute frame database for rendering m_NetChannel computes choked, and lost packets, too.
-//  Also computes latency data and sets max packet size
+//  Also computes latency data and sets Max packet size
 // Input  : *packet_latency - 
 //			*graph - 
 //			*choke_count - 
@@ -928,7 +928,7 @@ int CNetGraphPanel::GraphValue( void )
 	if ( !graphtype && !( in_graph.state & 1 ) )
 		return 0;
 
-	// With +graph key, use max area
+	// With +graph key, use Max area
 	if ( !graphtype )
 	{
 		graphtype = 2;

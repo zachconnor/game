@@ -107,9 +107,9 @@ private:
 	CNetworkVar( float, m_flTimerEndTime );	
 	CNetworkVar( bool, m_bIsDisabled );
 	CNetworkVar( bool, m_bShowInHUD );
-	CNetworkVar( int, m_nTimerLength );			// current timer's length (used in the timer panel if no max length is set)
+	CNetworkVar( int, m_nTimerLength );			// current timer's length (used in the timer panel if no Max length is set)
 	CNetworkVar( int, m_nTimerInitialLength );	// initial length of the timer
-	CNetworkVar( int, m_nTimerMaxLength );		// max time the timer can have (0 is no max)
+	CNetworkVar( int, m_nTimerMaxLength );		// Max time the timer can have (0 is no Max)
 	CNetworkVar( bool, m_bAutoCountdown );		// automatically count down the end of a round
 	CNetworkVar( int, m_nSetupTimeLength );		// current timer's setup time length (setup time is the time before the round begins)
 	CNetworkVar( int, m_nState );				// RT_STATE_SETUP or RT_STATE_NORMAL

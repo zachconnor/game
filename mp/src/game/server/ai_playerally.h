@@ -13,7 +13,7 @@
 #include "ai_baseactor.h"
 #include "ai_speechfilter.h"
 #ifndef _WIN32
-#undef min
+#undef Min
 #endif
 #include "stdstring.h"
 #ifndef _WIN32

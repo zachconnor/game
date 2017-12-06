@@ -328,7 +328,7 @@ void CCompileCaptionsApp::CompileCaptionFile( char const *infile, char const *ou
 
 		if ( len > blockSize )
 		{
-			Error( "Caption text file '%s' contains a single caption '%s' of %d bytes (%d is max), change MAX_BLOCK_SIZE in captioncompiler.h to fix!!!\n", g_pVGuiLocalize->GetNameByIndex( i ),
+			Error( "Caption text file '%s' contains a single caption '%s' of %d bytes (%d is Max), change MAX_BLOCK_SIZE in captioncompiler.h to fix!!!\n", g_pVGuiLocalize->GetNameByIndex( i ),
 				entryName, len, blockSize );
 		}
 		totalsize += len;

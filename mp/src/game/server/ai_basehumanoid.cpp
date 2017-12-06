@@ -75,7 +75,7 @@ void CAI_BaseHumanoid::CheckAmmo( void )
 		}
 		else if (GetActiveWeapon()->UsesClipsForAmmo1() && GetActiveWeapon()->Clip1() < (GetActiveWeapon()->GetMaxClip1() / 4 + 1))
 		{
-			// don't check for low ammo if you're near the max range of the weapon
+			// don't check for low ammo if you're near the Max range of the weapon
 			SetCondition(COND_LOW_PRIMARY_AMMO);
 		}
 	}

@@ -506,7 +506,7 @@ int ByteswapPHY( void *pDestBase, const void *pSrcBase, const int fileSize )
 
 	if ( g_bNativeSrc )
 	{
-		// Reset the pointers and let ivp swap the binary physics data
+        // Reset the pointers and let ivp std::swap the binary physics data
 		pSrc = (byte*)pSrcBase + pHdr->size;
 		pDest = (byte*)pDestBase + pHdr->size;
 
@@ -566,7 +566,7 @@ int ByteswapPHY( void *pDestBase, const void *pSrcBase, const int fileSize )
 
 	if ( !g_bNativeSrc )
 	{
-		// let ivp swap the ledge tree
+        // let ivp std::swap the ledge tree
 		pSrc = (byte*)pSrcBase + pHdr->size;
 		int bufSize = fileSize - pHdr->size;
 		pCollision->VCollideLoad( &collide, pHdr->solidCount, (const char *)pSrc, bufSize, true );
@@ -891,8 +891,8 @@ void ByteswapAnimData( mstudioanimdesc_t *pAnimDesc, int section, byte *&pDataSr
 					int iStartFrame = section * sectionFrames;
 					int iEndFrame = (section + 1) * sectionFrames;
 
-					iStartFrame = min( iStartFrame, totalFrames - 1 );
-					iEndFrame = min( iEndFrame, totalFrames - 1 );
+                    iStartFrame = Min( iStartFrame, totalFrames - 1 );
+                    iEndFrame = Min( iEndFrame, totalFrames - 1 );
 
 					totalFrames = iEndFrame - iStartFrame + 1;
 				}
@@ -1018,7 +1018,7 @@ int ByteswapANIFile( studiohdr_t* pHdr, void *pDestBase, const void *pSrcBase, c
 
 	Q_memset( pDestBase, 0, fileSize );
 
-	// swap file header
+    // std::swap file header
 	{
 		byte *pHeaderSrc = (byte *)pSrcBase;
 		byte *pHeaderDest = (byte *)pDestBase;
@@ -1135,8 +1135,8 @@ int ByteswapANIFile( studiohdr_t* pHdr, void *pDestBase, const void *pSrcBase, c
 			pDataDest = (byte*)pBlockBaseDest + pAnimDesc->localhierarchyindex;
 			DECLARE_OBJECT_POINTERS( pLocalHierarchy, pData, mstudiolocalhierarchy_t )
 
-			// HACK: Since animdescs are already native, pre-swap pAnimDesc->numlocalhierarchy 
-			// here so the automatic swap inside ITERATE_BLOCK will restore it
+            // HACK: Since animdescs are already native, pre-std::swap pAnimDesc->numlocalhierarchy
+            // here so the automatic std::swap inside ITERATE_BLOCK will restore it
 			int numlocalhierarchy = SrcNative( &pAnimDesc->numlocalhierarchy );
 			ITERATE_BLOCK( pLocalHierarchy, numlocalhierarchy )
 			{
@@ -1205,7 +1205,7 @@ int ByteswapANI( studiohdr_t* pHdr, void *pDestBase, const void *pSrcBase, const
 		if ( finalSize != fixedFileSize )
 		{
 			if ( g_bVerbose )
-				Warning( "Alignment fixups failed on ANI swap!\n" );
+                Warning( "Alignment fixups failed on ANI std::swap!\n" );
 			fixedFileSize = 0;
 		}
 	}
@@ -1867,7 +1867,7 @@ int ByteswapMDLFile( void *pDestBase, void *pSrcBase, const int fileSize )
 		DECLARE_INDEX_POINTERS_FIXUP( pLocalData, pHdr, studiohdr2index )
 		DECLARE_OBJECT_POINTERS( pStudioHdr2, pLocalData, studiohdr2_t )
 
-		// HACK: Pre-swap the constant "1" here so the automatic swap inside ITERATE_BLOCK will restore it
+        // HACK: Pre-std::swap the constant "1" here so the automatic std::swap inside ITERATE_BLOCK will restore it
 		int studiohdr2ct = 1;
 		studiohdr2ct = SrcNative( &studiohdr2ct );
 		ITERATE_BLOCK( pStudioHdr2, studiohdr2ct )
@@ -1983,7 +1983,7 @@ int ByteswapMDL( void *pDestBase, const void *pSrcBase, const int fileSize )
 		int finalSize = ByteswapMDLFile( pDestBase, pNewSrcBase, fixedFileSize );
 		if ( finalSize != fixedFileSize )
 		{
-			Warning( "Alignment fixups failed on MDL swap!\n" );
+            Warning( "Alignment fixups failed on MDL std::swap!\n" );
 			fixedFileSize = 0;
 		}
 	}
@@ -2009,7 +2009,7 @@ int ByteswapMDL( void *pDestBase, const void *pSrcBase, const int fileSize )
 }
 
 //----------------------------------------------------------------------
-// Determines what kind of file this is and calls the correct swap function
+// Determines what kind of file this is and calls the correct std::swap function
 //----------------------------------------------------------------------
 int ByteswapStudioFile( const char *pFilename, void *pOutBase, const void *pFileBase, int fileSize, studiohdr_t *pHdr, CompressFunc_t pCompressFunc )
 {
@@ -2917,8 +2917,8 @@ BEGIN_BYTESWAP_DATADESC( mstudioflexcontroller_t )
 	DEFINE_INDEX( sztypeindex, FIELD_INTEGER ),
 	DEFINE_INDEX( sznameindex, FIELD_INTEGER ),
 	DEFINE_FIELD( localToGlobal, FIELD_INTEGER ),
-	DEFINE_FIELD( min, FIELD_FLOAT ),
-	DEFINE_FIELD( max, FIELD_FLOAT ),
+    DEFINE_FIELD( Min, FIELD_FLOAT ),
+    DEFINE_FIELD( Max, FIELD_FLOAT ),
 END_BYTESWAP_DATADESC()
 
 BEGIN_BYTESWAP_DATADESC( mstudioflexcontrollerui_t )

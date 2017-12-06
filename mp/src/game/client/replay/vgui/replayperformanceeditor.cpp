@@ -885,7 +885,7 @@ DECLARE_BUILD_FACTORY_DEFAULT_TEXT( CReplayButton, CExImageButton );
 
 //-----------------------------------------------------------------------------
 
-#define MAX_FF_RAMP_TIME		8.0f	// The amount of time until we ramp to max scale value.
+#define MAX_FF_RAMP_TIME		8.0f	// The amount of time until we ramp to Max scale value.
 
 class CReplayEditorFastForwardButton : public CReplayButton
 {

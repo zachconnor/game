@@ -32,6 +32,11 @@ ipch
 *.mak.vpc_crc
 *.xcodeproj/
 *.project
+*.config
+*.creator
+*.files
+*.includes
+*.swp
 obj*/
 !devtools/*.mak
 !utils/smdlexp/smdlexp.mak

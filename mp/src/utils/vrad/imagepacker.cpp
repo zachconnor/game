@@ -72,7 +72,7 @@ bool CImagePacker::AddBlock( int width, int height, int *returnX, int *returnY )
 	while (outerX <= lastX)
 	{
 		// Skip all tiles that have the last Y value, these
-		// aren't going to change our min Y value
+		// aren't going to change our Min Y value
 		if (m_pLightmapWavefront[outerX] == lastMaxYVal)
 		{
 			++outerX;

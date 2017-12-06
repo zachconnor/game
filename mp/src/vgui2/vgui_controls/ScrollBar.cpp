@@ -339,18 +339,18 @@ int ScrollBar::GetValue()
 // Purpose: Set the range of the scroll bar slider.
 // This the range of numbers the slider can scroll through.
 //-----------------------------------------------------------------------------
-void ScrollBar::SetRange(int min,int max)
+void ScrollBar::SetRange(int Min,int Max)
 {
-	_slider->SetRange(min,max);
+	_slider->SetRange(Min,Max);
 }
 
 //-----------------------------------------------------------------------------
 // Purpose: Gets the range of the scroll bar slider.
 // This the range of numbers the slider can scroll through.
 //-----------------------------------------------------------------------------
-void ScrollBar::GetRange(int &min, int &max)
+void ScrollBar::GetRange(int &Min, int &Max)
 {
-    _slider->GetRange(min, max);
+    _slider->GetRange(Min, Max);
 }
 
 //-----------------------------------------------------------------------------
@@ -489,7 +489,7 @@ void ScrollBar::OnMouseFocusTicked()
 	// a button is not down.
 	else 
 	{
-		// if neither button is down keep delay at max
+		// if neither button is down keep delay at Max
 		_scrollDelay = system()->GetTimeMillis() + SCROLL_BAR_DELAY;
 		_respond = true; 
 	}
@@ -755,7 +755,7 @@ void ScrollBar::UpdateSliderImages( void )
 		ScrollBarSlider *pSlider = GetSlider();
 		if ( pSlider && pSlider->GetRangeWindow() > 0 )
 		{
-			int x, y, w, t, min, max;
+			int x, y, w, t, Min, Max;
 			m_pLine->GetBounds( x, y, w, t );
 
 			// If our slider needs layout, force it to do it now
@@ -763,15 +763,15 @@ void ScrollBar::UpdateSliderImages( void )
 			{
 				pSlider->InvalidateLayout( true );
 			}
-			pSlider->GetNobPos( min, max );
+			pSlider->GetNobPos( Min, Max );
 
 			if ( IsVertical() )
 			{
-				m_pBox->SetBounds( x, y + min, w, ( max - min ) );
+				m_pBox->SetBounds( x, y + Min, w, ( Max - Min ) );
 			}
 			else
 			{
-				m_pBox->SetBounds( x + min, 0, (max-min), t );
+				m_pBox->SetBounds( x + Min, 0, (Max-Min), t );
 			}
 		}
 	}

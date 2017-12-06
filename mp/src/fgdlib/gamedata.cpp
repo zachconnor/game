@@ -446,7 +446,7 @@ BOOL GameData::Load(const char *pszFilename)
 //-----------------------------------------------------------------------------
 // Purpose: Parses the "mapsize" specifier, which should be of the form:
 //
-//			mapsize(min, max)
+//			mapsize(Min, Max)
 //
 //			ex: mapsize(-8192, 8192)
 //
@@ -480,8 +480,8 @@ bool GameData::ParseMapSize(TokenReader &tr)
 
 	if (nMin != nMax)
 	{
-		m_nMinMapCoord = min(nMin, nMax);
-		m_nMaxMapCoord = max(nMin, nMax);
+		m_nMinMapCoord = Min(nMin, nMax);
+		m_nMaxMapCoord = Max(nMin, nMax);
 	}
 
 	if (!GDSkipToken(tr, OPERATOR, ")"))

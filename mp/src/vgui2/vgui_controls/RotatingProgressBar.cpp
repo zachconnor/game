@@ -70,7 +70,7 @@ void RotatingProgressBar::ApplySettings(KeyValues *inResourceData)
 		SetImage( imageName );
 	}
 
-	// Find min and max rotations in radians
+	// Find Min and Max rotations in radians
 	m_flStartRadians = DEG2RAD(inResourceData->GetFloat( "start_degrees", 0 ) );
 	m_flEndRadians = DEG2RAD( inResourceData->GetFloat( "end_degrees", 0 ) );
 

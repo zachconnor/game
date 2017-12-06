@@ -778,7 +778,7 @@ void CAntlionTemplateMaker::MakeNPC( void )
 
 			if ( g_debug_antlionmaker.GetInt() == 2 )
 			{
-				Msg("SPAWNED: Pool: %d (max %d) (Regenerating %d every %f)\n", m_iPool, m_iMaxPool, m_iPoolRegenAmount, m_flPoolRegenTime );
+				Msg("SPAWNED: Pool: %d (Max %d) (Regenerating %d every %f)\n", m_iPool, m_iMaxPool, m_iPoolRegenAmount, m_flPoolRegenTime );
 			}
 		}
 		else
@@ -1492,7 +1492,7 @@ void CAntlionTemplateMaker::PoolRegenThink( void )
 
 		if ( g_debug_antlionmaker.GetInt() == 2 )
 		{
-			Msg("REGENERATED: Pool: %d (max %d) (Regenerating %d every %f)\n", m_iPool, m_iMaxPool, m_iPoolRegenAmount, m_flPoolRegenTime );
+			Msg("REGENERATED: Pool: %d (Max %d) (Regenerating %d every %f)\n", m_iPool, m_iMaxPool, m_iPoolRegenAmount, m_flPoolRegenTime );
 		}
 	}
 

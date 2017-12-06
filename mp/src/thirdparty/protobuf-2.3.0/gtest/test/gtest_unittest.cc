@@ -850,16 +850,16 @@ TEST(VectorDeathTest, Swap) {
 
   EXPECT_DEATH_IF_SUPPORTED(
       a.Swap(-1, 1),
-      "Invalid first swap element -1: must be in range \\[0, 2\\]");
+      "Invalid first std::swap element -1: must be in range \\[0, 2\\]");
   EXPECT_DEATH_IF_SUPPORTED(
       a.Swap(3, 1),
-      "Invalid first swap element 3: must be in range \\[0, 2\\]");
+      "Invalid first std::swap element 3: must be in range \\[0, 2\\]");
   EXPECT_DEATH_IF_SUPPORTED(
       a.Swap(1, -1),
-      "Invalid second swap element -1: must be in range \\[0, 2\\]");
+      "Invalid second std::swap element -1: must be in range \\[0, 2\\]");
   EXPECT_DEATH_IF_SUPPORTED(
       a.Swap(1, 3),
-      "Invalid second swap element 3: must be in range \\[0, 2\\]");
+      "Invalid second std::swap element 3: must be in range \\[0, 2\\]");
 }
 
 TEST(VectorDeathTest, ShuffleRange) {

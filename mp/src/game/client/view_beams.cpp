@@ -144,7 +144,7 @@ private:
 	{
 
 #ifndef _XBOX
-		// default max # of particles at one time
+		// default Max # of particles at one time
 		DEFAULT_PARTICLES	= 2048,
 #else
 		DEFAULT_PARTICLES   = 1024,

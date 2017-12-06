@@ -245,7 +245,7 @@ public:
 	// Copy related methods
 	void	CopyArray( const T *pArray, int size );
 
-	// this is basically just a faster version of CopyArray which uses pointer swap
+	// this is basically just a faster version of CopyArray which uses pointer std::swap
 	// NOTE: This doesn't work for element arrays
 	void	SwapArray( CUtlVector< T > &array );
 

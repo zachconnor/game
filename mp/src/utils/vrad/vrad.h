@@ -89,7 +89,7 @@ struct directlight_t
 	// the end.
 	float m_flStartFadeDistance;
 	float m_flEndFadeDistance;
-	float m_flCapDist;										// max distance to feed in
+	float m_flCapDist;										// Max distance to feed in
 
 	directlight_t(void)
 	{
@@ -549,7 +549,7 @@ inline bool ValidDispFace( dface_t *pFace )
 }
 
 #define SAMPLEHASH_VOXEL_SIZE			64.0f
-typedef unsigned int SampleHandle_t;				// the upper 16 bits = facelight index (works because max face are 65536)
+typedef unsigned int SampleHandle_t;				// the upper 16 bits = facelight index (works because Max face are 65536)
 													// the lower 16 bits = sample index inside of facelight
 struct sample_t;
 struct SampleData_t

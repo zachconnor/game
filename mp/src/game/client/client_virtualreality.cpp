@@ -48,7 +48,7 @@ ConVar vr_moveaim_reticle_pitch_limit_zoom ( "vr_moveaim_reticle_pitch_limit_zoo
 // This are somewhat obsolete.
 ConVar vr_aim_yaw_offset( "vr_aim_yaw_offset", "90", 0, "This value is added to Yaw when returning the vehicle aim angles to Source." );
 
-ConVar vr_stereo_swap_eyes ( "vr_stereo_swap_eyes", "0", 0, "1=swap eyes." );
+ConVar vr_stereo_swap_eyes ( "vr_stereo_swap_eyes", "0", 0, "1=std::swap eyes." );
 
 // Useful for debugging wacky-projection problems, separate from multi-rendering problems.
 ConVar vr_stereo_mono_set_eye ( "vr_stereo_mono_set_eye", "0", 0, "0=off, Set all eyes to 1=left, 2=right, 3=middle eye" );

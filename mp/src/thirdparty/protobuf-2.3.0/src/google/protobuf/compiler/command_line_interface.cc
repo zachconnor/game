@@ -458,7 +458,7 @@ CommandLineInterface::MemoryOutputStream::~MemoryOutputStream() {
     }
 
     *map_slot = new string;
-    (*map_slot)->swap(data_);
+    (*map_slot)->std::swap(data_);
   } else {
     // This was an OpenForInsert().
 

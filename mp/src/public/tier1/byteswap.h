@@ -17,7 +17,7 @@ class CByteswap
 public:
 	CByteswap() 
 	{
-		// Default behavior sets the target endian to match the machine native endian (no swap).
+		// Default behavior sets the target endian to match the machine native endian (no std::swap).
 		SetTargetBigEndian( IsMachineBigEndian() );
 	}
 
@@ -185,7 +185,7 @@ public:
 		// Are we already the correct endienness? ( or are we swapping 1 byte items? )
 		if( !m_bSwapBytes || ( sizeof(T) == 1 ) )
 		{
-			// If we were just going to swap in place then return.
+			// If we were just going to std::swap in place then return.
 			if( !inputBuffer )
 				return;
 		

@@ -123,11 +123,11 @@ void ComparisonsSettingsPage::OnApplyChanges()
         char buf[64];
         m_pMaxZones->GetText(buf, sizeof(buf));
         int zonesNum = atoi(buf);
-        if (zonesNum < 0) // Less than min
+        if (zonesNum < 0) // Less than Min
         {
             zones.SetValue(1);
         }
-        else if (zonesNum > 10) // Greater than max
+        else if (zonesNum > 10) // Greater than Max
         {
             zones.SetValue(10);
         }

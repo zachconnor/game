@@ -240,7 +240,7 @@ public:
 	// element into the tree.
 	void	Reinsert( I elem );
 
-	// swap in place
+	// std::swap in place
 	void Swap( CUtlRBTree< T, I, L > &that );
 
 private:
@@ -351,7 +351,7 @@ protected:
 	void ResetDbgInfo() {}
 
 private:
-	// this doesn't make sense for fixed rbtrees, since there's no useful max pointer, and the index space isn't contiguous anyways
+	// this doesn't make sense for fixed rbtrees, since there's no useful Max pointer, and the index space isn't contiguous anyways
 	I  MaxElement() const;
 };
 
@@ -1573,7 +1573,7 @@ I CUtlRBTree<T, I, L, M>::Find( T const &search ) const
 
 
 //-----------------------------------------------------------------------------
-// swap in place
+// std::swap in place
 //-----------------------------------------------------------------------------
 template < class T, class I, typename L, class M > 
 void CUtlRBTree<T, I, L, M>::Swap( CUtlRBTree< T, I, L > &that )

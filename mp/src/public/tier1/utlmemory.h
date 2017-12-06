@@ -94,7 +94,7 @@ public:
 	// Takes ownership of the passed memory, including freeing it when this buffer is destroyed.
 	void AssumeMemory( T *pMemory, int nSize );
 
-	// Fast swap
+	// Fast std::swap
 	void Swap( CUtlMemory< T, I > &mem );
 
 	// Switches the buffer from an external memory buffer to a reallocatable buffer
@@ -136,7 +136,7 @@ protected:
 			const int MAX_GROW = 128;
 			if ( m_nGrowSize * sizeof(T) > MAX_GROW )
 			{
-				m_nGrowSize = max( 1, MAX_GROW / sizeof(T) );
+				m_nGrowSize = Max( 1, MAX_GROW / sizeof(T) );
 			}
 		}
 #endif
@@ -464,7 +464,7 @@ void CUtlMemory<T,I>::Init( int nGrowSize /*= 0*/, int nInitSize /*= 0*/ )
 }
 
 //-----------------------------------------------------------------------------
-// Fast swap
+// Fast std::swap
 //-----------------------------------------------------------------------------
 template< class T, class I >
 void CUtlMemory<T,I>::Swap( CUtlMemory<T,I> &mem )

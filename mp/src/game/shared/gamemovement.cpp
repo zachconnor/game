@@ -1782,7 +1782,7 @@ void CGameMovement::AirMove( void )
 	wishspeed = VectorNormalize(wishdir);
 
 	//
-	// clamp to server defined max speed
+	// clamp to server defined Max speed
 	//
 	if ( wishspeed != 0 && (wishspeed > mv->m_flMaxSpeed))
 	{
@@ -1951,7 +1951,7 @@ void CGameMovement::WalkMove( void )
 	wishspeed = VectorNormalize(wishdir);
 
 	//
-	// Clamp to server defined max speed
+	// Clamp to server defined Max speed
 	//
 	if ((wishspeed != 0.0f) && (wishspeed > mv->m_flMaxSpeed))
 	{
@@ -2209,7 +2209,7 @@ void CGameMovement::FullObserverMove( void )
 	wishspeed = VectorNormalize(wishdir);
 
 	//
-	// Clamp to server defined max speed
+	// Clamp to server defined Max speed
 	//
 
 	float maxspeed = sv_maxvelocity.GetFloat(); 
@@ -2286,7 +2286,7 @@ void CGameMovement::FullNoClipMove( float factor, float maxacceleration )
 	wishspeed = VectorNormalize(wishdir);
 
 	//
-	// Clamp to server defined max speed
+	// Clamp to server defined Max speed
 	//
 	if (wishspeed > maxspeed )
 	{
@@ -4792,7 +4792,7 @@ void CGameMovement::FullTossMove( void )
 		wishspeed = VectorNormalize(wishdir);
 
 		//
-		// Clamp to server defined max speed
+		// Clamp to server defined Max speed
 		//
 		if (wishspeed > mv->m_flMaxSpeed)
 		{

@@ -193,7 +193,7 @@ inline bool UnknownFieldSet::empty() const {
 }
 
 inline void UnknownFieldSet::Swap(UnknownFieldSet* x) {
-  std::swap(fields_, x->fields_);
+  std::std::swap(fields_, x->fields_);
 }
 
 inline int UnknownFieldSet::field_count() const {

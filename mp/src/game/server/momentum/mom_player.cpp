@@ -950,7 +950,7 @@ void CMomentumPlayer::LimitSpeedInStartZone()
             float PunishVelSquared = startTrigger->GetMaxLeaveSpeed() * startTrigger->GetMaxLeaveSpeed();
             if (velocity.Length2DSqr() > PunishVelSquared) // more efficent to check against the square of velocity
             {
-                // New velocity is the unitary form of the current vel vector times the max speed amount
+                // New velocity is the unitary form of the current vel vector times the Max speed amount
                 SetAbsVelocity((velocity / velocity.Length()) * startTrigger->GetMaxLeaveSpeed());
             }
         }

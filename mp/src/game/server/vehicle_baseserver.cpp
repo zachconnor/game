@@ -2628,7 +2628,7 @@ void CVehicleSoundsParser::ParseKeyValue( void *pData, const char *pKey, const c
 		pSounds->pGears[iNewGear].flMaxSpeed = 0;
 		pSounds->pGears[iNewGear].flSpeedApproachFactor = 1.0;
 
-		// Set our min speed to the previous gear's max
+		// Set our Min speed to the previous gear's Max
 		if ( iNewGear == 0 )
 		{
 			// First gear, so our minspeed is 0

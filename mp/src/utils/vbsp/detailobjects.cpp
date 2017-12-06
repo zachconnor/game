@@ -197,7 +197,7 @@ static void ParseDetailGroup( int detailId, KeyValues* pGroupKeyValues )
 
 					model.m_flRandomScaleStdDev = pIter->GetFloat( "spriterandomscale", 0.0f );
 
-					// sway is a percent of max sway, cl_detail_max_sway
+					// sway is a percent of Max sway, cl_detail_max_sway
 					float flSway = clamp( pIter->GetFloat( "sway", 0.0f ), 0.0, 1.0 );
 					model.m_SwayAmount = (unsigned char)( 255.0 * flSway );
 
@@ -502,7 +502,7 @@ static void AddDetailSpriteToLump( const Vector &vecOrigin, const QAngle &vecAng
 
 	if (i >= 65535)
 	{
-		Error( "Error! Too many detail props emitted on this map! (64K max!)n" );
+		Error( "Error! Too many detail props emitted on this map! (64K Max!)n" );
 	}
 
 	DetailObjectLump_t& objectLump = s_DetailObjectLump[i];
@@ -554,7 +554,7 @@ static void PlaceDetail( DetailModel_t const& model, const Vector& pt, const Vec
 	if (cosAngle < model.m_MaxCosAngle)
 		return;
 
-	// If it's between min + max, flip a coin...
+	// If it's between Min + Max, flip a coin...
 	if (cosAngle < model.m_MinCosAngle)
 	{
 		float probability = (cosAngle - model.m_MaxCosAngle) / 

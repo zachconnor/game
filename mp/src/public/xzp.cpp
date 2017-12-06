@@ -770,7 +770,7 @@ bool xZipAddFile( const char* filename, CUtlBuffer &fileBuff, bool bPrecacheEnti
 	else if( bProcessPrecacheHeaderOnly )
 	{
 		customPreloadSize = xZipComputeCustomPreloads( filename );
-		fileSize = min( fileSize, customPreloadSize );
+		fileSize = Min( fileSize, customPreloadSize );
 	}
 
 	unsigned CRC = xZipCRCFilename( filename );
@@ -1132,7 +1132,7 @@ bool xZipEnd()
 	fseek(hOutputFile,0,SEEK_SET);
 	g_xzpSwap.SwapFieldsToTargetEndian<xZipHeader_t>( &Header );	// Swap it to write out:
 	fwrite(&Header,1,sizeof(Header),hOutputFile);
-	g_xzpSwap.SwapFieldsToTargetEndian<xZipHeader_t>( &Header );	// But then swap it back so we can use it in  memory
+	g_xzpSwap.SwapFieldsToTargetEndian<xZipHeader_t>( &Header );	// But then std::swap it back so we can use it in  memory
 
 	// Shut down
 	fclose(hOutputFile);

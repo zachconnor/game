@@ -79,10 +79,10 @@ class OnTheFlyPrimeTable : public PrimeTable {
 // in an array.
 class PreCalculatedPrimeTable : public PrimeTable {
  public:
-  // 'max' specifies the maximum number the prime table holds.
-  explicit PreCalculatedPrimeTable(int max)
-      : is_prime_size_(max + 1), is_prime_(new bool[max + 1]) {
-    CalculatePrimesUpTo(max);
+  // 'Max' specifies the maximum number the prime table holds.
+  explicit PreCalculatedPrimeTable(int Max)
+      : is_prime_size_(Max + 1), is_prime_(new bool[Max + 1]) {
+    CalculatePrimesUpTo(Max);
   }
   virtual ~PreCalculatedPrimeTable() { delete[] is_prime_; }
 
@@ -99,15 +99,15 @@ class PreCalculatedPrimeTable : public PrimeTable {
   }
 
  private:
-  void CalculatePrimesUpTo(int max) {
+  void CalculatePrimesUpTo(int Max) {
     ::std::fill(is_prime_, is_prime_ + is_prime_size_, true);
     is_prime_[0] = is_prime_[1] = false;
 
-    for (int i = 2; i <= max; i++) {
+    for (int i = 2; i <= Max; i++) {
       if (!is_prime_[i]) continue;
 
       // Marks all multiples of i (except i itself) as non-prime.
-      for (int j = 2*i; j <= max; j += i) {
+      for (int j = 2*i; j <= Max; j += i) {
         is_prime_[j] = false;
       }
     }

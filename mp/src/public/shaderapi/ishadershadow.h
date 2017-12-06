@@ -313,7 +313,7 @@ public:
 
 	// Activate/deactivate skinning. Indexed blending is automatically
 	// enabled if it's available for this hardware. When blending is enabled,
-	// we allocate enough room for 3 weights (max allowed)
+	// we allocate enough room for 3 weights (Max allowed)
 	virtual void EnableVertexBlend( bool bEnable ) = 0;
 
 	// per texture unit stuff

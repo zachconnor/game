@@ -428,7 +428,7 @@ private:
 		GUN_STATE_FIRING,
 	};
 
-	// Gets the max speed of the helicopter
+	// Gets the Max speed of the helicopter
 	virtual float GetMaxSpeed();
 	virtual float GetMaxSpeedFiring();
 
@@ -540,7 +540,7 @@ private:
 	// Should we drop those bombs?
 	bool ShouldDropBombs( void );
 
-	// Returns the max firing distance
+	// Returns the Max firing distance
 	float GetMaxFiringDistance();
 
 	// Make sure we don't hit too many times
@@ -1385,7 +1385,7 @@ void CNPC_AttackHelicopter::InitializeRotorSound( void )
 
 
 //------------------------------------------------------------------------------
-// Gets the max speed of the helicopter
+// Gets the Max speed of the helicopter
 //------------------------------------------------------------------------------
 float CNPC_AttackHelicopter::GetMaxSpeed()
 {
@@ -1417,7 +1417,7 @@ float CNPC_AttackHelicopter::GetMaxSpeedFiring()
   
 
 //------------------------------------------------------------------------------
-// Returns the max firing distance
+// Returns the Max firing distance
 //------------------------------------------------------------------------------
 float CNPC_AttackHelicopter::GetMaxFiringDistance()
 {
@@ -3867,7 +3867,7 @@ float CNPC_AttackHelicopter::UpdatePerpPathDistance( float flMaxPathOffset )
 
 
 //-----------------------------------------------------------------------------
-// Computes the max speed + acceleration:	
+// Computes the Max speed + acceleration:	
 //-----------------------------------------------------------------------------
 void CNPC_AttackHelicopter::GetMaxSpeedAndAccel( float *pMaxSpeed, float *pAccelRate )
 {
@@ -4018,7 +4018,7 @@ void CNPC_AttackHelicopter::ComputeVelocity( const Vector &vecTargetPosition,
 
 
 //-----------------------------------------------------------------------------
-// Computes the max speed + acceleration:	
+// Computes the Max speed + acceleration:	
 //-----------------------------------------------------------------------------
 void CNPC_AttackHelicopter::ComputeAngularVelocity( const Vector &vecGoalUp, const Vector &vecFacingDirection )
 {

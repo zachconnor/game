@@ -120,13 +120,13 @@ abstract_class IVPhysicsDebugOverlay
 {
 public:
 	virtual void AddEntityTextOverlay(int ent_index, int line_offset, float duration, int r, int g, int b, int a, PRINTF_FORMAT_STRING const char *format, ...) = 0;
-	virtual void AddBoxOverlay(const Vector& origin, const Vector& mins, const Vector& max, QAngle const& orientation, int r, int g, int b, int a, float duration) = 0;
+    virtual void AddBoxOverlay(const Vector& origin, const Vector& mins, const Vector& Max, QAngle const& orientation, int r, int g, int b, int a, float duration) = 0;
 	virtual void AddTriangleOverlay(const Vector& p1, const Vector& p2, const Vector& p3, int r, int g, int b, int a, bool noDepthTest, float duration) = 0;
 	virtual void AddLineOverlay(const Vector& origin, const Vector& dest, int r, int g, int b,bool noDepthTest, float duration) = 0;
 	virtual void AddTextOverlay(const Vector& origin, float duration, PRINTF_FORMAT_STRING const char *format, ...) = 0;
 	virtual void AddTextOverlay(const Vector& origin, int line_offset, float duration, PRINTF_FORMAT_STRING const char *format, ...) = 0;
 	virtual void AddScreenTextOverlay(float flXPos, float flYPos,float flDuration, int r, int g, int b, int a, const char *text) = 0;
-	virtual void AddSweptBoxOverlay(const Vector& start, const Vector& end, const Vector& mins, const Vector& max, const QAngle & angles, int r, int g, int b, int a, float flDuration) = 0;
+    virtual void AddSweptBoxOverlay(const Vector& start, const Vector& end, const Vector& mins, const Vector& Max, const QAngle & angles, int r, int g, int b, int a, float flDuration) = 0;
 	virtual void AddTextOverlayRGB(const Vector& origin, int line_offset, float duration, float r, float g, float b, float alpha, PRINTF_FORMAT_STRING const char *format, ...) = 0;
 };
 
@@ -262,13 +262,13 @@ public:
 	virtual bool			IsBoxIntersectingCone( const Vector &boxAbsMins, const Vector &boxAbsMaxs, const truncatedcone_t &cone ) = 0;
 
 	// loads a set of solids into a vcollide_t
-	virtual void			VCollideLoad( vcollide_t *pOutput, int solidCount, const char *pBuffer, int size, bool swap = false ) = 0;
+    virtual void			VCollideLoad( vcollide_t *pOutput, int solidCount, const char *pBuffer, int size, bool swap = false ) = 0;
 	// destroyts the set of solids created by VCollideLoad
 	virtual void			VCollideUnload( vcollide_t *pVCollide ) = 0;
 
 	// begins parsing a vcollide.  NOTE: This keeps pointers to the text
 	// If you free the text and call members of IVPhysicsKeyParser, it will crash
-	virtual IVPhysicsKeyParser	*VPhysicsKeyParserCreate( const char *pKeyData ) = 0;
+    virtual IVPhysicsKeyParser	*VPhysicsKeyParserCreate( const char *pKeyData ) = 0;
 	// Free the parser created by VPhysicsKeyParserCreate
 	virtual void			VPhysicsKeyParserDestroy( IVPhysicsKeyParser *pParser ) = 0;
 
@@ -503,7 +503,7 @@ public:
 	virtual int ShouldCollide( IPhysicsObject *pObj0, IPhysicsObject *pObj1, void *pGameData0, void *pGameData1 ) = 0;
 	virtual int ShouldSolvePenetration( IPhysicsObject *pObj0, IPhysicsObject *pObj1, void *pGameData0, void *pGameData1, float dt ) = 0;
 	
-	// pObject has already done the max number of collisions this tick, should we freeze it to save CPU?
+    // pObject has already done the Max number of collisions this tick, should we freeze it to save CPU?
 	virtual bool ShouldFreezeObject( IPhysicsObject *pObject ) = 0;
 
 	// The system has already done too many collision checks, performance will suffer.
@@ -941,7 +941,7 @@ struct surfacesoundhandles_t
 struct surfacegameprops_t
 {
 // game movement data
-	float			maxSpeedFactor;			// Modulates player max speed when walking on this surface
+    float			maxSpeedFactor;			// Modulates player Max speed when walking on this surface
 	float			jumpFactor;				// Indicates how much higher the player should jump when on the surface
 // Game-specific data
 	unsigned short	material;

@@ -55,7 +55,7 @@ impactdamagetable_t gDefaultPlayerImpactDamageTable =
 	0.0f,		// large mass in kg (no large mass effects)
 	1.0f,		// large mass scale
 	2.0f,		// large mass falling scale
-	320.0f,		// min velocity for player speed to cause damage
+	320.0f,		// Min velocity for player speed to cause damage
 
 };
 
@@ -99,7 +99,7 @@ impactdamagetable_t gDefaultPlayerVehicleImpactDamageTable =
 	0,			// large mass in kg (no large mass effects)
 	1.0f,		// large mass scale
 	1.0f,		// large mass falling scale
-	0.0f,		// min vel
+	0.0f,		// Min vel
 };
 
 
@@ -142,7 +142,7 @@ impactdamagetable_t gDefaultNPCImpactDamageTable =
 	VPHYSICS_LARGE_OBJECT_MASS,		// large mass in kg 
 	4,			// large mass scale (anything over 500kg does 4X as much energy to read from damage table)
 	5,			// large mass falling scale (emphasize falling/crushing damage over sideways impacts since the stress will kill you anyway)
-	0.0f,		// min vel
+	0.0f,		// Min vel
 };
 
 //==============================================================================================
@@ -184,7 +184,7 @@ impactdamagetable_t gGlassImpactDamageTable =
 
 	50,			// large mass in kg 
 	4,			// large mass scale (anything over 50kg does 4X as much energy to read from damage table)
-	0.0f,		// min vel
+	0.0f,		// Min vel
 };
 
 //==============================================================================================
@@ -403,7 +403,7 @@ float CalculatePhysicsImpactDamage( int index, gamevcollisionevent_t *pEvent, co
 	float deltaV = pEvent->preVelocity[index].Length() - pEvent->postVelocity[index].Length();
 	float mass = pEvent->pObjects[index]->GetMass();
 
-	// If I lost speed, and I lost less than min velocity, then filter out this energy
+	// If I lost speed, and I lost less than Min velocity, then filter out this energy
 	if ( deltaV > 0 && deltaV < table.myMinVelocity )
 	{
 		deltaV = 0;

@@ -514,7 +514,7 @@ CAI_Hint *CAI_ActBusyBehavior::FindCombatActBusyHintNode()
 	//	-Is Visible (if specified by designer)
 	//	-Is Closest to me (if specified by designer)
 	//	-The player can see
-	//	-Is within the accepted max dist from player
+	//	-Is within the accepted Max dist from player
 	int iBits = bits_HINT_NODE_USE_GROUP;
 	
 	if ( m_bVisibleOnly )
@@ -1759,7 +1759,7 @@ void CAI_ActBusyBehavior::StartTask( const Task_t *pTask )
 					float flMaxTime = pBusyAnim->flMaxTime;
 					float flMinTime = pBusyAnim->flMinTime;
 
-					// Mapmaker input may have specified it's own max time
+					// Mapmaker input may have specified it's own Max time
 					if ( m_bForceActBusy && m_flForcedMaxTime != NO_MAX_TIME )
 					{
 						flMaxTime = m_flForcedMaxTime;
@@ -1771,7 +1771,7 @@ void CAI_ActBusyBehavior::StartTask( const Task_t *pTask )
 						}
 					}
 
-					// If we have no max time, or we're in a queue, we loop forever.
+					// If we have no Max time, or we're in a queue, we loop forever.
 					if ( !flMaxTime || m_bInQueue )
 					{
 						m_flEndBusyAt = 0;

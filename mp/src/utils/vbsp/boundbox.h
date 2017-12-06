@@ -53,7 +53,7 @@ class BoundBox
 
 
 //-----------------------------------------------------------------------------
-// Purpose: Gets the bounding box as two vectors, a min and a max.
+// Purpose: Gets the bounding box as two vectors, a Min and a Max.
 // Input  : Mins - Receives the box's minima.
 //			Maxs - Receives the box's maxima.
 //-----------------------------------------------------------------------------

@@ -1007,10 +1007,10 @@ int BrushMostlyOnSide (bspbrush_t *brush, plane_t *plane)
 {
 	int			i, j;
 	winding_t	*w;
-	vec_t		d, max;
+	vec_t		d, Max;
 	int			side;
 
-	max = 0;
+	Max = 0;
 	side = PSIDE_FRONT;
 	for (i=0 ; i<brush->numsides ; i++)
 	{
@@ -1020,14 +1020,14 @@ int BrushMostlyOnSide (bspbrush_t *brush, plane_t *plane)
 		for (j=0 ; j<w->numpoints ; j++)
 		{
 			d = DotProduct (w->p[j], plane->normal) - plane->dist;
-			if (d > max)
+			if (d > Max)
 			{
-				max = d;
+				Max = d;
 				side = PSIDE_FRONT;
 			}
-			if (-d > max)
+			if (-d > Max)
 			{
-				max = -d;
+				Max = -d;
 				side = PSIDE_BACK;
 			}
 		}

@@ -221,8 +221,8 @@ bool CAI_MoveSolver::Solve( const AI_MoveSuggestion_t *pSuggestions, int nSugges
 
 struct AI_MoveSuggWeights
 {
-	float min;
-	float max;
+	float Min;
+	float Max;
 };
 
 static AI_MoveSuggWeights g_AI_MoveSuggWeights[] = // @TODO (toml 06-18-02): these numbers need tuning
@@ -241,15 +241,15 @@ void CAI_MoveSolver::NormalizeSuggestions( AI_MoveSuggestion_t *pBegin, AI_MoveS
 {
 	while ( pBegin != pEnd )
 	{
-		const float min = g_AI_MoveSuggWeights[pBegin->type].min;
-		const float max = g_AI_MoveSuggWeights[pBegin->type].max;
+		const float Min = g_AI_MoveSuggWeights[pBegin->type].Min;
+		const float Max = g_AI_MoveSuggWeights[pBegin->type].Max;
 
 		Assert( pBegin->weight >= -AIMS_EPS && pBegin->weight <= 1.0 + AIMS_EPS );
 
 		if ( pBegin->weight < AIMS_EPS ) // zero normalizes to zero
 			pBegin->weight = 0.0;
 		else
-			pBegin->weight = ( ( max - min ) * pBegin->weight ) + min;
+			pBegin->weight = ( ( Max - Min ) * pBegin->weight ) + Min;
 
 		while (pBegin->arc.center < 0)
 			pBegin->arc.center += 360;

@@ -155,11 +155,11 @@ static void ComputeWorldCenter( DetailObjectLump_t& prop, Vector& center, Vector
 
 
 //-----------------------------------------------------------------------------
-// Computes max direct lighting for a single detal prop
+// Computes Max direct lighting for a single detal prop
 //-----------------------------------------------------------------------------
 static void ComputeMaxDirectLighting( DetailObjectLump_t& prop, Vector* maxcolor, int iThread )
 {
-	// The max direct lighting must be along the direction to one
+	// The Max direct lighting must be along the direction to one
 	// of the static lights....
 
 	Vector origin, normal;
@@ -205,7 +205,7 @@ static void ComputeMaxDirectLighting( DetailObjectLump_t& prop, Vector* maxcolor
 		}
 	}
 
-	// Find the max illumination
+	// Find the Max illumination
 	int i;
 	for ( i = 0; i < MAX_LIGHTSTYLES; ++i)
 	{
@@ -790,7 +790,7 @@ static void ComputeLighting( DetailObjectLump_t& prop, int iThread )
 	Vector directColor[MAX_LIGHTSTYLES];
 	Vector ambColor[MAX_LIGHTSTYLES];
 
-	// Get the max influence of all direct lights
+	// Get the Max influence of all direct lights
 	ComputeMaxDirectLighting( prop, directColor, iThread );
 
 	// Get the ambient lighting + lightstyles	  

@@ -323,7 +323,7 @@ void ProcessWorldModel (void)
 	start = Plat_FloatTime();
 	Msg("Building Faces...");
 	// this turns portals with one solid side into faces
-	// it also subdivides each face if necessary to fit max lightmap dimensions
+	// it also subdivides each face if necessary to fit Max lightmap dimensions
 	MakeFaces (tree->headnode);
 	Msg("done (%d)\n", (int)(Plat_FloatTime() - start) );
 

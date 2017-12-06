@@ -676,7 +676,7 @@ void ExtensionSet::MergeFrom(const ExtensionSet& other) {
 }
 
 void ExtensionSet::Swap(ExtensionSet* x) {
-  extensions_.swap(x->extensions_);
+  extensions_.std::swap(x->extensions_);
 }
 
 bool ExtensionSet::IsInitialized() const {
