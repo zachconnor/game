@@ -60,8 +60,6 @@ void CHudChat::OnLobbyEnter(LobbyEnter_t *pParam)
 {
     if (pParam->m_EChatRoomEnterResponse == k_EChatRoomEnterResponseSuccess)
         m_LobbyID = pParam->m_ulSteamIDLobby;
-    else
-        DevWarning("Failed to enter the chat! %d\n", pParam->m_EChatRoomEnterResponse);
 }
 
 void CHudChat::OnLobbyMessage(LobbyChatMsg_t *pParam)
@@ -97,8 +95,8 @@ void CHudChat::OnLobbyMessage(LobbyChatMsg_t *pParam)
 //-----------------------------------------------------------------------------
 // Purpose:
 // Input  : *pszName -
-//			iSize -
-//			*pbuf -
+//          iSize -
+//          *pbuf -
 //-----------------------------------------------------------------------------
 void CHudChat::MsgFunc_SayText(bf_read &msg)
 {
@@ -188,6 +186,7 @@ void CHudChat::FireGameEvent(IGameEvent *event)
     if (FStrEq(event->GetName(), "lobby_leave"))
     {
         m_LobbyID.Clear();
+        m_vTypingMembers.RemoveAll();
     }
 
     BaseClass::FireGameEvent(event);
@@ -238,8 +237,10 @@ void CHudChat::OnThink()
 
 void CHudChat::OnLobbyDataUpdate(LobbyDataUpdate_t *pParam)
 {
-    // If something other than the lobby...
-    if (pParam->m_bSuccess && pParam->m_ulSteamIDLobby != pParam->m_ulSteamIDMember)
+    // If something other than the lobby and local player...
+    if (pParam->m_bSuccess &&
+        pParam->m_ulSteamIDLobby != pParam->m_ulSteamIDMember &&
+        pParam->m_ulSteamIDMember != SteamUser()->GetSteamID().ConvertToUint64())
     {
         // Typing Status
         const char *typingText = SteamMatchmaking()->GetLobbyMemberData(m_LobbyID, pParam->m_ulSteamIDMember, LOBBY_DATA_TYPING);

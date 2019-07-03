@@ -26,10 +26,10 @@ class CTimeTriggerTraceEnum : public IEntityEnumerator
     Ray_t *m_pRay;
 };
 
-CMomentumTimer::CMomentumTimer(): CAutoGameSystemPerFrame("CMomentumTimer"), 
+CMomentumTimer::CMomentumTimer() : CAutoGameSystemPerFrame("CMomentumTimer"), 
       m_iStartTick(0), m_iEndTick(0),
-      m_iLastRunDate(0), m_bIsRunning(false), m_bWasCheatsMsgShown(false),
-      m_iTrackNumber(0), m_bShouldUseStartZoneOffset(false)
+      m_iLastRunDate(0), m_bIsRunning(false), m_bCanStart(false),
+      m_bWasCheatsMsgShown(false), m_iTrackNumber(0), m_bShouldUseStartZoneOffset(false)
 {
 
 }
@@ -75,8 +75,13 @@ bool CMomentumTimer::Start(CMomentumPlayer *pPlayer)
     if (!pPlayer)
         return false;
 
+    if (!m_bCanStart)
+    {
+        Warning("Cannot start timer, make sure to properly reset your timer by landing in the start zone!\n");
+        return false;
+    }
+
     // Perform all the checks to ensure player can start
-    // MOM_TODO: Display this info properly to client?
     if (g_pMOMSavelocSystem->IsUsingSaveLocMenu())
     {
         // MOM_TODO: Allow it based on gametype
@@ -142,8 +147,9 @@ void CMomentumTimer::Stop(CMomentumPlayer *pPlayer, bool bFinished /* = false */
 
 void CMomentumTimer::Reset(CMomentumPlayer *pPlayer)
 {
-    g_pMOMSavelocSystem->SetUsingSavelocMenu(false); // It'll get set to true if they teleport to a CP out of here
-    pPlayer->ResetRunStats();                        // Reset run stats
+    // It'll get set to true if they teleport to a CP out of here
+    g_pMOMSavelocSystem->SetUsingSavelocMenu(false);
+    pPlayer->ResetRunStats();
     pPlayer->m_Data.m_bMapFinished = false;
     pPlayer->m_Data.m_bTimerRunning = false;
 
@@ -163,6 +169,9 @@ void CMomentumTimer::Reset(CMomentumPlayer *pPlayer)
 
         g_ReplaySystem.BeginRecording();
     }
+
+    // Reset our CanStart bool
+    m_bCanStart = true;
 }
 
 void CMomentumTimer::OnPlayerSpawn(CMomentumPlayer *pPlayer)
@@ -183,7 +192,6 @@ void CMomentumTimer::OnPlayerSpawn(CMomentumPlayer *pPlayer)
 
 void CMomentumTimer::TryStart(CMomentumPlayer *pPlayer, bool bUseStartZoneOffset)
 {
-    // do not start timer if player is in practice mode or it's already running.
     if (!m_bIsRunning)
     {
         SetShouldUseStartZoneOffset(bUseStartZoneOffset);
@@ -211,6 +219,9 @@ void CMomentumTimer::TryStart(CMomentumPlayer *pPlayer, bool bUseStartZoneOffset
         {
             DispatchTimerEventMessage(pPlayer, pPlayer->entindex(), TIMER_EVENT_FAILED);
         }
+
+        // Force canStart to false regardless of starting or not
+        m_bCanStart = false;
     }
     else
     {
@@ -342,29 +353,50 @@ void CMomentumTimer::SetGameModeConVars()
     case GAMEMODE_SURF:
         sv_maxvelocity.SetValue(3500);
         sv_airaccelerate.SetValue(150);
+        sv_accelerate.SetValue(5);
         sv_maxspeed.SetValue(260);
         break;
     case GAMEMODE_BHOP:
         sv_maxvelocity.SetValue(100000);
         sv_airaccelerate.SetValue(1000);
+        sv_accelerate.SetValue(5);
         sv_maxspeed.SetValue(260);
         break;
     case GAMEMODE_KZ:
         sv_maxvelocity.SetValue(3500);
         sv_airaccelerate.SetValue(100);
+        sv_accelerate.SetValue(5);
         sv_maxspeed.SetValue(250);
+        break;
+    case GAMEMODE_TRICKSURF:
+        sv_maxvelocity.SetValue(100000);
+        sv_airaccelerate.SetValue(1000);
+        sv_accelerate.SetValue(10);
+        sv_maxspeed.SetValue(260);
         break;
     case GAMEMODE_UNKNOWN:
         sv_maxvelocity.SetValue(3500);
         sv_airaccelerate.SetValue(150);
+        sv_accelerate.SetValue(5);
         sv_maxspeed.SetValue(260);
         break;
     default:
         DevWarning("[%i] GameMode not defined.\n", gm.GetInt());
         break;
     }
-    DevMsg("CTimer set values:\nsv_maxvelocity: %i\nsv_airaccelerate: %i \nsv_maxspeed: %i\n", sv_maxvelocity.GetInt(),
-           sv_airaccelerate.GetInt(), sv_maxspeed.GetInt());
+
+    PrintGameModeConVars();
+}
+
+void CMomentumTimer::PrintGameModeConVars()
+{
+    const auto pStrToPrint = "Set game mode ConVars:\n\n"
+            "sv_maxvelocity: %i\n"
+            "sv_airaccelerate: %i\n"
+            "sv_maxspeed: %i\n"
+            "sv_gravity: %i\n"
+            "sv_friction: %i\n";
+    Msg(pStrToPrint, sv_maxvelocity.GetInt(), sv_airaccelerate.GetInt(), sv_accelerate.GetInt(), sv_maxspeed.GetInt(), sv_gravity.GetInt(), sv_friction.GetInt());
 }
 
 // Practice mode that stops the timer and allows the player to noclip.
@@ -546,6 +578,11 @@ CON_COMMAND_F(mom_stage_tele, "Teleports the player to the desired stage. Stops 
             Warning("Could not teleport to stage %i! Perhaps it doesn't exist?\n", desiredIndex);
         }
     }
+}
+
+CON_COMMAND(mom_print_gamemode_vars, "Prints out the currently set values for commands like sv_maxvelocity, airaccel, etc")
+{
+    g_pMomentumTimer->PrintGameModeConVars();
 }
 
 static CMomentumTimer s_Timer;

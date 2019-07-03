@@ -130,7 +130,7 @@ bool CAPIRequests::GetMapInfo(uint32 mapID, CallbackFunc func)
     APIRequest *req = new APIRequest;
     if (CreateAPIRequest(req, API_REQ(CFmtStr("maps/%u", mapID).Get()), k_EHTTPMethodGET))
     {
-        SteamHTTP()->SetHTTPRequestGetOrPostParameter(req->handle, "expand", "info,credits,inLibrary,inFavorites,submitter,images");
+        SteamHTTP()->SetHTTPRequestGetOrPostParameter(req->handle, "expand", "info,credits,inLibrary,inFavorites,submitter,images,personalBest,worldRecord");
         return SendAPIRequest(req, func, __FUNCTION__);
     }
     delete req;
@@ -257,7 +257,7 @@ bool CAPIRequests::EndRunSession(uint32 mapID, uint64 sessionID, const CUtlBuffe
     if (CreateAPIRequest(req, API_REQ(CFmtStr("maps/%u/session/%lld/end", mapID, sessionID).Get()), k_EHTTPMethodPOST))
     {
         SteamHTTP()->SetHTTPRequestRawPostBody(req->handle, "application/octet-stream", (uint8*) replayBuf.Base(), replayBuf.TellPut());
-        return SendAPIRequest(req, func, __FUNCTION__);
+        return SendAPIRequest(req, func, __FUNCTION__, true);
     }
 
     delete req;
@@ -305,6 +305,7 @@ HTTPRequestHandle CAPIRequests::DownloadFile(const char* pszURL, CallbackFunc si
             callback->sizeFunc = size;
             callback->progressFunc = prog;
             callback->completeFunc = end;
+            callback->m_dSentTime = Plat_FloatTime();
             if (pFileName == nullptr)
             {
                 callback->m_bSaveToFile = false;
@@ -518,6 +519,7 @@ void CAPIRequests::OnDownloadHTTPComplete(HTTPRequestCompleted_t* pCallback, boo
 
         KeyValuesAD comp("Complete");
         comp->SetUint64("request", pCallback->m_hRequest);
+        comp->SetFloat("duration", Plat_FloatTime() - call->m_dSentTime);
         if (bIO || !pCallback->m_bRequestSuccessful || pCallback->m_eStatusCode != k_EHTTPStatusCode200OK)
         {
             comp->SetBool("error", true);
@@ -554,10 +556,11 @@ void CAPIRequests::OnHTTPResp(HTTPRequestCompleted_t* pCallback, bool bIOFailure
         KeyValuesAD response(req->m_szCallingFunc);
         response->UsesEscapeSequences(true);
 
-        // Secondly, let's set the code, method, and URL of the response. Even if it's an IO error.
+        // Secondly, let's set the code, method, URL, and ping of the response. Even if it's an IO error.
         response->SetInt("code", pCallback->m_eStatusCode);
         response->SetString("method", req->m_szMethod);
         response->SetString("URL", req->m_szURL);
+        response->SetString("ping", CFmtStr("%.3f ms", (Plat_FloatTime() - req->m_dSentTime) * 1000.0f));
 
         // Thirdly, check if there are any errors
         bool bRequestOK = CheckAPIResponse(pCallback, bIOFailure);
@@ -658,11 +661,15 @@ bool CAPIRequests::CreateAPIRequest(APIRequest *request, const char* pszURL, EHT
     return request->handle != INVALID_HTTPREQUEST_HANDLE;
 }
 
-bool CAPIRequests::SendAPIRequest(APIRequest *req, CallbackFunc func, const char* pCallingFunc)
+bool CAPIRequests::SendAPIRequest(APIRequest *req, CallbackFunc func, const char* pCallingFunc, bool bPrioritize /*= false*/)
 {
     SteamAPICall_t apiHandle;
     if (SteamHTTP()->SendHTTPRequest(req->handle, &apiHandle))
     {
+        if (bPrioritize)
+            SteamHTTP()->PrioritizeHTTPRequest(req->handle);
+
+        req->m_dSentTime = Plat_FloatTime();
         Q_strncpy(req->m_szCallingFunc, pCallingFunc, sizeof(req->m_szCallingFunc));
         req->callbackFunc = func;
         req->callResult = new CCallResult<CAPIRequests, HTTPRequestCompleted_t>();

@@ -1,14 +1,11 @@
 ﻿#pragma once
 
-#ifndef GHOST_SERVER
-#include "const.h"
 #if defined(GAME_DLL) || defined(CLIENT_DLL)
 #include "shareddefs.h"
 #endif
-#endif
 
 // Main Version (0 is private alpha, 1 is public beta, 2 is full release)​.Main feature push (increment by one for each)​.​Small commits or hotfixes​
-#define MOM_CURRENT_VERSION "0.8.0"
+#define MOM_CURRENT_VERSION "0.8.1"
 
 #define MAX_TRACKS 64
 #define MAX_ZONES 64
@@ -36,8 +33,22 @@ enum MomTimerEvent_t
     TIMER_EVENT_FAILED // fired when the timer attempted to start but failed
 };
 
+enum RunSubmitState_t
+{
+    RUN_SUBMIT_UNKNOWN = 0,
+    RUN_SUBMIT_SUCCESS,
+    RUN_SUBMIT_FAIL_IN_MAPPING_MODE,
+    RUN_SUBMIT_FAIL_MAP_STATUS_INVALID,
+    RUN_SUBMIT_FAIL_SESSION_ID_INVALID,
+    RUN_SUBMIT_FAIL_API_FAIL,
+    RUN_SUBMIT_FAIL_IO_FAIL,
+
+    // Must be last
+    RUN_SUBMIT_COUNT
+};
+
 // Gamemode for momentum
-enum GAME_MODE
+enum GameMode_t
 {
     GAMEMODE_UNKNOWN = 0, // Non-recognized map (no info ents in it)
     GAMEMODE_SURF = 1,
@@ -63,7 +74,7 @@ const char * const g_szGameModes[] = {
 };
 
 // Run Flags
-enum RUN_FLAG
+enum RunFlag_t
 {
     RUNFLAG_NONE = 0,
     RUNFLAG_SCROLL = 1 << 0,
@@ -75,7 +86,7 @@ enum RUN_FLAG
     //MOM_TODO: Figure out the rest
 };
 
-enum TIME_TYPE
+enum TimeType_t
 {
     TIMES_LOCAL = 0,
     TIMES_TOP10,
@@ -86,7 +97,7 @@ enum TIME_TYPE
     TIMES_COUNT,
 };
 
-enum ONLINE_TIMES_STATUS
+enum OnlineTimesStatus_t
 {
     STATUS_TIMES_LOADED = 0,
     STATUS_TIMES_LOADING,
@@ -110,7 +121,7 @@ const char* const g_szTimesStatusStrings[] = {
     "#MOM_API_UnauthFriendsList", // STATUS_UNAUTHORIZED_FRIENDS_LIST
 };
 
-enum MAP_UPLOAD_STATUS
+enum MapUploadStatus_t
 {
     STATUS_UNKNOWN = -1,
     MAP_APPROVED,
@@ -123,7 +134,7 @@ enum MAP_UPLOAD_STATUS
     MAP_REMOVED,
 };
 
-enum MAP_CREDIT_TYPE
+enum MapCreditType_t
 {
     CREDIT_UNKNOWN = -1,
     CREDIT_AUTHOR,
@@ -132,7 +143,7 @@ enum MAP_CREDIT_TYPE
     CREDIT_SPECIAL_THANKS,
 };
 
-enum USER_ROLES
+enum UserRoles_t
 {
     USER_VERIFIED = 1 << 0,
     USER_MAPPER = 1 << 1,
@@ -140,14 +151,15 @@ enum USER_ROLES
     USER_ADMIN = 1 << 3,
 };
 
-enum USER_BANS
+enum UserBans_t
 {
-    USER_BANNED_ALIAS = 1 << 0,
-    USER_BANNED_AVATAR = 1 << 1,
-    USER_BANNED_LEADERBOARDS = 1 << 2,
+    USER_BANNED_LEADERBOARDS = 1 << 0,
+    USER_BANNED_ALIAS = 1 << 1,
+    USER_BANNED_AVATAR = 1 << 2,
+    USER_BANNED_BIO = 1 << 3,
 };
 
-enum LOBBY_MSG_TYPE
+enum LobbyMessageType_t
 {
     LOBBY_UPDATE_MEMBER_JOIN = 0,        // Joined the lobby
     LOBBY_UPDATE_MEMBER_JOIN_MAP,        // Joined your map
@@ -155,7 +167,7 @@ enum LOBBY_MSG_TYPE
     LOBBY_UPDATE_MEMBER_LEAVE_MAP,       // Left your map
 };
 
-enum SPECTATE_MSG_TYPE
+enum SpectateMessageType_t
 {
     SPEC_UPDATE_JOIN = 0,           // Started spectating
     SPEC_UPDATE_CHANGETARGET,    // Is now spectating someone else
@@ -243,5 +255,6 @@ enum SPECTATE_MSG_TYPE
 #define LOBBY_DATA_TYPING "isTyping"
 #define LOBBY_DATA_SPEC_TARGET "specTargetID"
 #define LOBBY_DATA_IS_SPEC "isSpectating"
+#define LOBBY_DATA_TYPE "type" // Use this with GetLobbyData and NOT GetLobbyMemberData!!!
 
 static const unsigned long long MOM_STEAM_GROUP_ID64 = 103582791441609755;

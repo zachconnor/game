@@ -35,9 +35,13 @@ class CMomentumGhostBaseEntity : public CBaseAnimating, public CMomRunEntity
 public:
     CMomentumGhostBaseEntity();
 
+    void TraceAttack(const CTakeDamageInfo &info, const Vector &vecDir, trace_t *ptr, CDmgAccumulator *pAccumulator) OVERRIDE;
+    int BloodColor() OVERRIDE { return BLOOD_COLOR_RED; }
+
     virtual void SetGhostBodyGroup(int bodyGroup);
     virtual void SetGhostColor(const uint32 newHexColor);
     virtual void SetGhostTrailProperties(const uint32 newHexColor, int newLen, bool enable);
+    bool ShouldCollide(int collisionGroup, int contentsMask) const OVERRIDE;
 
     virtual void SetGhostAppearance(GhostAppearance_t app, bool bForceUpdate = false);
     virtual GhostAppearance_t GetAppearance() { return m_ghostAppearance; }
@@ -57,6 +61,7 @@ public:
     void RemoveSpectator();
     CMomentumPlayer* GetCurrentSpectator() const { return m_pCurrentSpecPlayer; }
 
+    IMPLEMENT_NETWORK_VAR_FOR_DERIVED(m_fFlags);
     CNetworkString(m_szGhostName, MAX_PLAYER_NAME_LENGTH);
     CNetworkVar(int, m_nGhostButtons);
     CNetworkVar(int, m_iDisabledButtons);
@@ -88,7 +93,8 @@ protected:
     virtual void CreateTrail();
     virtual void RemoveTrail();
 
-    static bool CanUnduck(CMomentumGhostBaseEntity *pGhost);
+    bool CanUnduck();
+    void HandleDucking();
     CMomentumPlayer *m_pCurrentSpecPlayer;
     GhostAppearance_t m_ghostAppearance;
 

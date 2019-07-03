@@ -28,6 +28,8 @@ class CMomentumReplayGhostEntity : public CMomentumGhostBaseEntity, public CGame
     void UpdateStats(const Vector &ghostVel) OVERRIDE; // for hud display..
     bool IsReplayGhost() const OVERRIDE { return true; }
 
+    void GoToTick(int tick);
+
     inline void SetTickRate(float rate) { m_Data.m_flTickRate = rate; }
     inline void SetRunFlags(uint32 flags) { m_Data.m_iRunFlags = flags; }
     void SetPlaybackReplay(CMomReplayBase *pPlayback) { m_pPlaybackReplay = pPlayback; }
@@ -64,8 +66,6 @@ class CMomentumReplayGhostEntity : public CMomentumGhostBaseEntity, public CGame
     CMomReplayBase *m_pPlaybackReplay;
 
     bool m_bHasJumped;
-
-    ConVarRef m_cvarReplaySelection;
 
     // for faking strafe sync calculations
     QAngle m_angLastEyeAngle;

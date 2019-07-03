@@ -34,6 +34,21 @@ const char * const szGamemodeIcons[]
 // (some things are still updated each frame such as checking callbacks)
 #define DISCORD_FRAME_UPDATE_FREQ 600
 
+static void ToggleDiscordRPCState(IConVar *pVar, const char *pOldVal, float)
+{
+    const ConVarRef ref(pVar);
+    if (ref.GetBool())
+    {
+        g_pMomentumDiscord->DiscordInit();
+        g_pMomentumDiscord->DiscordUpdate();
+    }
+    else
+    {
+        Discord_Shutdown();
+    }
+}
+static MAKE_TOGGLE_CONVAR_C(mom_discord_enable, "1", FCVAR_ARCHIVE, "Toggles the Discord RPC functionality. 0 = OFF, 1 = ON.\n", ToggleDiscordRPCState);
+
 #ifdef DEBUG
 CON_COMMAND(mom_discord_debug, "Help debug discord integration\n")
 {
@@ -160,7 +175,7 @@ void CMomentumDiscord::LevelShutdownPreEntity()
 // Called every frame
 void CMomentumDiscord::Update(float frametime)
 {
-    if (!m_bValid)
+    if (!(m_bValid && mom_discord_enable.GetBool()))
         return;
 
     if (m_iUpdateFrame++ == DISCORD_FRAME_UPDATE_FREQ)
@@ -180,7 +195,7 @@ void CMomentumDiscord::Update(float frametime)
 // Called on game quit
 void CMomentumDiscord::Shutdown()
 {
-    if (m_bValid)
+    if (m_bValid && mom_discord_enable.GetBool())
         Discord_Shutdown();
 }
 
@@ -189,15 +204,12 @@ void CMomentumDiscord::Shutdown()
 // When a user joins a lobby
 void CMomentumDiscord::HandleLobbyEnter(LobbyEnter_t *pParam)
 {
-    if (pParam->m_EChatRoomEnterResponse != k_EChatRoomEnterResponseSuccess || pParam->m_ulSteamIDLobby == 0)
+    if (pParam->m_EChatRoomEnterResponse == k_EChatRoomEnterResponseSuccess)
     {
-        DevWarning("Failed to enter room! Error code: %i\n", pParam->m_EChatRoomEnterResponse);
-        return;
+        m_sSteamLobbyID = CSteamID(pParam->m_ulSteamIDLobby);
+        UpdateDiscordPartyIdFromSteam();
+        UpdateLobbyNumbers();
     }
-
-    m_sSteamLobbyID = CSteamID(pParam->m_ulSteamIDLobby);
-    UpdateDiscordPartyIdFromSteam();
-    UpdateLobbyNumbers();
 }
 
 void CMomentumDiscord::HandleLobbyDataUpdate(LobbyDataUpdate_t *pParam)
@@ -278,7 +290,7 @@ void CMomentumDiscord::FireGameEvent(IGameEvent *event)
         {
             Q_strncpy(m_szDiscordState, "Watching replay", sizeof(m_szDiscordState));
         }
-        else
+        else if (pPlayer->IsObserver())
         {
             Q_strncpy(m_szDiscordState, "Spectating", sizeof(m_szDiscordState));
         }
@@ -438,33 +450,28 @@ void CMomentumDiscord::UpdateDiscordPartyIdFromSteam()
 {
     if (m_sSteamLobbyID.IsValid())
     {
+        const auto lobbyID = m_sSteamLobbyID.ConvertToUint64();
+
         // The party ID is just the Steam Lobby ID
-        V_strncpy(m_szDiscordPartyId, CFmtStr("%lld", m_sSteamLobbyID.ConvertToUint64()),
-                  sizeof(m_szDiscordPartyId));
+        V_snprintf(m_szDiscordPartyId, sizeof(m_szDiscordPartyId), "%lld", lobbyID);
 
         // We could do something to further "encrypt" the secrets but it's probably fine
         if (m_sSteamUserID.IsValid())
         {
             // If we found a vaid steam user ID add it into the secret
-            V_strncpy(m_szDiscordJoinSecret,
-                      CFmtStr("J%lld;%lld", m_sSteamLobbyID.ConvertToUint64(),
-                              m_sSteamUserID.ConvertToUint64()),
-                      sizeof(m_szDiscordJoinSecret));
+            V_snprintf(m_szDiscordJoinSecret, sizeof(m_szDiscordJoinSecret), "J%lld;%lld", lobbyID, m_sSteamUserID.ConvertToUint64());
         }
         else
         {
             // Otherwise just fall back to the steam lobby ID
-            V_strncpy(m_szDiscordJoinSecret,
-                      CFmtStr("J%lld", m_sSteamLobbyID.ConvertToUint64()),
-                      sizeof(m_szDiscordJoinSecret));
+            V_snprintf(m_szDiscordJoinSecret, sizeof(m_szDiscordJoinSecret), "J%lld", lobbyID);
         }
 
         if (m_bInMap)
         {
             // If the user is in a map then add a valid spectate secret (the same as the join secret only with an 'S')
             // MOM_TODO: Check the `mom_lobby_type` cvar first
-            m_szDiscordSpectateSecret[0] = 'S';
-            V_strncpy(&m_szDiscordSpectateSecret[1], &m_szDiscordJoinSecret[1], sizeof(m_szDiscordSpectateSecret) - 1);
+            V_snprintf(m_szDiscordSpectateSecret, sizeof(m_szDiscordSpectateSecret), "S%s", &m_szDiscordJoinSecret[1]);
         }
         else
         {
@@ -506,6 +513,9 @@ void CMomentumDiscord::ClearDiscordFields(bool clearPartyFields /*=true*/)
 // Initialize the discord interface
 void CMomentumDiscord::DiscordInit()
 {
+    if (!mom_discord_enable.GetBool())
+        return;
+
     DiscordEventHandlers handlers;
     memset(&handlers, 0, sizeof(handlers));
     handlers.ready = HandleDiscordReady;
@@ -520,6 +530,9 @@ void CMomentumDiscord::DiscordInit()
 // Send an update to discord
 void CMomentumDiscord::DiscordUpdate()
 {
+    if (!mom_discord_enable.GetBool())
+        return;
+
     DiscordRichPresence discordPresence;
     memset(&discordPresence, 0, sizeof(discordPresence));
     discordPresence.state = m_szDiscordState;
@@ -571,7 +584,7 @@ void CMomentumDiscord::HandleDiscordJoin(const char *secret)
     if (secret && secret[0] == 'J')
     {
         // Get Steam Lobby ID and User ID
-        CUtlVector<char *, CUtlMemory<char *, int>> steamIDs;
+        CUtlVector<char*> steamIDs;
         V_SplitString(secret, ";", steamIDs);
 
         if (steamIDs.Count() > 0)
@@ -601,7 +614,7 @@ void CMomentumDiscord::HandleDiscordSpectate(const char *secret)
     if (secret && secret[0] == 'S')
     {
         // PurgeAndDeleteElements() must be called on this when done otherwise memory will leak
-        CUtlVector<char *, CUtlMemory<char *, int>> steamIDs;
+        CUtlVector<char*> steamIDs;
         V_SplitString(secret, ";", steamIDs);
 
         if (steamIDs.Count() != 2)
@@ -664,10 +677,6 @@ void CMomentumDiscord::HandleDiscordSpectate(const char *secret)
 void CMomentumDiscord::HandleDiscordJoinRequest(const DiscordUser *request)
 {
     DevLog("\nDiscord-RPC: join request from %s#%s - %s\n", request->username, request->discriminator, request->userId);
-
-    // Auto-accept party requests for now
-    // MOM_TODO: Prompt the player some how to deal with this, but we don't want to interrupt a run
-    Discord_Respond(request->userId, DISCORD_REPLY_YES);
 }
 
 // -------------------------------------------------------------------------- //

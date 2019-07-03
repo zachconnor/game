@@ -25,7 +25,9 @@ CON_COMMAND(mom_spectate, "Start spectating if there are ghosts currently being 
         if (args.ArgC() > 1)
         {
             uint64 target = Q_atoui64(args.Arg(1));
-            pTarget = g_pMomentumGhostClient->GetOnlineGhostEntityFromID(target);
+            const auto pGhost = g_pMomentumGhostClient->GetOnlineGhostEntityFromID(target);
+            if (pGhost && !pGhost->m_bSpectating.Get())
+                pTarget = pGhost;
         }
 
         if (!pTarget)
@@ -93,7 +95,7 @@ void CMomentumGhostClient::LevelShutdownPreEntity()
 
 void CMomentumGhostClient::FrameUpdatePreEntityThink()
 {
-    g_pMomentumLobbySystem->SendAndRecieveP2PPackets();
+    g_pMomentumLobbySystem->SendAndReceiveP2PPackets();
 }
 
 void CMomentumGhostClient::Shutdown()
@@ -123,6 +125,12 @@ void CMomentumGhostClient::SendAppearanceData(GhostAppearance_t appearance)
 {
     // MOM_TODO: g_pMomentumServerSystem->SetAppearance(appearance);
     g_pMomentumLobbySystem->SetAppearanceInMemberData(appearance);
+}
+
+void CMomentumGhostClient::SetIsSpectating(bool state)
+{
+    // MOM_TODO g_pMomentumServerSystem->SetIsSpectating(state);
+    g_pMomentumLobbySystem->SetIsSpectating(state);
 }
 
 void CMomentumGhostClient::SetSpectatorTarget(CSteamID target, bool bStartedSpectating, bool bLeft)

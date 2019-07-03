@@ -14,9 +14,8 @@
 
 #include "tier0/memdbgon.h"
 
-static MAKE_CONVAR(mom_replay_timescale, "1.0", FCVAR_NONE,
-                   "The timescale of a replay. > 1 is faster, < 1 is slower. \n", 0.01f, 10.0f);
-static MAKE_CONVAR(mom_replay_selection, "0", FCVAR_NONE, "Going forward or backward in the replayui \n", 0, 2);
+MAKE_CONVAR(mom_replay_timescale, "1.0", FCVAR_NONE, "The timescale of a replay. > 1 is faster, < 1 is slower. \n", 0.01f, 10.0f);
+MAKE_CONVAR(mom_replay_selection, "0", FCVAR_NONE, "Going forward or backward in the replayui \n", 0, 2);
 
 CMomentumReplaySystem::CMomentumReplaySystem(const char* pName):
     CAutoGameSystemPerFrame(pName), m_bRecording(false), m_bPlayingBack(false), m_pPlaybackReplay(nullptr),
@@ -236,7 +235,8 @@ void CMomentumReplaySystem::UpdateRecordingParams()
         else
         {
             // MOM_TODO just repeat the last frame created (part of the mega refactor)
-            m_pRecordingReplay->AddFrame(CReplayFrame(pPlayer->m_angLastAng, pPlayer->m_vecLastPos, pPlayer->m_fLastViewOffset, pPlayer->m_nSavedButtons, false));
+            SavedState_t *pSaved = pPlayer->GetSavedRunState();
+            m_pRecordingReplay->AddFrame(CReplayFrame(pSaved->m_angLastAng, pSaved->m_vecLastPos, pSaved->m_fLastViewOffset, pSaved->m_nButtons, false));
         }
 
         ++m_iTickCount; // increment recording tick
@@ -415,7 +415,7 @@ CON_COMMAND(mom_replay_restart, "Restarts the current spectated replay, if there
         auto pGhost = g_ReplaySystem.GetPlaybackReplay()->GetRunEntity();
         if (pGhost)
         {
-            pGhost->m_iCurrentTick = 0;
+            pGhost->GoToTick(0);
         }
     }
 }
@@ -447,12 +447,7 @@ CON_COMMAND(mom_replay_goto, "Go to a specific tick in the replay.")
         auto pGhost = g_ReplaySystem.GetPlaybackReplay()->GetRunEntity();
         if (pGhost && args.ArgC() > 1)
         {
-            int tick = Q_atoi(args[1]);
-            if (tick >= 0 && tick <= pGhost->m_iTotalTicks)
-            {
-                pGhost->m_iCurrentTick = tick;
-                pGhost->m_Data.m_bMapFinished = false;
-            }
+            pGhost->GoToTick(Q_atoi(args[1]));
         }
     }
 }
@@ -464,7 +459,7 @@ CON_COMMAND(mom_replay_goto_end, "Go to the end of the replay.")
         auto pGhost = g_ReplaySystem.GetPlaybackReplay()->GetRunEntity();
         if (pGhost)
         {
-            pGhost->m_iCurrentTick = pGhost->m_iTotalTicks - pGhost->m_Data.m_iStartTick;
+            pGhost->GoToTick(pGhost->m_iTotalTicks - pGhost->m_Data.m_iStartTick);
         }
     }
 }

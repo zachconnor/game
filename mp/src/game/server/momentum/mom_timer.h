@@ -58,6 +58,7 @@ class CMomentumTimer : public CAutoGameSystemPerFrame
     void DisablePractice(CMomentumPlayer *pPlayer);
 
     void SetGameModeConVars();
+    void PrintGameModeConVars();
 
     int GetTrackNumber() const { return m_iTrackNumber; }
 
@@ -78,6 +79,7 @@ class CMomentumTimer : public CAutoGameSystemPerFrame
     int m_iStartTick, m_iEndTick;
     time_t m_iLastRunDate;
     bool m_bIsRunning;
+    bool m_bCanStart;
     bool m_bWasCheatsMsgShown;
 
     CHandle<CTriggerTimerStart> m_hStartTriggers[MAX_TRACKS];

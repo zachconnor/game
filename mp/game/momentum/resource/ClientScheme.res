@@ -151,7 +151,7 @@ Scheme
 
 		ListPanel.TextColor					"White"
 		ListPanel.BgColor					"TransparentBlack"
-		ListPanel.SelectedTextColor			"Black"
+		ListPanel.SelectedTextColor			"White"
 		ListPanel.SelectedBgColor			"Light Blue"
 		ListPanel.SelectedOutOfFocusBgColor	"Dark Blue"
 		ListPanel.EmptyListInfoTextColor	"White"
@@ -300,8 +300,8 @@ Scheme
 				"tall"		"12"
 				"weight"	"0"
 				"antialias" "1"
-				"additive"	"1"
 				"custom"	"1"
+                "dropshadow" "1"
 			}
 		}
         
@@ -623,10 +623,10 @@ Scheme
 			{
 				"name"		"Verdana"
 				"tall"		"32"
-				"weight"	"0"
+				"weight"	"200"
 				"antialias" "1"
-				"additive"	"1"
 				"custom"	"1"
+                "dropshadow" "1"
 			}
 		}
 		HudNumbersGlow
@@ -650,9 +650,9 @@ Scheme
 				"name"		"Verdana"
 				"tall"		"16"
 				"weight"	"1000"
-				"additive"	"1"
 				"antialias" "1"
 				"custom"	"1"
+                "dropshadow" "1"
 			}
 		}
 		HudNumbersSmallBold
@@ -662,10 +662,9 @@ Scheme
 				"name"		"Verdana"
 				"tall"		"16"
 				"weight"	"1000"
-				"additive"	"1"
 				"antialias" "1"
 				"custom"	"1"
-				"bold"	"1"
+                "dropshadow" "1"
 			}
 		}
 		HudNumbersVerySmall
@@ -675,9 +674,9 @@ Scheme
 				"name"		"Verdana"
 				"tall"		"11"
 				"weight"	"1000"
-				"additive"	"1"
 				"antialias" "1"
 				"custom"	"1"
+                "dropshadow" "1"
 			}
 		}
 		HudNumbersExtremelySmall
@@ -687,9 +686,9 @@ Scheme
 				"name"		"Verdana"
 				"tall"		"9"
 				"weight"	"600"
-				"additive"	"1"
 				"antialias" "1"
 				"custom"	"1"
+                "dropshadow" "1"
 			}
 		}
 		HudNumbersSmallGlow
@@ -1251,6 +1250,28 @@ Scheme
 				}
 			}
 		}
+
+        ListPanelColumnButtonBorder
+        {
+            "inset" "0 0 0 0"
+			Top
+			{
+				"1"
+				{
+					"color" "Border.Bright"
+					"offset" "1 1"
+				}
+			}
+
+			Bottom
+			{
+				"1"
+				{
+					"color" "Border.Dark"
+					"offset" "0 0"
+				}
+			}
+        }
 		
 		ButtonBorder
 		{

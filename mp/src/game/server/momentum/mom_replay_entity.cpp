@@ -8,6 +8,7 @@
 #include "mom_player_shared.h"
 #include "run/mom_replay_base.h"
 #include "in_buttons.h"
+#include "mom_replay_system.h"
 
 #include "tier0/memdbgon.h"
 
@@ -28,7 +29,7 @@ END_DATADESC();
 CMomentumReplayGhostEntity::CMomentumReplayGhostEntity()
     : m_bIsActive(false), m_bReplayFirstPerson(false), m_pPlaybackReplay(nullptr), m_bHasJumped(false),
       m_flLastSyncVelocity(0), m_nStrafeTicks(0), m_nPerfectSyncTicks(0), m_nAccelTicks(0), m_nOldReplayButtons(0),
-      m_vecLastVel(vec3_origin), m_cvarReplaySelection("mom_replay_selection")
+      m_vecLastVel(vec3_origin)
 {
     m_RunStats.Init();
     m_bIsPaused = false;
@@ -107,7 +108,7 @@ void CMomentumReplayGhostEntity::StartRun(bool firstPerson)
 
         if (!CloseEnough(m_Data.m_flTickRate, gpGlobals->interval_per_tick, FLT_EPSILON))
         {
-            Warning("The tickrate is not equal (%f -> %f)! Stopping replay.\n", m_Data.m_flTickRate,
+            Warning("The tickrate is not equal (%f -> %f)! Stopping replay.\n", m_Data.m_flTickRate.Get(),
                     gpGlobals->interval_per_tick);
             EndRun();
             return;
@@ -137,9 +138,9 @@ void CMomentumReplayGhostEntity::UpdateStep(int Skip)
 
     if (m_bIsPaused)
     {
-        if (ConVarRef("mom_replay_selection").GetInt() == 1)
+        if (mom_replay_selection.GetInt() == 1)
             m_iCurrentTick -= Skip;
-        else if (ConVarRef("mom_replay_selection").GetInt() == 2)
+        else if (mom_replay_selection.GetInt() == 2)
             m_iCurrentTick += Skip;
     }
     else
@@ -180,7 +181,7 @@ void CMomentumReplayGhostEntity::Think()
         }
     }
 
-    float m_flTimeScale = ConVarRef("mom_replay_timescale").GetFloat();
+    float fTimeScale = mom_replay_timescale.GetFloat();
 
     // move the ghost
     if (m_iCurrentTick < 0 || m_iCurrentTick + 1 >= m_iTotalTicks)
@@ -191,7 +192,7 @@ void CMomentumReplayGhostEntity::Think()
     }
     else
     {
-        if (m_flTimeScale <= 1.0f)
+        if (fTimeScale <= 1.0f)
             UpdateStep(1);
         else
         {
@@ -202,10 +203,10 @@ void CMomentumReplayGhostEntity::Think()
             // We do it this way, because SetNextThink / engine doesn't allow faster updates at this timescale.
 
             // Calculate our next step
-            int iNextStep = static_cast<int>(m_flTimeScale) + 1;
+            int iNextStep = static_cast<int>(fTimeScale) + 1;
 
             // Calculate the average of ticks that will be used for the next step or the current one
-            float fTicksAverage = (1.0f - (static_cast<float>(iNextStep) - m_flTimeScale));
+            float fTicksAverage = (1.0f - (static_cast<float>(iNextStep) - fTimeScale));
 
             // If it's null, then we just run the current step
             if (fTicksAverage == 0.0f)
@@ -290,9 +291,9 @@ void CMomentumReplayGhostEntity::Think()
             HandleGhost();
     }
 
-    if (m_flTimeScale <= 1.0f)
+    if (fTimeScale <= 1.0f)
     {
-        SetNextThink(gpGlobals->curtime + gpGlobals->interval_per_tick * (1.0f / m_flTimeScale));
+        SetNextThink(gpGlobals->curtime + gpGlobals->interval_per_tick * (1.0f / fTimeScale));
     }
     else
     {
@@ -327,20 +328,18 @@ void CMomentumReplayGhostEntity::HandleGhostFirstPerson()
         }
         else*/
         {
-            // Otherwhise process normally.
+            // Otherwise process normally.
             nextStep = GetNextStep();
             currentStep = GetCurrentStep();
             prevStep = GetPreviousStep();
 
         }
-
         SetAbsOrigin(currentStep->PlayerOrigin());
 
         QAngle angles = currentStep->EyeAngles();
 
         if (m_pCurrentSpecPlayer->GetObserverMode() == OBS_MODE_IN_EYE)
         {
-            SetAbsAngles(angles);
             // don't render the model when we're in first person mode
             if (GetRenderMode() != kRenderNone)
             {
@@ -351,7 +350,7 @@ void CMomentumReplayGhostEntity::HandleGhostFirstPerson()
         else
         {
             // we divide x angle (pitch) by 10 so the ghost doesn't look really stupid
-            SetAbsAngles(QAngle(angles.x / 10, angles.y, angles.z));
+            angles.x /= 10.0f;
 
             // remove the nodraw effects
             if (GetRenderMode() != kRenderTransColor)
@@ -361,14 +360,14 @@ void CMomentumReplayGhostEntity::HandleGhostFirstPerson()
             }
         }
 
+        SetAbsAngles(angles);
 
-        bool bTeleportedThisFrame = (m_cvarReplaySelection.GetInt() == 1) // Going backwards?
+        bool bTeleportedThisFrame = (mom_replay_selection.GetInt() == 1) // Going backwards?
             ? prevStep->Teleported() : currentStep->Teleported();
 
         bool bTeleportedNextFrame = nextStep->Teleported();
 
         Vector interpolatedVel;
-        const float maxvel = sv_maxvelocity.GetFloat();
 
         if (!bTeleportedNextFrame)
         {
@@ -393,11 +392,10 @@ void CMomentumReplayGhostEntity::HandleGhostFirstPerson()
             // Fix teleporting being interpolated.
             IncrementInterpolationFrame();
         }
-
-
-        // Fixes an issue with teleporting
-        if (interpolatedVel.x <= maxvel && interpolatedVel.y <= maxvel && interpolatedVel.z <= maxvel)
+        else
+        {
             SetAbsVelocity(interpolatedVel);
+        }
 
         // networked var that allows the replay to control keypress display on the client
         m_nGhostButtons = currentStep->PlayerButtons();
@@ -407,23 +405,7 @@ void CMomentumReplayGhostEntity::HandleGhostFirstPerson()
 
         SetViewOffset(Vector(0, 0, currentStep->PlayerViewOffset()));
 
-        bool isDucking = (GetFlags() & FL_DUCKING) != 0;
-        if (m_nGhostButtons & IN_DUCK)
-        {
-            if (!isDucking)
-            {
-                SetCollisionBounds(VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
-                AddFlag(FL_DUCKING);
-            }
-        }
-        else
-        {
-            if (CanUnduck(this) && isDucking)
-            {
-                SetCollisionBounds(VEC_HULL_MIN, VEC_HULL_MAX);
-                RemoveFlag(FL_DUCKING);
-            }
-        }
+        HandleDucking();
     }
 }
 
@@ -517,6 +499,26 @@ void CMomentumReplayGhostEntity::UpdateStats(const Vector &ghostVel)
     m_nOldReplayButtons = currentStep->PlayerButtons();
 }
 
+void CMomentumReplayGhostEntity::GoToTick(int tick)
+{
+    if (tick >= 0 && tick <= m_iTotalTicks)
+    {
+        m_iCurrentTick = tick;
+        m_Data.m_bMapFinished = false;
+
+        // Teleport to the new tick
+        CReplayFrame *pNewStep = m_pPlaybackReplay->GetFrame(tick);
+        if (pNewStep)
+        {
+            Vector origin = pNewStep->PlayerOrigin();
+            QAngle eyes = pNewStep->EyeAngles();
+            Teleport(&origin, &eyes, nullptr);
+            PhysicsCheckForEntityUntouch();
+            // Entity will get full update next Think
+        }
+    }
+}
+
 void CMomentumReplayGhostEntity::EndRun()
 {
     m_bIsActive = false;
@@ -542,7 +544,7 @@ CReplayFrame *CMomentumReplayGhostEntity::GetNextStep()
 {
     int nextStep = m_iCurrentTick;
 
-    if ((m_cvarReplaySelection.GetInt() == 1) && m_bIsPaused)
+    if (mom_replay_selection.GetInt() == 1 && m_bIsPaused)
     {
         --nextStep;
 
@@ -562,7 +564,7 @@ CReplayFrame *CMomentumReplayGhostEntity::GetPreviousStep()
 {
     int nextStep = m_iCurrentTick;
 
-    if ((m_cvarReplaySelection.GetInt() == 1) && m_bIsPaused)
+    if (mom_replay_selection.GetInt() == 1 && m_bIsPaused)
     {
         ++nextStep;
 

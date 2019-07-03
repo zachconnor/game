@@ -60,14 +60,11 @@ class CLeaderboardsTimes : public vgui::EditablePanel
     CUtlMap<HTTPRequestHandle, uint64> m_mapReplayDownloads;
 
     // Sets up the icons used in the leaderboard
-    void SetupIcons();
+    void SetupDefaultIcons();
 
     // Attempts to add the avatar for a given steam ID to the given image list, if it doesn't exist already
     // exist in the given ID to index map.
     int TryAddAvatar(const uint64 &steamID, CUtlMap<uint64, int> *pMap, vgui::ImageList *pList);
-
-    // Updates an online player's avatar image
-    void UpdateLeaderboardPlayerAvatar(uint64, KeyValues *kv);
 
     bool m_bUnauthorizedFriendlist;
     // widths[0] == WIDTH FOR DATE
@@ -77,13 +74,12 @@ class CLeaderboardsTimes : public vgui::EditablePanel
 
     // methods
     void FillLeaderboards(bool bFullUpdate);
-    void SetPlaceColors(vgui::SectionedListPanel* panel, TIME_TYPE type) const;
+    void SetPlaceColors(vgui::SectionedListPanel* panel, TimeType_t type) const;
     void LoadLocalTimes(KeyValues *kv);
-    void LoadOnlineTimes(TIME_TYPE type);
+    void LoadOnlineTimes(TimeType_t type);
     void ConvertLocalTimes(KeyValues *pKv);
-    void ConvertOnlineTimes(KeyValues *kv, float seconds);
     // Place vector times into leaderboards panel (sectionlist)
-    void OnlineTimesVectorToLeaderboards(TIME_TYPE type);
+    void OnlineTimesVectorToLeaderboards(TimeType_t type);
 
     bool GetPlayerTimes(KeyValues *outPlayerInfo, bool fullUpdate);
     
@@ -96,12 +92,12 @@ class CLeaderboardsTimes : public vgui::EditablePanel
     // finds a local time in the scoreboard
     int FindItemIDForLocalTime(KeyValues *kvRef);
     // finds an online time in the scoreboard
-    int FindItemIDForOnlineTime(uint64 runID, TIME_TYPE type);
+    int FindItemIDForOnlineTime(uint64 runID, TimeType_t type);
 
     void GetTop10TimesCallback(KeyValues *pKv);
     void GetFriendsTimesCallback(KeyValues *pKv);
     void GetAroundTimesCallback(KeyValues *pKv);
-    void ParseTimesCallback(KeyValues *pKv, TIME_TYPE type);
+    void ParseTimesCallback(KeyValues *pKv, TimeType_t type);
 
     // Replay downloading
     void OnReplayDownloadStart(KeyValues *pKv);
@@ -136,17 +132,17 @@ private:
     bool m_bTimesLoading[TIMES_COUNT];
     float m_flTimesLastUpdate[TIMES_COUNT];
 
-    ONLINE_TIMES_STATUS m_eTimesStatus[TIMES_COUNT];
+    OnlineTimesStatus_t m_eTimesStatus[TIMES_COUNT];
 
-    enum LEADERBOARD_ICONS
+    enum LeaderboardIconIndex_t
     {
-        ICON_VIP,
+        ICON_VIP = 0,
         ICON_TEAMMEMBER,
         ICON_FRIEND,
+        ICON_DEFAULT_AVATAR,
 
         ICON_TOTAL // Used to control the amount of icons available
     };
-    int m_IconsIndex[ICON_TOTAL];
 
     Color m_cFirstPlace, m_cSecondPlace, m_cThirdPlace;
 

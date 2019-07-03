@@ -148,11 +148,13 @@ static CMomentumPlayer *s_pPlayer = nullptr;
 
 CMomentumPlayer::CMomentumPlayer()
     : m_duckUntilOnGround(false), m_flStamina(0.0f),
-      m_flLastVelocity(0.0f), m_nPerfectSyncTicks(0), m_nStrafeTicks(0), m_nAccelTicks(0), m_bPrevTimerRunning(false),
+      m_flLastVelocity(0.0f), m_nPerfectSyncTicks(0), m_nStrafeTicks(0), m_nAccelTicks(0),
       m_nPrevButtons(0), m_flTweenVelValue(1.0f), m_bInAirDueToJump(false), m_iProgressNumber(-1)
 {
     m_flPunishTime = -1;
     m_iLastBlock = -1;
+    m_iOldTrack = 0;
+    m_iOldZone = 0;
 
     m_bWasSpectating = false;
 
@@ -353,18 +355,17 @@ void CMomentumPlayer::Spawn()
 
     m_bAllowUserTeleports = true;
 
-    // Handle resetting only if we weren't spectating
+    // Handle resetting only if we weren't spectating nor have practice mode
     if (m_bWasSpectating)
     {
-        RestoreRunState();
+        RestoreRunState(false);
         m_bWasSpectating = false;
     }
-    else
+    else if (!m_bHasPracticeMode)
     {
         m_Data.m_bIsInZone = false;
         m_Data.m_bMapFinished = false;
         m_Data.m_iCurrentZone = 0;
-        m_bHasPracticeMode = false;
         m_bPreventPlayerBhop = false;
         m_iLandTick = 0;
         ResetRunStats();
@@ -374,8 +375,10 @@ void CMomentumPlayer::Spawn()
             ClearStartMark(i);
         }
 
-        g_MapZoneSystem.DispatchNoZonesMsg(this);
+        g_MapZoneSystem.DispatchMapInfo(this);
     }
+
+    SetPracticeModeState();
 
     RegisterThinkContext("THINK_EVERY_TICK");
     RegisterThinkContext("THINK_AVERAGE_STATS");
@@ -459,18 +462,17 @@ void CMomentumPlayer::OnJump()
     m_Data.m_flLastJumpZPos = GetLocalOrigin().z;
     m_iSuccessiveBhops++;
 
-    if (m_Data.m_bIsInZone && m_Data.m_iCurrentZone == 1 && m_bStartTimerOnJump)
-    {
-        g_pMomentumTimer->TryStart(this, false);
-    }
-
     // Set our runstats jump count
     if (g_pMomentumTimer->IsRunning())
     {
         const int currentZone = m_Data.m_iCurrentZone;
         m_RunStats.SetZoneJumps(0, m_RunStats.GetZoneJumps(0) + 1); // Increment total jumps
-        m_RunStats.SetZoneJumps(currentZone,
-                                         m_RunStats.GetZoneJumps(currentZone) + 1); // Increment zone jumps
+        m_RunStats.SetZoneJumps(currentZone, m_RunStats.GetZoneJumps(currentZone) + 1); // Increment zone jumps
+    }
+    else if (m_Data.m_bIsInZone && m_Data.m_iCurrentZone == 1 && m_bStartTimerOnJump)
+    {
+        // Jumps are incremented in this method
+        g_pMomentumTimer->TryStart(this, false);
     }
 }
 
@@ -478,7 +480,7 @@ void CMomentumPlayer::OnLand()
 {
     m_iLandTick = gpGlobals->tickcount;
 
-    if (m_Data.m_bIsInZone && m_Data.m_iCurrentZone == 1)
+    if (m_Data.m_bIsInZone && m_Data.m_iCurrentZone == 1 && GetMoveType() == MOVETYPE_WALK && !m_bHasPracticeMode)
     {
         // If we start timer on jump then we should reset on land
         g_pMomentumTimer->Reset(this);
@@ -837,16 +839,27 @@ void CMomentumPlayer::OnZoneEnter(CTriggerZone *pTrigger)
             m_iLimitSpeedType = pStartTrigger->GetLimitSpeedType();
             m_bShouldLimitPlayerSpeed = pStartTrigger->IsLimitingSpeed();
 
-            // Reset timer when we enter start zone
             SetCurrentZoneTrigger(pStartTrigger);
             SetCurrentProgressTrigger(pStartTrigger);
-            g_pMomentumTimer->Reset(this);
+
+            // Limit to 260 if timer is not running and we're not in practice mode
+            if (!(g_pMomentumTimer->IsRunning() || m_bHasPracticeMode))
+                LimitSpeed(260.0f, false);
+
+            // When we start on jump, we reset on land (see OnLand)
+            // If we're already on ground we can safely reset now
+            if (GetFlags() & FL_ONGROUND && GetMoveType() == MOVETYPE_WALK && !m_bHasPracticeMode)
+            {
+                g_pMomentumTimer->Reset(this);
+            }
         }
         break;
         case ZONE_TYPE_STOP:
         {
             // We've reached end zone, stop here
             //auto pStopTrigger = static_cast<CTriggerTimerStop *>(pTrigger);
+            m_iOldTrack = m_Data.m_iCurrentTrack;
+            m_iOldZone = m_Data.m_iCurrentZone;
 
             if (g_pMomentumTimer->IsRunning())
             {
@@ -943,6 +956,8 @@ void CMomentumPlayer::OnZoneExit(CTriggerZone *pTrigger)
         switch (pTrigger->GetZoneType())
         {
         case ZONE_TYPE_STOP:
+            m_Data.m_iCurrentTrack = m_iOldTrack;
+            m_Data.m_iCurrentZone = m_iOldZone;
             SetLaggedMovementValue(1.0f); // Reset slow motion
             break;
         case ZONE_TYPE_CHECKPOINT:
@@ -950,20 +965,11 @@ void CMomentumPlayer::OnZoneExit(CTriggerZone *pTrigger)
         case ZONE_TYPE_START:
             // g_pMomentumTimer->CalculateTickIntervalOffset(this, ZONE_TYPE_START, 1);
             g_pMomentumTimer->TryStart(this, true);
-            if (m_bShouldLimitPlayerSpeed)
+            if (m_bShouldLimitPlayerSpeed && !m_bHasPracticeMode)
             {
                 const auto pStart = static_cast<CTriggerTimerStart*>(pTrigger);
-                Vector vecNewVelocity = GetAbsVelocity();
 
-                const float flMaxSpeed = pStart->GetSpeedLimit();
-
-                if (vecNewVelocity.Length2D() > flMaxSpeed)
-                {
-                    VectorNormalizeFast(vecNewVelocity);
-
-                    vecNewVelocity *= flMaxSpeed;
-                    SetAbsVelocity(vecNewVelocity);
-                }
+                LimitSpeed(pStart->GetSpeedLimit(), true);
             }
             m_bShouldLimitPlayerSpeed = false;
             // No break here, we want to fall through; this handles both the start and stage triggers
@@ -1013,7 +1019,7 @@ void CMomentumPlayer::UpdateRunStats()
     if (!m_bHasPracticeMode)
     {
         // ---- Jumps and Strafes ----
-        UpdateJumpStrafes();
+        UpdateStrafes();
 
         //  ---- MAX VELOCITY ----
         UpdateMaxVelocity();
@@ -1033,7 +1039,8 @@ void CMomentumPlayer::UpdateRunStats()
 
 void CMomentumPlayer::UpdateRunSync()
 {
-    if (g_pMomentumTimer->IsRunning() || (ConVarRef("mom_hud_strafesync_draw").GetInt() == 2))
+    static ConVarRef sync("mom_hud_strafesync_draw");
+    if (g_pMomentumTimer->IsRunning() || (sync.GetInt() == 2))
     {
         if (!(GetFlags() & (FL_ONGROUND | FL_INWATER)) && GetMoveType() != MOVETYPE_LADDER)
         {
@@ -1072,27 +1079,12 @@ void CMomentumPlayer::UpdateRunSync()
     }
 }
 
-void CMomentumPlayer::UpdateJumpStrafes()
+void CMomentumPlayer::UpdateStrafes()
 {
     if (!g_pMomentumTimer->IsRunning())
         return;
 
-    int currentZone = m_Data.m_iCurrentZone;
-    if (!m_bPrevTimerRunning) // timer started on this tick
-    {
-        // Compare against successive bhops to avoid incrimenting when the player was in the air without jumping
-        // (for surf)
-        if (GetGroundEntity() == nullptr && m_iSuccessiveBhops)
-        {
-            m_RunStats.SetZoneJumps(0, m_RunStats.GetZoneJumps(0) + 1);
-            m_RunStats.SetZoneJumps(currentZone, m_RunStats.GetZoneJumps(currentZone) + 1);
-        }
-        if (m_nButtons & IN_MOVERIGHT || m_nButtons & IN_MOVELEFT)
-        {
-            m_RunStats.SetZoneStrafes(0, m_RunStats.GetZoneStrafes(0) + 1);
-            m_RunStats.SetZoneStrafes(currentZone, m_RunStats.GetZoneStrafes(currentZone) + 1);
-        }
-    }
+    const auto currentZone = m_Data.m_iCurrentZone;
     if (m_nButtons & IN_MOVELEFT && !(m_nPrevButtons & IN_MOVELEFT))
     {
         m_RunStats.SetZoneStrafes(0, m_RunStats.GetZoneStrafes(0) + 1);
@@ -1104,7 +1096,6 @@ void CMomentumPlayer::UpdateJumpStrafes()
         m_RunStats.SetZoneStrafes(currentZone, m_RunStats.GetZoneStrafes(currentZone) + 1);
     }
 
-    m_bPrevTimerRunning = g_pMomentumTimer->IsRunning();
     m_nPrevButtons = m_nButtons;
 }
 
@@ -1186,6 +1177,25 @@ void CMomentumPlayer::CalculateAverageStats()
 
     // think once per 0.1 second interval so we avoid making the totals extremely large
     SetNextThink(gpGlobals->curtime + AVERAGE_STATS_INTERVAL, "THINK_AVERAGE_STATS");
+}
+
+void CMomentumPlayer::LimitSpeed(float flSpeedLimit, bool bSaveZ)
+{
+    auto vecNewVelocity = GetAbsVelocity();
+
+    if (vecNewVelocity.Length2D() > flSpeedLimit)
+    {
+        const auto fSavedZ = vecNewVelocity.z;
+        vecNewVelocity.z = 0;
+        VectorNormalizeFast(vecNewVelocity);
+
+        vecNewVelocity *= flSpeedLimit;
+
+        if (bSaveZ)
+            vecNewVelocity.z = fSavedZ;
+
+        SetAbsVelocity(vecNewVelocity);
+    }
 }
 
 // override of CBasePlayer::IsValidObserverTarget that allows us to spectate ghosts
@@ -1502,8 +1512,10 @@ bool CMomentumPlayer::StartObserverMode(int mode)
 {
     if (m_iObserverMode == OBS_MODE_NONE)
     {
-        SaveCurrentRunState();
+        SaveCurrentRunState(false);
         FIRE_GAME_WIDE_EVENT("spec_start");
+
+        g_pMomentumGhostClient->SetIsSpectating(true);
     }
 
     return BaseClass::StartObserverMode(mode);
@@ -1514,6 +1526,8 @@ void CMomentumPlayer::StopObserverMode()
     if (m_iObserverMode > OBS_MODE_NONE)
     {
         FIRE_GAME_WIDE_EVENT("spec_stop");
+
+        g_pMomentumGhostClient->SetIsSpectating(false);
     }
 
     BaseClass::StopObserverMode();
@@ -1530,7 +1544,6 @@ void CMomentumPlayer::StopSpectating()
     StopObserverMode();
     m_hObserverTarget.Set(nullptr);
     ForceRespawn();
-    SetMoveType(MOVETYPE_WALK);
 
     // Update the lobby/server if there is one
     m_sSpecTargetSteamID.Clear(); // reset steamID when we stop spectating
@@ -1548,6 +1561,25 @@ void CMomentumPlayer::TogglePracticeMode()
         EnablePracticeMode();
 }
 
+void CMomentumPlayer::SetPracticeModeState()
+{
+    if (m_bHasPracticeMode)
+    {
+        SetParent(nullptr);
+        SetMoveType(MOVETYPE_NOCLIP);
+        if (!IsEFlagSet(EFL_NOCLIP_ACTIVE))
+            ClientPrint(this, HUD_PRINTCONSOLE, "Practice mode ON!\n");
+        AddEFlags(EFL_NOCLIP_ACTIVE);
+    }
+    else
+    {
+        SetMoveType(MOVETYPE_WALK);
+        if (IsEFlagSet(EFL_NOCLIP_ACTIVE))
+            ClientPrint(this, HUD_PRINTCONSOLE, "Practice mode OFF!\n");
+        RemoveEFlags(EFL_NOCLIP_ACTIVE);
+    }
+}
+
 void CMomentumPlayer::EnablePracticeMode()
 {
     if (g_pMomentumTimer->IsRunning() && mom_practice_safeguard.GetBool())
@@ -1561,16 +1593,13 @@ void CMomentumPlayer::EnablePracticeMode()
         }
     }
 
-    SetParent(nullptr);
-    SetMoveType(MOVETYPE_NOCLIP);
-    ClientPrint(this, HUD_PRINTCONSOLE, "Practice mode ON!\n");
-    AddEFlags(EFL_NOCLIP_ACTIVE);
     m_bHasPracticeMode = true;
+    SetPracticeModeState();
 
     // This is outside the isRunning check because if you practice mode -> tele to start -> toggle -> start run,
     // the replay file doesn't have your "last" position, so we just save it regardless of timer state, but only restore
     // it if in a run.
-    SaveCurrentRunState();
+    SaveCurrentRunState(true);
 
     g_pMomentumTimer->EnablePractice(this);
 
@@ -1584,15 +1613,17 @@ void CMomentumPlayer::EnablePracticeMode()
 
 void CMomentumPlayer::DisablePracticeMode()
 {
-    RemoveEFlags(EFL_NOCLIP_ACTIVE);
-    ClientPrint(this, HUD_PRINTCONSOLE, "Practice mode OFF!\n");
-    SetMoveType(MOVETYPE_WALK);
     m_bHasPracticeMode = false;
+    SetPracticeModeState();
 
     // Only when timer is running
     if (g_pMomentumTimer->IsRunning())
     {
-        RestoreRunState();
+        RestoreRunState(true);
+    }
+    else if (m_Data.m_bIsInZone && m_Data.m_iCurrentZone == 1)
+    {
+        LimitSpeed(0.0f, false);
     }
 
     g_pMomentumTimer->DisablePractice(this);
@@ -1605,33 +1636,67 @@ void CMomentumPlayer::DisablePracticeMode()
     }
 }
 
-void CMomentumPlayer::SaveCurrentRunState()
+void CMomentumPlayer::SaveCurrentRunState(bool bFromPractice)
 {
-    m_nSavedButtons = m_nButtons;
-    m_Data.m_iOldTrack = m_Data.m_iCurrentTrack;
-    m_Data.m_iOldZone = m_Data.m_iCurrentZone;
-    m_vecLastPos = GetAbsOrigin();
-    m_angLastAng = GetAbsAngles();
-    m_vecLastVelocity = GetAbsVelocity();
-    m_fLastViewOffset = GetViewOffset().z;
-    m_nSavedAccelTicks = m_nAccelTicks;
-    m_nSavedPerfectSyncTicks = m_nPerfectSyncTicks;
-    m_nSavedStrafeTicks = m_nStrafeTicks;
+    SavedState_t *pState;
+    if (bFromPractice)
+    {
+        pState = &m_SavedRunState;
+    }
+    else
+    {
+        if (m_bHasPracticeMode)
+            pState = &m_PracticeModeState;
+        else
+            pState = &m_SavedRunState;
+    }
+
+    pState->m_nButtons = m_nButtons;
+    pState->m_vecLastPos = GetAbsOrigin();
+    pState->m_angLastAng = GetAbsAngles();
+    pState->m_vecLastVelocity = GetAbsVelocity();
+    pState->m_fLastViewOffset = GetViewOffset().z;
+
+    if (bFromPractice || !m_bHasPracticeMode)
+    {
+        m_iOldTrack = m_Data.m_iCurrentTrack;
+        m_iOldZone = m_Data.m_iCurrentZone;
+        pState->m_nSavedAccelTicks = m_nAccelTicks;
+        pState->m_nSavedPerfectSyncTicks = m_nPerfectSyncTicks;
+        pState->m_nSavedStrafeTicks = m_nStrafeTicks;
+    }
 }
 
-void CMomentumPlayer::RestoreRunState()
+void CMomentumPlayer::RestoreRunState(bool bFromPractice)
 {
-    m_nButtons = m_nSavedButtons;
-    m_Data.m_iCurrentTrack = m_Data.m_iOldTrack;
-    m_Data.m_iCurrentZone = m_Data.m_iOldZone;
-    // Teleport calls SnapEyeAngles, don't worry
-    Teleport(&m_vecLastPos, &m_angLastAng, &m_vecLastVelocity);
-    SetViewOffset(Vector(0, 0, m_fLastViewOffset));
-    SetLastEyeAngles(m_angLastAng);
+    SavedState_t *pState;
 
-    m_nAccelTicks = m_nSavedAccelTicks;
-    m_nPerfectSyncTicks = m_nSavedPerfectSyncTicks;
-    m_nStrafeTicks = m_nSavedStrafeTicks;
+    if (bFromPractice)
+    {
+        pState = &m_SavedRunState;
+    }
+    else
+    {
+        if (m_bHasPracticeMode)
+            pState = &m_PracticeModeState;
+        else
+            pState = &m_SavedRunState;
+    }
+
+    m_nButtons = pState->m_nButtons;
+    // Teleport calls SnapEyeAngles, don't worry
+    Teleport(&pState->m_vecLastPos, &pState->m_angLastAng, &pState->m_vecLastVelocity);
+    SetViewOffset(Vector(0, 0, pState->m_fLastViewOffset));
+    SetLastEyeAngles(pState->m_angLastAng);
+
+    if (bFromPractice || !m_bHasPracticeMode)
+    {
+        m_Data.m_iCurrentTrack = m_iOldTrack;
+        m_Data.m_iCurrentZone = m_iOldZone;
+        m_nAccelTicks = pState->m_nSavedAccelTicks;
+        m_nPerfectSyncTicks = pState->m_nSavedPerfectSyncTicks;
+        m_nStrafeTicks = pState->m_nSavedStrafeTicks;
+    }
 }
 
 void CMomentumPlayer::PostThink()

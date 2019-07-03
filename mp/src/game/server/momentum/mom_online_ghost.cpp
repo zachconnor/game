@@ -164,7 +164,7 @@ void CMomentumOnlineGhostEntity::DoPaint(const DecalPacket_t& packet)
             if (!shootsound || !shootsound[0])
                 return;
 
-            CBroadcastRecipientFilter filter;
+            CPASAttenuationFilter filter(packet.vOrigin, shootsound);
             if (!te->CanPredict())
                 return;
 
@@ -312,23 +312,7 @@ void CMomentumOnlineGhostEntity::HandleGhostFirstPerson()
         if (m_pCurrentSpecPlayer->GetObserverMode() == OBS_MODE_IN_EYE)
         {
             HideGhost();
-            bool isDucking = (GetFlags() & FL_DUCKING) != 0;
-            if (m_nGhostButtons & IN_DUCK)
-            {
-                if (!isDucking)
-                {
-                    SetCollisionBounds(VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
-                    AddFlag(FL_DUCKING);
-                }
-            }
-            else
-            {
-                if (CanUnduck(this) && isDucking)
-                {
-                    SetCollisionBounds(VEC_HULL_MIN, VEC_HULL_MAX);
-                    RemoveFlag(FL_DUCKING);
-                }
-            }
+            HandleDucking();
         }
         else
         {
@@ -373,6 +357,20 @@ void CMomentumOnlineGhostEntity::UpdateStats(const Vector &vel)
             (float(m_nAccelTicks) / float(m_nStrafeTicks)) * 100.0f; // ticks gaining speed / ticks strafing
     }
     */
+}
+
+bool CMomentumOnlineGhostEntity::GetCurrentPositionPacketData(PositionPacket_t *out) const
+{
+    if (out && !m_bSpectating.Get())
+    {
+        out->Position = GetAbsOrigin();
+        out->Velocity = GetAbsVelocity();
+        out->EyeAngle = m_vecLookAngles;
+        out->Buttons = m_nGhostButtons;
+        out->ViewOffset = GetViewOffset().z;
+        return true;
+    }
+    return false;
 }
 
 void CMomentumOnlineGhostEntity::UpdatePlayerSpectate()

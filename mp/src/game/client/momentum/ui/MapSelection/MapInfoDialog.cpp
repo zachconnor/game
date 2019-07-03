@@ -56,8 +56,8 @@ CDialogMapInfo::CDialogMapInfo(Panel *parent, MapData *pMapData) : Frame(parent,
     m_pAroundButton = new Button(this, "AroundToggle", "#MOM_Leaderboards_Around", this, "Around");
     m_pFriendsButton = new Button(this, "FriendsToggle", "#MOM_Leaderboards_Friends", this, "Friends");
 
-    LoadControlSettings("resource/ui/MapSelector/DialogMapInfo.res");
-    m_pMapInfoPanel->LoadControlSettings("resource/ui/MapSelector/MapInformationPanel.res");
+    LoadControlSettings("resource/ui/mapselector/DialogMapInfo.res");
+    m_pMapInfoPanel->LoadControlSettings("resource/ui/mapselector/MapInformationPanel.res");
 
     m_pTop10Button->SetStaySelectedOnClick(true);
     m_pAroundButton->SetStaySelectedOnClick(true);
@@ -277,7 +277,7 @@ void CDialogMapInfo::FillMapInfo()
     }
 }
 
-void CDialogMapInfo::GetMapTimes(TIME_TYPE type)
+void CDialogMapInfo::GetMapTimes(TimeType_t type)
 {
     if (gpGlobals->curtime - UPDATE_INTERVAL < m_fRequestDelays[type])
         return;
@@ -317,7 +317,7 @@ void CDialogMapInfo::OnFriendsTimesCallback(KeyValues* pKvResponse)
     ParseAPITimes(pKvResponse, TIMES_FRIENDS);
 }
 
-void CDialogMapInfo::ParseAPITimes(KeyValues *pKvResponse, TIME_TYPE type)
+void CDialogMapInfo::ParseAPITimes(KeyValues *pKvResponse, TimeType_t type)
 {
     KeyValues *pData = pKvResponse->FindKey("data");
     KeyValues *pErr = pKvResponse->FindKey("error");

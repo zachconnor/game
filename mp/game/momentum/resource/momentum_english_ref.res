@@ -21,9 +21,9 @@
         "MOM_Controls_StopTimer" "Stop the timer"
         "MOM_Controls_ToggleSavelocMenu" "Toggle showing Saved Locations Menu"
         "MOM_Controls_Practice" "Toggle Practice Mode"
-        "MOM_Controls_ToggleTimes" "Toggle showing leaderboards"
+        "MOM_Controls_ToggleTimes" "Show leaderboards"
         "MOM_Controls_Drop" "Drop current weapon"
-        "MOM_Controls_ToggleLobbyMembers" "Toggle showing lobby members"
+        "MOM_Controls_ToggleLobbyMembers" "Show lobby members"
 
     //Saveloc Menu
         "MOM_Menu_SaveCurLoc" "Save Current Location"
@@ -68,8 +68,6 @@
         "MOM_Leaderboards_Filter" "Filter..."
         "MOM_Leaderboards_RunType" "Run Type"
         "MOM_Leaderboards_DeleteReplay" "Delete Run"
-        "MOM_Leaderboards_Spectate" "Spectate"
-        "MOM_Leaderboards_GoToMap" "Join Player"
 
     //Run Tags
         "MOM_RunFlag_ScrollOnly" "Scroll Only"
@@ -138,6 +136,7 @@
         "MOM_MapSelector_Maps" "Maps"
         "MOM_MapSelector_Difficulty" "Difficulty"
         "MOM_MapSelector_StartMap" "Start Map"
+        "MOM_MapSelector_RefreshMapInfo" "Refresh Map Info"
         "MOM_MapSelector_ShowMapInfo" "Show Map Info"
         "MOM_MapSelector_Map" "Map Name"
         "MOM_MapSelector_AddToFavorites" "Add Map to Favorites"
@@ -154,6 +153,8 @@
         "MOM_MapSelector_CancelDownload" "Cancel Download"
         "MOM_MapSelector_ConfirmCancel" "Cancel Download?"
         "MOM_MapSelector_ConfirmCancelMsg" "Are you sure you want to cancel this map download?"
+        "MOM_MapSelector_ConfirmOverwrite" "Overwrite existing map?"
+        "MOM_MapSelector_ConfirmOverwriteMsg" "Downloading this map will overwrite an existing file with the same name in your maps folder!\nAre you sure you want to continue?"
 
         "MOM_MapSelector_MapLayout" "Layout"
         "MOM_MapSelector_MapLayout_Tooltip" "This column shows if the map is linear or has stages."
@@ -203,10 +204,6 @@
         "MOM_MF_StrafeCount" "Total Strafes: %s1"
         "MOM_MF_AvgSync" "Average Sync: %s1"
         "MOM_MF_AvgSync2" "Average Sync2: %s1"
-        "MOM_MF_RunSaved" "Time Saved!"
-        "MOM_MF_RunNotSaved" "Time Did Not Save!"
-        "MOM_MF_RunUploaded" "Time Uploaded!"
-        "MOM_MF_RunNotUploaded" "Time Did Not Upload!"
         "MOM_MF_XPGainCos" "Cosmetic XP Gained: %s1"
         "MOM_MF_CosLvlGain" "(%s1 level(s) gained!)"
         "MOM_MF_XPGainRank" "Rank XP Gained: %s1"
@@ -217,7 +214,21 @@
         "MOM_MF_Right_Arrow" "Next Zone"
         "MOM_MF_Left_Arrow" "Previous Zone"
 
-        //Zone stats
+        "MOM_MF_RunSaved" "Run saved!"
+        "MOM_MF_RunNotSaved" "Run did not save!"
+
+        "MOM_MF_RunSubmitFail_Unknown" "Failed to submit the run; unknown error!"
+        "MOM_MF_RunSubmitted" "Run successfully submitted..."
+        "MOM_MF_RunSubmitFail_InMapping" "Did not submit the run; in mapping mode!"
+        "MOM_MF_RunSubmitFail_InvalidMapStatus" "Did not submit the run; invalid map status!"
+        "MOM_MF_RunSubmitFail_InvalidSession" "Did not submit the run; invalid run session!"
+        "MOM_MF_RunSubmitFail_APIFail" "Failed to submit the run; the API call failed!"
+        "MOM_MF_RunSubmitFail_IOFail" "Failed to submit the run; the run could no be read!"
+
+        "MOM_MF_RunUploaded" "Run uploaded!"
+        "MOM_MF_RunNotUploaded" "Run did not upload!"
+
+        // Zone stats
         "MOM_MF_ZoneNum" "Zone %s1"
         "MOM_MF_Zone_Enter" "Zone Enter Time: %s1"
         "MOM_MF_Time_Zone" "Zone Time: %s1"//Time spent on that zone
@@ -230,16 +241,16 @@
         "MOM_MF_Jumps" "Jumps: %s1"
         "MOM_MF_Strafes" "Strafes: %s1"
 
-        //Settings Panel
+        // Settings Panel
         "MOM_Settings_Title" "Momentum Settings"
 
-        //"Gameplay"
+        // "Gameplay"
         "MOM_Settings_Tab_Gameplay" "Gameplay"
         "MOM_Settings_Yaw_Speed" "Yaw Speed:"
         "MOM_Settings_Play_BlockSound" "Play bhop block sound"
         "MOM_Settings_Practice_Safeguard" "Enable the practice mode safeguard"
         "MOM_Settings_Practice_Safeguard_TT" "The safeguard prevents you from accidentally turning on practice mode while doing a run.\nIf enabled, practice mode will not enable if you are pressing any movement keys."
-        "MOM_Settings_Save_Checkpoints" "Save user checkpoints to file on map end"
+        "MOM_Settings_Save_Checkpoints" "Save user savelocs to file on map end"
         "MOM_Settings_Worldlight_Shadows" "World lights determine shadow direction"
         "MOM_Settings_Worldlight_Shadows_TT" "When enabled, world lights will determine entity shadow direction. NOTE: Can cause significant performance decreases in some maps!"
         "MOM_Settings_LowerWeapon" "Lower the weapon after a certain amount of speed"
@@ -250,7 +261,7 @@
         "MOM_Settings_Release_Forward_On_Jump_TT" "When checked the game will determine the forward key based on movement while on ground and release the determined key when you jump."
         
         
-        //"HUD Settings"
+        // "HUD Settings"
         "MOM_Settings_Tab_HUD" "HUD Settings"
         "MOM_Settings_Speedometer_Label" "Speedometer"
         "MOM_Settings_Speedometer_Show" "Display player speed."
@@ -283,7 +294,7 @@
         "MOM_Timer_Label" "Timer"
         "MOM_Settings_Timer_Show" "Display Timer"
 
-        //"Run Comparisons"
+        // "Run Comparisons"
         "MOM_Settings_Tab_Comparisons" "Run Comparisons"
         "MOM_Settings_Compare_Show" "Show Run Comparisons"
         "MOM_Settings_Compare_Format" "Format Run Comparisons panel"
@@ -317,7 +328,7 @@
         "MOM_Settings_Compare_Show_Jumps" "Show zone jump comparisons"
         "MOM_Settings_Compare_Show_Strafes" "Show zone strafe comparisons"
 
-        //Player Appearance
+        // Player Appearance
         "MOM_Settings_Tab_Appearance" "Appearance"
         "MOM_Settings_Ghost_Body" "Ghost Body"
         "MOM_Settings_Bodygroup_0" "Triangular Pyramid"
@@ -341,7 +352,7 @@
         "MOM_Settings_Pick_Trail_Color_TT" "Change ghost trail color"
         "MOM_Settings_Trail_Length" "Trail length (seconds)"
         
-        //Online settings
+        // Online settings
         "MOM_Settings_Tab_Online" "Online"
         "MOM_Settings_Override_Alpha_Enable" "Override Online Ghost Alphas"
         "MOM_Settings_Override_Alpha_Enable_TT" "When enabled, this setting overrides the alpha component of all online ghosts."
@@ -437,9 +448,6 @@
 
         "MOM_MB_DontShowAgain" "Do not show this again"
 
-        "MOM_MB_NoStartOrEnd_Title" "Invalid Map Zone Data"
-        "MOM_MB_NoStartOrEnd" "You're playing on a map that has invalid zone data.\nYou won't be able to use the timer properly!"
-
         "MOM_MB_EditingZone_Title" "Momentum Zone Editing"
         "MOM_MB_EditingZone" "PLEASE NOTE: The current implementation of zone editing is in a very prealpha state.\nExpect bugs, errors, glitches and features straight up broken, but note that we're working hard to implement a better, much easier version."
 
@@ -452,6 +460,31 @@
         "MOM_PaintGunPanel_Color" "Decal color:"
         "MOM_PaintGunPanel_Color_TT" "Change the color of the paint"
         
+        // Lobby members panel / related strings
+        "MOM_Lobby_Spectate" "Spectate"
+        "MOM_Lobby_GoToMap" "Join Player"
+        "MOM_Lobby_MakeOwner" "Make Lobby Owner"
+        "MOM_Lobby_TeleportTo" "Teleport to Player"
+
+        "MOM_Lobby_Type_Private" "Invite only"
+        "MOM_Lobby_Type_FriendsOnly" "Friends only"
+        "MOM_Lobby_Type_Public" "Public"
+
+        "MOM_Lobby_Member_State" "State"
+        "MOM_Lobby_Member_Spectating" "Spectating"
+
+        // Join fails
+        "MOM_Lobby_JoinFail" "Failed to join the lobby"
+        "MOM_Lobby_JoinFail_DoesntExist" "The lobby does not exist!"
+        "MOM_Lobby_JoinFail_NotAllowed" "You do not have the permissions needed to join the lobby."
+        "MOM_Lobby_JoinFail_Full" "The lobby is full!"
+        "MOM_Lobby_JoinFail_Error" "Unknown error."
+        "MOM_Lobby_JoinFail_Limited" "Your account is limited. Please spend $5 or more on Steam!"
+
+        "GameUI2_HostLobby" "Host lobby"
+        "GameUI2_LeaveLobby" "Leave lobby"
+        "GameUI2_InviteLobby" "Invite friends"
+
         // Main menu
         "GameUI2_LogoLeft" "Momentum"
         "GameUI2_LogoRight" "Mod"
@@ -483,9 +516,6 @@
         "GameUI2_SendFeedback" "SEND FEEDBACK"
         "GameUI2_SendFeedbackDescription" "Send feedback to the team"
 
-        "GameUI2_HostLobby" "Host lobby"
-        "GameUI2_LeaveLobby" "Leave lobby"
-        "GameUI2_InviteLobby" "Invite friends"
         "GameUI2_Respawn" "Respawn"
         "GameUI2_RespawnDescription" "Spawn back in game"
 

@@ -92,6 +92,7 @@ void CMapZoneSystem::LevelInitPreEntity()
 void CMapZoneSystem::LevelInitPostEntity()
 {
     m_Editor.LevelInit();
+    CalculateZoneCounts(CMomentumPlayer::GetLocalPlayer());
 }
 
 void CMapZoneSystem::LevelShutdownPreEntity()
@@ -484,21 +485,6 @@ void CMapZoneSystem::DispatchMapInfo(CMomentumPlayer *pPlayer) const
     {
         pPlayer->m_iZoneCount.Set(i, m_iZoneCount[i]);
         pPlayer->m_iLinearTracks.Set(i, (m_iLinearTracks & (1ULL << i)) > 0);
-    }
-}
-
-void CMapZoneSystem::DispatchNoZonesMsg(CMomentumPlayer *pPlayer) const
-{
-    if (m_iZoneCount[TRACK_MAIN] == 0)
-    {
-        CSingleUserRecipientFilter filter(pPlayer);
-        filter.MakeReliable();
-        UserMessageBegin(filter, "MB_NoStartOrEnd");
-        MessageEnd();
-    }
-    else
-    {
-        DispatchMapInfo(pPlayer);
     }
 }
 

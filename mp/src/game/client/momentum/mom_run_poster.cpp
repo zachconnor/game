@@ -104,29 +104,41 @@ void CRunPoster::FireGameEvent(IGameEvent *pEvent)
             m_cLeaderboardScoreUploaded.Set(uploadScore, this, &CRunPoster::OnLeaderboardScoreUploaded);
 #endif
 
-            if (ShouldSubmitRun())
+            RunSubmitState_t eSubmitState = ShouldSubmitRun();
+
+            if (eSubmitState == RUN_SUBMIT_SUCCESS)
             {
                 CUtlBuffer buf;
                 if (g_pFullFileSystem->ReadFile(pEvent->GetString("filepath"), "MOD", buf))
                 {
                     if (g_pAPIRequests->EndRunSession(g_pMapCache->GetCurrentMapID(), m_uRunSessionID, buf, UtlMakeDelegate(this, &CRunPoster::EndSessionCallback)))
                     {
-                        DevLog(2, "Run submitted!\n");
+                        Log("Run submitted!\n");
                     }
                     else
                     {
                         Warning("Failed to submit run; API call returned false!\n");
+                        eSubmitState = RUN_SUBMIT_FAIL_API_FAIL;
                     }
-                    ResetSession();
                 }
                 else
                 {
                     Warning("Failed to submit run: could not read file %s from %s !\n", pEvent->GetString("filename"), pEvent->GetString("filepath"));
+                    eSubmitState = RUN_SUBMIT_FAIL_IO_FAIL;
                 }
+
+                ResetSession();
             }
             else
             {
-                Warning("Not submitting the run!\n");
+                Warning("Not submitting the run due to submit state %i!\n", eSubmitState);
+            }
+
+            const auto pSubmitEvent = gameeventmanager->CreateEvent("run_submit");
+            if (pSubmitEvent)
+            {
+                pSubmitEvent->SetInt("state", eSubmitState);
+                gameeventmanager->FireEvent(pSubmitEvent);
             }
         }
     }
@@ -292,7 +304,7 @@ void CRunPoster::CreateSessionCallback(KeyValues *pKv)
     if (pData)
     {
         m_uRunSessionID = pData->GetUint64("id");
-        ConColorMsg(2, COLOR_GREEN, "Got the run session ID! %u\n", m_uRunSessionID);
+        ConColorMsg(2, COLOR_GREEN, "Got the run session ID! %lld\n", m_uRunSessionID);
     }
     else if (pErr)
     {
@@ -316,26 +328,49 @@ void CRunPoster::UpdateSessionCallback(KeyValues *pKv)
 
 void CRunPoster::EndSessionCallback(KeyValues* pKv)
 {
-    IGameEvent *runUploadedEvent = gameeventmanager->CreateEvent("run_upload");
-    KeyValues *pData = pKv->FindKey("data");
-    KeyValues *pErr = pKv->FindKey("error");
+    const auto pRunUploadedEvent = gameeventmanager->CreateEvent("run_upload");
+    const auto pData = pKv->FindKey("data");
+    const auto pErr = pKv->FindKey("error");
     if (pData)
     {
         // Necessary so that the leaderboards and hud_mapfinished update appropriately
-        if (runUploadedEvent)
+        if (pRunUploadedEvent)
         {
-            runUploadedEvent->SetBool("run_posted", true);
+            pRunUploadedEvent->SetBool("run_posted", true);
 
             const auto pPlayer = C_BasePlayer::GetLocalPlayer();
             if (pPlayer)
             {
-                if (pData->GetBool("isNewWorldRecord"))
+                const auto bIsWR = pData->GetBool("isNewWorldRecord");
+                const auto bIsPB = pData->GetBool("isNewPersonalBest");
+
+                if (bIsPB)
                 {
-                    pPlayer->EmitSound("Momentum.AchievedWR");
-                }
-                else if (pData->GetBool("isNewPersonalBest"))
-                {
-                    pPlayer->EmitSound("Momentum.AchievedPB");
+                    // Emit a sound
+                    pPlayer->EmitSound(bIsWR ? "Momentum.AchievedWR" : "Momentum.AchievedPB");
+
+                    // Update the map cache
+                    // MOM_TODO check if this run was for the default track & category when we support others (0.9.0+)
+                    const auto pMapData = g_pMapCache->GetCurrentMapData();
+                    if (pMapData)
+                    {
+                        const auto pRun = pData->FindKey("run");
+                        const auto pRank = pData->FindKey("rank");
+                        if (pRun && pRank)
+                        {
+                            MapRank rank;
+                            rank.FromKV(pRank);
+
+                            Run run;
+                            run.FromKV(pRun);
+                            rank.m_Run = run;
+                            pMapData->m_PersonalBest = rank;
+                            if (bIsWR)
+                                pMapData->m_WorldRecord = rank;
+
+                            pMapData->SendDataUpdate();
+                        }
+                    }
                 }
             }
 
@@ -346,14 +381,14 @@ void CRunPoster::EndSessionCallback(KeyValues* pKv)
                 const auto pCosXP = pXP->FindKey("cosXP");
                 if (pCosXP)
                 {
-                    runUploadedEvent->SetInt("lvl_gain", pCosXP->GetInt("gainLvl"));
-                    runUploadedEvent->SetInt("cos_xp", pCosXP->GetInt("gainXP"));
+                    pRunUploadedEvent->SetInt("lvl_gain", pCosXP->GetInt("gainLvl"));
+                    pRunUploadedEvent->SetInt("cos_xp", pCosXP->GetInt("gainXP"));
                     // oldXP: <int>
                 }
                 const auto pRankXP = pXP->FindKey("rankXP");
                 if (pRankXP)
                 {
-                    runUploadedEvent->SetInt("rank_xp", pRankXP->GetInt("rankXP"));
+                    pRunUploadedEvent->SetInt("rank_xp", pRankXP->GetInt("rankXP"));
                     // top10: <int>
                     // formula: <int>
                     // group: {
@@ -362,23 +397,30 @@ void CRunPoster::EndSessionCallback(KeyValues* pKv)
                     // }
                 }
             }
-            gameeventmanager->FireEvent(runUploadedEvent);
+            gameeventmanager->FireEvent(pRunUploadedEvent);
         }
     }
     else if (pErr)
     {
-        if (runUploadedEvent)
+        if (pRunUploadedEvent)
         {
-            runUploadedEvent->SetBool("run_posted", false);
+            pRunUploadedEvent->SetBool("run_posted", false);
             // MOM_TODO: send an error here
-            gameeventmanager->FireEvent(runUploadedEvent);
+            gameeventmanager->FireEvent(pRunUploadedEvent);
         }
     }
 }
 
-bool CRunPoster::ShouldSubmitRun()
+RunSubmitState_t CRunPoster::ShouldSubmitRun()
 {
-    return !m_bIsMappingMode && CheckCurrentMap() && m_uRunSessionID != 0;
+    if (m_bIsMappingMode)
+        return RUN_SUBMIT_FAIL_IN_MAPPING_MODE;
+    if (!CheckCurrentMap())
+        return RUN_SUBMIT_FAIL_MAP_STATUS_INVALID;
+    if (m_uRunSessionID == 0)
+        return RUN_SUBMIT_FAIL_SESSION_ID_INVALID;
+
+    return RUN_SUBMIT_SUCCESS;
 }
 
 bool CRunPoster::CheckCurrentMap()

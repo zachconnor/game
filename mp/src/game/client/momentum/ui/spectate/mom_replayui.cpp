@@ -40,6 +40,7 @@ C_MOMReplayUI::C_MOMReplayUI(IViewPort *pViewport) : Frame(nullptr, PANEL_REPLAY
     m_iTotalDuration = 0;
     m_iPlayButtonSelected = RUI_NOTHING;
     m_bWasVisible = false;
+    m_bWasClosed = false;
 
     surface()->CreatePopup(GetVPanel(), false, false, false, false, false);
 
@@ -95,12 +96,23 @@ void C_MOMReplayUI::OnThink()
     int x, y;
     input()->GetCursorPosition(x, y);
     const bool bWithin = IsWithin(x, y);
-    SetKeyBoardInputEnabled(bWithin);
+    if (bWithin)
+    {
+        const auto mouseOver = input()->GetMouseOver();
+        SetKeyBoardInputEnabled(mouseOver == GetVPanel() ||
+                                mouseOver == m_pGotoTick->GetVPanel() ||
+                                mouseOver == m_pTimescaleEntry->GetVPanel());
+    }
+    else
+    {
+        SetKeyBoardInputEnabled(false);
+    }
+
     if (!IsMouseInputEnabled() && bWithin)
     {
         SetMouseInputEnabled(true); 
         if (!m_pSpecGUI)
-            m_pSpecGUI = dynamic_cast<CMOMSpectatorGUI*>(m_pViewport->FindPanelByName(PANEL_SPECGUI));
+            m_pSpecGUI = static_cast<CMOMSpectatorGUI*>(m_pViewport->FindPanelByName(PANEL_SPECGUI));
         if (m_pSpecGUI && !m_pSpecGUI->IsMouseInputEnabled())
             m_pSpecGUI->SetMouseInputEnabled(true);
     }
@@ -192,7 +204,7 @@ void C_MOMReplayUI::OnTextChanged(Panel *p)
         char buf[64];
         m_pTimescaleEntry->GetText(buf, 64);
 
-        float fValue = float(atof(buf));
+        float fValue = V_atof(buf);
         if (fValue >= 0.01f && fValue <= 10.0f)
         {
             m_pTimescaleSlider->SetSliderValue(fValue);
@@ -220,8 +232,20 @@ void C_MOMReplayUI::SetLabelText() const
         Q_snprintf(buf, sizeof(buf), "%.1f", m_pTimescaleSlider->GetSliderValue());
         m_pTimescaleEntry->SetText(buf);
 
+        float newVal = V_atof(buf);
+        m_pTimescaleSlider->SetSliderValue(newVal);
         m_pTimescaleSlider->ApplyChanges();
     }
+}
+
+void C_MOMReplayUI::SetWasClosed(bool bWasClosed)
+{
+    m_bWasClosed = bWasClosed;
+}
+
+bool C_MOMReplayUI::WasClosed() const
+{
+    return m_bWasClosed;
 }
 
 void C_MOMReplayUI::ShowPanel(bool state)
@@ -230,6 +254,7 @@ void C_MOMReplayUI::ShowPanel(bool state)
     SetMouseInputEnabled(state);
     if (state)
         MoveToFront();
+    m_bWasClosed = false;
 }
 
 void C_MOMReplayUI::FireGameEvent(IGameEvent *pEvent)
@@ -288,6 +313,7 @@ void C_MOMReplayUI::OnCommand(const char *command)
     }
     else if (FStrEq("close", command))
     {
+        m_bWasClosed = true;
         m_bWasVisible = false;
         Close();
     }

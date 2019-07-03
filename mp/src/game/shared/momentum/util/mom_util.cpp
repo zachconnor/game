@@ -8,16 +8,19 @@
 #include "run/mom_replay_base.h"
 #include "run/run_compare.h"
 #include "run/run_stats.h"
+#include "run/mom_run_entity.h"
 #include "effect_dispatch_data.h"
-#include "tier1/checksum_sha1.h"
 #ifdef CLIENT_DLL
-#include "ChangelogPanel.h"
 #include "materialsystem/imaterialvar.h"
 #endif
 
+#include "tier0/valve_minmax_off.h"
+// These are wrapped by minmax_off/on due to Valve making a macro for min and max...
 #include "cryptopp/sha.h"
 #include <cryptopp/files.h>
 #include <cryptopp/hex.h>
+// Now we can unwrap
+#include "tier0/valve_minmax_on.h"
 
 #include "tier0/memdbgon.h"
 
@@ -498,7 +501,7 @@ void MomUtil::KnifeTrace(const Vector& vecShootPos, const QAngle& lookAng, bool 
     if (!bDidHit)
     {
         // play wiff or swish sound
-        CPASAttenuationFilter filter(pSoundSource);
+        CPASAttenuationFilter filter(trOutput->endpos, "Weapon_Knife.Slash");
         filter.UsePredictionRules();
         CBaseEntity::EmitSound(filter, pSoundSource->entindex(), "Weapon_Knife.Slash");
     }
@@ -562,15 +565,16 @@ void MomUtil::KnifeSmack(const trace_t& trIn, CBaseEntity *pSoundSource, const Q
     if (!trIn.m_pEnt || (trIn.surface.flags & SURF_SKY))
         return;
 
-    if (trIn.fraction == 1.0)
+    if (trIn.fraction == 1.0f)
         return;
 
     if (trIn.m_pEnt)
     {
-        CPASAttenuationFilter filter(pSoundSource);
+        CPASAttenuationFilter filter(trIn.endpos);
         filter.UsePredictionRules();
 
-        if (trIn.m_pEnt->IsPlayer())
+        const auto pRunEnt = dynamic_cast<CMomRunEntity*>(trIn.m_pEnt);
+        if (pRunEnt)
         {
             CBaseEntity::EmitSound(filter, pSoundSource->entindex(), bStab ? "Weapon_Knife.Stab" : "Weapon_Knife.Hit");
         }
