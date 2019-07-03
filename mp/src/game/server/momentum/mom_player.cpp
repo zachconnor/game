@@ -41,6 +41,28 @@ CON_COMMAND_F(
     pPlayer->TogglePracticeMode();
 }
 
+CON_COMMAND(
+	mom_eyetele,
+	"Teleports the player to the solid that they are looking at.\n")
+{
+	CMomentumPlayer *pPlayer = CMomentumPlayer::GetLocalPlayer();
+	if (!pPlayer)
+		return;
+
+	if (pPlayer->m_bHasPracticeMode || !g_pMomentumTimer->IsRunning())
+	{
+	    trace_t tr;
+		Vector forward;
+		pPlayer->EyeVectors(&forward);
+		UTIL_TraceLine(pPlayer->EyePosition(), pPlayer->EyePosition() + forward * MAX_COORD_RANGE, MASK_SOLID, pPlayer, COLLISION_GROUP_NONE, &tr);
+
+		if (tr.fraction != 1.0 && tr.DidHitWorld())
+		{
+			pPlayer->SetAbsOrigin((tr.endpos - pPlayer->EyePosition()).Length()>33 ? tr.endpos - (forward * 33) : pPlayer->EyePosition() + (forward * tr.fraction * 0.9));
+		}
+	}
+}
+
 CON_COMMAND(mom_strafesync_reset, "Reset the strafe sync. (works only when timer is disabled)\n")
 {
     CMomentumPlayer *pPlayer = dynamic_cast<CMomentumPlayer *>(UTIL_GetLocalPlayer());
